@@ -1,0 +1,808 @@
+﻿Windows Registry Editor Version 5.00
+
+; 	NEPTUNEOS REGISTRY PROFILE
+; 	THIS REGISTRY PROFILE FOR NEPTUNEOS WILL DISABLE COMPONENTS AND POLICIES AND OPTIMIZE THE REGISTRY FOR COMPETITIVE GAMING.
+;   CREATED BY NYNE.
+
+
+;	EXPLORER OPTIMIZATION
+
+; DISABLE SHAKE TO MINIMIZE
+; DISABLE TOOLTIPS
+; HIDE STATUS BAR
+; DISABLE SYNC PROVIDER NOTIFICATIONS
+; HIDE PREVIEW HANDLERS IN PREVIEW PNE
+; DISABLE SHARING WIZARD
+; SHOW EXTENSIONS
+; NEVER COMBINE ICONS ON TASKBAR
+; OPEN TO THIS PC
+; DISABLE RECENT ITEMS AND FREQUENT PLACES
+; DISABLE APP LAUNCH TRACKING
+; DISABLE ENCRYPTED NTFS COLORIZATION
+; CONFIGURE SNAP SETTINGS
+; DISABLE STORE APPS ON TASKBAR
+; SHOW THUMBNAILS INSTED OF ICONS
+; DON'T SEPERATE EXPLORER.EXE PROCESSES
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"DisallowShaking"=dword:00000001
+"ShowInfoTip"=dword:00000000
+"ShowStatusBar"=dword:00000000
+"ShowSyncProviderNotifications"=dword:00000000
+"ShowPreviewHandlers"=dword:00000000
+"SharingWizardOn"=dword:00000000
+"HideFileExt"=dword:00000000
+"TaskbarGlomLevel"=dword:00000002
+"LaunchTo"=dword:00000001
+"Start_TrackDocs"=dword:00000000
+"Start_TrackProgs"=dword:00000000
+"ShowCompColor"=dword:00000000
+"SnapFill"=dword:00000000
+"JointResize"=dword:00000000
+"SnapAssist"=dword:00000000
+"StoreAppsOnTaskbar"=dword:00000000
+"IconsOnly"=dword:00000000
+"SeparateProcess"=dword:00000000
+"UseOLEDTaskbarTransparency"=-
+"DontPrettyPath"=dword:00000001
+"ListviewAlphaSelect"=dword:00000000
+
+; DISABLE LOOK FOR APP IN WINDOWS STORE 
+; HIDE RECENTLY INSTALLED APPS
+; HIDE MOST USED APPS
+; DISABLE DEP IN Explorer
+; DISABLE HEAP TERMINATION ON CORRUPTION
+; DISABLE NEW APP ALERTS
+; DISABLE START CONTEXT MENUS
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"NoUseStoreOpenWith"=dword:00000001
+"HideRecentlyAddedApps"=dword:00000001
+"ShowOrHideMostUsedApps"=dword:00000002
+"NoDataExecutionPrevention"=dword:00000001
+"NoHeapTerminationOnCorruption"=dword:00000001
+"NoNewAppAlert"=dword:00000001
+"DisableContextMenusInStart"=dword:00000000
+
+; Small Icons in Control Panel
+; Show All Items in Control Panel
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel]
+"StartupPage"=dword:00000001
+"AllItemsIconView"=dword:00000001
+
+; Color Scheme
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent]
+"AccentColorMenu"=dword:ff6b5c51
+"AccentPalette"=hex(3):9F,B4,D1,00,8A,9D,B6,00,6E,7D,91,00,51,5C,6B,00,3B,\
+44,52,00,26,2F,3B,00,1C,23,2E,00,EF,69,50,00
+"StartColorMenu"=dword:ff52443b
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
+"AccentColor"=dword:ff6b5c51
+"ColorizationAfterglow"=dword:c4515c6b
+"ColorizationColor"=dword:c4515c6b
+"EnableWindowColorization"=dword:00000001
+
+; Hide Network Icon from Taskbar
+; Add Run in Seperate memory space to run prompt (useless, just looks nicer)
+; Prevent desktop.ini from being created
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCANetwork"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCANetwork"=dword:00000001
+"MemCheckBoxInRunDlg"=dword:00000001
+"UseDesktopIniCache"=dword:00000000
+
+; Hide People bar
+; Hide Notification Center
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
+"HidePeopleBar"=dword:00000001
+"DisableNotificationCenter"=dword:00000001
+
+; Hide Taskview Icon
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowTaskViewButton"=dword:00000000
+
+; Hide Network from File Explorer
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}]
+"System.IsPinnedToNameSpaceTree"=dword:00000000
+
+; Explorer Telemetry
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoSMConfigurePrograms"=dword:0000000
+"NoRemoteRecursiveEvents"=dword:00000001
+"NoLowDiskSpaceChecks"=dword:00000001
+"LinkResolveIgnoreLinkInfo"=dword:00000001
+"NoResolveSearch"=dword:00000001
+"NoResolveTrack"=dword:00000001
+"NoInternetOpenWith"=dword:00000001
+"DisableSearchBoxSuggestions"=dword:00000001
+"MemCheckBoxInRunDlg"=dword:00000001
+
+; Disable Password Reveal Icon on Lock Screen
+[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CredUI]
+"DisablePasswordReveal"=dword=00000001
+
+; Disable Network Icon on Lock Screen
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"DontDisplayNetworkSelectionUI"=dword:00000001
+
+; Disable Taskbar Transparency
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+"EnableTransparency"=dword:00000000
+
+; Show Drive Letters First
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"ShowDriveLettersFirst"=dword:00000004
+
+; Show all icons in tray
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"EnableAutoTray"=dword:00000000
+
+; Faster Explorer
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"AutoEndTasks"="1"
+"HungAppTimeout"="1000"
+"MenuShowDelay"="1"
+"WaitToKillAppTimeout"="1000"
+"LowLevelHooksTimeout"="1000"
+
+; 4MB Cache
+; Hide Quick Access
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"Max Cached Icons"="4096"
+"HubMode"=dword:00000001
+
+; Scaling Fixes
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"Win8DpiScaling"=dword:00000000
+"DpiScalingVer"=dword:00001000
+"LogPixels"=dword:00000096
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Control Panel\Desktop]
+"EnablePerProcessSystemDPI"=dword:00000001
+
+; Classic Volume Popout
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC]
+"EnableMtcUvc"=dword:00000000
+
+; 100% Wallpaper Quality
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"JPEGImportQuality"=dword:00000064
+
+; Verbose Status
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"VerboseStatus"=dword:00000001
+
+; Hide lock and Sleep
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
+"ShowSleepOption"=dword:00000000
+"ShowLockOption"=dword:00000000
+
+; Visual FX
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+"VisualFXSetting"=dword:00000003
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"UserPreferencesMask"=hex:90,12,02,80,10,00,00,00
+"DragFullWindows"="1"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ListviewShadow"=dword:00000001
+"ListviewAlphaSelect"=dword:00000001
+"IconsOnly"=dword:00000000
+"TaskbarAnimations"=dword:00000000
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"FontSmoothing"="0"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]
+"EnableAeroPeek"=dword:00000000
+"AlwaysHibernateThumbnails"=dword:00000000
+
+[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]
+"MinAnimate"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon]
+"DefaultApplied"="0"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation]
+"DefaultApplied"="0"
+
+; When Windows detects communications activity: 'Do Nothing'
+[HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio]
+"UserDuckingPreference"=dword:00000003
+
+; Do not show disabled devices, only disconnected
+[HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl]
+"ShowHiddenDevices"=dword:00000000
+"ShowDisconnectedDevices"=dword:00000001
+"VolumeUnits"=dword:00000000
+
+; Explorer Startup Speed
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Serialize]
+"StartupDelayInMSec"=dword:00000000
+
+; Restore "Copy To" Context Entry
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To]
+@="{C2FBB630-2971-11D1-A18C-00C04FD75D13}"
+
+; Restore "Move to" Context Entry
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Move To]
+@="{C2FBB631-2971-11D1-A18C-00C04FD75D13}"
+
+; Import Power Plan
+[HKEY_CLASSES_ROOT\.pow]
+@="Power Plan"
+"FriendlyTypeName"="Power Plan"
+
+[HKEY_CLASSES_ROOT\.pow\DefaultIcon]
+@=hex(2):25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,74,00,25,\
+  00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,70,00,6f,00,\
+  77,00,65,00,72,00,63,00,66,00,67,00,2e,00,63,00,70,00,6c,00,2c,00,2d,00,32,\
+  00,30,00,32,00,00,00
+
+[HKEY_CLASSES_ROOT\.pow\shell]
+
+[HKEY_CLASSES_ROOT\.pow\shell\Import]
+
+[HKEY_CLASSES_ROOT\.pow\shell\Import\command]
+@="powercfg /import \"%1\""
+
+; Take Ownership
+[HKEY_CLASSES_ROOT\*\shell\runas]
+@="Take Ownership"
+"NoWorkingDirectory"=""
+
+[HKEY_CLASSES_ROOT\*\shell\runas\command]
+@="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+
+[HKEY_CLASSES_ROOT\Directory\shell\runas]
+@="Take Ownership"
+"NoWorkingDirectory"=""
+
+[HKEY_CLASSES_ROOT\Directory\shell\runas\command]
+@="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"MultipleInvokePromptMinimum"=dword:000000c8
+
+; Restore Default Photo Viewer
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.bmp]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.cr2]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.dib]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.gif]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.ico]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.jfif]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.jpe]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.jpeg]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.jpg]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.jxr]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.png]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.tif]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.tiff]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\.wdp]
+@="PhotoViewer.FileAssoc.Tiff"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bmp\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cr2\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dib\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.gif\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ico\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpeg\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bmp\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jfif\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpe\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jxr\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpeg\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.jpg\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.png\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.tif\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.tiff\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.wdp\OpenWithProgids]
+"PhotoViewer.FileAssoc.Tiff"=hex(0):
+
+; Clean Context Menu 
+[-HKEY_CLASSES_ROOT\*\OpenWithList\Excel.exe]
+[-HKEY_CLASSES_ROOT\*\OpenWithList\IExplore.exe]
+[-HKEY_CLASSES_ROOT\*\OpenWithList\MSPaint.exe]
+[-HKEY_CLASSES_ROOT\*\OpenWithList\Excel.exe]
+[-HKEY_CLASSES_ROOT\*\OpenWithList\Winword.exe]
+[-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\ModernSharing]
+[-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\Sharing]
+[-HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\Sharing]
+[-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\Open With EncryptionMenu]
+[-HKEY_CLASSES_ROOT\*\shellex\PropertySheetHandlers\CryptoSignMenu]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AllFilesystemObjects\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\ContextMenuHandlers\Offline Files]
+[-HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\Drive\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\Offline Files]
+[-HKEY_CLASSES_ROOT\Directory\shellex\CopyHookHandlers\Sharing]
+[-HKEY_CLASSES_ROOT\Drive\shellex\ContextMenuHandlers\Sharing]
+[-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\Sharing]
+[-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\{55B3A0BD-4D28-42fe-8CFB-FA3EDFF969B8}]
+[-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
+[-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\{7988B573-EC89-11cf-9C00-00AA00A14F56}]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
+"{1d27f844-3a1f-4410-85ac-14651078412d}"=-
+"{7AD84985-87B4-4a16-BE58-8B72A5B390F7}"=-
+[-HKEY_CLASSES_ROOT\exefile\shellex\ContextMenuHandlers\PintoStartScreen]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\print]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\text\shell\print]
+[-HKEY_CLASSES_ROOT\batfile\shell\print]
+[-HKEY_CLASSES_ROOT\cmdfile\shell\print]
+[-HKEY_CLASSES_ROOT\docfile\shell\print]
+[-HKEY_CLASSES_ROOT\fonfile\shell\print]
+[-HKEY_CLASSES_ROOT\htmlfile\shell\print]
+[-HKEY_CLASSES_ROOT\inffile\shell\print]
+[-HKEY_CLASSES_ROOT\inifile\shell\print]
+[-HKEY_CLASSES_ROOT\JSEFile\shell\print]
+[-HKEY_CLASSES_ROOT\JSFile\shell\print]
+[-HKEY_CLASSES_ROOT\MSInfo.Document\shell\print]
+[-HKEY_CLASSES_ROOT\otffile\shell\print]
+[-HKEY_CLASSES_ROOT\pfmfile\shell\print]
+[-HKEY_CLASSES_ROOT\regfile\shell\print]
+[-HKEY_CLASSES_ROOT\rtffile\shell\print]
+[-HKEY_CLASSES_ROOT\ttcfile\shell\print]
+[-HKEY_CLASSES_ROOT\ttffile\shell\print]
+[-HKEY_CLASSES_ROOT\txtfile\shell\print]
+[-HKEY_CLASSES_ROOT\VBEFile\shell\print]
+[-HKEY_CLASSES_ROOT\VBSFile\shell\print]
+[-HKEY_CLASSES_ROOT\Wordpad.Document.1\shell\print]
+[-HKEY_CLASSES_ROOT\WPEDoc\shell\print]
+[-HKEY_CLASSES_ROOT\WPSDoc\shell\print]
+[-HKEY_CLASSES_ROOT\wrifile\shell\print]
+[-HKEY_CLASSES_ROOT\WSFFile\shell\print]
+[-HKEY_CLASSES_ROOT\odtfile\shell\print]
+[-HKEY_CLASSES_ROOT\docxfile\shell\print]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\InternetShortcut\shell\print]
+[-HKEY_CLASSES_ROOT\AcroExch.Document.7\shell\print]
+[-HKEY_CLASSES_ROOT\FoxitReader.Document\shell\print]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\pintohome]
+[-HKEY_CLASSES_ROOT\Folder\shellex\ContextMenuHandlers\Offline Files]
+[-HKEY_CLASSES_ROOT\Folder\shellex\ContextMenuHandlers\Library Location]
+[-HKEY_CLASSES_ROOT\Folder\shellex\ContextMenuHandlers\PinToStartScreen]
+[-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\{90AA3A4E-1CBA-4233-B8BB-535773D48449}]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\edit]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\Image Preview]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview]
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+[-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\Open With]
+
+
+
+
+;	POLICIES OPTIMIZATION
+;	DISABLING POLICIES, DATA COLLECTION, MITIGATIONS, AND MICROSOFT COMPONENTS
+
+; Disable UAC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableLUA"=dword:00000000
+"DisableAutomaticRestartSignOn"=dword:00000001
+"PromptOnSecureDesktop"=dword:00000000
+"ConsentPromptBehaviorAdmin"=dword:00000000
+
+; Disable Data Collection
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat]
+"AllowTelemetry"=dword:00000000
+
+; Disable Fault Tolerant Heap
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\FTH]
+"Enabled"=dword:00000000
+
+; Disable Background Apps
+; Disable Notification Access
+; Disable Radio Control
+; Disable Diagnostic Information Access
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+"LetAppsRunInBackground"=dword:00000002
+"LetAppsAccessNotifications"=dword:00000002
+"LetAppsAccessRadios"=dword:00000002
+"LetAppsGetDiagnosticInfo"=dword:00000002
+
+; Disable Crash Dumps
+; Disable AutoReboot After BSOD
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\CrashControl]
+"CrashDumpEnabled"=dword:00000000
+"AutoReboot"=dword:00000000
+"LogEvent"=dword:00000000
+
+; Notepad
+[HKEY_CURRENT_USER\Software\Microsoft\Notepad]
+"StatusBar"=dword:00000001
+"fWrap"=dword:00000001
+"fSavePageSettings"=dword:00000001
+"fSaveWindowPositions"=dword:00000001
+"fWindowsOnlyEOL"=dword:00000000
+"fPasteOriginalEOL"=dword:00000001
+
+; Disable SmartScreen
+; Disable Font Providers
+; Do not forcefully unload the users registry at user logoff
+; Don't recognize slow connections
+; Disable Roaming Profile
+; Do not check for user ownership of Roaming Profile Folders
+; Disable App Termination at Shutdown
+; Disable Fast Boot
+; Disable Clipboard History
+; Disable Activity Feed
+; Disable Lock Screen Notifications
+; Disable Resultant Set of Policy logging
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"EnableSmartScreen"=dword:00000000
+"EnableFontProviders"=dword:00000001
+"DisableForceUnload"=dword:00000001
+"SlowLinkDetectEnabled"=dword:00000000
+"DeleteRoamingCache"=dword:00000001
+"CompatibleRUPSecurity"=dword:00000001
+"AllowBlockingAppsAtShutdown"=dword:00000001
+"HiberbootEnabled"=dword:00000000
+"AllowClipboardHistory"=dword:00000000
+"AllowCrossDeviceClipboard"=dword:00000000
+"EnableActivityFeed"=dword:00000000
+"PublishUserActivities"=dword:00000000
+"UploadUserActivities"=dword:00000000
+"DisableLockScreenAppNotifications"=dword:00000001
+"RSoPLogging"=dword:00000000
+
+; Disable Updates
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching]
+"SearchOrderConfig"=dword:00000000
+"DontSearchWindowsUpdate"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"NoAutoUpdate"=dword:00000001
+"UseWUServer"=dword:00000001
+"AUOptions"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+"PreventDeviceMetadataFromNetwork"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update]
+"IncludeRecommendedUpdates"=dword:00000000
+"AUOptions"=dword:00000001
+"SetupWizardLaunchTime"=-
+"AcceleratedInstallRequired"=-
+"ElevateNonAdmins"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings]
+"ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+; Disable Diagnostic Tracing
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance]
+"DisableDiagnosticTracing"=dword:00000001
+
+; Apply Default User Picture to All Users
+; Disable Online Tips in Immersive Control Panel
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"UseDefaultTile"=dword:00000001
+"AllowOnlineTips"=dword:00000000
+
+; Disable System Maintenance
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+"MaintenanceDisabled"=dword:00000001
+
+; Disable Recommended Troubleshooting
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsMitigation]
+"UserPreference"=dword:00000002
+
+; DWM 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows]
+"DesktopHeapLogging"=dword:00000000
+"DwmInputUsesIoCompletionPort"=dword:00000000
+"EnableDwmInputProcessing"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm]
+"AnimationAttributionEnabled"=dword:00000000
+"AnimationAttributionHashingEnabled"=dword:00000000
+"OneCoreNoBootDWM"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm]
+"ForceEffectMode"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DWM]
+"DWMWA_TRANSITIONS_FORCEDISABLED"=dword:00000001
+"DisallowFlip3d"=dword:00000001
+"DisallowColorizationColorChanges"=dword:00000001
+"DisallowAnimations"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]
+"Composition"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition]
+"ExclusiveModeFramerateAveragingPeriodMs"=dword:000003e8
+"ExclusiveModeFramerateThresholdPercent"=dword:000000fa
+
+; Disable OLE Logging
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Ole]
+"ActivationFailureLoggingLevel"=dword:00000002
+"CallFailureLoggingLevel"=dword:00000002
+
+; Disable Logon Animation 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"EnableFirstLogonAnimation"=dword:00000000
+
+; Disable Recommended Troubleshooting 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsMitigation]
+"UserPreference"=dword:00000002
+
+; Disable Security Prompt
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments]
+"SaveZoneInformation"=dword:00000001
+
+; Quicker Shutdown 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"WaitToKillServiceTimeout"="1000"
+
+
+
+;	IMMERSIVE CONTROL PANEL
+;	THIS SECTION WILL OPTIMIZE THE SETTINGS APP.
+
+; Accounts Tab (Disable Sync)
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync]
+"SyncPolicy"=dword:00000005
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows]
+"Enabled"=dword:00000000
+
+; General Tab
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Control Panel\International\User Profile]
+"HttpAcceptLanguageOptOut"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackProgs"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-338393Enabled"=dword:00000000
+"SubscribedContent-353694Enabled"=dword:00000000
+"SubscribedContent-353696Enabled"=dword:00000000
+
+; Speech Tab
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy]
+"HasAccepted"=dword:00000000
+
+; Inking & Typing Personalization Tab
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Personalization\Settings]
+"AcceptedPrivacyPolicy"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization]
+"RestrictImplicitInkCollection"=dword:00000001
+"RestrictImplicitTextCollection"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore]
+"HarvestContacts"=dword:00000000
+
+; Diagnostics & Feedback Tab
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack]
+"ShowedToastAtLevel"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey]
+"EnableEventTranscript"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+"PeriodInNanoSeconds"=-
+
+; Activity History Tab
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"PublishUserActivities"=dword:00000000
+"UploadUserActivities"=dword:00000000
+
+; App Permissions Tab
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone]
+"Value"="Allow"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam]
+"Value"="Allow"
+
+; Disable Ease of Access
+[HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
+"Flags"="0"
+
+[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+"Flags"="0"
+
+[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+"Flags"="0"
+
+[HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
+"Flags"="0"
+
+
+;	IMAGE FILE EXECUTION OPTIONS
+;	THIS WILL REMOVE ALL DEFAULT IFEO KEYS FROM THE REGISTRY 
+; 	REMOVING APP MITIGATIONS AND IN SOME CASES FIXING STALLING ISSUES.
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ExtExport.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GoogleUpdate.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ie4uinit.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ieinstal.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ielowutil.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ieUnatt.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MRT.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\mscorsvw.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msfeedssync.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\mshta.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ngen.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ngentask.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\PresentationHost.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\PrintIsolationHost.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\runtimebroker.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\splwow64.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\spoolsv.exe]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SystemSettings.exe]
+
