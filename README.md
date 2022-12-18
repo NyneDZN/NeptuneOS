@@ -102,8 +102,8 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
+- [ ] Updated Logo
+- [ ] First Public Release
 - [ ] Feature 3
     - [ ] Nested Feature
 
