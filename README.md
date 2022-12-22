@@ -110,7 +110,7 @@ Discord: nyne.#1431
 ## Acknowledgments
 
 * [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
-* []()
+* [Optimization Guide by supermanZ (Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
 * []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
