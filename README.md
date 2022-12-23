@@ -2,7 +2,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/NyneDZN/NeptuneOS">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/120980797/209248113-fb446909-8aad-4c90-bedf-d4d536ef5dee.png"
+" alt="Logo" width="500" height="500">
   </a>
 
 <h3 align="center">NepuneOS</h3>
