@@ -91,10 +91,10 @@ You may also download your GPU drivers if you wish.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [x] Updated Script
+- [ ] 22H2 
+- [ ] Custom OOBE
+- [ ] Completed Discord
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
 
@@ -120,6 +120,5 @@ Discord: nyne.#1431
 
 * [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
 * [Optimization Guide by supermanZ (Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
-* []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
