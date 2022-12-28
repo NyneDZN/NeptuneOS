@@ -55,12 +55,19 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is a guide on how to install NeptuneOS.
+
+I am NOT responsible if you end up bricking your BIOS, corrupted files, or if your GPU/CPU dies while you are using NeptuneOS.
 
 ### Prerequisites
+Download your ethernet drivers prior to installing NeptuneOS.
+* [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)
+* [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html)
 
-This is an example of how to list things you need to use the software and how to install them.
+You may also download your GPU drivers if you wish.
+* [AMD](https://www.amd.com/en/support)
+* [Nvidia](https://www.nvidia.com/download/index.aspx)
+
 
 ### Installation
 
@@ -72,9 +79,10 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+ NeptuneOS was created with low-spec gaming and productivity in mind. There are a lot of people out there with great potential, but are limited by their 
+ hardware.
+ If you are on a low-end laptop, desktop, on a bottlenecked build, NeptuneOS can potentially help you gain every drop of performance out of your machine, to help you   
+ achieve your best form.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
