@@ -97,7 +97,7 @@ See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full li
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@NyneDZN](https://twitter.com/NyneDZN) - nyneszn@gmail.com
+Your Name - [@NyneDZN](https://twitter.com/NyneDZN) 
 
 Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
 
