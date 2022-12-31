@@ -64,9 +64,6 @@ You may also download your GPU drivers if you wish.
 * [Nvidia](https://www.nvidia.com/download/index.aspx)
 
 
-### Installation
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
