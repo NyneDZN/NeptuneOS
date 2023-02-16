@@ -29,10 +29,10 @@ if '%errorlevel%' NEQ '0' (
 	echo Your install of NeptuneOS %version% is corrupt. Please re-install.
 )
 
-:: Script Prep
+:: Disable Mouse and Explorer
 wscript "%NeptuneDir%FullscreenCMD.vbs"
 %NeptuneDir%Apps\DevManView.exe /disable "HID-compliant mouse"
-echo Killed Explorer
+cls & echo Killed Explorer
 echo Killed Mouse Control (!S_BLUE!Only to prevent pausing/closing the script. Keyboard control is active.)
 timeout /5
 
@@ -75,7 +75,18 @@ goto StartScript
 :StartScript
 :: Prerequisites
 cls & echo !S_BLUE!Installing Visual C++
-start /b /wait "%NeptuneDir%Prerequisites\vcredist.exe" /ai
+start /wait "%NeptuneDir%Prerequisites\vcredist2005_x86.exe" /q
+start /wait "%NeptuneDir%Prerequisites\vcredist2005_x64.exe" /q
+start /wait "%NeptuneDir%Prerequisites\vcredist2008_x86.exe" /qb
+start /wait "%NeptuneDir%Prerequisites\vcredist2008_x64.exe" /qb
+start /wait "%NeptuneDir%Prerequisites\vcredist2010_x86.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2010_x64.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2012_x86.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2012_x64.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2013_x86.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2013_x64.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart
+start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart
 cls & echo !S_BLUE!Installing DirectX
 "%NeptuneDir%Prerequisites\DirectX\DXSETUP.exe" /silent 
 cls & echo !S_BLUE!Installing Media Player
@@ -228,12 +239,15 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "QosManagesIdleProc
 :: Disable Watchdog Timer
 :: https://www.analog.com/en/design-notes/disable-the-watchdog-timer-during-system-reboot.html
 :: A watchdog timer continuously watches the execution of code and resets the system if the software hangs or no longer executes the correct sequence of code
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableSensorWatchdog" /t REG_DWORD /d "1" /f 
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableSensorWatchdog" /t REG_DWORD /d "1" /f
+
+:: Disable Fastboot
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 
 
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableVsyncLatencyUpdate" /t REG_DWORD /d "0" /f 
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "MfBufferingThreshold" /t REG_DWORD /d "0" /f 
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "TimerRebaseThresholdOnDripsExit" /t REG_DWORD /d "30" /f 
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableVsyncLatencyUpdate" /t REG_DWORD /d "0" /f 
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "MfBufferingThreshold" /t REG_DWORD /d "0" /f 
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "TimerRebaseThresholdOnDripsExit" /t REG_DWORD /d "30" /f 
 
 
 :: File System Configuration
@@ -283,8 +297,20 @@ FOR /F "eol=E" %%a in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 
 
 
+:: Time Server Configuration
+cls & echo !S_BLUE!Changing NTP Server...
+:: change ntp server from windows server to pool.ntp.org
+w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"
+:: resync time to pool.ntp.org
+net start w32time
+w32tm /config /update
+w32tm /resync
+%setSvc% W32Time 4
+
+
+
 :: Explorer Configuration
-cls & echo !S_BLUE!Configuring Explorer
+cls & echo !S_BLUE!Configuring Explorer...
 :: Enable Dark Mode
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f
@@ -360,7 +386,7 @@ Reg.exe "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Del
 
 
 :: Purge Windows Components
-cls & echo !S_BLUE!Disabling Windows Components
+cls & echo !S_BLUE!Debloating and Configuring Windows...
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "IncludeRecommendedUpdates" /t REG_DWORD /d "0" /f 
@@ -435,7 +461,7 @@ Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 
 
 :: Disable Scheduled Tasks
-cls & echo !S_BLUE!Disabling Scheduled Tasks
+cls & echo !S_BLUE!Disabling Scheduled Tasks...
 for %%i in (
 	"\Microsoft\Windows\Application Experience\StartupAppTask"
 	"\Microsoft\Windows\Autochk\Proxy"
@@ -471,7 +497,7 @@ for %%i in (
 )
 
 :: DWM Configuration
-cls & echo !S_BLUE!Configuring DWM
+cls & echo !S_BLUE!Configuring DWM...
 :: Enable Window Colorization
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "EnableWindowColorization" /t REG_DWORD /d "1" /f
 :: Disable Aero Peek
@@ -535,7 +561,7 @@ cls & echo !S_BLUE!Configuring Ease of Access Settings
 
 
 :: Audio Configuration
-cls & echo !S_BLUE!Configuring Audio Settings
+cls & echo !S_BLUE!Configuring Audio Settings...
 :: Disable Exclusive Mode on Devices
 for /f "delims=" %%a in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %NeptuneDir%Tools\PowerRun.exe /SW:0 Reg.exe add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d 0 /f
 for /f "delims=" %%a in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %NeptuneDir%Tools\PowerRun.exe /SW:0 Reg.exe add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d 0 /f
@@ -576,7 +602,7 @@ for %%i in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
 
 
 :: Boot Configuration Data
-cls & echo !S_BLUE!Configuring BCDEdit
+cls & echo !S_BLUE!Configuring BCDEdit...
 :: Disable Boot Graphics
 bcdedit /set bootux disabled 
 :: Legacy Boot Menu
@@ -623,9 +649,8 @@ bcdedit /set allowedinmemorysettings 0x0
 
  
 
-
 :: Disable Devices
-cls & echo !S_BLUE!Disabling Devices
+cls & echo !S_BLUE!Disabling Devices...
 %devman% /disable "WAN Miniport (IKEv2)" 
 %devman% /disable "WAN Miniport (IP)" 
 %devman% /disable "WAN Miniport (IPv6)" 
@@ -661,10 +686,14 @@ cls & echo !S_BLUE!Disabling Devices
 %devman% /disable "Programmable interrupt controller" 
 %devman% /disable "Numeric data processor" 
 %devman% /disable "High precision event timer"
+%devman% /disable "Composite Bus Enumerator"
+%devman% /disable "Plug and Play Software Device Enumerator"
+%devman% /disable "Microsoft System Management BIOS Driver"
+%devman% /disable "USB Video Device"
 
 
 :: Memory Optimization
-cls & echo !S_BLUE!Configuring Memory Management
+cls & echo !S_BLUE!Configuring Memory Management...
 :: Superfetch and Prefetch
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d 0 /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d 0 /f 
@@ -693,7 +722,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 
 
 :: Gaming/GPU Configuration
-cls & echo !S_BLUE!Configuring GPU
+cls & echo !S_BLUE!Configuring GPU...
 :: Global Fullscreen Exclusive
 %currentuser% Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "0" /f 
 %currentuser% Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
@@ -729,7 +758,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d "ffffffff" /f 
 Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d "0" /f
-:: Low Latency Priorities
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Affinity" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Background Only" /t REG_SZ /d "True" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "BackgroundPriority" /t REG_DWORD /d "8" /f 
@@ -739,7 +767,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Scheduling Category" /t REG_SZ /d "High" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "SFIO Priority" /t REG_SZ /d "High" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Latency Sensitive" /t REG_SZ /d "True" /f 
-:: Gaming Priorities 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Affinity" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Background Only" /t REG_SZ /d "False" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Clock Rate" /t REG_DWORD /d "10000" /f 
@@ -750,40 +777,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Latency Sensitive" /t REG_SZ /d "True" /f
 
 
-:: DirectX
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "DisableAGPSupport" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "UseNonLocalVidMem" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "UseNonLocalVidMem" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "DisableDDSCAPSInDDSD" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "EmulationOnly" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectMusic" /v "DisableHWAcceleration" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "EmulatePointSprites" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "ForceRgbRasterizer" /t reg_DWORD /d "0" /f/f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "EmulateStateBlocks" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "EnableDebugging" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "FullDebug" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "DisableDM" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "EnableMultimonDebugging" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "LoadDebugRuntime" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "EnumReference" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "EnumSeparateMMX" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "EnumRamp" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "EnumNullDevice" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "FewVertices" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "DisableMMX" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "DisableMMX" /t reg_DWORD /d "0" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "MMX Fast Path" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "MMXFastPath" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D" /v "UseMMXForRGB" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "UseMMXForRGB" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Direct3D\Drivers" /v "EnumSeparateMMX" /t reg_DWORD /d "1" /f 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\DirectDraw" /v "ForceNoSysLock" /t reg_DWORD /d "0" /f 
-
-
-
 
 :: Hardening and Mitigations
-cls & echo !S_BLUE!Setting Mitigations/Hardening the OS
+cls & echo !S_BLUE!Configuring Mitigations/Security Measures...
 :: Disable Spectre and Meltdown
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f 
@@ -848,7 +844,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /
 
 
 :: Network Configuration
-cls & echo !S_BLUE!Configuring Network Settings
+cls & echo !S_BLUE!Configuring Network Settings...
 :: TCP Configuration
 netsh int tcp set global autotuninglevel=normal 
 netsh int tcp set global chimney=disabled 
@@ -936,21 +932,6 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-
 :: Detect Congestion Failure
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCongestionControl" /t reg_DWORD /d "00000001" /f
 
-:: QoS Priority for Games
-for %%i in (csgo VALORANT-Win64-Shipping javaw FortniteClient-Win64-Shipping ModernWarfare r5apex Overwatch RocketLeague) do (
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Application Name" /t REG_SZ /d "%%i.exe" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Version" /t REG_SZ /d "1.0" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Protocol" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Local Port" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Local IP" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Remote Port" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Remote IP" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "DSCP Value" /t REG_SZ /d "46" /f
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\QoS\%%i" /v "Throttle Rate" /t REG_SZ /d "-1" /f
-)
-
 
 
 
@@ -958,7 +939,7 @@ for %%i in (csgo VALORANT-Win64-Shipping javaw FortniteClient-Win64-Shipping Mod
 
 
 :: Process Priorities
-cls & echo !S_BLUE!Configuring Process Priorities
+cls & echo !S_BLUE!Configuring Process Priorities...
 :: Background Applications to Below Normal
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "5" /f
@@ -967,8 +948,8 @@ for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHe
 :: AudioDG to High
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\audiodg.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\audiodg.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f 
-:: CSRSS to High
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f 
+:: CSRSS to Realtime
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f
 :: DWM to Idle
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dwm.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "1" /f 
@@ -994,18 +975,26 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 
 
 :: Drivers and Services
-cls & echo !S_BLUE!Disabling Drivers and Services
+cls & echo !S_BLUE!Disabling Drivers and Services...
 :: Deleting Driver Dependencies to prevent BSOD
 :: FVEVOL (Bitlocker Leftover)
 Reg.exe delete "HKLM\System\ControlSet001\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /f
+Reg.exe add "HKLM\System\CurrentControlSet\Services\fvevol" /v "ErrorControl" /t REG_DWORD /d "0" /f
 :: ksthunk (Webcam)
 Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}" /v "UpperFilters" /f
 Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-BEC7-08002BE2092F}" /v "UpperFilters" /f
+:: volsnap (Volume Shadow Copy)
+Reg.exe add "HKLM\System\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
+:: Dependencies
+Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t REG_MULTI_SZ /d "" /f
 
 :: Drivers
+%svc% AmdK8 4
+%svc% bowser 4
 %svc% Beep 4
 %svc% GpuEnergyDrv 4
 %svc% cdrom 4
+%svc% FileCrypt 4
 %svc% ksthunk 4
 %svc% CLFS 4
 %svc% fvevol 4
@@ -1016,25 +1005,101 @@ Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-
 %svc% QWAVEdrv 4
 %svc% FileCrypt 4
 %svc% luafv 4
+%svc% PEAUTH 4
+%svc% storqosflt 4
+%svc% Tcpip6 4
+%svc% tcpipreg 4
+%svc% NdisVirtualBus 4
+%svc% CldFlt 4
+%svc% NetBT 4
+%svc% NetBIOS 4
+%svc% wcifs 4
+%svc% CompositeBus 4
+%svc% condrv 4
+%svc% vdrvroot 4
+%svc% i8042prt 4
+%svc% 3ware 4
+%svc% HTTP 4
+%svc% mssmbios 4
+%svc% swenum 4
 
 :: Services
+%svc% FrameServer 4
+%svc% W32Time 4
+%svc% ShellHWDetection 4
+%svc% lmhosts 4
+%svc% diagsvc 4
+%svc% LanmanWorkstation 4
+%svc% LanmanServer 4
+%svc% BITS 4
+%svc% diagnosticshub.standardcollector.service 4
+%svc% DPS 4
+%svc% TabletInputService 4
+%svc% wuauserv 4
+%svc% WaaSMedicSvc 4
+%svc% WinHttpAutoProxySvc 4
+%svc% XblGameSave 4
+%svc% XblAuthManager 4
+%svc% BcastDVRUserService 4
+%svc% ClipSVC 4
+%svc% FontCache 4
+%svc% FontCache3.0.0.0 4
 %svc% Themes 4
 %svc% WSearch 4
-
-
-
-
-
+%svc% BFE 4
+%svc% mpssvc 4
+%svc% sppsvc 3
+%svc% WdiServiceHost 4
+%svc% WdiSystemHost 4
+%svc% iphlpsvc 4
+%svc% UsoSvc 4
+%svc% Winmgmt 3
+%svc% DoSvc 4
+%svc% PcaSvc 4
+%svc% TapiSrv 4
+%svc% BthAvctpSvc 4
+%svc% hidserv 4
+%svc% icssvc 4
+%svc% WpnService 4
+%svc% WpnUserService_19133 4
+%svc% CDPUserSvc 4
+%svc% CDPUserSvc_19133 4
+%svc% SENS 4
 
 :: Operating System Cleanup
-cls & echo !S_BLUE!Cleaning the OS
+cls & echo !S_BLUE!Cleaning the OS...
 :: Remove Obsolete Registry Keys
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\HotStart" /f 
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Sidebar" /f 
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Telephony" /f 
 Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f 
 %currentuser% Reg.exe delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Screensavers" /f 
-%currentuser% Reg.exe delete "HKCU\Printers" /f 
+%currentuser% Reg.exe delete "HKCU\Printers" /f
+
+:: Delete Leftover NTLITE Components
+takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a
+icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c
+taskkill /im GameBarPresenceWriter.exe /f
+takeown /f "%WinDir%\System32\bcastdvr.exe" /a
+icacls "%WinDir%\System32\bcastdvr.exe" /grant:r Administrators:F /c
+taskkill /im bcastdvr.exe /f
+del /f /q "%WinDir%\System32\bcastdvr.exe"
+del /f /q "%WinDir%\System32\GameBarPresenceWriter.exe"
+
+:: Disable Default Start Menu
+taskkill /f /im ShellExperienceHost.exe
+takeown /f "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe"
+ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" Shellhostold.exe
+
+:: Delete Microcode Updates
+takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll
+takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll
+del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q
+del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q
+
+:: Notice Text
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f
 goto Finish
 
 
@@ -1116,7 +1181,6 @@ del /f /q "%NeptuneDir%Prerequisites\MPC.exe"
 del /f /q "%NeptuneDir%Prerequisites\vcredist"
 del /f /q "%NeptuneDir%Prerequisites\7z.exe"
 del /f /q "%NeptuneDir%Prerequisites\Open-Shell.exe"
-del /f /q "%NeptuneDir%Prerequisites\str.exe" 
 rmdir /s /q "%NeptuneDir%Prerequisites\DirectX" 
 
 shutdown /r /f -t 5 /c "Setup Complete: Enjoy NeptuneOS"

@@ -294,6 +294,17 @@ Windows Registry Editor Version 5.00
 [-HKEY_CLASSES_ROOT\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview]
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
 [-HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\Open With]
+[HKEY_CLASSES_ROOT\batfile\shellEx\ContextMenuHandlers\Compatibility]
+@=-
+[HKEY_CLASSES_ROOT\cmdfile\shellEx\ContextMenuHandlers\Compatibility]
+@=-
+[HKEY_CLASSES_ROOT\exefile\shellex\ContextMenuHandlers\Compatibility]
+@=-
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
+"{1d27f844-3a1f-4410-85ac-14651078412d}"=-"
+
+
+
 
 ;  ADDS THE "COPY TO..." ABILITY FROM WINDOWS 7
 [HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To]
@@ -1474,29 +1485,9 @@ Windows Registry Editor Version 5.00
 ; SOME BUILDS HAD ISSUE WITH REGISTRY HIVE NOT EXISTING AND THUS NOT SAVING VOLUME MIXER PER APPLICATION SETTINGS.
 [HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore]
 
-; SET TIME SERVER TO NTP
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime]
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers]
-@="0"
-"1"="time.windows.com"
-"2"="time.nist.gov"
-"0"="0.pool.ntp.org"
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Parameters]
-"NtpServer"="0.pool.ntp.org,0x9"
-"ServiceDll"=hex(2):25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,\
-  00,74,00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,\
-  77,00,33,00,32,00,74,00,69,00,6d,00,65,00,2e,00,64,00,6c,00,6c,00,00,00
-"ServiceDllUnloadOnStop"=dword:00000001
-"ServiceMain"="SvchostEntry_W32Time"
-"Type"="NTP"
-
 ; DISABLE 'NOTIFY ME WHEN THE CLOCK CHANGES' IN 'DATE AND TIME'
 [HKEY_CURRENT_USER\Control Panel\TimeDate]
 "DstNotification"=dword:00000000
-
-; DECREASE NTP SYNC INTERVAL
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpClient]
-"SpecialPollInterval"=dword:00000300
 
 ; INCREASE DESKTOP APPLICATION HEAP
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems]
