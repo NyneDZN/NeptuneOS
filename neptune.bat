@@ -33,7 +33,7 @@ if '%errorlevel%' NEQ '0' (
 wscript "%NeptuneDir%FullscreenCMD.vbs"
 %NeptuneDir%Apps\DevManView.exe /disable "HID-compliant mouse"
 cls & echo Killed Explorer
-echo Killed Mouse Control (!S_BLUE!Only to prevent pausing/closing the script. Keyboard control is active.)
+echo Killed Mouse Control (!S_GREEN!Only to prevent pausing/closing the script. Keyboard control is active.)
 timeout /5
 
 :: Set Title
@@ -56,13 +56,13 @@ cls
 
 echo.
 echo.
-echo  !S_BLUE!Disclaimer:
-echo  !S_BLUE!Do NOT close out of this Post Install script.
-echo  !S_BLUE!This script will continue to setup NeptuneOS
-echo  !S_BLUE!This may take between 2-5 minutes depending on your HDD/SSD speed.
-echo  !S_BLUE!Please report any errors you may encounter in the OS or with this script.
-echo  !S_BLUE!If you close this, please re-run it in C:\Windows\NEPTUNE.
-echo  !S_BLUE!Press any key to continue the script.
+echo  !S_GREEN!Disclaimer:
+echo  !S_GREEN!Do NOT close out of this Post Install script.
+echo  !S_GREEN!This script will continue to setup NeptuneOS
+echo  !S_GREEN!This may take between 2-5 minutes depending on your HDD/SSD speed.
+echo  !S_GREEN!Please report any errors you may encounter in the OS or with this script.
+echo  !S_GREEN!If you close this, please re-run it in C:\Windows\NEPTUNE.
+echo  !S_GREEN!Press any key to continue the script.
 echo.
 echo.
 
@@ -74,7 +74,7 @@ goto StartScript
 
 :StartScript
 :: Prerequisites
-cls & echo !S_BLUE!Installing Visual C++
+cls & echo !S_GREEN!Installing Visual C++
 start /wait "%NeptuneDir%Prerequisites\vcredist2005_x86.exe" /q
 start /wait "%NeptuneDir%Prerequisites\vcredist2005_x64.exe" /q
 start /wait "%NeptuneDir%Prerequisites\vcredist2008_x86.exe" /qb
@@ -87,26 +87,26 @@ start /wait "%NeptuneDir%Prerequisites\vcredist2013_x86.exe" /passive /norestart
 start /wait "%NeptuneDir%Prerequisites\vcredist2013_x64.exe" /passive /norestart
 start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart
 start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart
-cls & echo !S_BLUE!Installing DirectX
+cls & echo !S_GREEN!Installing DirectX
 "%NeptuneDir%Prerequisites\DirectX\DXSETUP.exe" /silent 
-cls & echo !S_BLUE!Installing Media Player
+cls & echo !S_GREEN!Installing Media Player
 "%NeptuneDir%Prerequisites\MPC.exe" /VERYSILENT /NORESTART
-cls & echo !S_BLUE!Installing 7-Zip
+cls & echo !S_GREEN!Installing 7-Zip
 "%NeptuneDir%Prerequisites\7z.exe" /S 
-cls & echo !S_BLUE!Installing Open Shell
+cls & echo !S_GREEN!Installing Open Shell
 "%NeptuneDir%Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu 
-cls & echo !S_BLUE!Installing Timer Resolution Service
+cls & echo !S_GREEN!Installing Timer Resolution Service
 "%NeptuneDir%Prerequisites\str.exe" -install
 %svc% STR 2
 "%NeptuneDir%Tools\nircmd.exe shortcut "C:\POST INSTALL" "%userprofile%\Desktop" "Post-Install"
 
 :: Registry
-cls & echo !S_BLUE!Importing NEPTUNE %version% registry profile
+cls & echo !S_GREEN!Importing NEPTUNE %version% registry profile
 Regedit.exe /s "%NeptuneDir%neptune.reg" 
 PowerRun.exe /SW:0 regedit.exe /s "%NeptuneDir%neptune.reg" 
 
 :: Prepare DWM Script
-cls & echo !S_BLUE!Preparing DWM Script
+cls & echo !S_GREEN!Preparing DWM Script
 takeown /F "%windir%\System32\dwm.exe" /A & icacls "%windir%\System32\dwm.exe" /grant Administrators:(F)
 takeown /F "%windir%\System32\UIRibbon.dll" /A & icacls "%windir%\System32\UIRibbon.dll" /grant Administrators:(F) 
 takeown /F "%windir%\System32\UIRibbonRes.dll" /A & icacls "%windir%\System32\UIRibbonRes.dll" /grant Administrators:(F) 
@@ -121,11 +121,11 @@ copy /y "%windir%\System32\rundll32.exe" "%NeptuneDir%Other\dwm\fakedwm\dwm.exe"
 %PowerShell% "$PowerCfg = (Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings' -Recurse).Name -notmatch '\bDefaultPowerSchemeValues|(\\[0-9]|\b255)$';foreach ($item in $PowerCfg) { Set-ItemProperty -Path $item.Replace('HKEY_LOCAL_MACHINE','HKLM:') -Name 'Attributes' -Value 0 -Force}"
 
 :: Disable Hibernation
-cls & echo !S_BLUE!Disabling Hibernation
+cls & echo !S_GREEN!Disabling Hibernation
 powercfg -h off
 
 :: Powerplan Configuration
-cls & echo !S_BLUE!Importing Power Plan
+cls & echo !S_GREEN!Importing Power Plan
 powercfg -import "%NeptuneDir%power.pow" 11111111-1111-1111-1111-111111111111
 powercfg -setactive 11111111-1111-1111-1111-111111111111
 powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan" "A powerplan created to achieve low latency and high 0.01% lows." 
@@ -135,7 +135,7 @@ powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 powercfg -delete e9a42b02-d5df-448d-aa00-03f14749eb61
 
 :: Disable Sleep States 
-cls & echo !S_BLUE!Disabling Sleep States
+cls & echo !S_GREEN!Disabling Sleep States...
 :: Disable Away Mode Policy
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0
 powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0
@@ -146,11 +146,24 @@ powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41e
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0
 powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0
 
+cls & echo !S_GREEN!Configuring Power States...
+:: Enable Hardware P-States
+powercfg -setacvalueindex scheme_current sub_processor PERFAUTONOMOUS 1 
+powercfg -setacvalueindex scheme_current sub_processor PERFAUTONOMOUSWINDOW 20000 
+powercfg -setacvalueindex scheme_current sub_processor PERFCHECK 20
+:: Configure C-States
+powercfg -setacvalueindex scheme_current sub_processor IDLEPROMOTE 100 
+powercfg -setacvalueindex scheme_current sub_processor IDLEDEMOTE 100 
+powercfg -setacvalueindex scheme_current sub_processor IDLECHECK 20000 
+:: Enable Turbo Boost
+powercfg -setacvalueindex scheme_current sub_processor PERFBOOSTMODE 1 
+powercfg -setacvalueindex scheme_current sub_processor PERFBOOSTPOL 100 
+
 :: Set Active Scheme as Currnt
 powercfg -setactive scheme_current
 
 :: Disable Powersaving on Drivers
-cls & echo !S_BLUE!Disable Powersaving
+cls & echo !S_GREEN!Disable Powersaving
 for /f "tokens=*" %%a in ('wmic path Win32_PnPEntity GET DeviceID ^| findstr "USB\VID_"') do (   
     for %%i in (
     	"AllowIdleIrpInD3"
@@ -192,13 +205,7 @@ powershell "%WinDir%\NEPTUNE\pnp-powersaving.ps1"
 :: Disable Timer Coalescing 
 :: https://en.wikipedia.org/wiki/Timer_coalescing
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Executive" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\ModernSleep" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKLM\System\CurrentControlSet\Control" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f
 
 :: Disable Powerthrottling
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f
@@ -218,7 +225,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimation\Tagged
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimation\TaggedEnergy" /v "TelemetryMaxTagPerApplication" /t REG_DWORD /d "0" /f
 
 :: Disable CPU Core Parking (?)
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoreParkingDisabled" /t REG_DWORD /d 0"" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoreParkingDisabled" /t REG_DWORD /d "0" /f
 
 :: Disable Event Processor (?)
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f
@@ -251,7 +258,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "TimerRebaseThresho
 
 
 :: File System Configuration
-cls & echo !S_BLUE!Configuring The File System
+cls & echo !S_GREEN!Configuring The File System
 FSUTIL behavior set allowextchar 0
 FSUTIL behavior set Bugcheckoncorrupt 0
 :: Disable 8.3 File Creation
@@ -298,7 +305,7 @@ FOR /F "eol=E" %%a in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 
 
 :: Time Server Configuration
-cls & echo !S_BLUE!Changing NTP Server...
+cls & echo !S_GREEN!Changing NTP Server...
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"
 :: resync time to pool.ntp.org
@@ -310,7 +317,7 @@ w32tm /resync
 
 
 :: Explorer Configuration
-cls & echo !S_BLUE!Configuring Explorer...
+cls & echo !S_GREEN!Configuring Explorer...
 :: Enable Dark Mode
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f
@@ -386,7 +393,7 @@ Reg.exe "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Del
 
 
 :: Purge Windows Components
-cls & echo !S_BLUE!Debloating and Configuring Windows...
+cls & echo !S_GREEN!Debloating and Configuring Windows...
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "IncludeRecommendedUpdates" /t REG_DWORD /d "0" /f 
@@ -461,7 +468,7 @@ Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 
 
 :: Disable Scheduled Tasks
-cls & echo !S_BLUE!Disabling Scheduled Tasks...
+cls & echo !S_GREEN!Disabling Scheduled Tasks...
 for %%i in (
 	"\Microsoft\Windows\Application Experience\StartupAppTask"
 	"\Microsoft\Windows\Autochk\Proxy"
@@ -497,7 +504,7 @@ for %%i in (
 )
 
 :: DWM Configuration
-cls & echo !S_BLUE!Configuring DWM...
+cls & echo !S_GREEN!Configuring DWM...
 :: Enable Window Colorization
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "EnableWindowColorization" /t REG_DWORD /d "1" /f
 :: Disable Aero Peek
@@ -524,7 +531,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "Exclus
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "ExclusiveModeFramerateThresholdPercent" /t REG_DWORD /d "250" /f 
 
 :: Optimize Hung Apps and Shutdown Times
-cls & echo !S_BLUE!Optimize Hung Apps and Shutdown Times
+cls & echo !S_GREEN!Optimize Hung Apps and Shutdown Times
 %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
 %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t REG_SZ /d "1000" /f 
 %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "MenuShowDelay" /t REG_SZ /d "8" /f 
@@ -534,7 +541,7 @@ Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d "1000" /f
 
 :: Disable Mouse Acceleration
-cls & echo !S_BLUE!Configuring Keyboard and Mouse
+cls & echo !S_GREEN!Configuring Keyboard and Mouse
 %currentuser% Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
 %currentuser% Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
 %currentuser% Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f
@@ -544,7 +551,7 @@ cls & echo !S_BLUE!Configuring Keyboard and Mouse
 %currentuser% Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f
 
 :: Disable Ease of Access Settings
-cls & echo !S_BLUE!Configuring Ease of Access Settings
+cls & echo !S_GREEN!Configuring Ease of Access Settings
 %currentuser% Reg.exe add "HKCU\Control Panel\Accessibility\AudioDescription" /v "Flags" /t REG_DWORD /d "0" /f
 %currentuser% Reg.exe add "HKCU\Control Panel\Accessibility\Blind Access" /v "Flags" /t REG_DWORD /d "0" /f
 %currentuser% Reg.exe add "HKCU\Control Panel\Accessibility\HighContrast" /v "Flags" /t REG_DWORD /d "0" /f
@@ -561,7 +568,7 @@ cls & echo !S_BLUE!Configuring Ease of Access Settings
 
 
 :: Audio Configuration
-cls & echo !S_BLUE!Configuring Audio Settings...
+cls & echo !S_GREEN!Configuring Audio Settings...
 :: Disable Exclusive Mode on Devices
 for /f "delims=" %%a in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %NeptuneDir%Tools\PowerRun.exe /SW:0 Reg.exe add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d 0 /f
 for /f "delims=" %%a in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %NeptuneDir%Tools\PowerRun.exe /SW:0 Reg.exe add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d 0 /f
@@ -589,7 +596,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 
 
 :: Legacy Photo Viewer
-cls & echo !S_BLUE!Reviving Legacy Photo Viewer
+cls & echo !S_GREEN!Reviving Legacy Photo Viewer...
 :: Enable the Photo Viewer
 for %%i in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
     Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~i" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
@@ -602,7 +609,7 @@ for %%i in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
 
 
 :: Boot Configuration Data
-cls & echo !S_BLUE!Configuring BCDEdit...
+cls & echo !S_GREEN!Configuring BCDEdit...
 :: Disable Boot Graphics
 bcdedit /set bootux disabled 
 :: Legacy Boot Menu
@@ -650,7 +657,38 @@ bcdedit /set allowedinmemorysettings 0x0
  
 
 :: Disable Devices
-cls & echo !S_BLUE!Disabling Devices...
+cls & echo !S_GREEN!Disabling Devices...
+%devman% /disable "ACPI Processor Aggregator" 
+%devman% /disable "ACPI Wake Alarm" 
+%devman% /disable "Composite Bus Enumerator"
+%devman% /disable "Direct memory access controller" 
+%devman% /disable "High precision event timer"
+%devman% /disable "Microsoft Device Association Root Enumerator" 
+%devman% /disable "Microsoft GS Wavetable Synth" 
+%devman% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" 
+%devman% /disable "Microsoft Kernel Debug Network Adapter" 
+%devman% /disable "Microsoft RRAS Root Enumerator" 
+%devman% /disable "Microsoft System Management BIOS Driver"
+%devman% /disable "Microsoft Virtual Drive Enumerator" 
+%devman% /disable "Motherboard resources" 
+%devman% /disable "NDIS Virtual Network Adapter Enumerator" 
+%devman% /disable "Numeric data processor" 
+%devman% /disable "PCI Data Acquisition and Signal Processing Controller" 
+%devman% /disable "PCI Device" 
+%devman% /disable "PCI Memory Controller" 
+%devman% /disable "PCI Simple Communications Controller" 
+%devman% /disable "PCI Simple Communications Controller" 
+%devman% /disable "PCI standard RAM Controller" 
+%devman% /disable "Plug and Play Software Device Enumerator"
+%devman% /disable "Programmable interrupt controller" 
+%devman% /disable "Root Print Queue" 
+%devman% /disable "SM Bus Controller" 
+%devman% /disable "System board" 
+%devman% /disable "System Speaker" 
+%devman% /disable "System Timer" 
+%devman% /disable "UMBus Root Bus Enumerator" 
+%devman% /disable "Unknown Device" 
+%devman% /disable "USB Video Device"
 %devman% /disable "WAN Miniport (IKEv2)" 
 %devman% /disable "WAN Miniport (IP)" 
 %devman% /disable "WAN Miniport (IPv6)" 
@@ -659,41 +697,11 @@ cls & echo !S_BLUE!Disabling Devices...
 %devman% /disable "WAN Miniport (PPPOE)" 
 %devman% /disable "WAN Miniport (PPTP)" 
 %devman% /disable "WAN Miniport (SSTP)" 
-%devman% /disable "Motherboard resources" 
-%devman% /disable "System board" 
-%devman% /disable "System Speaker" 
-%devman% /disable "System Timer" 
-%devman% /disable "Microsoft Virtual Drive Enumerator" 
-%devman% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" 
-%devman% /disable "Microsoft GS Wavetable Synth" 
-%devman% /disable "Microsoft Device Association Root Enumerator" 
-%devman% /disable "Microsoft Kernel Debug Network Adapter" 
-%devman% /disable "Microsoft RRAS Root Enumerator" 
-%devman% /disable "PCI Data Acquisition and Signal Processing Controller" 
-%devman% /disable "PCI Simple Communications Controller" 
-%devman% /disable "PCI Device" 
-%devman% /disable "PCI Simple Communications Controller" 
-%devman% /disable "PCI Memory Controller" 
-%devman% /disable "PCI standard RAM Controller" 
-%devman% /disable "ACPI Processor Aggregator" 
-%devman% /disable "ACPI Wake Alarm" 
-%devman% /disable "UMBus Root Bus Enumerator" 
-%devman% /disable "Root Print Queue" 
-%devman% /disable "NDIS Virtual Network Adapter Enumerator" 
-%devman% /disable "Direct memory access controller" 
-%devman% /disable "Unknown Device" 
-%devman% /disable "SM Bus Controller" 
-%devman% /disable "Programmable interrupt controller" 
-%devman% /disable "Numeric data processor" 
-%devman% /disable "High precision event timer"
-%devman% /disable "Composite Bus Enumerator"
-%devman% /disable "Plug and Play Software Device Enumerator"
-%devman% /disable "Microsoft System Management BIOS Driver"
-%devman% /disable "USB Video Device"
+
 
 
 :: Memory Optimization
-cls & echo !S_BLUE!Configuring Memory Management...
+cls & echo !S_GREEN!Configuring Memory Management...
 :: Superfetch and Prefetch
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d 0 /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d 0 /f 
@@ -722,7 +730,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 
 
 :: Gaming/GPU Configuration
-cls & echo !S_BLUE!Configuring GPU...
+cls & echo !S_GREEN!Configuring GPU...
 :: Global Fullscreen Exclusive
 %currentuser% Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "0" /f 
 %currentuser% Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
@@ -779,7 +787,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 
 
 :: Hardening and Mitigations
-cls & echo !S_BLUE!Configuring Mitigations/Security Measures...
+cls & echo !S_GREEN!Configuring Mitigations...
 :: Disable Spectre and Meltdown
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f 
@@ -844,7 +852,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /
 
 
 :: Network Configuration
-cls & echo !S_BLUE!Configuring Network Settings...
+cls & echo !S_GREEN!Configuring Network Settings...
 :: TCP Configuration
 netsh int tcp set global autotuninglevel=normal 
 netsh int tcp set global chimney=disabled 
@@ -939,7 +947,7 @@ Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCon
 
 
 :: Process Priorities
-cls & echo !S_BLUE!Configuring Process Priorities...
+cls & echo !S_GREEN!Configuring Process Priorities...
 :: Background Applications to Below Normal
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "5" /f
@@ -975,7 +983,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 
 
 :: Drivers and Services
-cls & echo !S_BLUE!Disabling Drivers and Services...
+cls & echo !S_GREEN!Disabling Drivers and Services...
 :: Deleting Driver Dependencies to prevent BSOD
 :: FVEVOL (Bitlocker Leftover)
 Reg.exe delete "HKLM\System\ControlSet001\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /f
@@ -989,85 +997,125 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t REG_MULTI_SZ /d "" /f
 
 :: Drivers
+%svc% 3ware 4
 %svc% AmdK8 4
-%svc% bowser 4
+%svc% AppID 4
+%svc% AppID 4
+%svc% applockerfltr 4
 %svc% Beep 4
-%svc% GpuEnergyDrv 4
+%svc% bowser 4
+%svc% bttflt 4
 %svc% cdrom 4
-%svc% FileCrypt 4
-%svc% ksthunk 4
-%svc% CLFS 4
-%svc% fvevol 4
-%svc% KSecPkg 4
-%svc% srv2 4
-%svc% mrxsmb 4
-%svc% mrxsmb20 4
-%svc% QWAVEdrv 4
-%svc% FileCrypt 4
-%svc% luafv 4
-%svc% PEAUTH 4
-%svc% storqosflt 4
-%svc% Tcpip6 4
-%svc% tcpipreg 4
-%svc% NdisVirtualBus 4
 %svc% CldFlt 4
-%svc% NetBT 4
-%svc% NetBIOS 4
-%svc% wcifs 4
+%svc% CLFS 4
 %svc% CompositeBus 4
 %svc% condrv 4
-%svc% vdrvroot 4
-%svc% i8042prt 4
-%svc% 3ware 4
+%svc% FileCrypt 4
+%svc% FileCrypt 4
+%svc% fvevol 4
+%svc% GpuEnergyDrv 4
 %svc% HTTP 4
+%svc% KSecPkg 4
+%svc% ksthunk 4
+%svc% luafv 4
+%svc% mpsdrv 4
+%svc% mrxsmb 4
+%svc% mrxsmb20 4
+%svc% MSKSSRV 4
+%svc% MSPCLOCK 4
+%svc% MSPQM 4
 %svc% mssmbios 4
+%svc% MSTEE 4
+%svc% NdisTapi 4
+%svc% NdisVirtualBus 4
+%svc% NdisWan 4
+%svc% ndiswanlegacy 4
+%svc% NetBIOS 4
+%svc% NetBT 4
+%svc% PEAUTH 4
+%svc% QWAVEdrv 4
+%svc% RasAcd 4
+%svc% RasPppoe 4
+%svc% srv2 4
+%svc% storqosflt 4
 %svc% swenum 4
+%svc% Tcpip6 4
+%svc% tcpipreg 4
+%svc% umbus 4
+%svc% vdrvroot 4
+%svc% volsnap 4
+%svc% WacomPen 4
+%svc% wanarp 4
+%svc% wanarpv6 4
+%svc% wcifs 4
 
 :: Services
-%svc% FrameServer 4
-%svc% W32Time 4
-%svc% ShellHWDetection 4
-%svc% lmhosts 4
-%svc% diagsvc 4
-%svc% LanmanWorkstation 4
-%svc% LanmanServer 4
-%svc% BITS 4
-%svc% diagnosticshub.standardcollector.service 4
-%svc% DPS 4
-%svc% TabletInputService 4
-%svc% wuauserv 4
-%svc% WaaSMedicSvc 4
-%svc% WinHttpAutoProxySvc 4
-%svc% XblGameSave 4
-%svc% XblAuthManager 4
 %svc% BcastDVRUserService 4
+%svc% BFE 4
+%svc% BITS 4
+%svc% BthAvctpSvc 4
+%svc% CDPUserSvc 4
 %svc% ClipSVC 4
+%svc% diagnosticshub.standardcollector.service 4
+%svc% diagsvc 4
+%svc% DoSvc 4
+%svc% DPS 4
 %svc% FontCache 4
 %svc% FontCache3.0.0.0 4
-%svc% Themes 4
-%svc% WSearch 4
-%svc% BFE 4
+%svc% FrameServer 4
+%svc% gpsvc 4
+%svc% hidserv 4
+%svc% HvHost 4
+%svc% icssvc 4
+%svc% IKEEXT 4
+%svc% InstallService 4
+%svc% iphlpsvc 4
+%svc% KtmRm 4
+%svc% LanmanServer 4
+%svc% LanmanWorkstation 4
+%svc% lmhosts 4
 %svc% mpssvc 4
+%svc% NgcCtnrSvc 4
+%svc% PcaSvc 4
+%svc% PhoneSvc 4
+%svc% QWAVE 4
+%svc% SENS 4
+%svc% SharedAccess 4
+%svc% ShellHWDetection 4
 %svc% sppsvc 3
+%svc% stisvc 4
+%svc% stisvc 4
+%svc% TabletInputService 4
+%svc% TapiSrv 4
+%svc% Themes 4
+%svc% UsoSvc 4
+%svc% vmicguestinterface 4
+%svc% vmicheartbeat 4
+%svc% vmickvpexchange 4
+%svc% vmicrdv 4
+%svc% vmicshutdown 4
+%svc% vmictimesync 4
+%svc% vmicvmsession 4
+%svc% vmicvss 4
+%svc% W32Time 4
+%svc% WaaSMedicSvc 4
 %svc% WdiServiceHost 4
 %svc% WdiSystemHost 4
-%svc% iphlpsvc 4
-%svc% UsoSvc 4
+%svc% WinHttpAutoProxySvc 4
 %svc% Winmgmt 3
-%svc% DoSvc 4
-%svc% PcaSvc 4
-%svc% TapiSrv 4
-%svc% BthAvctpSvc 4
-%svc% hidserv 4
-%svc% icssvc 4
+%svc% wlidsvc 4
+%svc% WPDBusEnum 4
 %svc% WpnService 4
-%svc% WpnUserService_19133 4
-%svc% CDPUserSvc 4
-%svc% CDPUserSvc_19133 4
-%svc% SENS 4
+%svc% WSearch 4
+%svc% wuauserv 4
+%svc% XblAuthManager 4
+%svc% XblGameSave 4
+%svc% XboxGipSvc 4
+
+
 
 :: Operating System Cleanup
-cls & echo !S_BLUE!Cleaning the OS...
+cls & echo !S_GREEN!Cleaning the OS...
 :: Remove Obsolete Registry Keys
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\HotStart" /f 
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Sidebar" /f 
@@ -1167,8 +1215,8 @@ exit /b 0
 
 
 :Finish
-echo !S_BLUE!Finishing up installation and restarting. Enjoy NeptuneOS.
-echo !S_BLUE!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
+echo !S_GREEN!Finishing up installation and restarting. Enjoy NeptuneOS.
+echo !S_GREEN!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "POST INSTALL" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "POST INSTALL" /t REG_SZ /d "explorer \"C:\POST INSTALL\"" /f 
 %NeptuneDir%Apps\DevManView.exe /enable "HID-compliant mouse" 

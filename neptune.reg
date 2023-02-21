@@ -246,7 +246,6 @@ Windows Registry Editor Version 5.00
 [-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}]
 [-HKEY_CLASSES_ROOT\Drive\shellex\PropertySheetHandlers\{7988B573-EC89-11cf-9C00-00AA00A14F56}]
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
-"{1d27f844-3a1f-4410-85ac-14651078412d}"=-
 "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}"=-
 [-HKEY_CLASSES_ROOT\exefile\shellex\ContextMenuHandlers\PintoStartScreen]
 [-HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\print]
@@ -299,6 +298,8 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\cmdfile\shellEx\ContextMenuHandlers\Compatibility]
 @=-
 [HKEY_CLASSES_ROOT\exefile\shellex\ContextMenuHandlers\Compatibility]
+@=-
+[HKEY_CLASSES_ROOT\Msi.Package\shellex\ContextMenuHandlers\Compatibility]
 @=-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
 "{1d27f844-3a1f-4410-85ac-14651078412d}"=-"
