@@ -1105,7 +1105,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnServic
 %svc% wanarp 4
 %svc% wanarpv6 4
 %svc% wcifs 4
-%SVC% DJFOIJDFSOI 4
 
 
 :: Services
