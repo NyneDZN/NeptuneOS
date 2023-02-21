@@ -1,12 +1,14 @@
 :: Script created for NeptuneOS by nyne.#1431
 
 :: - Credit given to
-:: - amitxv (EVA) 
 :: - AdamX
-:: - AtlasOS
+:: - amitxv (EVA) 
+:: - AtlasOS (Xyueta)
+:: - FoxOS (CatGamerOP
 :: - DuckOS (AnhNguyen#7472, fikinoob#6487)
-:: - ShDW
 :: - EchoX
+:: - ShDW
+
 
 
 @echo off
@@ -75,18 +77,18 @@ goto StartScript
 :StartScript
 :: Prerequisites
 cls & echo !S_GREEN!Installing Visual C++
-start /wait "%NeptuneDir%Prerequisites\vcredist2005_x86.exe" /q
-start /wait "%NeptuneDir%Prerequisites\vcredist2005_x64.exe" /q
-start /wait "%NeptuneDir%Prerequisites\vcredist2008_x86.exe" /qb
-start /wait "%NeptuneDir%Prerequisites\vcredist2008_x64.exe" /qb
-start /wait "%NeptuneDir%Prerequisites\vcredist2010_x86.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2010_x64.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2012_x86.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2012_x64.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2013_x86.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2013_x64.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart
-start /wait "%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2005_x86.exe" /q
+"%NeptuneDir%Prerequisites\vcredist2005_x64.exe" /q
+"%NeptuneDir%Prerequisites\vcredist2008_x86.exe" /qb
+"%NeptuneDir%Prerequisites\vcredist2008_x64.exe" /qb
+"%NeptuneDir%Prerequisites\vcredist2010_x86.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2010_x64.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2012_x86.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2012_x64.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2013_x86.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2013_x64.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart
+"%NeptuneDir%Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart
 cls & echo !S_GREEN!Installing DirectX
 "%NeptuneDir%Prerequisites\DirectX\DXSETUP.exe" /silent 
 cls & echo !S_GREEN!Installing Media Player
@@ -97,13 +99,14 @@ cls & echo !S_GREEN!Installing Open Shell
 "%NeptuneDir%Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu 
 cls & echo !S_GREEN!Installing Timer Resolution Service
 "%NeptuneDir%Prerequisites\str.exe" -install
-%svc% STR 2
+
 "%NeptuneDir%Tools\nircmd.exe shortcut "C:\POST INSTALL" "%userprofile%\Desktop" "Post-Install"
 
 :: Registry
 cls & echo !S_GREEN!Importing NEPTUNE %version% registry profile
 Regedit.exe /s "%NeptuneDir%neptune.reg" 
-PowerRun.exe /SW:0 regedit.exe /s "%NeptuneDir%neptune.reg" 
+PowerRun.exe /SW:0 regedit.exe /s "%NeptuneDir%neptune.reg"
+
 
 :: Prepare DWM Script
 cls & echo !S_GREEN!Preparing DWM Script
@@ -208,6 +211,8 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "Co
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f 
 
 :: Disable Powerthrottling
+:: Intel CPUs, 6 generation or higher
+:: https://blogs.windows.com/windows-insider/2017/04/18/introducing-power-throttling
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f
 
 :: Disable Sleep Study
@@ -251,7 +256,10 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableSensorWatch
 :: Disable Fastboot
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 
+:: Win32PrioritySeperation (26 Hex)
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "38" /f
 
+:: (?)
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableVsyncLatencyUpdate" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "MfBufferingThreshold" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "TimerRebaseThresholdOnDripsExit" /t REG_DWORD /d "30" /f 
@@ -663,6 +671,7 @@ cls & echo !S_GREEN!Disabling Devices...
 %devman% /disable "Composite Bus Enumerator"
 %devman% /disable "Direct memory access controller" 
 %devman% /disable "High precision event timer"
+%devman% /disable "Microsoft Windows Management Interface for ACPI"
 %devman% /disable "Microsoft Device Association Root Enumerator" 
 %devman% /disable "Microsoft GS Wavetable Synth" 
 %devman% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" 
@@ -786,6 +795,8 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 
 
 
+
+
 :: Hardening and Mitigations
 cls & echo !S_GREEN!Configuring Mitigations...
 :: Disable Spectre and Meltdown
@@ -850,30 +861,34 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" /v "S
 :: https://www.stigviewer.com/stig/windows_10/2021-03-10/finding/V-220930
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /t REG_DWORD /d "1" /f
 
+:: Clear Firewall Rules
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
+
 
 :: Network Configuration
 cls & echo !S_GREEN!Configuring Network Settings...
 :: TCP Configuration
-netsh int tcp set global autotuninglevel=normal 
-netsh int tcp set global chimney=disabled 
-netsh int tcp set global dca=enabled 
-netsh int tcp set global netdma=disabled 
-netsh int tcp set global timestamps=enabled 
-netsh int tcp set global congestionprovider=ctcp 
-netsh int tcp set global ecncapability=disabled 
-netsh int tcp set global ecncapability=disabled 
-netsh int tcp set global rss=enabled 
-netsh int tcp set global fastopen=enabled 
-netsh int tcp set global nonsackrttresiliency=disabled 
-netsh int tcp set global rsc=disabled 
-netsh int tcp set global maxsynretransmissions=2 
-netsh int tcp set global initialRto=2000 
-netsh int tcp set heuristics enabled 
-netsh int tcp set supplemental Internet congestionprovider=ctcp 
-netsh int tcp set supplemental template=custom icw=10 
 netsh int ip set glob defaultcurhoplimit=255 
 netsh int ip set interface "Ethernet" metric=60 
 netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
+netsh int tcp set global autotuninglevel=normal 
+netsh int tcp set global chimney=disabled 
+netsh int tcp set global congestionprovider=ctcp 
+netsh int tcp set global dca=enabled 
+netsh int tcp set global ecncapability=disabled 
+netsh int tcp set global ecncapability=disabled 
+netsh int tcp set global fastopen=enabled 
+netsh int tcp set global initialRto=2000 
+netsh int tcp set global maxsynretransmissions=2 
+netsh int tcp set global netdma=disabled 
+netsh int tcp set global nonsackrttresiliency=disabled 
+netsh int tcp set global rsc=disabled 
+netsh int tcp set global rss=enabled 
+netsh int tcp set global timestamps=enabled 
+netsh int tcp set heuristics enabled 
+netsh int tcp set supplemental Internet congestionprovider=ctcp 
+netsh int tcp set supplemental template=custom icw=10 
 
 :: Disable Bandwith Preservation
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t reg_DWORD /d "1" /f 
@@ -912,6 +927,40 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetB
 
 :: Disable Network Adapters
 %PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr"
+
+:: Configure NIC (Xyueta)
+for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class" /v "*WakeOnMagicPacket" /s ^| findstr "HKEY"') do (
+    for %%i in (
+        "*EEE"
+        "*FlowControl"
+        "*LsoV2IPv4"
+        "*LsoV2IPv6"
+        "*SelectiveSuspend"
+        "*WakeOnMagicPacket"
+        "*WakeOnPattern"
+        "AdvancedEEE"
+        "AutoDisableGigabit"
+        "AutoPowerSaveModeEnabled"
+        "EnableConnectedPowerGating"
+        "EnableDynamicPowerGating"
+        "EnableGreenEthernet"
+        "EnableModernStandby"
+        "EnablePME"
+        "EnablePowerManagement"
+        "EnableSavePowerNow"
+        "GigaLite"
+        "PowerSavingMode"
+        "ReduceSpeedOnPowerDown"
+        "ULPMode"
+        "WakeOnLink"
+        "WakeOnSlot"
+        "WakeUpModeCap"
+    ) do (
+        for /f %%j in ('reg query "%%a" /v "%%~i" ^| findstr "HKEY"') do (
+            reg add "%%j" /v "%%~i" /t REG_SZ /d "0" /f
+        )
+    )
+)
 
 :: Enable DNS over HTTPS
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f 
@@ -980,8 +1029,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 
 
 
-
-
 :: Drivers and Services
 cls & echo !S_GREEN!Disabling Drivers and Services...
 :: Deleting Driver Dependencies to prevent BSOD
@@ -995,13 +1042,18 @@ Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
 :: Dependencies
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0Afd" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f
+
 
 :: Drivers
 %svc% 3ware 4
 %svc% AmdK8 4
 %svc% AppID 4
+%svc% ADP80XX 4
 %svc% AppID 4
 %svc% applockerfltr 4
+%svc% arcsas 4
 %svc% Beep 4
 %svc% bowser 4
 %svc% bttflt 4
@@ -1010,6 +1062,7 @@ Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnServic
 %svc% CLFS 4
 %svc% CompositeBus 4
 %svc% condrv 4
+%svc% Dfsc 4
 %svc% FileCrypt 4
 %svc% FileCrypt 4
 %svc% fvevol 4
@@ -1036,26 +1089,33 @@ Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnServic
 %svc% QWAVEdrv 4
 %svc% RasAcd 4
 %svc% RasPppoe 4
+%svc% SiSRaid2 4
+%svc% SiSRaid4 4
 %svc% srv2 4
 %svc% storqosflt 4
 %svc% swenum 4
 %svc% Tcpip6 4
 %svc% tcpipreg 4
+%svc% tdx 4
 %svc% umbus 4
 %svc% vdrvroot 4
+%svc% volmgrx 4
 %svc% volsnap 4
 %svc% WacomPen 4
 %svc% wanarp 4
 %svc% wanarpv6 4
 %svc% wcifs 4
 
+
 :: Services
+%svc% AppXSvc 3
 %svc% BcastDVRUserService 4
 %svc% BFE 4
 %svc% BITS 4
 %svc% BthAvctpSvc 4
 %svc% CDPUserSvc 4
 %svc% ClipSVC 4
+%svc% CryptSvc 3
 %svc% diagnosticshub.standardcollector.service 4
 %svc% diagsvc 4
 %svc% DoSvc 4
@@ -1085,6 +1145,7 @@ Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnServic
 %svc% sppsvc 3
 %svc% stisvc 4
 %svc% stisvc 4
+%svc% STR 2
 %svc% TabletInputService 4
 %svc% TapiSrv 4
 %svc% Themes 4
@@ -1178,6 +1239,8 @@ set svc=call :setSvc
 set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command"
 :: DevManView
 set devman="%NeptuneDir%Apps\DevManView.exe"
+:: Logs
+set install_log=%NeptuneDir%Other\logs\neptune.log
 goto :Prep
 
 :setSvc
