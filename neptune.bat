@@ -314,9 +314,9 @@ FOR /F "eol=E" %%a in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 
 :: Time Server Configuration
 cls & echo !S_GREEN!Changing NTP Server...
-:: change ntp server from windows server to pool.ntp.org
+:: Switch to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"
-:: resync time to pool.ntp.org
+:: Resync to pool.ntp.org
 net start w32time
 w32tm /config /update
 w32tm /resync
@@ -512,7 +512,7 @@ for %%i in (
 )
 
 :: DWM Configuration
-cls & echo !S_GREEN!Configuring DWM...
+cls & echo !S_GREEN!Configuring Desktop Window Manager...
 :: Enable Window Colorization
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "EnableWindowColorization" /t REG_DWORD /d "1" /f
 :: Disable Aero Peek
@@ -869,26 +869,26 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\Fire
 :: Network Configuration
 cls & echo !S_GREEN!Configuring Network Settings...
 :: TCP Configuration
-netsh int ip set glob defaultcurhoplimit=255 
-netsh int ip set interface "Ethernet" metric=60 
+netsh int ip set glob defaultcurhoplimit=255
+netsh int ip set interface "Ethernet" metric=60
 netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
-netsh int tcp set global autotuninglevel=normal 
-netsh int tcp set global chimney=disabled 
+netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
+netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global chimney=disabled
 netsh int tcp set global congestionprovider=ctcp 
-netsh int tcp set global dca=enabled 
-netsh int tcp set global ecncapability=disabled 
-netsh int tcp set global ecncapability=disabled 
-netsh int tcp set global fastopen=enabled 
-netsh int tcp set global initialRto=2000 
-netsh int tcp set global maxsynretransmissions=2 
-netsh int tcp set global netdma=disabled 
-netsh int tcp set global nonsackrttresiliency=disabled 
-netsh int tcp set global rsc=disabled 
-netsh int tcp set global rss=enabled 
-netsh int tcp set global timestamps=enabled 
-netsh int tcp set heuristics enabled 
-netsh int tcp set supplemental Internet congestionprovider=ctcp 
-netsh int tcp set supplemental template=custom icw=10 
+netsh int tcp set global dca=enable
+netsh int tcp set global ecncapability=disabled
+netsh int tcp set global fastopen=enabled
+netsh int tcp set global initialRto=2000
+netsh int tcp set global maxsynretransmissions=2
+netsh int tcp set global netdma=disabled
+netsh int tcp set global nonsackrttresiliency=disabled
+netsh int tcp set global rsc=disabled
+netsh int tcp set global rss=enabled
+netsh int tcp set global timestamps=enabled
+netsh int tcp set heuristics enabled
+netsh int tcp set supplemental Internet congestionprovider=ctcp
+netsh int tcp set supplemental template=custom icw=10
 
 :: Disable Bandwith Preservation
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t reg_DWORD /d "1" /f 
