@@ -407,6 +407,10 @@ Windows Registry Editor Version 5.00
 "Language"="Language"
 "Taskbar and Navigation"="Taskbar and Navigation"
 "Fonts"="Fonts"
+"Phone and Modem"="Phone and Modem"
+"Troubleshooting"="Troubleshooting"
+"Security and Maintenance"="Security and Maintenance"
+
 
 ; HIDE RECYCLE BIN FROM DESKTOP
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu]
