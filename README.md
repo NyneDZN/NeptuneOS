@@ -52,10 +52,11 @@
 
 This is a guide on how to install NeptuneOS.
 
-I am NOT responsible if you end up bricking your BIOS, corrupted files, or if your GPU/CPU dies while you are using NeptuneOS.
+YOU are fully responsible for whatever happens to your system during your time using NeptuneOS
 
 ### Prerequisites
 Download your ethernet drivers prior to installing NeptuneOS.
+Common vendors are provided, but you might want to download prior to installation, just incase.
 * [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)
 * [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html)
 
@@ -75,6 +76,8 @@ You may also download your GPU drivers if you wish.
  hardware.
  If you are on a low-end laptop, desktop, on a bottlenecked build, NeptuneOS can potentially help you gain every drop of performance out of your machine, to help you   
  achieve your best form.
+                                       
+ I am aware that this project is literally a fork of Atlas, I don't expect anyone to use NeptuneOS as their daily driver, this project in specific is purely for me to learn, experiment, and just have fun doing what I like.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,9 +87,19 @@ You may also download your GPU drivers if you wish.
 ## Roadmap
 
 - [x] Updated Script
-- [ ] 22H2 
-- [ ] Custom OOBE
-- [ ] Completed Discord
+   - [x] 1803                                   
+   - [ ] 22H2
+   - [ ] Finish Index                                     
+   - [ ] Driver Installation via Curl
+                                      
+- [ ] Complete the Discord
+   - [ ] Channels
+   - [ ] Roles
+   - [ ] WebHooks
+                                       
+- [ ] Complete the GitHub
+   - [ ] README.md
+   - [ ] Wiki
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
 
@@ -111,6 +124,8 @@ Discord: nyne.#1431
 ## Acknowledgments
 
 * [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
-* [Optimization Guide by supermanZ (Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
+* [Optimization Guide by supermanZ (Very Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
+* [Atlas](https://github.com/Atlas-OS/)
+* [N1ko](https://n1kobg.blogspot.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
