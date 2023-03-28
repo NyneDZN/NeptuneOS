@@ -86,11 +86,14 @@ You may also download your GPU drivers if you wish.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Updated Script
-   - [x] 1803                                   
-   - [ ] 22H2
-   - [ ] Finish Index                                     
+- [x] NeptuneOS
+   - [x] 1803 Branch                                 
+   - [ ] 22H2 Branch
+   - [ ] Finish Script Index                                     
    - [ ] Driver Installation via Curl
+   - [ ] Finish Post-Setup Folder
+      - [ ] Device Driver Setups
+      - [ ] Services/Drivers                                 
                                       
 - [ ] Complete the Discord
    - [ ] Channels
