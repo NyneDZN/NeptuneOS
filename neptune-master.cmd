@@ -16,6 +16,7 @@
 :: Remove placebo/useless tweaks
 :: Complete script index
 :: Fix fullscreen.vbs
+:: Fix mitigations
 
 
 @echo off
@@ -239,8 +240,17 @@ for /f "tokens=*" %%s in ('reg query "HKLM\System\CurrentControlSet\Enum" /S /F 
 
 :: Disable Timer Coalescing 
 :: https://en.wikipedia.org/wiki/Timer_coalescing
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKLM\System\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+
+:: Disable Connected Standby
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Disable Powerthrottling
 :: Intel CPUs, 6 generation or higher
@@ -1173,6 +1183,71 @@ Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Latency Sensitive" /t REG_SZ /d "True" /f >nul 2>&1 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Latency Sensitive" /t REG_SZ /d "True" /f >nul 2>&1
 
+:: Resource Policy Store (?)
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\HardCap0" /v "CapPercentage" /t REG_DWORD /d "0" /f  >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\HardCap0" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\Paused" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\Paused" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapFull" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapFull" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapFullAboveNormal" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapFullAboveNormal" /v "PriorityClass" /t REG_DWORD /d "32" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapFullAboveNormal" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapLow" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapLow" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapLowBackgroundBegin" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapLowBackgroundBegin" /v "PriorityClass" /t REG_DWORD /d "32" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\SoftCapLowBackgroundBegin" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\UnmanagedAboveNormal" /v "CapPercentage" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\UnmanagedAboveNormal" /v "PriorityClass" /t REG_DWORD /d "32" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\CPU\UnmanagedAboveNormal" /v "SchedulingType" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\BackgroundDefault" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\Frozen" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\FrozenDNCS" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\FrozenDNK" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\FrozenPPLE" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\Paused" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\PausedDNK" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\Pausing" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\PrelaunchForeground" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Flags\ThrottleGPUInterference" /v "IsLowPriority" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Critical" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Critical" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\CriticalNoUi" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\CriticalNoUi" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\EmptyHostPPLE" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\EmptyHostPPLE" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\High" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\High" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Low" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Low" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Lowest" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Lowest" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Medium" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\Medium" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\MediumHigh" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\MediumHigh" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\StartHost" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\StartHost" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\VeryHigh" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\VeryHigh" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\VeryLow" /v "BasePriority" /t REG_DWORD /d "130" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Importance\VeryLow" /v "OverTargetPriority" /t REG_DWORD /d "80" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\IO\NoCap" /v "IOBandwidth" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Memory\NoCap" /v "CommitLimit" /t REG_DWORD /d "4294967295" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Memory\NoCap" /v "CommitTarget" /t REG_DWORD /d "4294967295" /f >nul 2>&1
+
+:: Enable timer distribution
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f >nul 2>&1
+
+:: Disable foreground priority decay
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\KernelVelocity" /v "DisableFGBoostDecay" /t REG_DWORD /d "1" /f >nul 2>&1
+
+:: Disable DPC Watchdog
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcWatchdogProfileOffset" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcTimeout" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcWatchdogPeriod" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Reliable timestamp
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Reliability" /v "TimeStampInterval" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Reliability" /v "IoPriority" /t REG_DWORD /d "3" /f >nul 2>&1
@@ -1432,6 +1507,11 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 :: Memory Heap Tweaks
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "HeapDeCommitFreeBlockThreshold" /t REG_DWORD /d "262144" /f >nul 2>&1
 
+:: Paged Pool Memory Tweaks (?)
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "NonPagedPoolSize" /t REG_DWORD /d "192" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagedPoolSize" /t REG_DWORD /d "192" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PoolUsageMaximum" /t REG_DWORD /d "192" /f >nul 2>&1
+
 :: Disable Memory Compression
 %PowerShell% "Disable-MMAgent -MemoryCompression" >nul 2>&1
 
@@ -1463,8 +1543,10 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 
 :: Disable ASLR
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "MoveImages" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Disable CFG
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: NTFS Mitigations
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "ProtectionMode" /t REG_DWORD /d "0" /f >nul 2>&1
 
@@ -1542,30 +1624,35 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /
 echo !S_GREEN!Configuring Network Settings... 
 
 :: TCP Configuration
-netsh int ip set glob defaultcurhoplimit=255 >nul 2>&1
-netsh int ip set global dhcpmediasense=disabled >nul 2>&1
-netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
-netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
 netsh int isatap set state disable >nul 2>&1
+netsh int 6to4 set state disabled >nul 2>&1
+netsh int teredo set state disabled >nul 2>&1
+netsh winsock reset >nul 2>&1
+netsh int ip set global defaultcurhoplimit=255 >nul 2>&1
+netsh int ip set global dhcpmediasense=disabled >nul 2>&1
+netsh int ip set global neighborcachelimit=4096 >nul 2>&1
+netsh int ip set global taskoffload=enabled >nul 2>&1
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
 netsh int tcp set global chimney=disabled >nul 2>&1
 netsh int tcp set global congestionprovider=ctcp >nul 2>&1
-netsh int tcp set global dca=enable >nul 2>&1
+netsh int tcp set global dca=enabled >nul 2>&1
 netsh int tcp set global ecncapability=disabled >nul 2>&1
 netsh int tcp set global fastopen=enabled >nul 2>&1
 netsh int tcp set global initialRto=2000 >nul 2>&1
 netsh int tcp set global maxsynretransmissions=2 >nul 2>&1
-netsh int tcp set global netdma=disabled >nul 2>&1
+netsh int tcp set global netdma=enabled >nul 2>&1
 netsh int tcp set global nonsackrttresiliency=disabled >nul 2>&1
 netsh int tcp set global rsc=disabled >nul 2>&1
 netsh int tcp set global rss=enabled >nul 2>&1
-netsh int tcp set global timestamps=enabled >nul 2>&1
-netsh int tcp set heuristics enabled >nul 2>&1
+netsh int tcp set global timestamps=disabled >nul 2>&1
+netsh int tcp set heuristics disabled >nul 2>&1
+netsh int tcp set security mpp=disabled >nul 2>&1
 netsh int tcp set security profiles=disabled >nul 2>&1
 netsh int tcp set supplemental Internet congestionprovider=ctcp >nul 2>&1
 netsh int tcp set supplemental template=custom icw=10 >nul 2>&1
-netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
-netsh interface teredo set state disabled >nul 2>&1
+netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
+netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
+netsh int ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
 
 :: Disable Bandwith Preservation
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t reg_DWORD /d "1" /f >nul 2>&1
@@ -1574,73 +1661,40 @@ Reg.exe add "HKLM\Software\WOW6432Node\Policies\Microsoft\Windows\Psched" /v "No
 
 :: Disable Network Level Authentication
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /t REG_SZ /d "1" /f >nul 2>&1
+
+:: No TCP Connection Limit
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxConnectionsPerServer" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Max Port to 65534
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /t REG_DWORD /d "65534" /f >nul 2>&1
+
 :: Reduce TIME_WAIT
-Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /t REG_DWORD /d "30" /f >nul 2>&1
+Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /t REG_DWORD /d "32" /f >nul 2>&1
+
 :: Reduce Time to Live
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DefaultTTL" /t REG_DWORD /d "64" /f >nul 2>&1
+
 :: Duplicate ACKS
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpMaxDupAcks" /t REG_DWORD /d "2" /f >nul 2>&1
+
 :: Disable SACKS
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "SackOpts" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Disable MultiCast
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t reg_DWORD /d "0" /f >nul 2>&1
-:: Enable TCP Extensions
-Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t reg_DWORD /d "00000001" /f >nul 2>&1
+
+:: Disable TCP Extensions
+Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t reg_DWORD /d "0" /f >nul 2>&1
+
+:: Allow ICMP redirects to override OSPF generated routes
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t REG_DWORD /d "1" /f >nul 2>&1
+
+:: TCP Window Size
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "GlobalMaxTcpWindowSize" /t REG_DWORD /d "8760" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpWindowSize" /t REG_DWORD /d "8760" /f >nul 2>&1
 
 :: Disable network discovery
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff" /f >nul 2>&1
-
-:: Disable Nagle's Algorithm
-:: https://en.wikipedia.org/wiki/Nagle%27s_algorithm
-for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
-    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t REG_DWORD /d "0" /f >nul 2>&1
-    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t REG_DWORD /d "1" /f >nul 2>&1
-)
-
-:: Disable NetBIOS over TCP
-for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
-    Reg.exe add "%%a" /v "NetbiosOptions" /t REG_DWORD /d "2" /f >nul 2>&1
-)
-
-:: Disable Network Adapters
-%PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr" >nul 2>&1
-
-:: Configure Network Interface Card (NIC) 
-for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class" /v "*WakeOnMagicPacket" /s ^| findstr "HKEY"') do (
-    for %%i in (
-        "*EEE"
-        "*FlowControl"
-        "*LsoV2IPv4"
-        "*LsoV2IPv6"
-        "*SelectiveSuspend"
-        "*WakeOnMagicPacket"
-        "*WakeOnPattern"
-        "AdvancedEEE"
-        "AutoDisableGigabit"
-        "AutoPowerSaveModeEnabled"
-        "EnableConnectedPowerGating"
-        "EnableDynamicPowerGating"
-        "EnableGreenEthernet"
-        "EnableModernStandby"
-        "EnablePME"
-        "EnablePowerManagement"
-        "EnableSavePowerNow"
-        "GigaLite"
-        "PowerSavingMode"
-        "ReduceSpeedOnPowerDown"
-        "ULPMode"
-        "WakeOnLink"
-        "WakeOnSlot"
-        "WakeUpModeCap"
-    ) do (
-        for /f %%j in ('reg query "%%a" /v "%%~i" ^| findstr "HKEY"') do (
-            reg add "%%j" /v "%%~i" /t REG_SZ /d "0" /f >nul 2>&1
-        )
-    )
-)
 
 :: Enable DNS over HTTPS
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f >nul 2>&1
@@ -1674,26 +1728,81 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-
 :: Detect Congestion Failure
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCongestionControl" /t reg_DWORD /d "00000001" /f >nul 2>&1
 
-:: Disable SYN-Dos protection
+:: Disable SYN-DOS protection
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "SynAttackProtect" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "UseDelayedAcceptance" /t REG_DWORD /d "0" /f >nul 2>&1
 
+:: Prevent unwanted NIC resets
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\services\NDIS\Parameters" /v "DisableNDISWatchDog" /t REG_DWORD /d "1" /f >nul 2>&1
+
+
+
+:: Disable Nagle's Algorithm
+:: https://en.wikipedia.org/wiki/Nagle%27s_algorithm
+for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
+    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t REG_DWORD /d "1" /f >nul 2>&1
+    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t REG_DWORD /d "0" /f >nul 2>&1
+    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t REG_DWORD /d "1" /f >nul 2>&1
+)
+
+:: Disable NetBIOS over TCP
+for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
+    Reg.exe add "%%a" /v "NetbiosOptions" /t REG_DWORD /d "2" /f >nul 2>&1
+)
+
+:: Disable Network Adapters
+%PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr" >nul 2>&1
+
+:: Configure Network Interface Card (NIC) 
+:: for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class" /v "*WakeOnMagicPacket" /s ^| findstr "HKEY"') do (
+::     for %%i in (
+::         "*EEE"
+::         "*FlowControl"
+::         "*LsoV2IPv4"
+::         "*LsoV2IPv6"
+::         "*SelectiveSuspend"
+::         "*WakeOnMagicPacket"
+::         "*WakeOnPattern"
+::         "AdvancedEEE"
+::         "AutoDisableGigabit"
+::         "AutoPowerSaveModeEnabled"
+::         "EnableConnectedPowerGating"
+::         "EnableDynamicPowerGating"
+::         "EnableGreenEthernet"
+::         "EnableModernStandby"
+::         "EnablePME"
+::         "EnablePowerManagement"
+::         "EnableSavePowerNow"
+::         "GigaLite"
+::         "PowerSavingMode"
+::         "ReduceSpeedOnPowerDown"
+::         "ULPMode"
+::         "WakeOnLink"
+::         "WakeOnSlot"
+::         "WakeUpModeCap"
+::     ) do (
+::         for /f %%j in ('reg query "%%a" /v "%%~i" ^| findstr "HKEY"') do (
+::             reg add "%%j" /v "%%~i" /t REG_SZ /d "0" /f >nul 2>&1
+::         )
+::     )
+:: )
 
 
 :: Process Priorities
 echo !S_GREEN!Configuring Process Priorities...
 
-:: Background Processes to Below Normal
+:: Background Processes > Below normal
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "5" /f >nul 2>&1
 )
 
-:: System Processes to Idle
+:: System Processes > Idle
 for %%i in (fontdrvhost.exe lsass.exe WmiPrvSE.exe ) do (
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "1" /f >nul 2>&1
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "IoPriority" /t REG_DWORD /d "0" /f >nul 2>&1
 )
 
-:: CSRSS to High
+:: CSRSS > High
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f >nul 2>&1
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f >nul 2>&1
 
