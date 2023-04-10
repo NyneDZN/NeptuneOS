@@ -1,0 +1,45 @@
+NVSlimmer
+NVIDIA driver customization utility
+uKER 2018-2020 (uker@outlook.com)
+
+v0.10 (2020/08/20)
+- Added support for new "Process and module monitoring driver" in 452.xx drivers.
+
+v0.9 (2020/08/06)
+- Implemented deletion of temporary folder.
+- Changed DPI scaling mode in hopes of getting rid of high DPI layout issue.
+
+v0.8 (2020/06/27)
+- Fixed warning on 451.48 drivers.
+- Upon being asked, finally got the nerve to add an oh-so-pretentious donations link. Sorry about that.
+- Inverted order of changelog to have the latest changes the most readily accessible.
+
+v0.7 (2019/06/16)
+- Fixed error when repackaging for users with spaces in Windows user name.
+- Improved overall error handling.
+
+v0.6 (2019/04/29)
+- Added support for new component in DCH drivers.
+- Other minor tweaks.
+
+v0.5 (2018/10/19)
+- Fixed crash affecting users with spaces in Windows user name.
+
+v0.4 (2018/09/30)
+- Added option to apply pending modifications when performing explicit install (missed it the last time).
+- Handled UnauthorizedAccessException when attempting to process developer drivers.
+- UI changes.
+
+v0.3 (2018/09/26)
+- Added option to apply pending modifications when repackaging.
+- Better filename collision resolution when repackaging.
+
+v0.2 (2018/09/23)
+- Added Repackage option.
+- Implemented dependency checks.
+- Added support for all modules in Windows 7 drivers
+- Updated some module names.
+- UI changes.
+
+v0.1 (2018/09/20)
+- Initial release.

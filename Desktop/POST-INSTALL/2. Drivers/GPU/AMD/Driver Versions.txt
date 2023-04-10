@@ -1,0 +1,7 @@
+- 21.8.2 WHQL
+- 20.9.1 WHQL
+- 20.8.1 Optional
+- 20.4.2 WHQL
+- Latest
+
+Credit: Avarice#5090
