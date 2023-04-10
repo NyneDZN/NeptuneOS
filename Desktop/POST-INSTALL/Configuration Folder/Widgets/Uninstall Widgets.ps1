@@ -1,0 +1,1 @@
+Get-AppxPackage *WebExperience* | Remove-AppxPackage
