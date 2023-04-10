@@ -2032,14 +2032,17 @@ Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul 2>&1
 %currentuser% Reg.exe delete "HKCU\Printers" /f >nul 2>&1
 
 :: Delete Files
-takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a >nul 2>&1
-icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c >nul 2>&1
-taskkill /im GameBarPresenceWriter.exe /f >nul 2>&1
-takeown /f "%WinDir%\System32\bcastdvr.exe" /a >nul 2>&1
-icacls "%WinDir%\System32\bcastdvr.exe" /grant:r Administrators:F /c >nul 2>&1
-taskkill /im bcastdvr.exe /f >nul 2>&1
-del /f /q "%WinDir%\System32\bcastdvr.exe" >nul 2>&1
-del /f /q "%WinDir%\System32\GameBarPresenceWriter.exe" >nul 2>&1
+if %OSVersion%=="Windows 10" (
+    takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a >nul 2>&1
+    icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c >nul 2>&1
+    taskkill /im GameBarPresenceWriter.exe /f >nul 2>&1
+    takeown /f "%WinDir%\System32\bcastdvr.exe" /a >nul 2>&1
+    icacls "%WinDir%\System32\bcastdvr.exe" /grant:r Administrators:F /c >nul 2>&1
+    taskkill /im bcastdvr.exe /f >nul 2>&1
+    del /f /q "%WinDir%\System32\bcastdvr.exe" >nul 2>&1
+    del /f /q "%WinDir%\System32\GameBarPresenceWriter.exe" >nul 2>&1
+)
+
 takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
 takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
 del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
