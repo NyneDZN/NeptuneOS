@@ -1671,6 +1671,30 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" /v "S
 :: https://www.stigviewer.com/stig/windows_10/2021-03-10/finding/V-220930
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /t REG_DWORD /d "1" /f >nul 2>&1
 
+:: Disable Process Mitigations (Credit: XOS)
+for /f "tokens=3 skip=2" %%a in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions"') do set mitigation_mask=%%a
+for /L %%a in (0,1,9) do (
+    set "mitigation_mask=!mitigation_mask:%%a=2!
+)
+for %%a in (
+	fontdrvhost.exe
+	dwm.exe
+	lsass.exe
+	svchost.exe
+	WmiPrvSE.exe
+	winlogon.exe
+	csrss.exe
+	audiodg.exe
+	ntoskrnl.exe
+	services.exe
+) do (
+	Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+	Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationAuditOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+)
+
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+
 
 :: Network Configuration
 echo !S_GREEN!Configuring Network Settings... 
