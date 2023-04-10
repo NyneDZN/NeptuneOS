@@ -168,9 +168,9 @@ w32tm /resync >nul 2>&1
 :: Powerplan Configuration
 echo !S_GREEN!Importing Power Plan
 
-powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" !POWER_GUID! >nul 2>&1
-powercfg -setactive !POWER_GUID! >nul 2>&1
-powercfg -changename !POWER_GUID! "NeptuneOS Powerplan v2" "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
+powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" 11111111-1111-1111-1111-111111111111 >nul 2>&1
+powercfg -setactive 11111111-1111-1111-1111-111111111111 >nul 2>&1
+powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan v2" "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul 2>&1
 powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
 powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
@@ -180,32 +180,32 @@ powercfg -delete e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
 echo !S_GREEN!Disabling Sleep States...
 
 :: Disable Away Mode Policy
-powercfg -setacvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 >nul 2>&1
-powercfg -setdcvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 >nul 2>&1
+powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 >nul 2>&1
 
 :: Disable Idle States
-powercfg -setacvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 >nul 2>&1
-powercfg -setdcvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 >nul 2>&1
+powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 >nul 2>&1
 
 :: Disable Hybrid Sleep
-powercfg -setacvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 >nul 2>&1
-powercfg -setdcvalueindex !POWER_GUID! 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 >nul 2>&1
+powercfg -setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 >nul 2>&1
 
 echo !S_GREEN!Configuring Power States...
 
 :: Enable Hardware P-States
-powercfg -setacvalueindex !POWER_GUID! sub_processor PERFAUTONOMOUS 1 >nul 2>&1
-powercfg -setacvalueindex !POWER_GUID! sub_processor PERFAUTONOMOUSWINDOW 20000 >nul 2>&1
-powercfg -setacvalueindex !POWER_GUID! sub_processor PERFCHECK 20 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFAUTONOMOUS 1 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFAUTONOMOUSWINDOW 20000 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFCHECK 20 >nul 2>&1
 
 :: Configure C-States
-powercfg -setacvalueindex !POWER_GUID! sub_processor IDLEPROMOTE 100 >nul 2>&1
-powercfg -setacvalueindex !POWER_GUID! sub_processor IDLEDEMOTE 100 >nul 2>&1
-powercfg -setacvalueindex !POWER_GUID! sub_processor IDLECHECK 20000 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor IDLEPROMOTE 100 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor IDLEDEMOTE 100 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor IDLECHECK 20000 >nul 2>&1
 
 :: Enable Turbo Boost
-powercfg -setacvalueindex !POWER_GUID! sub_processor PERFBOOSTMODE 1 >nul 2>&1
-powercfg -setacvalueindex !POWER_GUID! sub_processor PERFBOOSTPOL 100 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTMODE 1 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTPOL 100 >nul 2>&1
 
 :: Set Active Scheme as Currnt
 powercfg -setactive scheme_current >nul 2>&1
