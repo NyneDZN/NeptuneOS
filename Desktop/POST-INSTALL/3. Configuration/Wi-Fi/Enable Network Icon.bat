@@ -11,3 +11,5 @@ REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /V
 
 taskkill /f /im explorer.exe
 start explorer.exe
+echo The network icon should now be enabled.
+pause>nul
