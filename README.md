@@ -60,10 +60,6 @@ Common vendors are provided, but you might want to download prior to installatio
 * [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)
 * [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html)
 
-You may also download your GPU drivers if you wish.
-* [AMD](https://www.amd.com/en/support)
-* [Nvidia](https://www.nvidia.com/download/index.aspx)
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -77,7 +73,7 @@ You may also download your GPU drivers if you wish.
  If you are on a low-end laptop, desktop, on a bottlenecked build, NeptuneOS can potentially help you gain every drop of performance out of your machine, to help you   
  achieve your best form.
                                        
- I am aware that this project is literally a fork of Atlas, I don't expect anyone to use NeptuneOS as their daily driver, this project in specific is purely for me to learn, experiment, and just have fun doing what I like.
+ This project is a fork of AtlasOS.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
