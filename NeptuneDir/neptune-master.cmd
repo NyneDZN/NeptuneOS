@@ -37,6 +37,8 @@ if /i "%~1"=="/idleE"        goto idleE
 :: GPU Configuration
 if /i "%~1"=="/amdcard"      goto amdC
 if /i "%~1"=="/nvidiacard"   goto nvidiaC
+:: EmptyStandbyList
+if /i "%~1"=="/memory"       goto memoryC
 :: debugging purposes only
 if /i "%~1"=="/test"         goto testScript
 :: no arguments
@@ -2227,6 +2229,15 @@ for /f "tokens=* delims=\" %%i in ('C:\Windows\NeptuneDir\Tools\filepicker.exe e
     Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%%i" /t REG_SZ /d "~ DISABLEDXMAXIMIZEDWINDOWEDMODE HIGHDPIAWARE" /f >nul 2>&1 
 )
 goto finishNRB
+
+:memoryC
+set "ESL=%WinDir%\NeptuneDir\Tools\EmptyStandbyList.exe
+%ESL% workingsets
+%ESL% modifiedpagelist
+%ESL% priority0standbylist
+%ESL% standbylist
+echo RAM cleaned.
+pause>nul
 
 
 
