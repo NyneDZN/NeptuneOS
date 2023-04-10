@@ -12,11 +12,8 @@
 :: TODO
 :: Fix regpath consistencies 
 :: Fix echo grammar mistakes
-:: Complete other branches
 :: Remove placebo/useless tweaks
 :: Complete script index
-:: Fix fullscreen.vbs
-:: Fix mitigations
 
 
 @echo off
