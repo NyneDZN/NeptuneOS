@@ -2263,7 +2263,7 @@ set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide 
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
 :: Script configuration
-set version=0.4.2
+set version=0.5
 title NeptuneOS %version% Configuration Script
 cls
 goto:eof
