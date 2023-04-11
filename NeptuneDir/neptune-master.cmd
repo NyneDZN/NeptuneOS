@@ -66,10 +66,12 @@ if %errorlevel% == 0 set OSVersion=Windows 11
 echo Operating system: %OSVersion%
 
 if "%OSVersion%"=="Windows 10" (
-    echo Code for Windows 10 goes here
+    echo You are using the 1803 Version of NeptuneOS.
+    echo Press any key to continue the script.
     pause>nul
 ) else if "%OSVersion%"=="Windows 11" (
-    echo Code for Windows 11 goes here
+    echo You are using the 22H2 Version of NeptuneOS.
+    echo Press any key to continue the script.
     pause>nul
 ) else (
     echo You should not reach this.
