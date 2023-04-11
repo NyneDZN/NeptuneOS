@@ -3,5 +3,5 @@ Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explore
 Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HoverSelectDesktops" /t REG_DWORD /d "1" /f >nul 2>&1
 taskkill /f /im explorer.exe >nul 2>&1
 start explorer.exe >nul 2>&1
-cls
-pause
+echo Immersive Alt Tab has been enabled.
+pause>nul
