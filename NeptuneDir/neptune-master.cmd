@@ -861,7 +861,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /v "Debugger" /t REG_SZ /d "%WinDir%\System32\taskkill.exe" /f >nul 2>&1
 
 :: Disable unnecessary autologgers
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
         for %%a in (
         "Circular Kernel Context Logger"
         "CloudExperienceHostOobe"
@@ -1368,7 +1368,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC" /v "Enabl
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f >nul 2>&1
 
 :: Disable Scheduled Tasks
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     echo !S_GREEN!Disabling Scheduled Tasks...
     for %%i in (
         "\Microsoft\Windows\Application Experience\StartupAppTask"
@@ -1457,7 +1457,7 @@ bcdedit /set allowedinmemorysettings 0x0 >nul 2>&1
 echo !S_GREEN!Disabling Devices...
 
 :: System Devices (Windows 10)
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     %DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
     %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
     %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
@@ -1494,7 +1494,7 @@ if %OSVersion%=="Windows 10" (
 )
 
 :: System Devices (Windows 11)
-if %OSVersion%=="Windows 11" (
+if "%OSVersion%""=="Windows 11" (
     %DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
     %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
     %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
@@ -1518,7 +1518,7 @@ if %OSVersion%=="Windows 11" (
 )
 
 :: Network Adapters
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     %DevMan% /disable "WAN Miniport (IKEv2)" >nul 2>&1
     %DevMan% /disable "WAN Miniport (IP)" >nul 2>&1
     %DevMan% /disable "WAN Miniport (IPv6)" >nul 2>&1
@@ -1893,7 +1893,7 @@ echo !S_GREEN!Disabling Drivers and Services...
 
 :: Deleting Driver Filters to prevent BSOD
 :: ksthunk (Webcam)
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%""=="Windows 10" (
     Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}" /v "UpperFilters" /f >nul 2>&1
     Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-BEC7-08002BE2092F}" /v "UpperFilters" /f >nul 2>&1
 )
@@ -1918,7 +1918,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService"
 :: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Drivers and Services
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%""=="Windows 10" (
     :: Drivers
     %svc% 3ware 4
     %svc% AmdK8 4
@@ -2057,7 +2057,7 @@ Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul 2>&1
 %currentuser% Reg.exe delete "HKCU\Printers" /f >nul 2>&1
 
 :: Delete Files
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%""=="Windows 10" (
     takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a >nul 2>&1
     icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c >nul 2>&1
     taskkill /im GameBarPresenceWriter.exe /f >nul 2>&1
@@ -2084,7 +2084,7 @@ del /f /q "%WinDir%\NeptuneDir\Prerequisites\Open-Shell.exe" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites\DirectX" >nul 2>&1
 
 :: Disable Default Start Menu
-if %OSVersion%=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     taskkill /f /im ShellExperienceHost.exe
     takeown /f "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" >nul 2>&1
     ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" Shellhostold.exe >nul 2>&1
