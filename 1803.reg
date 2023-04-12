@@ -50,4 +50,3 @@ Windows Registry Editor Version 5.00
 "EnableFirstLogonAnimation"=dword:00000000
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
 "EnableFirstLogonAnimation"=dword:00000000
-

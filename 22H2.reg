@@ -1,0 +1,45 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"ConsentPromptBehaviorAdmin"=dword:00000000
+"EnableLUA"=dword:00000000
+"PromptOnSecureDesktop"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate]
+"SetAutoRestartDeadline"=dword:00000001
+"UpdateNotificationLevel"=dword:00000002
+"AutoRestartDeadlinePeriodInDaysForFeatureUpdates"=dword:0000001e
+"ActiveHoursEnd"=dword:00000001
+"ActiveHoursStart"=dword:00000008
+"SetActiveHours"=dword:00000001
+"AutoRestartNotificationSchedule"=dword:000000f0
+"AutoRestartDeadlinePeriodInDays"=dword:0000001e
+"SetAutoRestartNotificationConfig"=dword:00000001
+"SetAutoRestartNotificationDisable"=dword:00000000
+"SetRestartWarningSchd"=dword:00000001
+"ScheduleRestartWarning"=dword:00000018
+"SetUpdateNotificationLevel"=dword:00000001
+"ScheduleImminentRestartWarning"=dword:0000003c
+"ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"IncludeRecommendedUpdates"=dword:00000000
+"NoAutoUpdate"=dword:00000001
+"AutoInstallMinorUpdates"=dword:00000000
+"NoAutoRebootWithLoggedOnUsers"=dword:00000001
+"RebootRelaunchTimeoutEnabled"=dword:00000001
+"RebootRelaunchTimeout"=dword:000005a0
+"RebootWarningTimeout"=dword:0000001e
+"RebootWarningTimeoutEnabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\MRT]
+"DontOfferThroughWUAU"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCortana"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableFirstLogonAnimation"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"EnableFirstLogonAnimation"=dword:00000000
+
