@@ -20,9 +20,8 @@
 				</Password>
 			</AutoLogon>
 			<OEMInformation>
-				<HelpCustomized>true</HelpCustomized>
 				<Manufacturer>nyne.#1431</Manufacturer>
-				<Model>NeptuneOS 0.4</Model>
+				<Model>22H2</Model>
 				<SupportHours>N/A</SupportHours>
 				<SupportPhone>N/A</SupportPhone>
 				<SupportURL>http://discord.gg/MEh7MMRKDD</SupportURL>
@@ -57,7 +56,7 @@
 			<SkipAutoActivation>true</SkipAutoActivation>
 		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-			<ComputerName>NeptunePC</ComputerName>
+			<ComputerName>DESKTOP-2KO8PE6</ComputerName>
 		</component>
 	</settings>
 	<settings pass="windowsPE">
@@ -94,6 +93,7 @@
 				<AcceptEula>true</AcceptEula>
 				<ProductKey>
 					<Key></Key>
+					<WillShowUI>OnError</WillShowUI>
 				</ProductKey>
 			</UserData>
 		</component>
