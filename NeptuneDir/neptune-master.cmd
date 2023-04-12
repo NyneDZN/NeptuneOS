@@ -14,6 +14,8 @@
 :: Fix echo grammar mistakes
 :: Remove placebo/useless tweaks
 :: Complete script index
+:: Fix updates on 22H2
+:: 22H2 services/drivers
 
 
 @echo off
