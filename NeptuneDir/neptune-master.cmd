@@ -14,8 +14,7 @@
 :: Fix echo grammar mistakes
 :: Remove placebo/useless tweaks
 :: Complete script index
-:: Fix updates on 22H2
-:: 22H2 services/drivers
+
 
 
 @echo off
@@ -2079,6 +2078,30 @@ if "%OSVersion%""=="Windows 10" (
     %svc% XblGameSave 4
     %svc% XboxGipSvc 4
 )
+
+if "%OSVersion%"=="Windows 11" (
+    :: Drivers
+    %svc% Beep 4
+    %svc% Ndu 4
+
+    :: Services
+    %svc% BthAvctpSvc 4
+    %svc% DiagTrack 4
+    %svc% DispBrokerDesktopSvc 4
+    %svc% DPS 4
+    %svc% FontCache 4
+    %svc% LanmanWorkstation 4
+    %svc% LanmanWorkstation 4
+    %svc% lmhosts 4
+    %svc% MapsBroker 4
+    %svc% RmSvc 4
+    %svc% ShellHWDetection 4
+    %svc% Spooler 4
+    %svc% WdiSystemHost 4
+    %svc% WinHttpAutoProxySvc 4
+    %svc% Winmgmt 3
+    %svc% WpnService 4
+
 
 :: Operating System Cleanup
 echo !S_GREEN!Cleaning the OS...
