@@ -1,10 +1,24 @@
 @echo off
-sc config BthAvctpSvc start=disabled
-sc stop BthAvctpSvc >nul 2>nul
-for /f %%I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /k /f CDPUserSvc ^| find /i "CDPUserSvc" ') do (
-  reg add "%%I" /v "Start" /t REG_DWORD /d "4" /f
-  sc stop %%~nI
+
+ver | findstr /i "Windows 10" > nul
+if %errorlevel% == 0 set OSVersion=Windows 10
+
+ver | findstr /i "Windows 11" > nul
+if %errorlevel% == 0 set OSVersion=Windows 11
+
+if "%OSVersion%"=="Windows 10" (
+  sc config BthAvctpSvc start=disabled
+  sc stop BthAvctpSvc >nul 2>nul
+  for /f %%I in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /k /f CDPUserSvc ^| find /i "CDPUserSvc" ') do (
+    reg add "%%I" /v "Start" /t REG_DWORD /d "4" /f
+    sc stop %%~nI
+    sc config CDPSvc start=disabled
+  )
 )
-sc config CDPSvc start=disabled
+
+if "%OSVersion%"=="Windows 11" (
+  sc config BthAvctpSvc start=disabled
+  sc stop BthAvctpSvc >nul 2>nul
+)
 echo Bluetooth has been disabled.
 pause>nul
