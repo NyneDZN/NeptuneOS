@@ -113,7 +113,6 @@ goto:eof
 
 :post
 call:start
-echo false > C:\Users\Public\success.txt
 
 :: Prerequisites
 echo !S_GREEN!Installing Prerequisites...
@@ -1461,7 +1460,12 @@ bcdedit /set {globalsettings} custom:16000068 true >nul 2>&1
 :: Disable Automatic Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
 :: Set Boot Label
-bcdedit /set {current} description "NeptuneOS %version%" >nul 2>&1
+if "%OSVersion%"=="Windows 10" (
+    bcdedit /set {current} description "NeptuneOS 1803 %Version%" >nul 2>&1
+)
+if "%OSVersion%"=="Windows 11" (
+    bcdedit /set {current} description "NeptuneOS 22H2 %Version%" >nul 2>&1
+)
 :: Disable DEP
 bcdedit /set nx AlwaysOff >nul 2>&1
 :: Use Synthetic Timers
@@ -2151,8 +2155,7 @@ echo !S_GREY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GREY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "POST INSTALL" /f >nul 2>&1
 
-:: clear false value
-echo true > C:\Users\Public\success.txt
+shutdown /f /r /t 5
 exit
 
 
