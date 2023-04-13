@@ -821,6 +821,7 @@ if "%OSVersion%"=="Windows 11" (
     Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1
     Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f >nul 2>&1
     Reg.exe add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f >nul 2>&1
+)
 
 :: BSOD Quality of Life
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "AutoReboot" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1527,7 +1528,7 @@ if "%OSVersion%"=="Windows 10" (
 )
 
 :: System Devices (Windows 11)
-if "%OSVersion%""=="Windows 11" (
+if "%OSVersion%"=="Windows 11" (
     %DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
     %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
     %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
@@ -1926,7 +1927,7 @@ echo !S_GREEN!Disabling Drivers and Services...
 
 :: Deleting Driver Filters to prevent BSOD
 :: ksthunk (Webcam)
-if "%OSVersion%""=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}" /v "UpperFilters" /f >nul 2>&1
     Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-BEC7-08002BE2092F}" /v "UpperFilters" /f >nul 2>&1
 )
@@ -1951,7 +1952,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService"
 :: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Drivers and Services
-if "%OSVersion%""=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     :: Drivers
     %svc% 3ware 4
     %svc% AmdK8 4
@@ -2114,7 +2115,7 @@ Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul 2>&1
 %currentuser% Reg.exe delete "HKCU\Printers" /f >nul 2>&1
 
 :: Delete Files
-if "%OSVersion%""=="Windows 10" (
+if "%OSVersion%"=="Windows 10" (
     takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a >nul 2>&1
     icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c >nul 2>&1
     taskkill /im GameBarPresenceWriter.exe /f >nul 2>&1
