@@ -2134,12 +2134,7 @@ del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Prerequisites\Open Shell.exe" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Prerequisites\MPC.exe" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Prerequisites\vcredist" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Prerequisites\7z.exe" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Prerequisites\Open-Shell.exe" >nul 2>&1
-rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites\DirectX" >nul 2>&1
+rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Disable Default Start Menu
 if "%OSVersion%"=="Windows 10" (
