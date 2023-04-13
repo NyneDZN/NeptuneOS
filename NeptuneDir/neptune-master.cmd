@@ -35,8 +35,9 @@ if /i "%~1"=="/idleE"        goto idleE
 :: GPU Configuration
 if /i "%~1"=="/amdcard"      goto amdC
 if /i "%~1"=="/nvidiacard"   goto nvidiaC
-:: EmptyStandbyList
+:: Cleaners
 if /i "%~1"=="/memory"       goto memoryC
+if /i "%~1"=="/cacheclean"   goto cacheC
 :: debugging purposes only
 if /i "%~1"=="/test"         goto testScript
 :: no arguments
