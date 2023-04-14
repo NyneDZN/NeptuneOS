@@ -2108,21 +2108,26 @@ if "%OSVersion%"=="Windows 11" (
 
     :: Services
     %svc% BthAvctpSvc 4
+    %svc% DPS 4
     %svc% DiagTrack 4
     %svc% DispBrokerDesktopSvc 4
-    %svc% DPS 4
     %svc% FontCache 4
     %svc% LanmanWorkstation 4
     %svc% LanmanWorkstation 4
-    %svc% lmhosts 4
     %svc% MapsBroker 4
     %svc% RmSvc 4
+    %svc% SgrmBroker 4
     %svc% ShellHWDetection 4
     %svc% Spooler 4
+    %svc% TextInputManagementService 4
     %svc% WdiSystemHost 4
     %svc% WinHttpAutoProxySvc 4
     %svc% Winmgmt 3
     %svc% WpnService 4
+    %svc% WpnUserService 4
+    %svc% lmhosts 4
+    %svc% webthreatdefusersvc 4
+
 
 
 :: Operating System Cleanup
