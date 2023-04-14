@@ -59,6 +59,7 @@ exit
 
 
 :start
+:: This is here for debugging purposes
 ver | findstr /i "Windows 10" > nul
 if %errorlevel% == 0 set OSVersion=Windows 10
 
