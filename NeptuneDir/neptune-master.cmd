@@ -1,24 +1,8 @@
-    :: Script compiled for NeptuneOS by nyne.#1431
-
-:: - Credit:
-
-:: - AtlasOS (Inspiration, Script Code, Registry)
-:: - EchoX (Batch Functions)
-:: - EVA (DWM Script)
-:: - FoxOS (Post-Install Folder)
-:: - KernelOS (Registry for Color Scheme)
-:: - KirbyOS (Timer Resolution, LowAudioLatency)
-
-:: TODO
-:: Fix regpath consistencies 
-:: Fix echo grammar mistakes
-:: Remove placebo/useless tweaks
-:: Complete script index
-
-
+:: Script Created by Nyne for NeptuneOS on 7/01/2023
 
 @echo off
 setlocal EnableDelayedExpansion
+mode 120,40
 call:Functions
 
 :: Script Index
@@ -58,33 +42,7 @@ pause
 exit
 
 
-:start
-:: This is here for debugging purposes
-
-ver | findstr /i "Windows 10" > nul
-if %errorlevel% == 0 set OSVersion=Windows 10
-
-ver | findstr /i "Windows 11" > nul
-if %errorlevel% == 0 set OSVersion=Windows 11
-
-echo Operating system: %OSVersion%
-
-if "%OSVersion%"=="Windows 10" (
-    echo You are using the 1803 Version of NeptuneOS.
-    echo Press any key to continue the script.
-    pause>nul
-) else if "%OSVersion%"=="Windows 11" (
-    echo You are using the 22H2 Version of NeptuneOS.
-    echo Press any key to continue the script.
-    pause>nul
-) else (
-    echo You should not reach this.
-)
-
-mode 120,40
-cls
-
-
+:post
 echo  ___________________________________________________________________________________
 echo.
 echo  Disclaimer:
@@ -97,7 +55,6 @@ echo  Press any key to continue the script.
 echo  ___________________________________________________________________________________
 pause>nul
 cls
-
 
 echo.
 echo !S_RED!888b    888                   888                               
@@ -112,17 +69,10 @@ echo !S_RED!                     888
 echo !S_RED!                     888                                        
 echo !S_RED!                     888                                        
 echo.
-goto:eof
 
-:post
-call:start
 
 :: Prerequisites
 echo !S_GREEN!Installing Prerequisites...
-
-echo !S_GREEN!Importing Registry Profile...
-Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg"
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg"
 
 echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
@@ -144,13 +94,15 @@ echo !S_GREEN!Installing DirectX
 echo !S_GREEN!Installing 7-Zip
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 
-if "%OSVersion%"=="Windows 10" (
-    echo !S_GREEN!Installing Open Shell
-    "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
-)
+echo !S_GREEN!Installing Open Shell
+"%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
 echo !S_GREEN!Installing Timer Resolution Service
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
+
+echo !S_GREEN!Importing Registry Profile...
+Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg"
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg"
 
 
 :: Time Server Configuration
@@ -174,7 +126,7 @@ echo !S_GREEN!Importing Power Plan
 
 powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" 11111111-1111-1111-1111-111111111111 >nul 2>&1
 powercfg -setactive 11111111-1111-1111-1111-111111111111 >nul 2>&1
-powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan v2" "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
+powercfg -changename 11111111-1111-1111-1111-111111111111 "Neptune's Powerplan v1 "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul 2>&1
 powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
 powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
@@ -251,9 +203,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "Default
 
 :: Disable StorPort Idle
 for /f "tokens=*" %%s in ('reg query "HKLM\System\CurrentControlSet\Enum" /S /F "StorPort" ^| findstr /e "StorPort"') do Reg add "%%s" /v "EnableIdlePowerManagement" /t REG_DWORD /d "0" /f >nul 2>&1
-
-:: Untitled Powersaving
-%PowerShell% "%WinDir%\NEPTUNE\pnp-powersaving.ps1" >nul 2>&1
 
 :: Disable Timer Coalescing 
 :: https://en.wikipedia.org/wiki/Timer_coalescing
@@ -398,9 +347,7 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM" /v "DWMWA_TRANSITIONS
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\DWM" /v "AlwaysHibernateThumbnails" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Disable font smoothing
-if "%OSVersion%"=="Windows 10" (
-    %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "FontSmoothing" /t REG_SZ /d "0" /f >nul 2>&1
-)
+%currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "FontSmoothing" /t REG_SZ /d "0" /f >nul 2>&1
 
 :: Enable window colorization
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "EnableWindowColorization" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -418,16 +365,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 :: Hide meet now button on taskbar
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t REG_DWORD /d "1" /f >nul 2>&1
 
-:: Allign taskbar icons to the left on 22H2
-if "%OSVersion%"=="Windows 11" (
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul 2>&1
-)
-
 :: Hide the teams icon on 22H2
-if "%OSVersion%"=="Windows 11" (
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v "ChatIcon" /t REG_DWORD /d "3" /f >nul 2>&1
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul 2>&1
-)
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v "ChatIcon" /t REG_DWORD /d "3" /f >nul 2>&1
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Hide people bar
 %currentuser% Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -456,7 +396,7 @@ Reg.exe add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "
 %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f >nul 2>&1
 
 :: Set Wallpaper
-%currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\Windows\Web\Wallpaper\Windows\1803.png" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\Windows\Web\Wallpaper\Windows\neptune.png" /f >nul 2>&1
 
 :: Disable show window contents while dragging
 %currentuser% Reg.exe add "HKCU\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d "0" /f >nul 2>&1
@@ -607,20 +547,18 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "MultipleInvokePromptMinimum" /t REG_DWORD /d "200" /f >nul 2>&1
 
 :: Hide control panel applets
-if "%OSVersion%"=="Windows 10" (
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisallowCPL" /t REG_DWORD /d "1" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Color Management" /t REG_SZ /d "Color Management" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Credential Manager" /t REG_SZ /d "Credential Manager" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Default Programs" /t REG_SZ /d "Default Programs" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Fonts" /t REG_SZ /d "Fonts" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Indexing Options" /t REG_SZ /d "Indexing Options" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Language" /t REG_SZ /d "Language" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Phone and Modem" /t REG_SZ /d "Phone and Modem" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Recovery" /t REG_SZ /d "Recovery" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Security and Maintenance" /t REG_SZ /d "Security and Maintenance" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Taskbar and Navigation" /t REG_SZ /d "Taskbar and Navigation" /f >nul 2>&1
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Troubleshooting" /t REG_SZ /d "Troubleshooting" /f >nul 2>&1
-)
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisallowCPL" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Color Management" /t REG_SZ /d "Color Management" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Credential Manager" /t REG_SZ /d "Credential Manager" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Default Programs" /t REG_SZ /d "Default Programs" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Fonts" /t REG_SZ /d "Fonts" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Indexing Options" /t REG_SZ /d "Indexing Options" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Language" /t REG_SZ /d "Language" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Phone and Modem" /t REG_SZ /d "Phone and Modem" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Recovery" /t REG_SZ /d "Recovery" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Security and Maintenance" /t REG_SZ /d "Security and Maintenance" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Taskbar and Navigation" /t REG_SZ /d "Taskbar and Navigation" /f >nul 2>&1
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowCPL" /v "Troubleshooting" /t REG_SZ /d "Troubleshooting" /f >nul 2>&1
 
 :: Hide network icon from taskbar
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCANetwork" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -659,26 +597,24 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMod
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM" /v "DisallowComposition" /t REG_DWORD /d "1" /f >nul 2>&1 
 
 :: More DWM (?)
-if "%OSVersion%"=="Windows 10" (
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "DwmInputUsesIoCompletionPort" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "EnableDwmInputProcessing" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "DisableDrawListCaching" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "DisallowNonDrawListRendering" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableCpuClipping" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableDrawToBackbuffer" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableImageProcessing" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableMPCPerfCounter" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "TelemetryFramesSequenceMaximumPeriodMilliseconds" /t REG_DWORD /d "500" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "UseHWDrawListEntriesOnWARP" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "ExclusiveModeFramerateAveragingPeriodMs" /t REG_DWORD /d "1000" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "ExclusiveModeFramerateThresholdPercent" /t REG_DWORD /d "250" /f >nul 2>&1 
-)
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "DwmInputUsesIoCompletionPort" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "EnableDwmInputProcessing" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "DisableDrawListCaching" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "DisallowNonDrawListRendering" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableCpuClipping" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableDrawToBackbuffer" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableImageProcessing" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "EnableMPCPerfCounter" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "TelemetryFramesSequenceMaximumPeriodMilliseconds" /t REG_DWORD /d "500" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "UseHWDrawListEntriesOnWARP" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "ExclusiveModeFramerateAveragingPeriodMs" /t REG_DWORD /d "1000" /f >nul 2>&1 
+ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm\ExtendedComposition" /v "ExclusiveModeFramerateThresholdPercent" /t REG_DWORD /d "250" /f >nul 2>&1 
+
 
 :: Restore Windows 10 Context Menu on 22H2
-if "%OSVersion%"=="Windows 11" (
-    Reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /t REG_SZ /d "" /f >nul 2>&1 
-)
+Reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /t REG_SZ /d "" /f >nul 2>&1 
+
 
 :: Remove restore previous versions from context menu and file properties
 Reg.exe delete "HKCR\AllFilesystemObjects\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >nul 2>&1 
@@ -789,57 +725,41 @@ Reg.exe add "HKLM\SOFTWARE\Classes\powerplan\Shell\open\command" /ve /t REG_SZ /
 Reg.exe add "HKLM\SOFTWARE\Classes\.pow" /ve /t REG_SZ /d "powerplan" /f >nul 2>&1
 Reg.exe add "HKLM\SOFTWARE\Classes\.pow" /v "FriendlyTypeName" /t REG_SZ /d "Power Plan" /f >nul 2>&1
 
+
 :: Registry Configuration
 echo !S_GREEN!Configuring the Registry..
 
 :: Disable Windows Update
-if "%OSVersion%"=="Windows 10" (
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "IncludeRecommendedUpdates" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "UpdateServiceUrlAlternate" /t REG_SZ /d "http://disableupdateserver.com/" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "WUServer" /t REG_SZ /d "http://disableupdateserver.com/" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "WUStatusServer" /t REG_SZ /d "http://disableupdateserver.com/" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUpgrade" /f >nul 2>&1
-)
 
-if "%OSVersion%"=="Windows 11" (
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartDeadline" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "UpdateNotificationLevel" /t REG_DWORD /d "2" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartDeadlinePeriodInDaysForFeatureUpdates" /t REG_DWORD /d "30" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursEnd" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursStart" /t REG_DWORD /d "8" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetActiveHours" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartNotificationSchedule" /t REG_DWORD /d "240" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartDeadlinePeriodInDays" /t REG_DWORD /d "30" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartNotificationConfig" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartNotificationDisable" /t REG_DWORD /d "0" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetRestartWarningSchd" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ScheduleRestartWarning" /t REG_DWORD /d "24" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetUpdateNotificationLevel" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ScheduleImminentRestartWarning" /t REG_DWORD /d "60" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "IncludeRecommendedUpdates" /t REG_DWORD /d "0" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AutoInstallMinorUpdates" /t REG_DWORD /d "0" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoRebootWithLoggedOnUsers" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootRelaunchTimeoutEnabled" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootRelaunchTimeout" /t REG_DWORD /d "1440" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootWarningTimeout" /t REG_DWORD /d "30" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootWarningTimeoutEnabled" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1 
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1
-    Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f >nul 2>&1
-    Reg.exe add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f >nul 2>&1
-)
+
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartDeadline" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "UpdateNotificationLevel" /t REG_DWORD /d "2" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartDeadlinePeriodInDaysForFeatureUpdates" /t REG_DWORD /d "30" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursEnd" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursStart" /t REG_DWORD /d "8" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetActiveHours" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartNotificationSchedule" /t REG_DWORD /d "240" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "AutoRestartDeadlinePeriodInDays" /t REG_DWORD /d "30" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartNotificationConfig" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartNotificationDisable" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetRestartWarningSchd" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ScheduleRestartWarning" /t REG_DWORD /d "24" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetUpdateNotificationLevel" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ScheduleImminentRestartWarning" /t REG_DWORD /d "60" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "IncludeRecommendedUpdates" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AutoInstallMinorUpdates" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoRebootWithLoggedOnUsers" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootRelaunchTimeoutEnabled" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootRelaunchTimeout" /t REG_DWORD /d "1440" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootWarningTimeout" /t REG_DWORD /d "30" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "RebootWarningTimeoutEnabled" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1 
+Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f >nul 2>&1
 
 :: BSOD Quality of Life
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "AutoReboot" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -911,32 +831,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 
 :: Disable microsoft compatibility appraiser telemetry process
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /v "Debugger" /t REG_SZ /d "%WinDir%\System32\taskkill.exe" /f >nul 2>&1
-
-:: Disable unnecessary autologgers
-if "%OSVersion%"=="Windows 10" (
-        for %%a in (
-        "Circular Kernel Context Logger"
-        "CloudExperienceHostOobe"
-        "DefenderApiLogger"
-        "DefenderAuditLogger"
-        "Diagtrack-Listener"
-        "Diaglog"
-        "LwtNetLog"
-        "Microsoft-Windows-Rdp-Graphics-RdpIdd-Trace"
-        "NetCore"
-        "NtfsLog"
-        "RadioMgr"
-        "RdrLog"
-        "ReadyBoot"
-        "SpoolerLogger"
-        "UBPM"
-        "WdiContextLog"
-        "WiFiSession"
-    ) do (
-        Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\%%~a" /v "Start" /t REG_DWORD /d "0" /f >nul 2>&1
-    )
-)
-
 
 :: Disable speech model updates
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Speech" /v "AllowSpeechModelUpdate" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1321,11 +1215,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "D
 :: Disable foreground priority decay
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\KernelVelocity" /v "DisableFGBoostDecay" /t REG_DWORD /d "1" /f >nul 2>&1
 
-:: Disable DPC Watchdog
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcWatchdogProfileOffset" /t REG_DWORD /d "0" /f >nul 2>&1
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcTimeout" /t REG_DWORD /d "0" /f >nul 2>&1
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DpcWatchdogPeriod" /t REG_DWORD /d "0" /f >nul 2>&1
-
 :: Reliable timestamp
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Reliability" /v "TimeStampInterval" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Reliability" /v "IoPriority" /t REG_DWORD /d "3" /f >nul 2>&1
@@ -1419,43 +1308,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC" /v "Enabl
 :: Don't Reduce Sounds While In A Call
 %currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f >nul 2>&1
 
-:: Disable Scheduled Tasks
-if "%OSVersion%"=="Windows 10" (
-    echo !S_GREEN!Disabling Scheduled Tasks...
-    for %%i in (
-        "\Microsoft\Windows\Application Experience\StartupAppTask"
-        "\Microsoft\Windows\Autochk\Proxy"
-        "\Microsoft\Windows\BrokerInfrastructure\BgTaskRegistrationMaintenanceTask"
-        "\Microsoft\Windows\Chkdsk\ProactiveScan"
-        "\Microsoft\Windows\Chkdsk\SyspartRepair"
-        "\Microsoft\Windows\Data Integrity Scan\Data Integrity Scan"
-        "\Microsoft\Windows\Data Integrity Scan\Data Integrity Scan for Crash Recovery"
-        "\Microsoft\Windows\Defrag\ScheduledDefrag"
-        "\Microsoft\Windows\DiskCleanup\SilentCleanup"
-        "\Microsoft\Windows\DiskFootPrint\Diagnostics"
-        "\Microsoft\Windows\DiskFootPrint\StorageSense"
-        "\Microsoft\Windows\LanguageComponentsInstaller\Uninstallation"
-        "\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents"
-        "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"
-        "\Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser"
-        "\Microsoft\Windows\Registry\RegIdleBackup"
-        "\Microsoft\Windows\Time Synchronization\ForceSynchronizeTime"
-        "\Microsoft\Windows\Time Synchronization\SynchronizeTime"
-        "\Microsoft\Windows\Time Zone\SynchronizeTimeZone"
-        "\Microsoft\Windows\UpdateOrchestrator\Reboot"
-        "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
-        "\Microsoft\Windows\UpdateOrchestrator\USO_Broker_Display"
-        "\Microsoft\Windows\UPnP\UPnPHostConfig"
-        "\Microsoft\Windows\User Profile Service\HiveUploadTask"
-        "\Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange"
-        "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-        "\Microsoft\Windows\WindowsUpdate\sih"
-        "\Microsoft\Windows\Wininet\CacheTask"
-    ) do (
-        schtasks.exe /Change /Disable /TN %%i >nul 2>&1
-        %WinDir%\NeptuneDir\Tools\powerrun.exe /SW:0 schtasks.exe /Change /Disable /TN %%i >nul 2>&1
-    )
-)
 
 :: Boot Configuration Data
 echo !S_GREEN!Configuring BCDEdit...
@@ -1479,12 +1331,7 @@ bcdedit /set {globalsettings} custom:16000068 true >nul 2>&1
 :: Disable Automatic Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
 :: Set Boot Label
-if "%OSVersion%"=="Windows 10" (
-    bcdedit /set {current} description "NeptuneOS 1803 %Version%" >nul 2>&1
-)
-if "%OSVersion%"=="Windows 11" (
-    bcdedit /set {current} description "NeptuneOS 22H2 %Version%" >nul 2>&1
-)
+bcdedit /set {current} description "Neptune's 22H2 %Version%" >nul 2>&1
 :: Disable DEP
 bcdedit /set nx AlwaysOff >nul 2>&1
 :: Use Synthetic Timers
@@ -1509,82 +1356,30 @@ bcdedit /set vsmlaunchtype Off >nul 2>&1
 :: Disable Memory Mitigations
 bcdedit /set allowedinmemorysettings 0x0 >nul 2>&1
 
-
 :: Disable Devices
 echo !S_GREEN!Disabling Devices...
 
-:: System Devices (Windows 10)
-if "%OSVersion%"=="Windows 10" (
-    %DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
-    %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
-    %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
-    %DevMan% /disable "Direct memory access controller" >nul 2>&1
-    %DevMan% /disable "High precision event timer" >nul 2>&1
-    %DevMan% /disable "Microsoft Device Association Root Enumerator" >nul 2>&1
-    %DevMan% /disable "Microsoft GS Wavetable Synth" >nul 2>&1
-    %DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
-    %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
-    %DevMan% /disable "Microsoft RRAS Root Enumerator" >nul 2>&1
-    %DevMan% /disable "Microsoft System Management BIOS Driver" >nul 2>&1
-    %DevMan% /disable "Microsoft Virtual Drive Enumerator" >nul 2>&1
-    %DevMan% /disable "Microsoft Windows Management Interface for ACPI" >nul 2>&1
-    %DevMan% /disable "Motherboard resources" >nul 2>&1
-    %DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1
-    %DevMan% /disable "Numeric data processor" >nul 2>&1
-    %DevMan% /disable "PCI Data Acquisition and Signal Processing Controller" >nul 2>&1
-    %DevMan% /disable "PCI Device" >nul 2>&1
-    %DevMan% /disable "PCI Memory Controller" >nul 2>&1
-    %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
-    %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
-    %DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
-    %DevMan% /disable "Plug and Play Software Device Enumerator" >nul 2>&1
-    %DevMan% /disable "Programmable interrupt controller" >nul 2>&1
-    %DevMan% /disable "Root Print Queue" >nul 2>&1
-    %DevMan% /disable "SM Bus Controller" >nul 2>&1
-    %DevMan% /disable "System board" >nul 2>&1
-    %DevMan% /disable "System CMOS/real time clock" >nul 2>&1
-    %DevMan% /disable "System Speaker" >nul 2>&1
-    %DevMan% /disable "System Timer" >nul 2>&1
-    %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
-    %DevMan% /disable "Unknown Device" >nul 2>&1
-    %DevMan% /disable "USB Video Device" >nul 2>&1
-)
-
-:: System Devices (Windows 11)
-if "%OSVersion%"=="Windows 11" (
-    %DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
-    %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
-    %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
-    %DevMan% /disable "Direct memory access controller" >nul 2>&1
-    %DevMan% /disable "High precision event timer" >nul 2>&1
-    %DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
-    %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
-    %DevMan% /disable "Microsoft Windows Management Interface for ACPI" >nul 2>&1
-    %DevMan% /disable "Motherboard resources" >nul 2>&1
-    %DevMan% /disable "Numeric data processor" >nul 2>&1
-    %DevMan% /disable "PCI Data Acquisition and Signal Processing Controller" >nul 2>&1
-    %DevMan% /disable "PCI Device" >nul 2>&1
-    %DevMan% /disable "PCI Memory Controller" >nul 2>&1
-    %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
-    %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
-    %DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
-    %DevMan% /disable "Programmable interrupt controller" >nul 2>&1
-    %DevMan% /disable "System board" >nul 2>&1
-    %DevMan% /disable "System Speaker" >nul 2>&1
-    %DevMan% /disable "System Timer" >nul 2>&1
-)
-
-:: Network Adapters
-if "%OSVersion%"=="Windows 10" (
-    %DevMan% /disable "WAN Miniport (IKEv2)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (IP)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (IPv6)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (L2TP)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (Network Monitor)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (PPPOE)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (PPTP)" >nul 2>&1
-    %DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1
-)
+:: System Devices 
+%DevMan% /disable "ACPI Processor Aggregator" >nul 2>&1
+%DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
+%DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
+%DevMan% /disable "Direct memory access controller" >nul 2>&1
+%DevMan% /disable "High precision event timer" >nul 2>&1
+%DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
+%DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
+%DevMan% /disable "Microsoft Windows Management Interface for ACPI" >nul 2>&1
+%DevMan% /disable "Motherboard resources" >nul 2>&1
+%DevMan% /disable "Numeric data processor" >nul 2>&1
+%DevMan% /disable "PCI Data Acquisition and Signal Processing Controller" >nul 2>&1
+%DevMan% /disable "PCI Device" >nul 2>&1
+%DevMan% /disable "PCI Memory Controller" >nul 2>&1
+%DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
+%DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
+%DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
+%DevMan% /disable "Programmable interrupt controller" >nul 2>&1
+%DevMan% /disable "System board" >nul 2>&1
+%DevMan% /disable "System Speaker" >nul 2>&1
+%DevMan% /disable "System Timer" >nul 2>&1
 
 :: Memory Optimization
 echo !S_GREEN!Configuring Memory Management...
@@ -1610,9 +1405,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 :: Disable Page Combining 
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePageCombining" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\currentcontrolset\control\session manager\Memory Management" /v "DisablePagingCombining" /t REG_DWORD /d "1" /f >nul 2>&1
-
-:: Disable Swapfile
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "SwapfileControl" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Memory Heap Tweaks
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "HeapDeCommitFreeBlockThreshold" /t REG_DWORD /d "262144" /f >nul 2>&1
@@ -1643,6 +1435,7 @@ for %%a in (
 )
 
 
+
 :: Hardening and Mitigations
 echo !S_GREEN!Configuring Mitigations...
 
@@ -1669,6 +1462,7 @@ for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "DmaRem
 :: Disable SEHOP
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Disable TSX 
 Reg.exe add "HKLM\SYSTEM\currentcontrolset\control\session manager\Kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f >nul 2>&1
 
@@ -1752,6 +1546,7 @@ for %%a in (
 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+
 
 
 :: Network Configuration
@@ -1922,6 +1717,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetB
 :: )
 
 
+
 :: Process Priorities
 echo !S_GREEN!Configuring Process Priorities...
 
@@ -1970,167 +1766,37 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService"
 :: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\UserManager\TriggerInfo" /f >nul 2>&1
 
 :: Split Audio Services
-:: copy /y "%windir%\System32\svchost.exe" "%windir%\System32\audiosvchost.exe" >nul 2>&1
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalServiceNetworkRestricted -p" /f >nul 2>&1
-:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
+copy /y "%windir%\System32\svchost.exe" "%windir%\System32\audiosvchost.exe" >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalServiceNetworkRestricted -p" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Drivers and Services
-if "%OSVersion%"=="Windows 10" (
-    :: Drivers
-    %svc% 3ware 4
-    %svc% AmdK8 4
-    %svc% AppID 4
-    %svc% ADP80XX 4
-    %svc% AppID 4
-    %svc% applockerfltr 4
-    %svc% arcsas 4
-    %svc% Beep 4
-    %svc% bowser 4
-    %svc% bttflt 4
-    %svc% cdrom 4
-    %svc% CldFlt 4
-    %svc% CLFS 4
-    %svc% CompositeBus 4
-    %svc% condrv 4
-    %svc% Dfsc 4
-    %svc% FileCrypt 4
-    %svc% FileCrypt 4
-    %svc% GpuEnergyDrv 4
-    %svc% HTTP 4
-    %svc% KSecPkg 4
-    %svc% ksthunk 4
-    %svc% luafv 4
-    %svc% mpsdrv 4
-    %svc% mrxsmb 4
-    %svc% mrxsmb20 4
-    %svc% MSKSSRV 4
-    %svc% MSPCLOCK 4
-    %svc% MSPQM 4
-    %svc% mssmbios 4
-    %svc% MSTEE 4
-    %svc% NdisTapi 4
-    %svc% NdisVirtualBus 4
-    %svc% NdisWan 4
-    %svc% ndiswanlegacy 4
-    %svc% NetBIOS 4
-    %svc% NetBT 4
-    %svc% PEAUTH 4
-    %svc% QWAVEdrv 4
-    %svc% RasAcd 4
-    %svc% RasPppoe 4
-    %svc% SiSRaid2 4
-    %svc% SiSRaid4 4
-    %svc% srv2 4
-    %svc% storqosflt 4
-    %svc% swenum 4
-    %svc% Tcpip6 4
-    %svc% tcpipreg 4
-    %svc% tdx 4
-    %svc% umbus 4
-    %svc% vdrvroot 4
-    %svc% WacomPen 4
-    %svc% wanarp 4
-    %svc% wanarpv6 4
-    %svc% wcifs 4
-    %svc% WindowsTrustedRTProxy 4
 
-    :: Services
-    %svc% AppXSvc 3
-    %svc% BcastDVRUserService 4
-    %svc% BFE 4
-    %svc% BITS 4
-    %svc% BthAvctpSvc 4
-    %svc% CaptureService 4
-    %svc% CDPUserSvc 4
-    %svc% ClipSVC 4
-    %svc% CryptSvc 3
-    %svc% diagnosticshub.standardcollector.service 4
-    %svc% diagsvc 4
-    %svc% DoSvc 4
-    %svc% DPS 4
-    %svc% FontCache 4
-    %svc% FontCache3.0.0.0 4
-    %svc% FrameServer 4
-    %svc% gpsvc 4
-    %svc% hidserv 4
-    %svc% HvHost 4
-    %svc% icssvc 4
-    %svc% IKEEXT 4
-    %svc% InstallService 4
-    %svc% iphlpsvc 4
-    %svc% KtmRm 4
-    %svc% LanmanServer 4
-    %svc% LanmanWorkstation 4
-    %svc% lmhosts 4
-    %svc% mpssvc 4
-    %svc% NgcCtnrSvc 4
-    %svc% PcaSvc 4
-    %svc% PhoneSvc 4
-    %svc% QWAVE 4
-    %svc% SENS 4
-    %svc% SharedAccess 4
-    %svc% ShellHWDetection 4
-    %svc% sppsvc 3
-    %svc% stisvc 4
-    %svc% stisvc 4
-    %svc% STR 2
-    %svc% TabletInputService 4
-    %svc% TapiSrv 4
-    %svc% Themes 4
-    %svc% UsoSvc 4
-    %svc% vmicguestinterface 4
-    %svc% vmicheartbeat 4
-    %svc% vmickvpexchange 4
-    %svc% vmicrdv 4
-    %svc% vmicshutdown 4
-    %svc% vmictimesync 4
-    %svc% vmicvmsession 4
-    %svc% vmicvss 4
-    %svc% W32Time 4
-    %svc% WaaSMedicSvc 4
-    %svc% WdiServiceHost 4
-    %svc% WdiSystemHost 4
-    %svc% WinHttpAutoProxySvc 4
-    %svc% Winmgmt 3
-    %svc% wlidsvc 4
-    %svc% WPDBusEnum 4
-    %svc% WpnService 4
-    %svc% WpnUserService 4
-    %svc% WSearch 4
-    %svc% wuauserv 4
-    %svc% XblAuthManager 4
-    %svc% XblGameSave 4
-    %svc% XboxGipSvc 4
-)
+:: Drivers
+%svc% Beep 4
+%svc% Ndu 4
 
-if "%OSVersion%"=="Windows 11" (
-    :: Drivers
-    %svc% Beep 4
-    %svc% Ndu 4
-
-    :: Services
-    %svc% BthAvctpSvc 4
-    %svc% DPS 4
-    %svc% DiagTrack 4
-    %svc% DispBrokerDesktopSvc 4
-    %svc% FontCache 4
-    %svc% LanmanWorkstation 4
-    %svc% LanmanWorkstation 4
-    %svc% MapsBroker 4
-    %svc% RmSvc 4
-    %svc% SgrmBroker 4
-    %svc% ShellHWDetection 4
-    %svc% Spooler 4
-    %svc% TextInputManagementService 4
-    %svc% WdiSystemHost 4
-    %svc% WinHttpAutoProxySvc 4
-    %svc% Winmgmt 3
-    %svc% WpnService 4
-    %svc% WpnUserService 4
-    %svc% lmhosts 4
-    %svc% webthreatdefusersvc 4
-
-
+:: Services
+%svc% BthAvctpSvc 4
+%svc% DPS 4
+%svc% DiagTrack 4
+%svc% DispBrokerDesktopSvc 4
+%svc% FontCache 4
+%svc% LanmanWorkstation 4
+%svc% LanmanWorkstation 4
+%svc% MapsBroker 4
+%svc% RmSvc 4
+%svc% SgrmBroker 4
+%svc% ShellHWDetection 4
+%svc% Spooler 4
+%svc% TextInputManagementService 4
+%svc% WdiSystemHost 4
+%svc% WinHttpAutoProxySvc 4
+%svc% Winmgmt 3
+%svc% WpnService 4
+%svc% WpnUserService 4
+%svc% lmhosts 4
+%svc% webthreatdefusersvc 4
 
 :: Operating System Cleanup
 echo !S_GREEN!Cleaning the OS...
@@ -2143,17 +1809,6 @@ Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul 2>&1
 %currentuser% Reg.exe delete "HKCU\Printers" /f >nul 2>&1
 
 :: Delete Files
-if "%OSVersion%"=="Windows 10" (
-    takeown /f "%WinDir%\System32\GameBarPresenceWriter.exe" /a >nul 2>&1
-    icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r Administrators:F /c >nul 2>&1
-    taskkill /im GameBarPresenceWriter.exe /f >nul 2>&1
-    takeown /f "%WinDir%\System32\bcastdvr.exe" /a >nul 2>&1
-    icacls "%WinDir%\System32\bcastdvr.exe" /grant:r Administrators:F /c >nul 2>&1
-    taskkill /im bcastdvr.exe /f >nul 2>&1
-    del /f /q "%WinDir%\System32\bcastdvr.exe" >nul 2>&1
-    del /f /q "%WinDir%\System32\GameBarPresenceWriter.exe" >nul 2>&1
-)
-
 takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
 takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
 del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
@@ -2165,11 +1820,9 @@ del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Disable Default Start Menu
-if "%OSVersion%"=="Windows 10" (
-    taskkill /f /im ShellExperienceHost.exe
-    takeown /f "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" >nul 2>&1
-    ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" Shellhostold.exe >nul 2>&1
-)
+taskkill /f /im ShellExperienceHost.exe
+takeown /f "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" >nul 2>&1
+ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" Shellhostold.exe >nul 2>&1
 
 :: Notice Text
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
@@ -2184,139 +1837,6 @@ exit
 
 
 
-
-
-
-
-
-
-
-:::::::::::::::::::::::
-:::  Configuration  :::
-:::::::::::::::::::::::
-
-:clean
-del /s /f /q %windir%\temp\*.*
-del /s /f /q %windir%\Prefetch\*.*
-del /s /f /q %temp%\*.*
-rd /s /q %WINDIR%\Logs
-del /q %userprofile%\AppData\Local\Microsoft\Windows\INetCache\IE\*.*
-del /q %WINDIR%\Downloaded Program Files\*.*
-rd /s /q %SYSTEMDRIVE%\$RECYCLE.BIN
-del /f /s /q %appdata%\Listary\UserData
-del /f /q %ProgramFiles(x86)%\Steam\Dumps
-del /f /q %ProgramFiles(x86)%\Steam\Traces
-del /f /q %ProgramFiles(x86)%\Steam\appcache\*.log
-rd /s /q "%AppData%\vstelemetry"
-rd /s /q "%LocalAppData%\Microsoft\VSApplicationInsights"
-rd /s /q "%ProgramData%\Microsoft\VSApplicationInsights"
-rd /s /q "%temp%\Microsoft\VSApplicationInsights"
-rd /s /q "%temp%\VSFaultInfo"
-rd /s /q "%temp%\VSFeedbackPerfWatsonData"
-rd /s /q "%temp%\VSFeedbackVSRTCLogs"
-rd /s /q "%temp%\VSRemoteControl"
-rd /s /q "%temp%\VSTelem"
-rd /s /q "%Temp%\VSTelem.Out"
-rd /s /q "%AppData%\Sun\Java\Deployment\cache"
-rd /s /q "%AppData%\Macromedia\Flash Player"
-rd /s /q "%USERPROFILE%\.dotnet\TelemetryStorageService"
-reg delete "HKCU\Software\Adobe\MediaBrowser\MRU" /va /f
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List" /va /f
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List" /va /f
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Map Network Drive MRU" /va /f
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Map Network Drive MRU" /va /f
-reg delete "HKCU\Software\Microsoft\Search Assistant\ACMru" /va /f
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /va /f
-reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /va /f
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU" /va /f
-reg delete "HKCU\Software\Microsoft\Direct3D\MostRecentApplication" /va /f
-reg delete "HKLM\SOFTWARE\Microsoft\Direct3D\MostRecentApplication" /va /f
-del /f /s /q /a %LocalAppData%\Microsoft\Windows\Explorer\*.db
-goto :eof
-
-:dwmC
-echo !S_GREEN!Preparing DWM Script
-takeown /F "%windir%\System32\dwm.exe" /A & icacls "%windir%\System32\dwm.exe" /grant Administrators:(F) >nul 2>&1
-takeown /F "%windir%\System32\UIRibbon.dll" /A & icacls "%windir%\System32\UIRibbon.dll" /grant Administrators:(F) >nul 2>&1
-takeown /F "%windir%\System32\UIRibbonRes.dll" /A & icacls "%windir%\System32\UIRibbonRes.dll" /grant Administrators:(F) >nul 2>&1
-takeown /F "%windir%\System32\Windows.UI.Logon.dll" /A & icacls "%windir%\System32\Windows.UI.Logon.dll" /grant Administrators:(F) >nul 2>&1
-takeown /F "%windir%\System32\RuntimeBroker.exe" /A & icacls "%windir%\System32\RuntimeBroker.exe" /grant Administrators:(F) >nul 2>&1
-takeown /F "%windir%\SystemApps\ShellExperienceHost_cw5n1h2txyewy" /A & icacls "%windir%\SystemApps\ShellExperienceHost_cw5n1h2txyewy" /grant Administrators:(F) >nul 2>&1
-copy /y "%windir%\System32\dwm.exe" "%WinDir%\NeptuneDir\Other\dwm\realdwm\dwm.exe" >nul 2>&1
-copy /y "%windir%\System32\rundll32.exe" "%WinDir%\NeptuneDir\Other\dwm\fakedwm\dwm.exe" >nul 2>&1
-goto:eof
-
-
-:dwmD
-echo !S_GREEN!Disabling DWM...
-call:dwmC
-%WinDir%\NeptuneDir%\Tools\pssuspend -r winlogon >nul 2>&1
-timeout 1 >nul 2>&1
-%WinDir%\NeptuneDir%\Tools\pssuspend winlogon >nul 2>&1
-timeout 1 >nul 2>&1
-taskkill /F /IM dwm.exe >nul 2>&1
-timeout 1 >nul 2>&1
-copy /y "%windir%\NeptuneDir\Other\dwm\fakedwm\dwm.exe" "%windir%\System32" >nul 2>&1
-REN "%windir%\System32\UIRibbon.dll" "UIRibbon.old" >nul 2>&1
-REN "%windir%\System32\UIRibbonRes.dll" "UIRibbonRes.old" >nul 2>&1
-REN "%windir%\System32\Windows.UI.Logon.dll" "Windows.UI.Logon.old" >nul 2>&1
-REN "%windir%\System32\RuntimeBroker.exe" "RuntimeBroker.old" >nul 2>&1
-REN "%windir%\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" "ShellExperienceHost.old" >nul 2>&1
-%WinDir%\NeptuneDir%\Tools\pssuspend -r winlogon >nul 2>&1
-shutdown /r /f /t 0
-exit /b
-
-
-:dwmE
-echo Enabling DWM...
-%WinDir%\NeptuneDir%\Tools\pssuspend -r winlogon >nul 2>&1
-copy /y "%windir%\NeptuneDir\Other\dwm\realdwm\dwm.exe" "%windir%\System32" >nul 2>&1
-timeout 1 >nul 2>&1
-REN "%windir%\System32\UIRibbon.old" "UIRibbon.dll" >nul 2>&1
-REN "%windir%\System32\UIRibbonRes.old" "UIRibbonRes.dll" >>nul 2>&1
-REN "%windir%\System32\Windows.UI.Logon.old" "Windows.UI.Logon.dll" >nul 2>&1
-shutdown /r /f /t 0
-exit /b
-
-:idleD
-echo THIS WILL CAUSE YOUR CPU USAGE TO *DISPLAY* AS 100% IN TASK MANAGER. ENABLE IDLE IF THIS IS AN ISSUE.
-powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 1
-powercfg -setactive scheme_current
-goto finishNRB
-
-:idleE
-powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
-powercfg -setactive scheme_current
-goto finishNRB
-
-:dscp
-echo "Please select the game you play."
-
-for /f "tokens=* delims=\" %%i in ('C:\Windows\NeptuneDir\Tools\filepicker.exe exe') do (
-    if "%%i"=="cancelled by user" exit
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Application Name" /t REG_SZ /d "%%~ni%%~xi" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Version" /t REG_SZ /d "1.0" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Protocol" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Local Port" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Local IP" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Remote Port" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Remote IP" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "DSCP Value" /t REG_SZ /d "46" /f >nul 2>&1
-    Reg.exe add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\QoS\%%~ni%%~xi" /v "Throttle Rate" /t REG_SZ /d "-1" /f >nul 2>&1
-    Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%%i" /t REG_SZ /d "~ DISABLEDXMAXIMIZEDWINDOWEDMODE HIGHDPIAWARE" /f >nul 2>&1 
-)
-goto finishNRB
-
-:memoryC
-set "ESL=%WinDir%\NeptuneDir\Tools\EmptyStandbyList.exe
-%ESL% workingsets
-%ESL% modifiedpagelist
-%ESL% priority0standbylist
-%ESL% standbylist
-echo RAM cleaned.
-pause>nul
 
 
 
@@ -2343,7 +1863,7 @@ set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide 
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
 :: Script configuration
-set version=0.5
+set version=0.1
 title NeptuneOS %version% Configuration Script
 cls
 goto:eof
@@ -2367,3 +1887,4 @@ exit /b 0
 :finishNRB
 	echo Finished, changes have been applied.
 	pause & exit /b
+
