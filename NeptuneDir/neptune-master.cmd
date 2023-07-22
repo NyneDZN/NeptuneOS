@@ -1774,7 +1774,25 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 
 :: Drivers
 %svc% Beep 4
-%svc% Ndu 4
+%svc% CldFlt 4
+%svc% NetBIOS 4
+%svc% NetBT 4
+%svc% QWAVEdrv 4
+%svc% RasAgileVpn 4
+%svc% RasPppoe 4
+%svc% RasSstp 4
+%svc% Rasl2tp 4
+%svc% Telemetry 4
+%svc% Wof 4
+%svc% luafv 4
+%svc% rspndr 4
+%svc% srv2 4
+%svc% srvnet 4
+%svc% tcpipreg 4
+%svc% umbus 4
+%svc% wanarp 4
+%svc% wanarpv6 4
+%svc% PptpMiniport 4
 
 :: Services
 %svc% BthAvctpSvc 4
@@ -1782,7 +1800,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% DiagTrack 4
 %svc% DispBrokerDesktopSvc 4
 %svc% FontCache 4
-%svc% LanmanWorkstation 4
 %svc% LanmanWorkstation 4
 %svc% MapsBroker 4
 %svc% RmSvc 4
@@ -1797,6 +1814,15 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% WpnUserService 4
 %svc% lmhosts 4
 %svc% webthreatdefusersvc 4
+%svc% WSearch 4
+%svc% LanmanServer 4
+%svc% SENS 4
+%svc% iphlpsvc 4
+%svc% TrkWks 4
+%svc% QWAVE 4
+%svc% TabletInputService 4
+%svc% WaaSMedicSvc 4
+
 
 :: Operating System Cleanup
 echo !S_GREEN!Cleaning the OS...
