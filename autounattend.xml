@@ -9,46 +9,21 @@
 			<UserLocale>en-US</UserLocale>
 		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-			<TimeZone>Pacific Standard Time</TimeZone>
-			<AutoLogon>
-				<Enabled>true</Enabled>
-				<LogonCount>9999999</LogonCount>
-				<Username>user</Username>
-				<Password>
-					<PlainText>true</PlainText>
-					<Value></Value>
-				</Password>
-			</AutoLogon>
 			<OEMInformation>
-				<Manufacturer>nyne.#1431</Manufacturer>
-				<Model>22H2</Model>
+				<Manufacturer>Nyne</Manufacturer>
+				<Model>22H2 / NeptuneOS 0.1</Model>
 				<SupportHours>N/A</SupportHours>
 				<SupportPhone>N/A</SupportPhone>
-				<SupportURL>http://discord.gg/MEh7MMRKDD</SupportURL>
+				<SupportURL>N/A</SupportURL>
 			</OEMInformation>
 			<OOBE>
 				<HideEULAPage>true</HideEULAPage>
-				<HideLocalAccountScreen>true</HideLocalAccountScreen>
+				<HideLocalAccountScreen>false</HideLocalAccountScreen>
 				<HideOnlineAccountScreens>true</HideOnlineAccountScreens>
 				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
 				<NetworkLocation>Home</NetworkLocation>
 				<ProtectYourPC>3</ProtectYourPC>
-				<SkipMachineOOBE>true</SkipMachineOOBE>
-				<SkipUserOOBE>true</SkipUserOOBE>
 			</OOBE>
-			<UserAccounts>
-				<LocalAccounts>
-					<LocalAccount wcm:action="add">
-						<DisplayName>NeptuneOS</DisplayName>
-						<Group>Administrators</Group>
-						<Name>user</Name>
-						<Password>
-							<PlainText>true</PlainText>
-							<Value></Value>
-						</Password>
-					</LocalAccount>
-				</LocalAccounts>
-			</UserAccounts>
 		</component>
 	</settings>
 	<settings pass="specialize">
@@ -56,7 +31,7 @@
 			<SkipAutoActivation>true</SkipAutoActivation>
 		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-			<ComputerName>DESKTOP-2KO8PE6</ComputerName>
+			<ComputerName>NEPTUNE%SERIAL%</ComputerName>
 		</component>
 	</settings>
 	<settings pass="windowsPE">
