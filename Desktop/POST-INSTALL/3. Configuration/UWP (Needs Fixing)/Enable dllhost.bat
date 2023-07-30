@@ -1,1 +1,0 @@
-ren C:\Windows\System32\dllhost.old dllhost.exe

@@ -11,5 +11,5 @@ echo Wi-Fi and extra services have been disabled.
 pause>nul
 
 :wifiDskip
-echo Wi-Fi is now disabled.
+echo Wi-Fi is now disabled, you may have to restart your PC for changes to apply.
 pause>nul

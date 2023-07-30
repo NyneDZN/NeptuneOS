@@ -1,1 +1,0 @@
-move C:\Windows\System32\sihost.exe C:\Windows

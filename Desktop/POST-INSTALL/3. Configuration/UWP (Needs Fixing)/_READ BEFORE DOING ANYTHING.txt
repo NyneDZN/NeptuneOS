@@ -1,3 +1,0 @@
-Disabling these components WILL break your taskbar, UWP apps (such as settings).
-Dllhost will break any game that requires easy anticheat, and the windows legacy photo viewer.
-ShellExperienceHost only breaks taskbar

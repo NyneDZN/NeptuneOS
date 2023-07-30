@@ -7,5 +7,5 @@ sc config vwififlt start=system
 ping -n 1 -4 1.1.1.1 |Find "Failure"|(
     sc config WlanSvc start=auto
 )
-echo Wi-Fi is now enabled.
+echo Wi-Fi is now enabled, you may have to restart your PC for changes to apply.
 pause>nul
