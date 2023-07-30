@@ -1800,7 +1800,7 @@ del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Disable Default Start Menu
-taskkill /f /im ShellExperienceHost.exe
+taskkill /f /im StartMenuExperienceHost.exe
 takeown /f "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" >nul 2>&1
 ren "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" ShitStartMenu.exe >nul 2>&1
 
