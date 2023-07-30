@@ -1804,6 +1804,11 @@ taskkill /f /im ShellExperienceHost.exe
 takeown /f "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" >nul 2>&1
 ren "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" ShitStartMenu.exe >nul 2>&1
 
+:: Disable Default Search App
+taskkill /f /im SearchApp.exe
+takeown /f "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SeachApp.exe" >nul 2>&1
+ren "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" ShitSearchApp.exe >nul 2>&1
+
 :: Notice Text
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
