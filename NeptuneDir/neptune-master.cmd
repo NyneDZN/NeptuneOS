@@ -1365,6 +1365,7 @@ echo !S_GREEN!Disabling Devices...
 %DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
+%DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: Memory Optimization
 echo !S_GREEN!Configuring Memory Management...
@@ -1418,7 +1419,6 @@ for %%a in (
         Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>&1
     )
 )
-
 
 
 :: Hardening and Mitigations
@@ -1649,8 +1649,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v
 :: Prevent unwanted NIC resets
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\services\NDIS\Parameters" /v "DisableNDISWatchDog" /t REG_DWORD /d "1" /f >nul 2>&1
 
-
-
 :: Disable Nagle's Algorithm
 :: https://en.wikipedia.org/wiki/Nagle%27s_algorithm
 for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
@@ -1666,40 +1664,6 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetB
 
 :: Disable Network Adapters
 %PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr" >nul 2>&1
-
-:: Configure Network Interface Card (NIC) 
-:: for /f %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class" /v "*WakeOnMagicPacket" /s ^| findstr "HKEY"') do (
-::     for %%i in (
-::         "*EEE"
-::         "*FlowControl"
-::         "*LsoV2IPv4"
-::         "*LsoV2IPv6"
-::         "*SelectiveSuspend"
-::         "*WakeOnMagicPacket"
-::         "*WakeOnPattern"
-::         "AdvancedEEE"
-::         "AutoDisableGigabit"
-::         "AutoPowerSaveModeEnabled"
-::         "EnableConnectedPowerGating"
-::         "EnableDynamicPowerGating"
-::         "EnableGreenEthernet"
-::         "EnableModernStandby"
-::         "EnablePME"
-::         "EnablePowerManagement"
-::         "EnableSavePowerNow"
-::         "GigaLite"
-::         "PowerSavingMode"
-::         "ReduceSpeedOnPowerDown"
-::         "ULPMode"
-::         "WakeOnLink"
-::         "WakeOnSlot"
-::         "WakeUpModeCap"
-::     ) do (
-::         for /f %%j in ('reg query "%%a" /v "%%~i" ^| findstr "HKEY"') do (
-::             reg add "%%j" /v "%%~i" /t REG_SZ /d "0" /f >nul 2>&1
-::         )
-::     )
-:: )
 
 
 
@@ -1717,8 +1681,8 @@ for %%i in (fontdrvhost.exe lsass.exe WmiPrvSE.exe ) do (
   Reg.exe add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "IoPriority" /t REG_DWORD /d "0" /f >nul 2>&1
 )
 
-:: CSRSS > High
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f >nul 2>&1
+:: CSRSS > Realtime
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "4" /f >nul 2>&1
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f >nul 2>&1
 
 :: ntoskrnl.exe > Realtime (EXPERIMENTAL)
@@ -1730,11 +1694,8 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 echo !S_GREEN!Disabling Drivers and Services...
 
 :: Deleting Driver Filters to prevent BSOD
-:: ksthunk (Webcam)
-if "%OSVersion%"=="Windows 10" (
-    Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}" /v "UpperFilters" /f >nul 2>&1
-    Reg.exe delete "HKLM\System\CurrentControlSet\Control\Class\{6BDD1FC6-810F-11D0-BEC7-08002BE2092F}" /v "UpperFilters" /f >nul 2>&1
-)
+:: fvevol
+reg delete "HKLM\System\ControlSet001\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /f
 
 :: Dependencies
 Reg.exe add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t REG_MULTI_SZ /d "" /f >nul 2>&1
@@ -1742,26 +1703,19 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0RpcSs\0TcpIp" /f >nul 2>&1
 
-:: Trigger Info
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AppIDSvc\TriggerInfo" /f >nul 2>&1
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Appinfo\TriggerInfo" /f >nul 2>&1
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\TriggerInfo" /f >nul 2>&1
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\gpsvc\TriggerInfo" /f >nul 2>&1
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\SystemEventsBroker\TriggerInfo" /f >nul 2>&1
-:: Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\UserManager\TriggerInfo" /f >nul 2>&1
-
 :: Split Audio Services
 copy /y "%windir%\System32\svchost.exe" "%windir%\System32\audiosvchost.exe" >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalServiceNetworkRestricted -p" /f >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
-:: Drivers and Services
-
 :: Drivers
 %svc% Beep 4
 %svc% CldFlt 4
+%svc% NdisTapi 4
+%svc% NdisWan 4
 %svc% NetBIOS 4
 %svc% NetBT 4
+%svc% PptpMiniport 4
 %svc% QWAVEdrv 4
 %svc% RasAgileVpn 4
 %svc% RasPppoe 4
@@ -1770,14 +1724,21 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% Telemetry 4
 %svc% Wof 4
 %svc% luafv 4
+%svc% ndiswanlegacy 4
 %svc% rspndr 4
 %svc% srv2 4
 %svc% srvnet 4
 %svc% tcpipreg 4
+%svc% tdx 4
 %svc% umbus 4
 %svc% wanarp 4
 %svc% wanarpv6 4
-%svc% PptpMiniport 4
+%svc% NdisCap 4
+%svc% GpuEnergyDrv 4
+%svc% cdrom 4
+%svc% SgrmAgent 4
+%svc% KSecPkg 4
+%svc% fvevol 4
 
 :: Services
 %svc% BthAvctpSvc 4
@@ -1785,29 +1746,34 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% DiagTrack 4
 %svc% DispBrokerDesktopSvc 4
 %svc% FontCache 4
+%svc% LanmanServer 4
 %svc% LanmanWorkstation 4
 %svc% MapsBroker 4
+%svc% QWAVE 4
 %svc% RmSvc 4
+%svc% SENS 4
 %svc% SgrmBroker 4
 %svc% ShellHWDetection 4
 %svc% Spooler 4
+%svc% TabletInputService 4
 %svc% TextInputManagementService 4
+%svc% TrkWks 4
+%svc% WSearch 4
+%svc% WaaSMedicSvc 4
 %svc% WdiSystemHost 4
 %svc% WinHttpAutoProxySvc 4
 %svc% Winmgmt 3
 %svc% WpnService 4
 %svc% WpnUserService 4
+%svc% iphlpsvc 4
 %svc% lmhosts 4
 %svc% webthreatdefusersvc 4
-%svc% WSearch 4
-%svc% LanmanServer 4
-%svc% SENS 4
-%svc% iphlpsvc 4
-%svc% TrkWks 4
-%svc% QWAVE 4
-%svc% TabletInputService 4
-%svc% WaaSMedicSvc 4
-
+%svc% SstpSvc 4
+%svc% UserDataSvc 4
+%svc% UnistoreSvc 4
+%svc% PimIndexMaintenanceSvc 4
+%svc% CDPUserSvc 4
+%svc% WPDBusEnum 4
 
 :: Operating System Cleanup
 echo !S_GREEN!Cleaning the OS...
@@ -1832,8 +1798,8 @@ rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Disable Default Start Menu
 taskkill /f /im ShellExperienceHost.exe
-takeown /f "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" >nul 2>&1
-ren "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" Shellhostold.exe >nul 2>&1
+takeown /f "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" >nul 2>&1
+ren "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" ShitStartMenu.exe >nul 2>&1
 
 :: Notice Text
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
