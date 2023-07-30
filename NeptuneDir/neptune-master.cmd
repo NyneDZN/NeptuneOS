@@ -74,7 +74,7 @@ echo.
 :: Prerequisites
 echo !S_GREEN!Installing Prerequisites...
 
-echo !S_GREEN!Installing Visual C++
+echo !S_GREEN!Installing Visual C++...
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x64.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2008_x86.exe" /qb >nul 2>&1
@@ -88,16 +88,16 @@ echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart >nul 2>&1
 
-echo !S_GREEN!Installing DirectX
+echo !S_GREEN!Installing DirectX...
 "%WinDir%\NeptuneDir\Prerequisites\DirectX\DXSETUP.exe" /silent >nul 2>&1
 
-echo !S_GREEN!Installing 7-Zip
+echo !S_GREEN!Installing 7-Zip...
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 
-echo !S_GREEN!Installing Open Shell
+echo !S_GREEN!Installing Open Shell...
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
-echo !S_GREEN!Installing Timer Resolution Service
+echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 echo !S_GREEN!Importing Registry Profile...
@@ -122,7 +122,7 @@ w32tm /resync >nul 2>&1
 %PowerShell% "$PowerCfg = (Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings' -Recurse).Name -notmatch '\bDefaultPowerSchemeValues|(\\[0-9]|\b255)$';foreach ($item in $PowerCfg) { Set-ItemProperty -Path $item.Replace('HKEY_LOCAL_MACHINE','HKLM:') -Name 'Attributes' -Value 0 -Force}" >nul 2>&1
 
 :: Powerplan Configuration
-echo !S_GREEN!Importing Power Plan
+echo !S_GREEN!Importing Power Plan...
 
 powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" 11111111-1111-1111-1111-111111111111 >nul 2>&1
 powercfg -setactive 11111111-1111-1111-1111-111111111111 >nul 2>&1
@@ -167,7 +167,7 @@ powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PER
 powercfg -setactive scheme_current >nul 2>&1
 
 :: Disable Powersaving on Drivers
-echo !S_GREEN!Disable Powersaving
+echo !S_GREEN!Disable Powersaving...
 
 for /f "tokens=*" %%a in ('wmic path Win32_PnPEntity GET DeviceID ^| findstr "USB\VID_"') do (   
     for %%i in (
@@ -719,7 +719,7 @@ Reg.exe add "HKLM\SOFTWARE\Classes\.pow" /v "FriendlyTypeName" /t REG_SZ /d "Pow
 
 
 :: Registry Configuration
-echo !S_GREEN!Configuring the Registry..
+echo !S_GREEN!Configuring the Registry...
 
 :: Disable Windows Update
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "SetAutoRestartDeadline" /t REG_DWORD /d "1" /f >nul 2>&1
