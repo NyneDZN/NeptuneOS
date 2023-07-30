@@ -1350,10 +1350,12 @@ echo !S_GREEN!Disabling Devices...
 %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
 %DevMan% /disable "Direct memory access controller" >nul 2>&1
 %DevMan% /disable "High precision event timer" >nul 2>&1
+%DevMan% /disable "Microsoft GS Wavetable Synth" >nul 2>&1
 %DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
 %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
 %DevMan% /disable "Microsoft Windows Management Interface for ACPI" >nul 2>&1
 %DevMan% /disable "Motherboard resources" >nul 2>&1
+%DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1
 %DevMan% /disable "Numeric data processor" >nul 2>&1
 %DevMan% /disable "PCI Data Acquisition and Signal Processing Controller" >nul 2>&1
 %DevMan% /disable "PCI Device" >nul 2>&1
@@ -1362,9 +1364,9 @@ echo !S_GREEN!Disabling Devices...
 %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
 %DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
 %DevMan% /disable "Programmable interrupt controller" >nul 2>&1
-%DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
+%DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: Memory Optimization
@@ -1709,8 +1711,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Drivers
+
 %svc% Beep 4
 %svc% CldFlt 4
+%svc% GpuEnergyDrv 4
+%svc% KSecPkg 4
+%svc% NdisCap 4
 %svc% NdisTapi 4
 %svc% NdisWan 4
 %svc% NetBIOS 4
@@ -1721,8 +1727,11 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% RasPppoe 4
 %svc% RasSstp 4
 %svc% Rasl2tp 4
+%svc% SgrmAgent 4
 %svc% Telemetry 4
 %svc% Wof 4
+%svc% cdrom 4
+%svc% fvevol 4
 %svc% luafv 4
 %svc% ndiswanlegacy 4
 %svc% rspndr 4
@@ -1733,12 +1742,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Im
 %svc% umbus 4
 %svc% wanarp 4
 %svc% wanarpv6 4
-%svc% NdisCap 4
-%svc% GpuEnergyDrv 4
-%svc% cdrom 4
-%svc% SgrmAgent 4
-%svc% KSecPkg 4
-%svc% fvevol 4
 
 :: Services
 %svc% BthAvctpSvc 4
