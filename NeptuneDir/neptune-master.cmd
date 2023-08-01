@@ -9,19 +9,6 @@ call:Functions
 
 :: Post Install
 if /i "%~1"=="/postinstall"  goto post
-:: DWM
-if /i "%~1"=="/dwmC"         goto dwmC
-if /i "%~1"=="/dwmD"         goto dwmD
-if /i "%~1"=="/dwmE"         goto dwmE
-:: Idle
-if /i "%~1"=="/idleD"        goto idleD
-if /i "%~1"=="/idleE"        goto idleE
-:: GPU Configuration
-if /i "%~1"=="/amdcard"      goto amdC
-if /i "%~1"=="/nvidiacard"   goto nvidiaC
-:: Cleaners
-if /i "%~1"=="/memory"       goto memoryC
-if /i "%~1"=="/cacheclean"   goto cacheC
 :: debugging purposes only
 if /i "%~1"=="/test"         goto testScript
 :: no arguments
