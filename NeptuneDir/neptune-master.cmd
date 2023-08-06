@@ -1649,7 +1649,7 @@ del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 :: Import registry file a second time
 :: Sometimes it won't apply at all
 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\%system% /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
