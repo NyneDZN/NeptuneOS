@@ -1565,7 +1565,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% IKEEXT 4
 %svc% LanManServer 4
 %svc% microsoft_bluetooth_avrcptransport 4
-%svc% PrintNotify
+%svc% PrintNotify 4
 %svc% RFCOMM 4
 %svc% Spooler 4
 %svc% SysMain 4
@@ -1674,6 +1674,8 @@ echo !S_GREY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GREY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
 echo !S_GREY!Press any key to let the system reboot.
 pause>nul
+
+shutdown /f /r /t 0
 
 
 
