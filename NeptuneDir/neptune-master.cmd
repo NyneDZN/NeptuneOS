@@ -1498,7 +1498,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t REG_
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Backing up default windows service and drivers (imribiy)
-set BACKUP="%HOMEPATH%\POST-INSTALL\Troubleshooting\windows-default-services.reg"
+set BACKUP="%HOMEPATH%\Desktop\\POST-INSTALL\Troubleshooting\windows-default-services.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
 	for /f "tokens=3" %%b in ('reg query "%%~a" /v "Start" 2^>nul') do (
@@ -1578,7 +1578,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 
 
 :: Backing up default neptune services and drivers
-set BACKUP="%HOMEPATH%\POST-INSTALL\Troubleshooting\neptune-default-services.reg"
+set BACKUP="%HOMEPATH%\Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
@@ -1654,8 +1654,8 @@ del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 
 :: Import registry file a second time
 :: Sometimes it won't apply at all
-%WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\%system% /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
