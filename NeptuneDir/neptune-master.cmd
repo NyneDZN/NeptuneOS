@@ -1504,7 +1504,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t REG_
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t REG_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Backing up default windows service and drivers (imribiy)
-set BACKUP="C:\Windows\service-backups\windows-default-services.reg"
+set BACKUP="%HOMEPATH%\POST-INSTALL\Troubleshooting\windows-default-services.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
 	for /f "tokens=3" %%b in ('reg query "%%~a" /v "Start" 2^>nul') do (
@@ -1584,7 +1584,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 
 
 :: Backing up default neptune services and drivers
-set BACKUP="C:\Windows\service-backups\xos-default-services.reg"
+set BACKUP="%HOMEPATH%\POST-INSTALL\Troubleshooting\neptune-default-services.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
