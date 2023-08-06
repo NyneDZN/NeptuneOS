@@ -104,8 +104,8 @@ echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 echo !S_GREEN!Importing Registry Profile...
-Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\%system% /SW:0 regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 
 :: -- Registry Configuration -- ::
@@ -1654,6 +1654,11 @@ takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
 takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
 del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
 del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
+
+:: Import registry file a second time
+:: Sometimes it won't apply at all
+Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\%system% /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
