@@ -1141,22 +1141,12 @@ for %%a in (
 :: -- Boot Configuration Data -- ::
 echo !S_GREEN!Configuring BCDEdit...
 
-:: Disable Boot Graphics
-bcdedit /set bootux disabled >nul 2>&1
 :: Legacy Boot Menu
 bcdedit /set bootmenupolicy legacy >nul 2>&1
 :: Disable Hyper-V
 bcdedit /set hypervisorlaunchtype off >nul 2>&1
 :: Disable TPM
 bcdedit /set tpmbootentropy ForceDisable >nul 2>&1
-:: Enable Quiet Boot
-bcdedit /set quietboot yes >nul 2>&1
-:: Disable Boot Logo
-bcdedit /set {globalsettings} custom:16000067 true >nul 2>&1
-:: Disable The Boot Animation
-bcdedit /set {globalsettings} custom:16000069 true >nul 2>&1
-:: Disable Boot Messages
-bcdedit /set {globalsettings} custom:16000068 true >nul 2>&1
 :: Disable Automatic Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
 :: Set Boot Label
