@@ -1160,7 +1160,7 @@ bcdedit /set {globalsettings} custom:16000068 true >nul 2>&1
 :: Disable Automatic Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
 :: Set Boot Label
-bcdedit /set {current} description "Neptune's 22H2 %Version%" >nul 2>&1
+bcdedit /set {current} description "NeptuneOS %Version%" >nul 2>&1
 :: Disable DEP
 bcdedit /set nx AlwaysOff >nul 2>&1
 :: Use Synthetic Timers
