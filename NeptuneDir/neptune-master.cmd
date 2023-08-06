@@ -104,8 +104,8 @@ echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 echo !S_GREEN!Importing Registry Profile...
-Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 
 :: -- Registry Configuration -- ::
@@ -870,6 +870,9 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProf
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f >nul 2>&1 
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing" /v "Latency Sensitive" /t REG_SZ /d "True" /f >nul 2>&1 
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Latency Sensitive" /t REG_SZ /d "True" /f >nul 2>&1
+
+:: Set split threshold to minimize svchost.exe processes
+Reg add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >nul 2>&1
 
 :: Background process priority to below normal
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
@@ -1651,8 +1654,8 @@ del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 
 :: Import registry file a second time
 :: Sometimes it won't apply at all
-Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\%system% /SW:0 Regedit /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
