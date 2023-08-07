@@ -1149,8 +1149,6 @@ echo !S_GREEN!Configuring BCDEdit...
 bcdedit /set bootmenupolicy legacy >nul 2>&1
 :: Disable Hyper-V
 bcdedit /set hypervisorlaunchtype off >nul 2>&1
-:: Disable TPM
-bcdedit /set tpmbootentropy ForceDisable >nul 2>&1
 :: Disable Automatic Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
 :: Set Boot Label
