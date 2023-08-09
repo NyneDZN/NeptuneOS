@@ -906,7 +906,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 echo !S_GREEN!Importing Power Plan...
 powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" 11111111-1111-1111-1111-111111111111 >nul 2>&1
 powercfg -setactive 11111111-1111-1111-1111-111111111111 >nul 2>&1
-powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan 2.0. A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
+powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan 2.0." "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul 2>&1
 powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
 powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
