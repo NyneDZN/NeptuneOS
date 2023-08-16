@@ -1182,6 +1182,9 @@ bcdedit /set vm No >nul 2>&1
 bcdedit /set vsmlaunchtype Off >nul 2>&1
 :: Disable Memory Mitigations
 bcdedit /set allowedinmemorysettings 0x0 >nul 2>&1
+:: Use X2APIC
+bcdedit /set x2apicpolicy enable 
+bcdedit /set uselegacyapicmode no
 
 
 :: -- Device Manager -- ::
