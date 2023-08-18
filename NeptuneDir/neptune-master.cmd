@@ -1644,7 +1644,6 @@ cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
 takeown /f "SearchHost.exe" >nul 2>&1
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
 ren SearchHost.exe SearchHost.old >nul 2>&1
-start explorer.exe >nul 2>&1
 
 :: Delete microcode
 takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
