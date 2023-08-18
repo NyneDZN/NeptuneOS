@@ -106,9 +106,12 @@ echo !S_GREEN!Installing Timer Resolution Service...
 echo !S_GREEN!Installing Open Shell...
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
+echo !S_GREEN!Installing VLC Media Player...
+"C:\Windows\NeptuneDir\Prerequisites\vlc.exe" /S >nul 2>&1
+
 echo !S_GREEN!Importing Registry Profile...
-Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
+C:\Windows\NeptuneDir\Tools\PowerRun.exe /SW:0 C:\Windows\Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
 
 
 :: -- Registry Configuration -- ::
