@@ -1660,8 +1660,8 @@ del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
 del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 
 :: Import registry file a second time for good measures
-%WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
