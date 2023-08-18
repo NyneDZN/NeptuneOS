@@ -103,6 +103,9 @@ echo !S_GREEN!Installing 7-Zip...
 echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
+echo !S_GREEN!Installing Open Shell...
+"%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
+
 echo !S_GREEN!Importing Registry Profile...
 Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
@@ -1632,10 +1635,11 @@ if "%SystemType%"=="Laptop" (
 :: -- Finishing Up -- ::
 echo !S_GREEN! Finishing Up...
 
-:: Disable windows search
+:: Disable windows search and start menu
 taskkill /f /im explorer.exe >nul 2>&1
 taskkill /f /im searchapp.exe >nul 2>&1
 taskkill /f /im SearchHost.exe >nul 2>&1
+taskkill /f /im StartMenuExperienceHost.exe >nul 2>&1
 cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul 2>&1
 takeown /f "searchapp.exe" >nul 2>&1
 icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul 2>&1
@@ -1644,6 +1648,10 @@ cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
 takeown /f "SearchHost.exe" >nul 2>&1
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
 ren SearchHost.exe SearchHost.old >nul 2>&1
+cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
+takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
+icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
+ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
 
 :: Delete microcode
 takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
@@ -1651,8 +1659,7 @@ takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
 del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
 del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 
-:: Import registry file a second time
-:: Sometimes it won't apply at all
+:: Import registry file a second time for good measures
 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
