@@ -1599,8 +1599,17 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 	) 
 ) >nul 2>&1
 
+wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare
+if %errorlevel% equ 1 (
+    echo !S_RED!If you see this message, this means you're on a VM! 
+    goto :eof
+) else (
+    goto :VariableDrivers
+)
+
 :: Check if battery information is available to determine system type
 :: If this method ends up being unreliable it will be replaced
+:VariableDrivers
 wmic path Win32_Battery get BatteryStatus > nul 2>&1
 if %errorlevel% equ 0 (
     set SystemType=Desktop
@@ -1633,6 +1642,7 @@ if "%SystemType%"=="Laptop" (
     %svc% sermouse 4
     %svc% serial 4
     %svc% i8042prt 4
+    goto :eof
 )
 
 :: -- Finishing Up -- ::
