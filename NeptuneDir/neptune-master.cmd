@@ -1562,6 +1562,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% LanManServer 4
 %svc% microsoft_bluetooth_avrcptransport 4
 %svc% PrintNotify 4
+%svc% rdyboost 4
 %svc% RFCOMM 4
 %svc% Spooler 4
 %svc% SysMain 4
@@ -1577,7 +1578,6 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WarpJITSvc 4
 %svc% WPDBusEnum 4
 %svc% WSearch 4
-%svc% rdyboost 4
 
 
 :: Backing up default neptune services and drivers
