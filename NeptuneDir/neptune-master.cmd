@@ -100,18 +100,35 @@ echo !S_GREEN!Installing DirectX...
 echo !S_GREEN!Installing 7-Zip...
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 
+echo !S_GREEN!Configuring 7-Zip...
+Regedit.exe /s "C:\Windows\NeptuneDir\neptune.reg"
+
 echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 echo !S_GREEN!Installing Open Shell...
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
+echo !S_GREEN!Configuring Open Shell...
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "Version" /t REG_DWORD /d "67371150" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkipMetro" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuStyle" /t REG_SZ /d "Win7" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ProgramsMenuDelay" /t REG_DWORD /d "99999999" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "StartScreenShortcut" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinW7" /t REG_SZ /d "" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinVariationW7" /t REG_SZ /d "" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinOptionsW7" /t REG_MULTI_SZ /d "USER_IMAGE=1\0SMALL_ICONS=1\0THICK_BORDER=0\0SOLID_SELECTION=0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuItems7" /t REG_MULTI_SZ /d "Item1.Command=user_files\0Item1.Settings=NOEXPAND\0Item2.Command=user_documents\0Item2.Settings=NOEXPAND\0Item3.Command=user_pictures\0Item3.Settings=NOEXPAND\0Item4.Command=user_music\0Item4.Settings=NOEXPAND\0Item5.Command=user_videos\0Item5.Settings=ITEM_DISABLED\0Item6.Command=downloads\0Item6.Settings=ITEM_DISABLED\0Item7.Command=homegroup\0Item7.Settings=ITEM_DISABLED\0Item8.Command=separator\0Item9.Command=games\0Item9.Settings=TRACK_RECENT|NOEXPAND|ITEM_DISABLED\0Item10.Command=favorites\0Item10.Settings=ITEM_DISABLED\0Item11.Command=computer\0Item11.Settings=NOEXPAND\0Item12.Command=downloads\0Item12.Settings=NOEXPAND\0Item13.Command=network\0Item13.Settings=ITEM_DISABLED\0Item14.Command=network_connections\0Item14.Settings=ITEM_DISABLED\0Item15.Command=separator\0Item16.Command=control_panel\0Item16.Settings=TRACK_RECENT|NOEXPAND\0Item17.Command=pc_settings\0Item17.Settings=TRACK_RECENT\0Item18.Command=admin\0Item18.Settings=TRACK_RECENT|ITEM_DISABLED\0Item19.Command=devmgmt.msc\0Item19.Label=Device Manager\0Item19.Icon=C:\Windows\system32\devmgr.dll, 201\0Item19.Settings=NOEXPAND\0Item20.Command=defaults\0Item20.Settings=ITEM_DISABLED\0Item21.Command=help\0Item21.Settings=ITEM_DISABLED\0Item22.Command=run\0Item23.Command=apps\0Item23.Settings=ITEM_DISABLED\0Item24.Command=windows_security\0Item24.Settings=ITEM_DISABLED" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ShiftRight" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "RecentPrograms" /t REG_SZ /d "None" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchTrack" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchAutoComplete" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "None" /f >nul 2>&1
+
 echo !S_GREEN!Installing VLC Media Player...
 "C:\Windows\NeptuneDir\Prerequisites\vlc.exe" /S >nul 2>&1
-
-echo !S_GREEN!Importing Registry Profile...
-Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
-C:\Windows\NeptuneDir\Tools\PowerRun.exe /SW:0 C:\Windows\Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
 
 
 :: -- Registry Configuration -- ::
@@ -1499,7 +1516,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService" /t 
 
 :: Delete driver filters
 :: rdyboost
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "fvevol\0iorate" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "fvevol\0iorate" /f >nul 2>&1
 
 :: Split audio services to improve cycles count
 copy /y "%windir%\System32\svchost.exe" "%windir%\System32\audiosvchost.exe" >nul 2>&1
@@ -1676,20 +1693,16 @@ takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
 del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
 del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 
-:: Import registry file a second time for good measures
-Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
-C:\Windows\NeptuneDir\Tools\PowerRun.exe /SW:0 C:\Windows\Regedit.exe import "C:\Windows\NeptuneDir\neptune.reg" >nul 2>&1
-
 :: Delete neptune setup files
-del /f /q "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+del /f /q "%WinDir%\NeptuneDir\7z.reg" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Set notice text
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
 
 cls
 echo !S_GREY!Finishing up installation and restarting. Enjoy NeptuneOS.
