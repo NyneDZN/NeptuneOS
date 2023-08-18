@@ -104,8 +104,8 @@ echo !S_GREEN!Installing Timer Resolution Service...
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 echo !S_GREEN!Importing Registry Profile...
-%WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe /s "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
+%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 %WinDir%\Regedit.exe import "%WinDir%\NeptuneDir\neptune.reg" >nul 2>&1
 
 
 :: -- Registry Configuration -- ::
@@ -1099,7 +1099,7 @@ FOR /F "eol=E" %%a in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 
 
 :: -- Task Scheduler -- ::
-echo !S_GREEN! Disabling Scheduled Tasks...
+echo !S_GREEN!Disabling Scheduled Tasks...
 
 for %%a in (
     "\Microsoft\Windows\ApplicationData\appuriverifierdaily"
@@ -1238,7 +1238,7 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
 
 
 :: -- Security and Hardening -- ::
-echo !S_GREEN! Disabling Mitigations...
+echo !S_GREEN!Disabling Mitigations...
 
 :: Disable Spectre and Meltdown
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f >nul 2>&1
