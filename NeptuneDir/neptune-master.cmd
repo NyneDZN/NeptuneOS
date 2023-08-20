@@ -1006,6 +1006,7 @@ for %%a in (WakeEnabled WdkSelectiveSuspendEnable) do (
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "DefaultPnPCapabilities" /t REG_DWORD /d "24" /f >nul 2>&1
 
 :: Disable Timer Coalescing 
+:: not sure which regkey this belongs in
 :: https://en.wikipedia.org/wiki/Timer_coalescing
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
