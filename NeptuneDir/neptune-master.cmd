@@ -1234,9 +1234,10 @@ echo !S_GREEN!Disabling Devices...
 %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
 %DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
 %DevMan% /disable "Programmable interrupt controller" >nul 2>&1
+%DevMan% /disable "SM Bus Controller"
+%DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
-%DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: -- MSI Mode -- ::
