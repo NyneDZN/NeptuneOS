@@ -125,7 +125,7 @@ Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchTrack" /t REG_DWO
 Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchAutoComplete" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "None" /f >nul 2>&1
+Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 
 echo !S_GREEN!Installing VLC Media Player...
 "C:\Windows\NeptuneDir\Prerequisites\vlc.exe" /S >nul 2>&1
@@ -1539,6 +1539,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 ) >nul 2>&1
 
 :: Disable drivers and services
+:: 4 = disabled, 3 = manual, 2 = automatic, 1 = system, 0 = boot
 %svc% 3ware 4
 %svc% ADP80XX 4
 %svc% AmdK8 4
@@ -1620,17 +1621,8 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 	) 
 ) >nul 2>&1
 
-wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare
-if %errorlevel% equ 1 (
-    echo !S_RED!If you see this message, this means you're on a VM! 
-    goto :eof
-) else (
-    goto :VariableDrivers
-)
-
 :: Check if battery information is available to determine system type
 :: If this method ends up being unreliable it will be replaced
-:VariableDrivers
 wmic path Win32_Battery get BatteryStatus > nul 2>&1
 if %errorlevel% equ 0 (
     set SystemType=Desktop
