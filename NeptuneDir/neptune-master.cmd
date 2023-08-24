@@ -27,7 +27,7 @@ setlocal EnableDelayedExpansion
 
 :: neptune variables
 set version=2.0
-set st=20
+set st=19
 set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: script variables, do not touch
@@ -1615,9 +1615,9 @@ echo !S_GREEN!Configuring Open Shell [19/%ST%]
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 
-echo !S_GREEN!Installing VLC Media Player [20/%ST%]
-vlc.exe /S >nul 2>&1
-timeout 15 >nul 2>&1
+:: echo !S_GREEN!Installing VLC Media Player [20/%ST%]
+:: vlc.exe /S >nul 2>&1
+:: timeout 15 >nul 2>&1
 
 
 echo !S_GREEN! Finalizing Setup [20/%ST%]
