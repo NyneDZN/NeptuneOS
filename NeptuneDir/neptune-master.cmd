@@ -30,9 +30,6 @@ set version=2.0
 set st=20
 set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
-:: killing explorer
-taskkill /f /im explorer.exe >nul 2>&1
-
 :: script variables, do not touch
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
@@ -95,6 +92,9 @@ pause
 exit
 
 :postinstall
+:: killing explorer
+taskkill /f /im explorer.exe >nul 2>&1
+
 echo !S_GREEN!Configuring NTP Server [1/%ST%]
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org" >nul 2>&1
@@ -288,7 +288,6 @@ for %%a in (
     "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
     "\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker"
     "\Microsoft\Windows\UPnP\UPnPHostConfig"
-    "\Microsoft\Windows\WaaSMedic\PerformRemediation"
     "\Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange"
     "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
     "\Microsoft\Windows\Wininet\CacheTask"
@@ -623,7 +622,6 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% PrintNotify 4
 %svc% rdyboost 4
 %svc% RFCOMM 4
-%svc% SENS 4
 %svc% Spooler 4
 %svc% SysMain 4
 %svc% vmicguestinterface 4
@@ -638,9 +636,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WarpJITSvc 4
 %svc% WdiServiceHost 4
 %svc% WPDBusEnum 4
-%svc% WpnService 4
 %svc% WSearch 4
-%svc% WpnUserService 4
 %svc% WinHttpAutoProxySvc 4 
 
 :: backing up default neptune services and drivers
