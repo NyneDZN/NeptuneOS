@@ -591,6 +591,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% NdisTapi 4
 %svc% NdisWan 4
 %svc% ndiswanlegacy 4
+%svc% Ndu 4
 %svc% NetBIOS 4
 %svc% NetBT 4
 %svc% QWAVEdrv 4
@@ -604,7 +605,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% tdx 4
 %svc% Telemetry 4
 %svc% wanarp 4
-%svc% wanarpv6 4
+%svc% wanarpv6 4 
 :: services
 %svc% BluetoothUserService 4
 %svc% bthserv 4
