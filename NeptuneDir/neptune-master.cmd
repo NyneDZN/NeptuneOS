@@ -1394,6 +1394,31 @@ Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Shell Extens
 Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f >nul 2>&1
 Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >nul 2>&1
 
+:: remove print from context menu
+Reg.exe add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
+for %%a in (
+    "batfile"
+    "cmdfile"
+    "docxfile"
+    "fonfile"
+    "htmlfile"
+    "inffile"
+    "inifile"
+    "JSEFile"
+    "otffile"
+    "pfmfile"
+    "regfile"
+    "rtffile"
+    "ttcfile"
+    "ttffile"
+    "txtfile"
+    "VBEFile"
+    "VBSFile"
+    "WSFFile"
+) do (
+    Reg.exe add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
+)
+
 :: debloat 'Send To' context menu, hidden files do not show up in the 'Send To' context menu
 attrib +h "C:\Users\%loggedinUsername%\AppData\Roaming\Microsoft\Windows\SendTo\Bluetooth File Transfer.LNK" >nul 2>&1
 attrib +h "C:\Users\%loggedinUsername%\AppData\Roaming\Microsoft\Windows\SendTo\Mail Recipient.MAPIMail" >nul 2>&1
