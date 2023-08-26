@@ -27,7 +27,7 @@ setlocal EnableDelayedExpansion
 
 :: neptune variables
 set version=3.0
-set st=19
+set st=18
 set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: script variables, do not touch
@@ -1620,7 +1620,7 @@ echo !S_GREEN!Installing Timer Resolution Service [17/%ST%]
 :: timeout 15 >nul 2>&1
 
 
-echo !S_GREEN! Finalizing Setup [20/%ST%]
+echo !S_GREEN! Finalizing Setup [18/%ST%]
 :: Disable windows search and start menu
 taskkill /f /im explorer.exe >nul 2>&1
 taskkill /f /im searchapp.exe >nul 2>&1
