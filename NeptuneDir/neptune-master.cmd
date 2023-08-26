@@ -26,7 +26,7 @@
 setlocal EnableDelayedExpansion
 
 :: neptune variables
-set version=2.0
+set version=3.0
 set st=19
 set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
