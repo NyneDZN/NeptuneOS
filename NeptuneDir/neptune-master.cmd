@@ -61,21 +61,6 @@ icacls C:\Windows\NeptuneDir /inheritance:r /grant Everyone:F /t > nul
 
 :: Post-install 
 if /i "%~1"=="/postinstall"		   goto postinstall
-:: Animations
-if /i "%~1"=="/ad"         goto aniD
-if /i "%~1"=="/ae"         goto aniE
-:: Wi-Fi
-if /i "%~1"=="/dw"         goto wifiD
-if /i "%~1"=="/ew"         goto wifiE
-:: Microsoft Store
-if /i "%~1"=="/ds"         goto storeD
-if /i "%~1"=="/es"         goto storeE
-:: Bluetooth
-if /i "%~1"=="/btd"         goto btD
-if /i "%~1"=="/bte"         goto btE
-:: Hard Drive Prefetching
-if /i "%~1"=="/hddd"         goto hddD
-if /i "%~1"=="/hdde"         goto hddE
 
 
 :argumentFAIL
