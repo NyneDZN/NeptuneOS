@@ -1534,7 +1534,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32Priorit
 :: set split threshold to minimize svchost.exe processes
 :: can be unstable in rare cases, if one service crashes then all svchosts crash
 :: shouldn't be a problem if services are stable
-Reg add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "ffffffff" /f >nul 2>&1
 
 :: background process priority to below normal
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
