@@ -239,11 +239,11 @@ echo !S_GREEN!Disabling Scheduled Tasks [5/%ST%]
 :: there may be more tasks that need to be disabled?
 :: some that shouldn't be?
 for %%a in (
+    "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
+    "\Microsoft\Windows\Application Experience\StartupAppTask"
     "\Microsoft\Windows\ApplicationData\appuriverifierdaily"
     "\Microsoft\Windows\ApplicationData\appuriverifierinstall"
     "\Microsoft\Windows\ApplicationData\DsSvcCleanup"
-    "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
-    "\Microsoft\Windows\Application Experience\StartupAppTask"
     "\Microsoft\Windows\BrokerInfrastructure\BgTaskRegistrationMaintenanceTask"
     "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask"
     "\Microsoft\Windows\Defrag\ScheduledDefrag"
@@ -254,6 +254,7 @@ for %%a in (
     "\Microsoft\Windows\InstallService\ScanForUpdates"
     "\Microsoft\Windows\InstallService\ScanForUpdatesAsUser"
     "\Microsoft\Windows\InstallService\SmartRetry"
+    "\Microsoft\Windows\International\Synchronize Language Settings"
     "\Microsoft\Windows\Management\Provisioning\Cellular"
     "\Microsoft\Windows\MUI\LPRemove"
     "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
@@ -277,7 +278,6 @@ for %%a in (
     "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
     "\Microsoft\Windows\Wininet\CacheTask"
     "\Microsoft\XblGameSave\XblGameSaveTask"
-    "\Microsoft\Windows\International\Synchronize Language Settings"
 ) do (
 	schtasks /change /disable /TN %%a > nul
 )
