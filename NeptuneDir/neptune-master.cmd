@@ -352,9 +352,13 @@ echo !S_GREEN!Disabling Devices [7/%ST%]
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
-:: tpm devices
-%DevMan% /disable "AMD PSP 10.0 Device"
-%DevMan% /disable "Trusted Platform Module 2.0"
+
+:: tpm devices (disabled for windows 10. functionality remains.)
+if os="Windows 10" (
+    %DevMan% /disable "AMD PSP 10.0 Device"
+    %DevMan% /disable "Trusted Platform Module 2.0"
+)
+
 :: network devices
 %DevMan% /disable "Microsoft RRAS Root Enumerator" >nul 2>&1 
 %DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1 
