@@ -277,6 +277,7 @@ for %%a in (
     "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
     "\Microsoft\Windows\Wininet\CacheTask"
     "\Microsoft\XblGameSave\XblGameSaveTask"
+    "\Microsoft\Windows\International\Synchronize Language Settings"
 ) do (
 	schtasks /change /disable /TN %%a > nul
 )
@@ -1324,6 +1325,14 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /
 
 :: disable desktop.ini file creation
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDesktopIniCache" /t REG_DWORD /d "0" /f >nul 2>&1
+
+:: disable action center on w10
+if os="Windows 10" (
+    echo You are on Windows 10. This message is for debugging purposes and will be removed in the final release.
+    reg add "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f >nul 2>&1
+) ELSE (
+    echo You are on Windows 11. This message is for debugging purposes and will be removed in the final release.
+)
 
 :: disable quick access
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f >nul 2>&1
