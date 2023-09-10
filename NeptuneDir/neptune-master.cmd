@@ -1531,6 +1531,10 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableSensorWatchdog"
 :: set Win32PrioritySeparation to short variable 1:1, no foreground boost
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "36" /f >nul 2>&1
 
+:: configure foreground priorities
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System" /v "PassiveIntRealTimeWorkerPriority" /t REG_DWORD /d "18" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\KernelVelocity" /v "DisableFGBoostDecay" /t REG_DWORD /d "1" /f >nul 2>&1
+
 :: set split threshold to minimize svchost.exe processes
 :: can be unstable in rare cases, if one service crashes then all svchosts crash
 :: shouldn't be a problem if services are stable
