@@ -189,6 +189,8 @@ for /f "tokens=*" %%i in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr "US
 
 
 echo !S_GREEN!Configuring NTFS [4/%ST%]
+:: raise the limit of paged pool memory
+FSUTIL behavior set memoryusage 2
 :: disallows characters from the extended character set to be used in 8.3 character-length short file names 
 FSUTIL behavior set allowextchar 0 >nul 2>&1
 :: disallow generation of a bug check 
