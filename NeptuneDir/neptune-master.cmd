@@ -68,8 +68,8 @@ icacls C:\Windows\NeptuneDir /inheritance:r /grant Everyone:F /t > nul
 :: Scripts must be run through a shortcut with the proper arguments
 
 :: Post-install 
-if /i "%~1"=="/postinstall"		   goto postinstall
-
+if /i "%~1"=="/postinstall"   goto postinstall
+if /i "%~1"=="/testPrompt" goto testPrompt
 
 :argumentFAIL
 echo The master script had no arguments passed to it. You're either launching the script directly, or "%~nx0" is broken/corrupted.
