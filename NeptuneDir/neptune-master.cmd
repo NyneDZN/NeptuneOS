@@ -827,7 +827,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settin
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 
 
-echo !S_GREEN! Configuring Registry [12/%ST%]
+echo !S_GREEN!Configuring Registry [12/%ST%]
 :: configuring the general Regedit
 
 :: disable ceip
