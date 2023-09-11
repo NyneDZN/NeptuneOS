@@ -48,7 +48,7 @@ for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Wind
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
 :: change number of setup steps based on winver
-if os="Windows 11" (
+if os=="Windows 11" (
     set st=18
     set fs=18
 ) ELSE (
@@ -198,7 +198,7 @@ for /f "tokens=*" %%i in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr "US
 
 echo !S_GREEN!Configuring NTFS [4/%ST%]
 :: raise the limit of paged pool memory
-FSUTIL behavior set memoryusage 2
+FSUTIL behavior set memoryusage 2 >nul 2>&1
 :: disallows characters from the extended character set to be used in 8.3 character-length short file names 
 FSUTIL behavior set allowextchar 0 >nul 2>&1
 :: disallow generation of a bug check 
@@ -364,7 +364,7 @@ echo !S_GREEN!Disabling Devices [7/%ST%]
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: tpm devices (disabled for windows 10. functionality remains.)
-if os="Windows 10" (
+if os=="Windows 10" (
     %DevMan% /disable "AMD PSP 10.0 Device"
     %DevMan% /disable "Trusted Platform Module 2.0"
 )
@@ -1341,7 +1341,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDesktopIniCache" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: disable action center on w10
-if os="Windows 10" (
+if os=="Windows 10" (
     echo You are on Windows 10. This message is for debugging purposes and will be removed in the final release.
     reg add "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f >nul 2>&1
 ) ELSE (
@@ -1620,7 +1620,7 @@ echo !S_GREEN!Installing Timer Resolution Service [17/%ST%]
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 
-if os="Windows 10" (
+if os=="Windows 10" (
     echo !S_GREEN!Installing Open Shell [18/%ST%]
     "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
