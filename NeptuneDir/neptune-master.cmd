@@ -27,7 +27,6 @@ setlocal EnableDelayedExpansion
 
 :: neptune variables
 set version=3.0
-set st=18
 set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: script variables, do not touch
@@ -47,6 +46,15 @@ for /f "tokens=6 delims=[.] " %%a in ('ver') do (set "win_version=%%a")
 if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
 for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
+
+:: change number of setup steps based on winver
+if os="Windows 11" (
+    set st=18
+    set fs=18
+) ELSE (
+    set st=20
+    set fs=20
+)
 
 :: Setting path variables for NeptuneDir
 setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
@@ -1635,12 +1643,7 @@ if os="Windows 10" (
     %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 )
 
-:: echo !S_GREEN!Installing VLC Media Player [20/%ST%]
-:: vlc.exe /S >nul 2>&1
-:: timeout 15 >nul 2>&1
-
-
-echo !S_GREEN! Finalizing Setup [18/%ST%]
+echo !S_GREEN!Finalizing Setup [%FS%/%ST%]
 :: Disable windows search and start menu
 taskkill /f /im explorer.exe >nul 2>&1
 taskkill /f /im searchapp.exe >nul 2>&1
