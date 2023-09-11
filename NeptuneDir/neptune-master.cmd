@@ -658,7 +658,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 
 :: check if battery information is available to determine system type
 :: if this method ends up being unreliable it will be replaced
-:: a VM detection method needs to be implemented into this, as it breaks VM control
+:: a VM detection method needs to be implemented into this, as it breaks VM keyboard control
 wmic path Win32_Battery get BatteryStatus > nul 2>&1
 if %errorlevel% equ 0 (
     set SystemType=Desktop
