@@ -48,10 +48,10 @@ for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Wind
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
 :: change number of setup steps based on winver
-if %os%=="Windows 11" (
+if os=="Windows 11" (
     set ST=18
     set FS=18
-) else if %os%=="Windows 10" (
+) else if os=="Windows 10" (
     set ST=20
     set FS=20
 )
@@ -364,7 +364,7 @@ echo !S_GREEN!Disabling Devices [7/%ST%]
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: tpm devices (disabled for windows 10. functionality remains.)
-if %os%=="Windows 10" (
+if os=="Windows 10" (
     %DevMan% /disable "AMD PSP 10.0 Device"
     %DevMan% /disable "Trusted Platform Module 2.0"
 )
@@ -1066,7 +1066,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 :: disable notifications and notification center
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /t REG_DWORD /d "1" /f >nul 2>&1
-if %os%=="Windows 10" (
+if os=="Windows 10" (
     Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
@@ -1614,7 +1614,7 @@ echo !S_GREEN!Installing Timer Resolution Service [17/%ST%]
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 
-if %os%=="Windows 10" (
+if os=="Windows 10" (
     echo !S_GREEN!Installing Open Shell [18/%ST%]
     "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
