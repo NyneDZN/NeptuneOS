@@ -51,7 +51,7 @@ for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 if os=="Windows 11" (
     set ST=18
     set FS=18
-) else if os=="Windows 10" (
+) else os=="Windows 10" (
     set ST=20
     set FS=20
 )
@@ -404,7 +404,7 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
     )
 )
 
-echo !S_GREEN!Configuring Network Shell [9/%ST%]
+echo !S_GREEN!Configuring Network Settings [9/%ST%]
 :: should probably research this soon aswell
 :: 0 ping soon
 netsh int isatap set state disable >nul 2>&1
