@@ -209,7 +209,8 @@ FSUTIL behavior set disable8dot3 1 >nul 2>&1
 :: disable NTFS File Compression
 FSUTIL behavior set disablecompression 1 >nul 2>&1
 :: disable NTFS File Encryption
-FSUTIL behavior set disableencryption 1 >nul 2>&1
+:: disabling file encryption prevents XBOX downloads 
+:: FSUTIL behavior set disableencryption 1 >nul 2>&1
 :: disable Last Accessed Timestamp
 FSUTIL behavior set disablelastaccess 1 >nul 2>&1
 FSUTIL behavior set disablespotcorruptionhandling 1 >nul 2>&1
