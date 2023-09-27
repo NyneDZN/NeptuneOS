@@ -51,7 +51,7 @@ for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 if os=="Windows 11" (
     set ST=18
     set FS=18
-) else os=="Windows 10" (
+) else  (
     set ST=20
     set FS=20
 )
