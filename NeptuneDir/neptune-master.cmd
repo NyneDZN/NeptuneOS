@@ -1670,9 +1670,9 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
 
 cls
-echo !S_GREY!Finishing up installation and restarting. Enjoy NeptuneOS.
-echo !S_GREY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
-echo !S_GREY!Press any key to let the system reboot.
+echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
+echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
+echo !S_GRAY!Press any key to let the system reboot.
 pause>nul
 
 shutdown /f /r /t 0
