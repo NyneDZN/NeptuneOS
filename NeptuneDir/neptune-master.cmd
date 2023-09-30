@@ -51,7 +51,7 @@ for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 if os=="Windows 11" (
     set ST=18
     set FS=18
-) else  (
+) ELSE (
     set ST=20
     set FS=20
 )
@@ -312,8 +312,8 @@ bcdedit /deletevalue useplatformclock >nul 2>&1
 :: 15 second timeout for dualboot users
 bcdedit /timeout 15 >nul 2>&1
 :: disable emergency management services
-bcdedit /set ems no >nul 2>&1
-bcdedit /set bootems no >nul 2>&1
+:: bcdedit /set ems no >nul 2>&1
+:: bcdedit /set bootems no >nul 2>&1
 :: disable kernel debugging
 bcdedit /set debug no >nul 2>&1
 :: stop using uncontiguous portions of low-memory
@@ -571,6 +571,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 :: 4 = disabled, 3 = manual, 2 = automatic, 1 = system, 0 = boot
 
 :: drivers
+:: should also dig into
 %svc% 3ware 4
 %svc% ADP80XX 4
 %svc% AmdK8 4
