@@ -47,15 +47,6 @@ if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
 for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
-:: change number of setup steps based on winver
-if os=="Windows 11" (
-    set ST=18
-    set FS=18
-) ELSE (
-    set ST=20
-    set FS=20
-)
-
 :: Setting path variables for NeptuneDir
 setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
 setx path "%path%;C:\Windows\NeptuneDir\Tools;" -m >nul 2>&1
@@ -69,7 +60,7 @@ icacls C:\Windows\NeptuneDir /inheritance:r /grant Everyone:F /t > nul
 
 :: Post-install 
 if /i "%~1"=="/postinstall"   goto postinstall
-if /i "%~1"=="/testPrompt" goto testPrompt
+if /i "%~1"=="/testPrompt"    goto testPrompt
 
 :argumentFAIL
 echo The master script had no arguments passed to it. You're either launching the script directly, or "%~nx0" is broken/corrupted.
@@ -88,7 +79,7 @@ exit
 :: killing explorer
 taskkill /f /im explorer.exe >nul 2>&1
 
-echo !S_GREEN!Configuring NTP Server [1/%ST%]
+echo !S_GREEN!Configuring NTP Server
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org" >nul 2>&1
 
@@ -101,7 +92,7 @@ w32tm /resync >nul 2>&1
 %svc% W32Time 4 >nul 2>&1
 
 
-echo !S_GREEN!Configuring Powerplan [2/%ST%]
+cls & echo !S_GREEN!Configuring Powerplan
 :: unhide power attributes
 :: source: https://gist.github.com/Velocet/7ded4cd2f7e8c5fa475b8043b76561b5#file-unlock-powercfg-ps1
 %PowerShell% "$PowerCfg = (Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings' -Recurse).Name -notmatch '\bDefaultPowerSchemeValues|(\\[0-9]|\b255)$';foreach ($item in $PowerCfg) { Set-ItemProperty -Path $item.Replace('HKEY_LOCAL_MACHINE','HKLM:') -Name 'Attributes' -Value 0 -Force}" >nul 2>&1
@@ -181,7 +172,7 @@ wevtutil set-log "Microsoft-Windows-Kernel-Processor-Power/Diagnostic" /e:false
 wevtutil set-log "Microsoft-Windows-UserModePowerService/Diagnostic" /e:false
 
 
-echo !S_GREEN!Disabling PowerSaving [3/%ST%]
+cls & echo !S_GREEN!Disabling PowerSaving
 for /f "tokens=*" %%i in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr "USB\VID_"') do (
 	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnhancedPowerManagementEnabled" /t Reg_DWORD /d "0" /f
 	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "AllowIdleIrpInD3" /t Reg_DWORD /d "0" /f
@@ -196,7 +187,7 @@ for /f "tokens=*" %%i in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr "US
 %PowerShell% "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}" >nul 2>&1
 
 
-echo !S_GREEN!Configuring NTFS [4/%ST%]
+cls & echo !S_GREEN!Configuring NTFS
 :: raise the limit of paged pool memory
 FSUTIL behavior set memoryusage 2 >nul 2>&1
 :: disallows characters from the extended character set to be used in 8.3 character-length short file names 
@@ -245,7 +236,7 @@ FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 )
 
 
-echo !S_GREEN!Disabling Scheduled Tasks [5/%ST%]
+cls & echo !S_GREEN!Disabling Scheduled Tasks
 :: might need to research this soon
 :: there may be more tasks that need to be disabled?
 :: some that shouldn't be?
@@ -294,7 +285,7 @@ for %%a in (
 )
 
 
-echo !S_GREEN!Configuring BCDEdit [6/%ST%]
+cls & echo !S_GREEN!Configuring BCDEdit
 :: legacy boot menu
 bcdedit /set bootmenupolicy legacy >nul 2>&1
 :: disable hyper-v
@@ -337,7 +328,7 @@ bcdedit /set linearaddress57 OptOut >nul 2>&1
 bcdedit /set increaseuserva 268435328 >nul 2>&1
 
 
-echo !S_GREEN!Disabling Devices [7/%ST%]
+cls & echo !S_GREEN!Disabling Devices
 :: system devices
 %DevMan% /disable "ACPI Processor AggRegator" >nul 2>&1
 %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
@@ -383,7 +374,7 @@ if os=="Windows 10" (
 %DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1 
 
 
-echo !S_GREEN!Enabling MSI Mode [8/%ST%]
+cls & echo !S_GREEN!Enabling MSI Mode
 :: enable MSI mode on USB, GPU, SATA controllers and network adapters
 :: deleting DevicePriority sets the priority to undefined
 for %%a in (
@@ -405,7 +396,7 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
     )
 )
 
-echo !S_GREEN!Configuring Network Settings [9/%ST%]
+cls & echo !S_GREEN!Configuring Network Settings
 :: should probably research this soon aswell
 :: 0 ping soon
 netsh int isatap set state disable >nul 2>&1
@@ -536,7 +527,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetB
 %PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr" >nul 2>&1
 
 
-echo !S_GREEN!Disabling Drivers and Services [10/%ST%]
+cls & echo !S_GREEN!Disabling Drivers and Services
 :: driver dependencies
 Reg add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t Reg_MULTI_SZ /d "" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t Reg_MULTI_SZ /d "NSI\0Afd" /f >nul 2>&1
@@ -696,7 +687,7 @@ if "%SystemType%"=="Laptop" (
 )
 
 
-echo !S_GREEN!Security and Hardening [11/%ST%]
+cls & echo !S_GREEN!Security and Hardening
 :: disable spectre and meltdown
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t Reg_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t Reg_DWORD /d "3" /f >nul 2>&1
@@ -829,7 +820,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settin
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 
 
-echo !S_GREEN!Configuring Registry [12/%ST%]
+cls & echo !S_GREEN!Configuring Registry
 :: configuring the general Regedit
 
 :: disable ceip
@@ -1590,7 +1581,7 @@ for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f >nul 2>&1
 
 
-echo !S_GREEN!Installing Visual C++ [13/%ST%]
+cls & echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x64.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2008_x86.exe" /qb >nul 2>&1
@@ -1604,24 +1595,24 @@ echo !S_GREEN!Installing Visual C++ [13/%ST%]
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart >nul 2>&1
 
-echo !S_GREEN!Installing DirectX [14/%ST%]
+cls & echo !S_GREEN!Installing DirectX
 "%WinDir%\NeptuneDir\Prerequisites\DirectX\DXSETUP.exe" /silent >nul 2>&1
 
-echo !S_GREEN!Installing 7-Zip [15/%ST%]
+cls & echo !S_GREEN!Installing 7-Zip
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 
-echo !S_GREEN!Configuring 7-Zip [16/%ST%]
+cls & echo !S_GREEN!Configuring 7-Zip
 Regedit.exe /s "C:\Windows\NeptuneDir\7z.reg"
 
-echo !S_GREEN!Installing Timer Resolution Service [17/%ST%]
+cls & echo !S_GREEN!Installing Timer Resolution Service
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 
 if os=="Windows 10" (
-    echo !S_GREEN!Installing Open Shell [18/%ST%]
+    cls & echo !S_GREEN!Installing Open Shell
     "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
-    echo !S_GREEN!Configuring Open Shell [19/%ST%]
+    cls & echo !S_GREEN!Configuring Open Shell
     %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "Version" /t REG_DWORD /d "67371150" /f >nul 2>&1
     %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkipMetro" /t REG_DWORD /d "1" /f >nul 2>&1
     %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuStyle" /t REG_SZ /d "Win7" /f >nul 2>&1
@@ -1640,7 +1631,7 @@ if os=="Windows 10" (
     %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 )
 
-echo !S_GREEN!Finalizing Setup [%FS%/%ST%]
+cls & echo !S_GREEN!Finalizing Setup
 :: Disable windows search and start menu
 taskkill /f /im explorer.exe >nul 2>&1
 taskkill /f /im searchapp.exe >nul 2>&1
