@@ -79,7 +79,7 @@ exit
 :: killing explorer
 taskkill /f /im explorer.exe >nul 2>&1
 
-echo !S_GREEN!Configuring NTP Server
+cls & echo !S_GREEN!Configuring NTP Server
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org" >nul 2>&1
 
@@ -1566,7 +1566,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 :: disable exclusive mode on devices
 for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d 0 /f >nul 2>&1
 for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d 0 /f >nul 2>&1
-for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do %WinDir%\NeptuneDir\Tools\PowerRunexe /SW:0 Reg add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d 0 /f >nul 2>&1
+for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d 0 /f >nul 2>&1
 for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg add "%%a\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d 0 /f >nul 2>&1
 
 :: fix volume mixer
@@ -1656,10 +1656,12 @@ if os=="Windows 10" (
 )
 
 :: Delete microcode
-takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
-takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
-del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
-del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
+if os=="Windows 10" (
+    takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
+    takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
+    del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
+    del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
+)
 
 :: Delete neptune setup files
 del /f /q "%WinDir%\NeptuneDir\7z.reg" >nul 2>&1
