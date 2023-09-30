@@ -1656,6 +1656,7 @@ if os=="Windows 10" (
 )
 
 :: Delete microcode
+:: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
 if os=="Windows 10" (
     takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
     takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
