@@ -98,6 +98,7 @@ This project is a fork of AtlasOS.
 - [ ] Complete the GitHub
    - [ ] README.md
    - [ ] Wiki
+   - [ ] Benchmarks
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
 
