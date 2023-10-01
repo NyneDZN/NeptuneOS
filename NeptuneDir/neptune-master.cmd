@@ -1324,9 +1324,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "Conf
 :: enable verbose status
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "VerboseStatus" /t REG_DWORD /d "1" /f >nul 2>&1
 
-:: allow take ownership for more than 15+ files
-%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "MultipleInvokePromptMinimum" /t REG_DWORD /d "200" /f >nul 2>&1
-
 :: increase icon cache (51.2mb)
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "Max Cached Icons" /t REG_SZ /d "51200" /f >nul 2>&1
 
