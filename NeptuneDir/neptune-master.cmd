@@ -653,8 +653,9 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 ) >nul 2>&1
 
 :: check if battery information is available to determine system type
-:: if this method ends up being unreliable it will be replaced
+:: if this method ends up being unreliable it will be replaced, but it seems to be working as of now.
 :: a VM detection method needs to be implemented into this, as it breaks VM keyboard control
+:: re-enable keyboard control on VM by running Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.reg
 wmic path Win32_Battery get BatteryStatus > nul 2>&1
 if %errorlevel% equ 0 (
     set SystemType=Desktop
