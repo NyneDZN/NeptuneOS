@@ -68,12 +68,10 @@ Common vendors are provided, but you might want to download prior to installatio
 <!-- ABOUT NEPTUNEOS -->
 ## About NeptuneOS
 
- NeptuneOS was created with low-spec gaming and productivity in mind. There are a lot of people out there with great potential, but are limited by their 
- hardware.
- If you are on a low-end laptop, desktop, on a bottlenecked build, NeptuneOS can potentially help you gain every drop of performance out of your machine, to help you   
- achieve your best form.
+NeptuneOS is a tailored version of Windows that prioritizes optimal performance and minimal latency, all while preserving seamless compatibility with standard Windows applications and functions. 
+By fine-tuning system settings and configurations, it aims to deliver a superior user experience for those seeking peak performance without sacrificing compatibility.
                                        
- This project is a fork of AtlasOS.
+This project is a fork of AtlasOS.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,8 +81,8 @@ Common vendors are provided, but you might want to download prior to installatio
 ## Roadmap
 
 - [x] NeptuneOS
-   - [x] 1803 Branch                                 
-   - [ ] 22H2 Branch
+   - [ ] Windows 10 Branch                                 
+   - [ ] Windows 11 Branch
    - [ ] Finish Script Index                                     
    - [ ] Driver Installation via Curl
    - [ ] Finish Post-Setup Folder
@@ -113,7 +111,7 @@ Your Name - [@NyneDZN](https://twitter.com/NyneDZN)
 
 Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
 
-Discord: nyne.#1431
+Discord: nyne.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
