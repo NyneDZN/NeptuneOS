@@ -630,6 +630,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% vmictimesync 4
 %svc% vmicvmsession 4
 %svc% vmicvss 4
+%svc% W32Time 4
 %svc% WaaSMedicSvc 4
 %svc% WarpJITSvc 4
 %svc% Wcmsvc 4
