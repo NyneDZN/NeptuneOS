@@ -1621,6 +1621,12 @@ for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f >nul 2>&1
 
 
+
+cls & echo !S_GREEN!Rebuilding Performance Counters
+lodctr /r >nul 2>&1
+lodctr /r >nul 2>&1
+
+
 cls & echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x64.exe" /q >nul 2>&1
