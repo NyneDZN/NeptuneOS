@@ -613,6 +613,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% FontCache 4
 %svc% HvHost 4
 %svc% IKEEXT 4
+%svc% iphlpsvc 4
 %svc% LanManServer 4
 %svc% LanmanWorkstation 4
 %svc% microsoft_bluetooth_avrcptransport 4
@@ -631,11 +632,11 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% vmicvss 4
 %svc% WaaSMedicSvc 4
 %svc% WarpJITSvc 4
+%svc% Wcmsvc 4
 %svc% WdiServiceHost 4
+%svc% WinHttpAutoProxySvc 4 
 %svc% WPDBusEnum 4
 %svc% WSearch 4
-%svc% WinHttpAutoProxySvc 4 
-%svc% Wcmsvc 4
 
 :: backing up default neptune services and drivers
 set BACKUP="%HOMEPATH%\Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.Reg"
