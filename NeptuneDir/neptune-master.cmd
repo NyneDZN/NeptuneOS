@@ -191,8 +191,18 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "Default
 
 
 cls & echo !S_GREEN!Configuring NTFS
-:: raise the limit of paged pool memory
-FSUTIL behavior set memoryusage 2 >nul 2>&1
+:: adjust master file table size and paged pool memory cache levels according to ram size
+if !TOTAL_MEMORY! LSS 8000000 (
+    fsutil behavior set memoryusage 1 >nul 2>&1
+    fsutil behavior set mftzone 1 >nul 2>&1
+) else if !TOTAL_MEMORY! LSS 16000000 (
+    fsutil behavior set memoryusage 1 >nul 2>&1
+    fsutil behavior set mftzone 2 >nul 2>&1
+) else (
+    fsutil behavior set memoryusage 2 >nul 2>&1
+    fsutil behavior set mftzone 2 >nul 2>&1
+)
+
 :: disallows characters from the extended character set to be used in 8.3 character-length short file names 
 FSUTIL behavior set allowextchar 0 >nul 2>&1
 :: disallow generation of a bug check 
