@@ -635,6 +635,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WPDBusEnum 4
 %svc% WSearch 4
 %svc% WinHttpAutoProxySvc 4 
+%svc% Wcmsvc 4
 
 :: backing up default neptune services and drivers
 set BACKUP="%HOMEPATH%\Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.Reg"
