@@ -840,6 +840,10 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settin
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\2" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 
+:: mitigation for CVE-2022-30190 folina exploit
+:: https://msrc-blog.microsoft.com/2022/05/30/guidance-for-cve-2022-30190-microsoft-support-diagnostic-tool-vulnerability/
+Reg delete HKEY_CLASSES_ROOT\ms-msdt /f >nul 2>&1
+
 
 cls & echo !S_GREEN!Configuring Registry
 :: configuring the general Regedit
