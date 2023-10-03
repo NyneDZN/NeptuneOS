@@ -18,6 +18,7 @@
 :: - AtlasOS
 :: - Winaero
 :: - privacy.sexy
+:: - HeavenOS
 
 :: Neptune is a fork of older era AtlasOS
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
@@ -37,6 +38,9 @@ set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
+
+:: Fetch RAM amount
+for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11
