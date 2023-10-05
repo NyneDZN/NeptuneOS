@@ -1453,9 +1453,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked
 
 :: remove share in context menu
 Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >nul 2>&1
-
-:: remove share in context menu
-Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >nul 2>&1
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f >nul 2>&1
 
 :: remove bitmap image from the 'New' context menu
 Reg delete "HKCR\.bmp\ShellNew" /f >nul 2>&1
