@@ -17,7 +17,7 @@ sc config vpci start=disabled
 sc config hvservice start=disabled
 sc config hvcrash start=disabled
 sc config HvHost start=disabled
-C:\Windows\NeptuneDir\Tools\DevManView.exe /disable "Remote Desktop Device Redirector Bus"
+C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Remote Desktop Device Redirector Bus"
 cls
 echo Hyper-V disabled. Please reboot.
 pause

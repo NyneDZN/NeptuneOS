@@ -18,8 +18,8 @@ sc config hvservice start=demand
 sc config hvcrash start=disabled
 sc config HvHost start=demand
 sc config rdbss start=system
-C:\Windows\NeptuneDir\Tools\DevManView.exe /enable "Remote Desktop Device Redirector Bus"
-C:\Windows\NeptuneDir\Tools\DevManView.exe /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Remote Desktop Device Redirector Bus"
+C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 cls
 echo Hyper-V enabled. Please reboot.
 pause
