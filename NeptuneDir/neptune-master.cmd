@@ -1482,27 +1482,27 @@ Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >nul 2
 Reg delete "HKCR\*\shell\pintohomefile" /f >nul 2>&1
 
 :: remove 'rotate left' and 'rotate right' from context menu
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
-reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
 
 
 :: add 'copy to' to context menu
