@@ -373,7 +373,7 @@ cls & echo !S_GREEN!Disabling Devices
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 
 :: tpm devices (disabled for windows 10. functionality remains.)
-if os=="Windows 10" (
+if "%os%"=="Windows 10" (
     %DevMan% /disable "AMD PSP 10.0 Device"
     %DevMan% /disable "Trusted Platform Module 2.0"
 )
@@ -1112,7 +1112,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 :: disable notifications and notification center
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /t REG_DWORD /d "1" /f >nul 2>&1
-if os=="Windows 10" (
+if "%os%"=="Windows 10" (
     Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
@@ -1578,11 +1578,6 @@ Reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "MultipleInvokePromptMinimum" /t REG_DWORD /d "200" /f >nul 2>&1
 Reg add "HKCU\Software\Winaero.com\Winaero Tweaker\Changes" /v "pageContextMenuSelectionLimit" /t REG_DWORD /d "1" /f >nul 2>&1
 
-:: restore default context menu
-if os=="Windows 11" (
-    Reg add HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /ve /d "" /f >nul 2>&1
-)
-
 :: force contiguous directx memory allocation
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "DpiMapIommuContiguous" /t REG_DWORD /d "1" /f >nul 2>&1
 
@@ -1644,7 +1639,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "DisableSensorWatchdog"
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "38" /f >nul 2>&1
 
 :: global timer resolution
-if os=="Windows 11" (
+if "%os%"=="Windows 11" (
     Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
@@ -1733,7 +1728,7 @@ cls & echo !S_GREEN!Installing Timer Resolution Service
 "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 
 
-if os=="Windows 10" (
+if "%os%"=="Windows 10" (
     cls & echo !S_GREEN!Installing Open Shell
     "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
@@ -1769,7 +1764,7 @@ ren searchapp.exe searchapp.old >nul 2>&1
 cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
 takeown /f "SearchHost.exe" >nul 2>&1
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
-if os=="Windows 10" (
+if "%os%"=="Windows 10" (
     ren SearchHost.exe SearchHost.old >nul 2>&1
     cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
     takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
@@ -1779,7 +1774,7 @@ if os=="Windows 10" (
 
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
-if os=="Windows 10" (
+if "%os%"=="Windows 10" (
     takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
     takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
     del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
