@@ -43,17 +43,13 @@ set svc=call :setSvc
 for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
 
 :: Configure variables for determining winver
-systeminfo | findstr /C:"OS Name" | findstr /C:"Windows 10" >nul 2>&1
-if %errorlevel% equ 0 (
-    set os=Windows 10
-) else (
-    systeminfo | findstr /C:"OS Name" | findstr /C:"Windows 11" >nul 2>&1
-    if %errorlevel% equ 1 (
-        set os=Windows 11
-    ) else (
-        echo You are on an unsupported version of Windows
-    )
-)
+:: - %os% - Windows 10 or 11
+:: - %releaseid% - release ID (21H2, 22H2)
+:: - %build% - current build of Windows (like 10.0.19044.1889)
+for /f "tokens=6 delims=[.] " %%a in ('ver') do (set "win_version=%%a")
+if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
+for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
+for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
 :: Setting path variables for NeptuneDir
 setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
