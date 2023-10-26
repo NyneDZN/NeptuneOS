@@ -371,6 +371,7 @@ cls & echo !S_GREEN!Disabling Devices
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
+%DevMan% /disable "Unknown device" >nul 2>&1
 
 :: tpm devices (disabled for windows 10. functionality remains.)
 if "%os%"=="Windows 10" (
