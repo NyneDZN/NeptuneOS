@@ -487,6 +487,11 @@ Reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMultic
 :: disable tcp extensions
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t Reg_DWORD /d "0" /f >nul 2>&1
 
+:: disable smart name resolution
+:: this may cause a DNS leak
+Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "DisableParallelAandAAAA" /t REG_DWORD /d 1 /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d 1 /f >nul 2>&1
+ 
 :: allow icmp redirects to override ospf generated routes
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t Reg_DWORD /d "1" /f >nul 2>&1
 
@@ -932,7 +937,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\Firewall
 
 :: clear image file execution options
 :: commenting this out for now as it stores default application mitigations, which when deleted can increase vulnerability
-:: also, i had the process mitigations being set BEFORE clearing IFEO, which made the tweak pointless, tf is wrong with me?
+:: also, i had the process mitigations being set BEFORE clearing IFEO, which made the tweak pointless, tf is wrong with me?1
 :: Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
 :: Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
 
