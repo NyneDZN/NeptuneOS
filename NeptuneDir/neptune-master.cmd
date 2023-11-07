@@ -446,6 +446,7 @@ netsh int tcp set supplemental template=custom icw=10 >nul 2>&1
 netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
 netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
 netsh int ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
+netsh int teredo set state type=enterpriseclient >nul 2>&1
 
 :: disable bandwith preservation
 Reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t Reg_DWORD /d "1" /f >nul 2>&1
