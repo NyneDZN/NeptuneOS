@@ -931,8 +931,10 @@ Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\Firew
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f >nul 2>&1
 
 :: clear image file execution options
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
+:: commenting this out for now as it stores default application mitigations, which when deleted can increase vulnerability
+:: also, i had the process mitigations being set BEFORE clearing IFEO, which made the tweak pointless, tf is wrong with me?
+:: Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
+:: Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /f >nul 2>&1
 
 :: disable content delivery manager
 :: disable pre-installed apps
