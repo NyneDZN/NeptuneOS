@@ -417,14 +417,15 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
 cls & echo !S_GREEN!Configuring Network Settings
 :: should probably research this soon aswell
 :: 0 ping soon
-netsh int isatap set state disable >nul 2>&1
 netsh int 6to4 set state disabled >nul 2>&1
-netsh int teredo set state disabled >nul 2>&1
-netsh winsock reset >nul 2>&1
 netsh int ip set global defaultcurhoplimit=255 >nul 2>&1
 netsh int ip set global dhcpmediasense=disabled >nul 2>&1
 netsh int ip set global neighborcachelimit=4096 >nul 2>&1
 netsh int ip set global taskoffload=enabled >nul 2>&1
+netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
+netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
+netsh int ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
+netsh int isatap set state disable >nul 2>&1
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
 netsh int tcp set global chimney=disabled >nul 2>&1
 netsh int tcp set global congestionprovider=ctcp >nul 2>&1
@@ -443,9 +444,7 @@ netsh int tcp set security mpp=disabled >nul 2>&1
 netsh int tcp set security profiles=disabled >nul 2>&1
 netsh int tcp set supplemental Internet congestionprovider=ctcp >nul 2>&1
 netsh int tcp set supplemental template=custom icw=10 >nul 2>&1
-netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
-netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
-netsh int ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
+netsh int teredo set state disabled >nul 2>&1
 netsh int teredo set state type=enterpriseclient >nul 2>&1
 
 :: disable bandwith preservation
