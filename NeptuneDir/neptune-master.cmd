@@ -268,7 +268,6 @@ for %%a in (
     "\Microsoft\Windows\Defrag\ScheduledDefrag"
     "\Microsoft\Windows\Device Setup\Metadata Refresh"
     "\Microsoft\Windows\Diagnosis\Scheduled"
-    "\Microsoft\Windows\DiskCleanup\SilentCleanup"
     "\Microsoft\Windows\DiskFootprint\Diagnostics"
     "\Microsoft\Windows\InstallService\ScanForUpdates"
     "\Microsoft\Windows\InstallService\ScanForUpdatesAsUser"
@@ -300,6 +299,9 @@ for %%a in (
 ) do (
 	schtasks /change /disable /TN %%a > nul
 )
+
+:: comment out storage sense to enable it
+schtasks /change /enable /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup" > nul
 
 
 cls & echo !S_GREEN!Configuring BCDEdit
