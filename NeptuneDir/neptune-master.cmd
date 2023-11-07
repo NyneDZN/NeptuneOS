@@ -634,6 +634,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% iphlpsvc 4
 %svc% LanManServer 4
 %svc% LanmanWorkstation 4
+%svc% lmhosts 4
 %svc% microsoft_bluetooth_avrcptransport 4
 %svc% PrintNotify 4
 %svc% rdyboost 4
