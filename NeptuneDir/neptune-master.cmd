@@ -611,7 +611,8 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% cdrom 4
 %svc% flpydisk 4
 %svc% GpuEnergyDrv 4
-%svc% luafv 4
+:: don't disable the UAC file virtualization service, as UAC is now enabled by default
+:: %svc% luafv 4
 %svc% mrxsmb 4
 %svc% mrxsmb20 4
 %svc% NdisCap 4
