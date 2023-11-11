@@ -1266,7 +1266,6 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloud
 :: disable dwm composition
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "Composition" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM" /v "DisallowComposition" /t REG_DWORD /d "1" /f >nul 2>&1
-echo You're here 1
 
 :: automatically close any apps and continue to restart, shut down, or sign out of windows
 %currentuser% Reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f >nul 2>&1
@@ -1293,7 +1292,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Hid
 Reg add "HKLM\SOFTWARE\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /v "" /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /v "" /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\WOW6432Node\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /v "" /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}" /f >nul 2>&1
-echo You're here 2
 
 :: disable animations in dwm
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM" /v "DisallowAnimations" /t REG_DWORD /d "1" /f >nul 2>&1
