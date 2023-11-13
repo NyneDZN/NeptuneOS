@@ -1,4 +1,0 @@
-;!@Install@!UTF-8!
-Title="NVIDIA driver 442.19 x64"
-BeginPrompt="This modified driver package has been generated with NVSlimmer.\nProceed with installation?"
-;!@InstallEnd@!
