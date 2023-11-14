@@ -1850,9 +1850,10 @@ cls & echo !S_GREEN!Installing 7-Zip
 cls & echo !S_GREEN!Configuring 7-Zip
 Regedit.exe /s "C:\Windows\NeptuneDir\7z.reg"
 
-cls & echo !S_GREEN!Installing Timer Resolution Service
-"%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
-
+if "%os%"=="Windows 11" (
+    cls & echo !S_GREEN!Installing Timer Resolution Service
+    "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
+)
 
 if "%os%"=="Windows 10" (
     cls & echo !S_GREEN!Installing Open Shell
