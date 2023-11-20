@@ -1598,6 +1598,19 @@ Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E910
 %currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "NoPreviousVersionsPage" /f >nul 2>&1
 %currentuser% Reg delete "HKCU\SOFTWARE\Policies\Microsoft\PreviousVersions" /v "DisableLocalPage" /f >nul 2>&1
 
+:: remove edit with paint 3D
+Reg delete "HKCR\SystemFileAssociations\.3mf\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.bmp\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.fbx\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.gif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jfif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpe\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpeg\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpg\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.png\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tiff\Shell\3D Edit" /f >nul 2>&1
+ 
 :: remove give access to from context menu
 Reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
 Reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
