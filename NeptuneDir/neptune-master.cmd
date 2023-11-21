@@ -1169,6 +1169,18 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowF
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f >nul 2>&1
 
+@echo off
+set "class=HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings"
+set "stats=HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Stats"
+set "entries={2933BF90-7B36-11D2-B20E-00C04F983E60} {2933BF91-7B36-11D2-B20E-00C04F983E60} {2933BF94-7B36-11D2-B20E-00C04F983E60} {3050F819-98B5-11CF-BB82-00AA00BDCE0B} {333C7BC4-460F-11D0-BC04-0080C7055A83} {373984C9-B845-449B-91E7-45AC83036ADE} {64AB4BB7-111E-11D1-8F79-00C04FC2FBE1} {6BF52A52-394A-11D3-B153-00C04F79FAA6} {884E2049-217D-11DA-B2A4-000E7BBB2B09} {884E2051-217D-11DA-B2A4-000E7BBB2B09} {88D96A05-F192-11D4-A65F-0040963251E5} {88D96A06-F192-11D4-A65F-0040963251E5} {88D96A07-F192-11D4-A65F-0040963251E5} {88D96A08-F192-11D4-A65F-0040963251E5} {88D96A0A-F192-11D4-A65F-0040963251E5} {8E4062D9-FE1B-4B9E-AA16-5E8EEF68F48E} {D2517915-48CE-4286-970F-921E881B8C5C} {EE09B103-97E0-11CF-978F-00A02463E06F} {F5078F32-C551-11D3-89B9-0000F81FE221} {F5078F33-C551-11D3-89B9-0000F81FE221} {F5078F34-C551-11D3-89B9-0000F81FE221} {F5078F35-C551-11D3-89B9-0000F81FE221} {F5078F36-C551-11D3-89B9-0000F81FE221} {F5078F39-C551-11D3-89B9-0000F81FE221} {F6D90F12-9C73-11D3-B32E-00C04F990BB4} {F6D90F14-9C73-11D3-B32E-00C04F990BB4}"
+
+for %%I in (%entries%) do (
+    Reg add "%class%\%%I" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
+    Reg add "%class%\%%I" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
+    Reg add "%stats%\%%I\iexplore" /v "Flags" /t REG_DWORD /d "4" /f >nul 2>&1
+)
+
+
 :: disable map updates
 Reg add "HKLM\SYSTEM\Maps" /v "UpdateOnlyOnWifi" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\Maps" /v "AutoUpdateEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1707,8 +1719,7 @@ reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tif\ShellEx\ContextMenuHan
 reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
 reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
 reg delete "HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
-
-
+E
 :: add 'copy to' to context menu
 Reg add "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To" /ve /t REG_SZ /d "{C2FBB630-2971-11D1-A18C-00C04FD75D13}" /f >nul 2>&1
 
@@ -1787,7 +1798,6 @@ Reg add "HKCU\Software\Winaero.com\Winaero Tweaker\Changes" /v "pageContextMenuS
 :: disable readyboost
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "GroupPolicyDisallowCaches" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /t REG_DWORD /d "0" /f >nul 2>&1
-
 
 :: force contiguous directx memory allocation
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "DpiMapIommuContiguous" /t REG_DWORD /d "1" /f >nul 2>&1
