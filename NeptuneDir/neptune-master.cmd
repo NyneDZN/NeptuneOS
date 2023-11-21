@@ -836,21 +836,29 @@ for %%a in (
 	Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationAuditOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 )
 
+Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "csrss.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "dwm.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "ntoskrnl.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "csrss.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "dwm.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions\ProcessMitigationOptions" /v "ntoskrnl.exe" /t REG_SZ /d "00000000000000000000000000000000" /f >nul 2>&1
+
+
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 
 :: harden winRM
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service" /v AllowUnencryptedTraffic /t Reg_DWORD /d 0 /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client" /v AllowDigest /t Reg_DWORD /d 0 /f >nul 2>&1
-Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule" /v DisableRpcOverTcp /t Reg_DWORD /d 1 /f >nul 2>&1
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v DisableRemoteScmEndpoints /t Reg_DWORD /d 1 /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service" /v "AllowUnencryptedTraffic" /t Reg_DWORD /d "0" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client" /v "AllowDigest" /t Reg_DWORD /d "0" /f >nul 2>&1
+Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule" /v "DisableRpcOverTcp" /t Reg_DWORD /d "1" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "DisableRemoteScmEndpoints" /t Reg_DWORD /d "1" /f >nul 2>&1
 
 :: mitigate ClickOnce
-Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v MyComputer /t Reg_SZ /d "Disabled" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v LocalIntranet /t Reg_SZ /d "Disabled" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v Internet /t Reg_SZ /d "Disabled" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v TrustedSites /t Reg_SZ /d "Disabled" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v UntrustedSites /t Reg_SZ /d "Disabled" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "MyComputer" /t Reg_SZ /d "Disabled" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "LocalIntranet" /t Reg_SZ /d "Disabled" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "Internet" /t Reg_SZ /d "Disabled" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "TrustedSites" /t Reg_SZ /d "Disabled" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "UntrustedSites" /t Reg_SZ /d "Disabled" /f >nul 2>&1
 
 :: mitigation for cve-2021-40444 and other future activex related attacks 
 :: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40444
