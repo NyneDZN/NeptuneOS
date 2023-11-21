@@ -881,6 +881,17 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Ena
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "1" /f > nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "5" /f > nul 2>&1
 
+:: track only important failure events
+Auditpol /set /subcategory:"Process Termination" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"RPC Events" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"Filtering Platform Connection" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"DPAPI Activity" /success:disable /failure:disable > nul 2>&1
+Auditpol /set /subcategory:"IPsec Driver" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"Other System Events" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"Security State Change" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"Security System Extension" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"System Integrity" /success:disable /failure:enable > nul 2>&1
+
 
 cls & echo !S_GREEN!Configuring Registry
 :: configuring the general Regedit
