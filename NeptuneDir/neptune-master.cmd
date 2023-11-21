@@ -1900,6 +1900,9 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerT
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 
+:: disable fastboot
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabledHiberbootEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: disable watchdog timer
 :: https://www.analog.com/en/design-notes/disable-the-watchdog-timer-during-system-reboot.html
 :: a watchdog timer continuously watches the execution of code and resets the system if the software hangs or no longer executes the correct sequence of code
@@ -1920,7 +1923,6 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\KernelVelocity" /v "DisableFGBoos
 :: disable memory paging
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePageCombining" /t REG_DWORD /d "1" /f >nul 2>&1
-
 
 :: set split threshold to minimize svchost.exe processes
 :: can be unstable in rare cases, if one service crashes then all svchosts crash
