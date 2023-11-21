@@ -892,6 +892,17 @@ Auditpol /set /subcategory:"Security State Change" /success:disable /failure:ena
 Auditpol /set /subcategory:"Security System Extension" /success:disable /failure:enable > nul 2>&1
 Auditpol /set /subcategory:"System Integrity" /success:disable /failure:enable > nul 2>&1
 
+:: limit logging to 48mb
+wevtutil sl Security /ms:48048576 > nul 2>&1
+wevtutil sl Application /ms:48048576 > nul 2>&1
+wevtutil sl Setup /ms:48048576 > nul 2>&1
+wevtutil sl System /ms:48048576 > nul 2>&1
+wevtutil sl "Windows Powershell" /ms:24048576 > nul 2>&1
+wevtutil sl "Microsoft-Windows-PowerShell/Operational" /ms:24048576 > nul 2>&1
+wevtutil sl "Microsoft-Windows-Sysmon/Operational" /ms:24048576 > nul 2>&1
+wevtutil sl "Microsoft-Windows-TaskScheduler/Operational" /e:true > nul 2>&1
+wevtutil sl "Microsoft-Windows-DNS-Client/Operational" /e:true > nul 2>&1
+
 
 cls & echo !S_GREEN!Configuring Registry
 :: configuring the general Regedit
