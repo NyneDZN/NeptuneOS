@@ -1402,6 +1402,11 @@ Reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\FlightedFeatures" /v "Im
 :: disable fast user switching
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "HideFastUserSwitching" /t REG_DWORD /d "1" /f >nul 2>&1
 
+:: disable widgets on windows 11
+if "%os%"=="Windows 11" (
+    Reg add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f >nul 2>&1
+)
+
 :: enable window colorization
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "EnableWindowColorization" /t REG_DWORD /d "1" /f >nul 2>&1
 
