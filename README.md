@@ -81,17 +81,17 @@ This project is a fork of AtlasOS.
 ## Roadmap
 
 - [x] NeptuneOS
-   - [x] Windows 10 Branch                                 
-   - [ ] Windows 11 Branch
-   - [ ] Finish Script Index                                     
-   - [ ] Driver Installation via Curl
-   - [x] Finish Post-Setup Folder
-      - [x] Device Driver Setups
-      - [x] Services/Drivers                                 
-                                      
+   - [x] Windows 10 Branch   
+      - [ ] 1803
+      - [X] 22H2                             
+   - [x] Windows 11 Branch
+      - [X] 23H2
+      - [X] Canary (24H2)
+   - [ ] PowerShell Command
+                               
 - [ ] Complete the Discord
    - [ ] Channels
-      - [ ] NeptuneOS Category
+      - [x] NeptuneOS Category
    - [ ] Roles
    - [X] WebHooks
                                        
