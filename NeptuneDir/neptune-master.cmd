@@ -872,6 +872,10 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settin
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\2" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1004" /t Reg_DWORD /d 00000003 /f >nul 2>&1
 
+:: Prevent Kerberos from using DES or RC4
+:: https://gist.github.com/mackwage/08604751462126599d7e52f233490efe?permalink_comment_id=3310398
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters" /v SupportedEncryptionTypes /t REG_DWORD /d 2147483640 /f >nul 2>&1
+
 :: mitigation for CVE-2022-30190 folina exploit
 :: https://msrc-blog.microsoft.com/2022/05/30/guidance-for-cve-2022-30190-microsoft-support-diagnostic-tool-vulnerability/
 Reg delete HKEY_CLASSES_ROOT\ms-msdt /f >nul 2>&1
