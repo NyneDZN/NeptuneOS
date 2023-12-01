@@ -19,6 +19,7 @@
 :: - Winaero
 :: - privacy.sexy
 :: - HeavenOS
+:: - CoutX
 
 :: Neptune is a fork of older era AtlasOS
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
@@ -1966,6 +1967,9 @@ if "%os%"=="Windows 11" (
 :: configure foreground priorities
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System" /v "PassiveIntRealTimeWorkerPriority" /t REG_DWORD /d "18" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\KernelVelocity" /v "DisableFGBoostDecay" /t REG_DWORD /d "1" /f >nul 2>&1
+
+:: increase decommitting memory threshold
+Reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "HeapDeCommitFreeBlockThreshold" /t REG_DWORD /d "262144" /f >nul 2>&1
 
 :: disable memory paging
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f >nul 2>&1
