@@ -66,3 +66,10 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\Open\Command]
 @="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -File \"%1\""
+
+
+; run startup scripts synchronously
+; https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.Scripts::Run_Logon_Script_Sync_2
+; might potentially make the post-setup script run a second or two sooner? might need testing, but either way this does no harm
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System]
+"RunLogonScriptSync"=dword:00000001
