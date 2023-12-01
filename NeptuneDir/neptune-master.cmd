@@ -1478,6 +1478,10 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "DisableAcrylicBack
 :: disable the "welcome" text on logon, speeds up login, especially for HDDs
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "DelayedDesktopSwitchTimeout" /t REG_DWORD /d "0" /f >nul 2>&1
 
+:: run startup scripts asynchronously
+:: https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.Scripts::Run_Startup_Script_Sync
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "RunStartupScriptSync" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: set neptuneos wallpaper
 %currentuser% Reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png" /f >nul 2>&1
 
