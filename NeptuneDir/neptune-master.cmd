@@ -2143,6 +2143,9 @@ rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
 
+:: Importing finalization script into RunOnce
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%%WinDir%%\NeptuneDir\Prerequisites\finalize.bat" /f >nul 2>&1
+
 cls
 echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
