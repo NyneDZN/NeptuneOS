@@ -3,23 +3,23 @@
 
 :: I take no credit for any code in this script, this was all compiled from open sources
 :: Credits, in no particular order:
-:: - he3als
-:: - Zusier
 :: - Amit
 :: - Artanis
-:: - CatGamerOP
-:: - EverythingTech
-:: - Melody
-:: - Revision
-:: - imribiy
-:: - nohopestage
-:: - Timecard
-:: - Phlegm
 :: - AtlasOS
-:: - Winaero
-:: - privacy.sexy
-:: - HeavenOS
+:: - CatGamerOP
 :: - CoutX
+:: - EverythingTech
+:: - he3als
+:: - HeavenOS
+:: - imribiy
+:: - Melody
+:: - nohopestage
+:: - Phlegm
+:: - privacy.sexy
+:: - Revision
+:: - Timecard
+:: - Winaero
+:: - Zusier
 
 :: Neptune is a fork of older era AtlasOS
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
@@ -27,11 +27,10 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: neptune variables
+:: NeptuneOS Variables
 set version=0.4
-set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
-:: script variables, do not touch
+:: Batch Variables
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
 set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command"
@@ -39,9 +38,16 @@ set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
+:: logs functionality will be fully implemented in the future
+:: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: Fetch RAM amount
 for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
+
+:: Check GPU
+for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value') do (
+for %%n in (GeForce NVIDIA RTX GTX) do echo %%a | find /I "%%n" >nul && set GPU=NVIDIA
+)
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11
@@ -56,9 +62,6 @@ for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
 setx path "%path%;C:\Windows\NeptuneDir\Tools;" -m >nul 2>&1
 setx path "%path%;C:\Windows\NeptuneDir\Prerequisites;" -m >nul 2>&1
-
-:: Allow NeptuneDir to be altered for ease
-icacls C:\Windows\NeptuneDir /inheritance:r /grant Everyone:F /t > nul
 
 :: Script index
 :: Scripts must be run through a shortcut with the proper arguments
