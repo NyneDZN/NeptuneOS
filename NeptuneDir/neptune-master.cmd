@@ -215,41 +215,41 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "Default
 cls & echo !S_GREEN!Configuring NTFS
 :: adjust master file table size and paged pool memory cache levels according to ram size
 if !TOTAL_MEMORY! LSS 8000000 (
-    fsutil behavior set memoryusage 1 >nul 2>&1
-    fsutil behavior set mftzone 1 >nul 2>&1
+    FSUTIL behavior set memoryusage 1 >nul 2>&1
+    FSUTIL behavior set mftzone 1 >nul 2>&1
 ) else if !TOTAL_MEMORY! LSS 16000000 (
-    fsutil behavior set memoryusage 1 >nul 2>&1
-    fsutil behavior set mftzone 2 >nul 2>&1
+    FSUTIL behavior set memoryusage 1 >nul 2>&1
+    FSUTIL behavior set mftzone 2 >nul 2>&1
 ) else (
-    fsutil behavior set memoryusage 2 >nul 2>&1
-    fsutil behavior set mftzone 2 >nul 2>&1
+    FSUTIL behavior set memoryusage 2 >nul 2>&1
+    FSUTIL behavior set mftzone 2 >nul 2>&1
 )
 
-:: disallows characters from the extended character set to be used in 8.3 character-length short file names 
+:: Disallows characters from the extended character set to be used in 8.3 character-length short file names 
 FSUTIL behavior set allowextchar 0 >nul 2>&1
-:: disallow generation of a bug check 
+:: Disallow generation of a bug check 
 FSUTIL behavior set bugcheckoncorrupt 0 >nul 2>&1
-:: dsable 8.3 File Creation
+:: Disable 8.3 File Creation
 :: https://ttcshelbyville.wordpress.com/2018/12/02/should-you-disable-8dot3-for-performance-and-security
 FSUTIL behavior set disable8dot3 1 >nul 2>&1
-:: disable NTFS File Compression
+:: Disable NTFS File Compression
 FSUTIL behavior set disablecompression 1 >nul 2>&1
-:: disable NTFS File Encryption
-:: disabling file encryption prevents XBOX downloads 
+:: Disable NTFS File Encryption
+:: Commented out because this disables XBOX downloads
 :: FSUTIL behavior set disableencryption 1 >nul 2>&1
-:: disable Last Accessed Timestamp
+:: Disable Last Accessed Timestamp
 FSUTIL behavior set disablelastaccess 1 >nul 2>&1
 FSUTIL behavior set disablespotcorruptionhandling 1 >nul 2>&1
-:: enable Trimming for SSD's
+:: Enable Trimming for SSD's
 FSUTIL behavior set disabledeletenotify 0 >nul 2>&1
-:: don't Encrypt The Paging File
+:: Disable paging file encryption
 FSUTIL behavior set encryptpagingfile 0 >nul 2>&1
 FSUTIL behavior set quotanotify 86400 >nul 2>&1
 FSUTIL behavior set symlinkevaluation L2L:1 >nul 2>&1
-:: disable NTFS Self Repair
+:: Disable self repair on boot drive
 FSUTIL repair set C: 0 >nul 2>&1
 
-:: disable write cache buffer
+:: Disable Write Cache Buffer
 	for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
 		for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "CacheIsPowerProtected" /t Reg_DWORD /d "1" /f >nul 2>&1
 	)
@@ -258,23 +258,20 @@ FSUTIL repair set C: 0 >nul 2>&1
 	)
 )
 
-:: disable hipm, dipm, and hdd parking
+:: Disable HIPM, DIPM, and HDD parking
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "EnableHIPM"^| FINDSTR /V "EnableHIPM"') DO (
 	Reg add "%%a" /F /V "EnableHIPM" /T Reg_DWORD /d 0 >nul 2>&1
 	Reg add "%%a" /F /V "EnableDIPM" /T Reg_DWORD /d 0 >nul 2>&1
 	Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
 )
 
-:: iolatencycap 0
+:: IOLATENCYCAP to 0
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "IoLatencyCap"^| FINDSTR /V "IoLatencyCap"') DO (
 	Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
 )
 
 
 cls & echo !S_GREEN!Disabling Scheduled Tasks
-:: might need to research this soon
-:: there may be more tasks that need to be disabled?
-:: some that shouldn't be?
 for %%a in (
     "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
     "\Microsoft\Windows\Application Experience\StartupAppTask"
@@ -324,7 +321,7 @@ for %%a in (
 	schtasks /change /disable /TN %%a > nul
 )
 
-:: comment out storage sense to enable it
+:: Enable Storage Sense
 schtasks /change /enable /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup" > nul
 
 
