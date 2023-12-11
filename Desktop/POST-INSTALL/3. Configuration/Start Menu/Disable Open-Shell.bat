@@ -22,4 +22,6 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 taskkill /f /im explorer.exe
 taskkill /f /im StartMenu.exe
 rename "C:\Program Files\Open-Shell" "OpenShellStart"
+cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
+ren StartMenuExperienceHost.old StartMenuExperienceHost.exe >nul 2>&1
 start explorer.exe
