@@ -394,7 +394,7 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
 %DevMan% /disable "Direct memory access controller" >nul 2>&1
 %DevMan% /disable "High precision event timer" >nul 2>&1
-%DevMan% /disable "Legacy device"
+%DevMan% /disable "Legacy device" >nul 2>&1
 %DevMan% /disable "Microsoft GS Wavetable Synth" >nul 2>&1
 %DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
 %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
@@ -508,7 +508,7 @@ netsh int tcp set global netdma=enabled >nul 2>&1
 :: - > Disable Non Sack RTT Resiliency 
 :: - > If you have fluctuating ping and packet loss, enabling this might benefit
 :: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
-netsh int tcp set global nonsackrttresiliency=disabled >nul 2>1
+netsh int tcp set global nonsackrttresiliency=disabled >nul 2>&1
 :: - > Disable Receive Segment Coalescing State
 :: - > Enabling this may provide higher throughput when lower CPU utilization is important
 :: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
@@ -519,7 +519,7 @@ netsh int tcp set global rsc=disabled >nul 2>&1
 netsh int tcp set global rss=enabled >nul 2>&1
 :: - > Disable TCP 1323 Timestamps
 :: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
-netsh int tcp set global timestamps=disabled >nul 2>&
+netsh int tcp set global timestamps=disabled >nul 2>&1
 :: - > Disable Scaling Heuristics
 netsh int tcp set heuristics disabled >nul 2>&1
 :: - > Set Max Port Ranges
