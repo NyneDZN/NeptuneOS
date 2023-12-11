@@ -326,51 +326,48 @@ for %%a in (
 schtasks /change /enable /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup" > nul
 
 
+:: Configuring the Boot Configuration Data in Windows
 cls & echo !S_GREEN!Configuring BCDEdit
-:: legacy boot menu
+
+:: Enable the Legacy Boot Menu 
 bcdedit /set bootmenupolicy legacy >nul 2>&1
-:: disable hyper-v
+:: Disable Hyper-V
 bcdedit /set hypervisorlaunchtype off >nul 2>&1
-:: disable automatic repair
+:: Disable Automatic Drive Repair
 bcdedit /set {current} recoveryenabled no >nul 2>&1
-:: set boot label
+:: Set Boot Label
 bcdedit /set {current} description "NeptuneOS %version%" >nul 2>&1
-:: disable dep
-bcdedit /set nx alwaysoff >nul 2>&1
-:: use synthetic timers
+:: Disable Laptop Powersaving
 bcdedit /set disabledynamictick yes >nul 2>&1
+:: Use Synthetic Timers
 bcdedit /set useplatformtick yes >nul 2>&1
+:: Disable HPET
 bcdedit /deletevalue useplatformclock >nul 2>&1
-:: 15 second timeout for dualboot users
+:: 15 Second Timeout
 bcdedit /timeout 15 >nul 2>&1
-:: disable emergency management services
+:: Disable Emergency Management Services
 :: bcdedit /set ems no >nul 2>&1
 :: bcdedit /set bootems no >nul 2>&1
-:: disable kernel debugging
+:: Disable Kernel Debugging
 bcdedit /set debug no >nul 2>&1
-:: stop using uncontiguous portions of low-memory
+:: Stop using uncontiguous portions of low-memory
 :: https://sites.google.com/view/melodystweaks/basictweaks
-bcdedit /set firstmegabytepolicy useall >nul 2>&1
-bcdedit /set avoidlowmemory 0x8000000 >nul 2>&1
-bcdedit /set nolowmem yes >nul 2>&1
-:: disable dma memory protection and core isolation
-bcdedit /set vm no >nul 2>&1
-bcdedit /set vsmlaunchtype off >nul 2>&1
-:: disable memory mitigations
-bcdedit /set allowedinmemorysettings 0x0 >nul 2>&1
-:: use x2apic
+:: bcdedit /set firstmegabytepolicy useall >nul 2>&1
+:: bcdedit /set avoidlowmemory 0x8000000 >nul 2>&1
+:: bcdedit /set nolowmem yes >nul 2>&1
+:: Enable X2Apic
 bcdedit /set x2apicpolicy enable >nul 2>&1
 bcdedit /set uselegacyapicmode no >nul 2>&1
-:: legacy tscsyncpolicy
-bcdedit /set tscsyncpolicy enhanced >nul 2>&1
-:: linear address 57
+:: Enable Legacy TSCSyncPolicy
+:: bcdedit /set tscsyncpolicy enhanced >nul 2>&1
+:: Linear Address 57
 :: https://en.wikipedia.org/wiki/Intel_5-level_paging
 bcdedit /set linearaddress57 OptOut >nul 2>&1
 bcdedit /set increaseuserva 268435328 >nul 2>&1
 
 
-cls & echo !S_GREEN!Configuring Devices and MSI Mode
 :: Configuring devices in Windows
+cls & echo !S_GREEN!Configuring Devices and MSI Mode
 
 :: Device Manager
 :: - > System Devices
