@@ -2189,7 +2189,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "http://discord.gg/MEh7MMRKDD" /f >nul 2>&1
 
 :: Importing finalization script into RunOnce
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%%WinDir%%\NeptuneDir\Prerequisites\finalize.bat" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Prerequisites\finalize.bat" /f >nul 2>&1
 
 cls
 echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
