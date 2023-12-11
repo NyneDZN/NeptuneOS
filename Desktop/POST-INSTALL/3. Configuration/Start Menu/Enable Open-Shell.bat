@@ -19,8 +19,11 @@ if %errorlevel% neq 0 (
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 :: Enable Open-Shell
+taskkill /f /im StartMenuExperienceHost.exe
 taskkill /f /im explorer.exe
 rename "C:\Program Files\OpenShellStart" "Open-Shell"
+cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
+ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
 cd "C:\Program Files\Open-Shell"
 start StartMenu.exe
 cd %windir%
