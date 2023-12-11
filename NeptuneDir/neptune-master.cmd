@@ -625,41 +625,45 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledC
 
 
 cls & echo !S_GREEN!Disabling Drivers and Services
-:: driver dependencies
+:: Configuring the services and drivers in Windows
+
+:: Configuring Driver Dependencies
+:: - > Audio Service
 Reg add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t Reg_MULTI_SZ /d "" /f >nul 2>&1
+:: - > DHCP, allows for TDX to be disabled
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t Reg_MULTI_SZ /d "NSI\0Afd" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t Reg_MULTI_SZ /d "nsi" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService" /t Reg_MULTI_SZ /d "NSI\0RpcSs\0TcpIp" /f >nul 2>&1
 
-:: delete driver filters
-:: rdyboost
+:: Configure Driver Filters
+:: - > ReadyBoost
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t Reg_MULTI_SZ /d "fvevol\0iorate" /f >nul 2>&1
 
-:: split audio services to improve cycles count
+:: Split Audio Services
+:: This will prevent audio dropouts when setting svchost.exe to low priority
 copy /y "%windir%\System32\svchost.exe" "%windir%\System32\audiosvchost.exe" >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t Reg_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalServiceNetworkRestricted -p" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t Reg_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
-:: backing up default windows service and drivers (imribiy)
+:: Backing up default Windows services and drivers
 set BACKUP="%HOMEPATH%\Desktop\\POST-INSTALL\Troubleshooting\windows-default-services.Reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
-	for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
-		for /l %%c in (0,1,4) do (
-			if "%%b"=="0x%%c" (
-				echo. >>%BACKUP%
-				echo [%%~a] >>%BACKUP%
-				echo "Start"=dword:0000000%%c >>%BACKUP%
-			) 
-		) 
-	) 
+    for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
+        for /l %%c in (0,1,4) do (
+            if "%%b"=="0x%%c" (
+                echo. >>%BACKUP%
+                echo [%%~a] >>%BACKUP%
+                echo "Start"=dword:0000000%%c >>%BACKUP%
+            ) 
+        ) 
+    ) 
 ) >nul 2>&1
 
-:: disable drivers and services
-:: 4 = disabled, 3 = manual, 2 = automatic, 1 = system, 0 = boot
+:: Configure Drivers and Services
+:: Guide:  4 = Disabled, 3 = Manual, 2 = Automatic, 1 = System, 0 = Boot
 
-:: drivers
-:: should also dig into
+:: Drivers
 %svc% 3ware 4
 %svc% ADP80XX 4
 %svc% AmdK8 4
@@ -674,7 +678,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% cdrom 4
 %svc% flpydisk 4
 %svc% GpuEnergyDrv 4
-:: don't disable the UAC file virtualization service, as UAC is now enabled by default
+:: Driver related to UAC
 :: %svc% luafv 4
 %svc% mrxsmb 4
 %svc% mrxsmb20 4
@@ -698,7 +702,12 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% Telemetry 4
 %svc% wanarp 4
 %svc% wanarpv6 4
-:: services
+:: Windows Defender Drivers
+%svc% WdBoot 4
+%svc% WdFilter 4
+%svc% WdNisDrv 4
+
+:: Services
 %svc% BluetoothUserService 4
 %svc% bthserv 4
 %svc% diagsvc 4
@@ -722,6 +731,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% RmSvc 4
 %svc% ShellHWDetection 4
 %svc% Spooler 4
+:: SuperFetch Driver
 %svc% SysMain 4
 %svc% vmicguestinterface 4
 %svc% vmicheartbeat 4
@@ -740,27 +750,32 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WinHttpAutoProxySvc 4 
 %svc% WPDBusEnum 4
 %svc% WSearch 4
+:: Windows Defender Services
+%svc% WinDefend 4
+%svc% WdNisSvc 4
+%svc% SecurityHealthService 4
+%svc% Sense 4
 
-:: backing up default neptune services and drivers
+:: Backup default NeptuneOS drivers and services
 set BACKUP="%HOMEPATH%\Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.Reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
-	for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
-		for /l %%c in (0,1,4) do (
-			if "%%b"=="0x%%c" (
-				echo. >>%BACKUP%
-				echo [%%~a] >>%BACKUP%
-				echo "Start"=dword:0000000%%c >>%BACKUP%
-			) 
-		) 
-	) 
+    for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
+        for /l %%c in (0,1,4) do (
+            if "%%b"=="0x%%c" (
+                echo. >>%BACKUP%
+                echo [%%~a] >>%BACKUP%
+                echo "Start"=dword:0000000%%c >>%BACKUP%
+            ) 
+        ) 
+    ) 
 ) >nul 2>&1
 
 :: check if battery information is available to determine system type
 :: if this method ends up being unreliable it will be replaced, but it seems to be working as of now.
 :: a VM detection method needs to be implemented into this, as it breaks VM keyboard control
-:: re-enable keyboard control on VM by running Desktop\POST-INSTALL\Troubleshooting\neptune-default-services.reg
+:: re-enable keyboard control on VM by running Desktop\POST-INSTALL\Advanced Configuration\Services and Drivers\Serial Port\Enable Serial Port.reg
 wmic path Win32_Battery get BatteryStatus > nul 2>&1
 if %errorlevel% equ 0 (
     set SystemType=Desktop
