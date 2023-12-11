@@ -369,8 +369,11 @@ bcdedit /set linearaddress57 OptOut >nul 2>&1
 bcdedit /set increaseuserva 268435328 >nul 2>&1
 
 
-cls & echo !S_GREEN!Disabling Devices
-:: system devices
+cls & echo !S_GREEN!Configuring Devices and MSI Mode
+:: Configuring devices in Windows
+
+:: Device Manager
+:: - > System Devices
 %DevMan% /disable "ACPI Processor AggRegator" >nul 2>&1
 %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
 %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
@@ -397,13 +400,7 @@ cls & echo !S_GREEN!Disabling Devices
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
 %DevMan% /disable "Unknown device" >nul 2>&1
 
-:: tpm devices (disabled for windows 10. functionality remains.)
-if "%os%"=="Windows 10" (
-    %DevMan% /disable "AMD PSP 10.0 Device"
-    %DevMan% /disable "Trusted Platform Module 2.0"
-)
-
-:: network devices
+:: VPN Devices
 %DevMan% /disable "Microsoft RRAS Root Enumerator" >nul 2>&1 
 %DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1 
 %DevMan% /disable "WAN Miniport (IKEv2)" >nul 2>&1 
@@ -415,10 +412,15 @@ if "%os%"=="Windows 10" (
 %DevMan% /disable "WAN Miniport (PPTP)" >nul 2>&1 
 %DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1 
 
+:: TPM Devices
+if "%os%"=="Windows 10" (
+    %DevMan% /disable "AMD PSP 10.0 Device"
+    %DevMan% /disable "Trusted Platform Module 2.0"
+)
 
-cls & echo !S_GREEN!Enabling MSI Mode
-:: enable MSI mode on USB, GPU, SATA controllers and network adapters
-:: deleting DevicePriority sets the priority to undefined
+:: MSI Mode
+:: Enable MSI mode on USB, GPU, SATA controllers and network adapters
+:: Deleting DevicePriority sets the priority to undefined
 for %%a in (
     Win32_USBController, 
     Win32_VideoController, 
@@ -437,6 +439,7 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
         Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t Reg_DWORD /d "2"  /f > nul 2>nul
     )
 )
+
 
 :: Configuring network settings and the NIC adapter in Windows
 cls & echo !S_GREEN!Configuring Network Settings
