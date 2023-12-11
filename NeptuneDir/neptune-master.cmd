@@ -213,7 +213,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "Default
 
 
 cls & echo !S_GREEN!Configuring NTFS
-:: adjust master file table size and paged pool memory cache levels according to ram size
+:: Configuring the NTFS file system in Windows
+
+:: Adjust MFT (master file table) and paged pool memory cache levels according to ram size
 if !TOTAL_MEMORY! LSS 8000000 (
     FSUTIL behavior set memoryusage 1 >nul 2>&1
     FSUTIL behavior set mftzone 1 >nul 2>&1
@@ -250,26 +252,25 @@ FSUTIL behavior set symlinkevaluation L2L:1 >nul 2>&1
 FSUTIL repair set C: 0 >nul 2>&1
 
 :: Disable Write Cache Buffer
-	for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
-		for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "CacheIsPowerProtected" /t Reg_DWORD /d "1" /f >nul 2>&1
-	)
-	for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
-		for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "UserWriteCacheSetting" /t Reg_DWORD /d "1" /f >nul 2>&1
-	)
+    for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
+        for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "CacheIsPowerProtected" /t Reg_DWORD /d "1" /f >nul 2>&1
+    )
+    for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
+        for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "UserWriteCacheSetting" /t Reg_DWORD /d "1" /f >nul 2>&1
+    )
 )
 
 :: Disable HIPM, DIPM, and HDD parking
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "EnableHIPM"^| FINDSTR /V "EnableHIPM"') DO (
-	Reg add "%%a" /F /V "EnableHIPM" /T Reg_DWORD /d 0 >nul 2>&1
-	Reg add "%%a" /F /V "EnableDIPM" /T Reg_DWORD /d 0 >nul 2>&1
-	Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
+    Reg add "%%a" /F /V "EnableHIPM" /T Reg_DWORD /d 0 >nul 2>&1
+    Reg add "%%a" /F /V "EnableDIPM" /T Reg_DWORD /d 0 >nul 2>&1
+    Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
 )
 
 :: IOLATENCYCAP to 0
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "IoLatencyCap"^| FINDSTR /V "IoLatencyCap"') DO (
-	Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
+    Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
 )
-
 
 cls & echo !S_GREEN!Disabling Scheduled Tasks
 for %%a in (
