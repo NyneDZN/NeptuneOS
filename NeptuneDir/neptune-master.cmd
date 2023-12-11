@@ -438,105 +438,151 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
     )
 )
 
+:: Configuring network settings and the NIC adapter in Windows
 cls & echo !S_GREEN!Configuring Network Settings
-:: should probably research this soon aswell
-:: 0 ping soon
-netsh int 6to4 set state disabled >nul 2>&1
+
+:: Network Shell
+:: - > Disable IPV6
+:: IPV6 is disabled through regedit, so I'm commenting this out so it doesn't cause unforseen issues.
+:: netsh int 6to4 set state disabled >nul 2>&1
+:: netsh int IPV6 set global randomizeidentifier=disabled >nul 2>&1
+:: netsh int IPV6 set privacy state=disable >nul 2>&1
+:: netsh int IPV6 6to4 set state state=disabled >nul 2>&1
+:: netsh int IPV6 isatap set state state=disabled >nul 2>&1
+:: netsh int IPV6 set teredo disable
+:: - > Increase TTL (Time to Live)
+:: https://packetpushers.net/ip-time-to-live-and-hop-limit-basics/
 netsh int ip set global defaultcurhoplimit=255 >nul 2>&1
+:: - > Disable Media Sense
 netsh int ip set global dhcpmediasense=disabled >nul 2>&1
 netsh int ip set global neighborcachelimit=4096 >nul 2>&1
+:: - > Enable Task Offloading
 netsh int ip set global taskoffload=enabled >nul 2>&1
-netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
+:: netsh int ip set interface "Ethernet" metric=60 >nul 2>&1
+:: - > Set MTU (maximum transmission unit)
 netsh int ipv4 set subinterface "Ethernet" mtu=1500 store=persistent >nul 2>&1
 netsh int ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent >nul 2>&1
-netsh int isatap set state disable >nul 2>&1
+:: - > Set AutoTuningLevel
+:: https://www.majorgeeks.com/content/page/what_is_windows_auto_tuning.html
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
 netsh int tcp set global chimney=disabled >nul 2>&1
+:: - > Set Congestion Provider to CTCP (Client to Client Protocol)
+:: - > CTCP Provides better throughput and latency for gaming
+:: https://www.speedguide.net/articles/tcp-congestion-control-algorithms-comparison-7423
 netsh int tcp set global congestionprovider=ctcp >nul 2>&1
+:: - > Enable Direct Cache Access
+:: - > This will have a bigger impact on older CPU's
 netsh int tcp set global dca=enabled >nul 2>&1
+:: - > Disable Explicit Congestion Notification
+:: https://en.wikipedia.org/wiki/Explicit_Congestion_Notification
+:: https://www.bufferbloat.net/projects/cerowrt/wiki/Enable_ECN/#:~:text=Enabling%20ECN%20does%20not%20much,already%2C%20but%20few%20clients%20do.
 netsh int tcp set global ecncapability=disabled >nul 2>&1
+:: - > Enable TCP Fast Open
+:: https://en.wikipedia.org/wiki/TCP_Fast_Open
 netsh int tcp set global fastopen=enabled >nul 2>&1
-netsh int tcp set global initialRto=2000 >nul 2>&1
+:: - > Set the TCP Retransmission Timer
+:: https://www.speedguide.net/faq/how-does-tcpinitialrtt-or-initialrto-affect-tcp-498
+netsh int tcp set global initialRto=3000 >nul 2>&1
+:: - > Set Max SYN Retransmissions to the lowest value
+:: https://medium.com/@avocadi/tcp-syn-retries-f30756ec7c55
 netsh int tcp set global maxsynretransmissions=2 >nul 2>&1
 netsh int tcp set global netdma=enabled >nul 2>&1
-netsh int tcp set global nonsackrttresiliency=disabled >nul 2>&1
+:: - > Disable Non Sack RTT Resiliency 
+:: - > If you have fluctuating ping and packet loss, enabling this might benefit
+:: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
+netsh int tcp set global nonsackrttresiliency=disabled >nul 2>1
+:: - > Disable Receive Segment Coalescing State
+:: - > Enabling this may provide higher throughput when lower CPU utilization is important
+:: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
 netsh int tcp set global rsc=disabled >nul 2>&1
+:: - > Enable Receive Side Scaling
+:: - > This allows multiple cores to process incoming packets, improving network performance
+:: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
 netsh int tcp set global rss=enabled >nul 2>&1
-netsh int tcp set global timestamps=disabled >nul 2>&1
+:: - > Disable TCP 1323 Timestamps
+:: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
+netsh int tcp set global timestamps=disabled >nul 2>&
+:: - > Disable Scaling Heuristics
 netsh int tcp set heuristics disabled >nul 2>&1
-netsh int tcp set security mpp=disabled >nul 2>&1
-netsh int tcp set security profiles=disabled >nul 2>&1
+:: - > Set Max Port Ranges
+netsh int ipv4 set dynamicport udp start=1025 num=64511 >nul 2>&1
+netsh int ipv4 set dynamicport tcp start=1025 num=64511 >nul 2>&1
+:: - > Disable Memory Pressure Protection
+:: - > This is a network security feature that will kill malicious TCP connections and SYN requests with no sort of performance or stability loss.
+:: https://support.microsoft.com/en-us/topic/description-of-the-new-memory-pressure-protection-feature-for-tcp-stack-749c1746-ba10-ec18-d61a-bbdabbc403fc
+:: netsh int tcp set security mpp=disabled >nul 2>&1
+:: netsh int tcp set security profiles=disabled >nul 2>&1
 netsh int tcp set supplemental Internet congestionprovider=ctcp >nul 2>&1
 netsh int tcp set supplemental template=custom icw=10 >nul 2>&1
+:: - > Disable Teredo 
 netsh int teredo set state disabled >nul 2>&1
-netsh int teredo set state type=enterpriseclient >nul 2>&1
 
-:: disable bandwith preservation
+
+:: Disable Bandwith Preservation
 Reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t Reg_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /t Reg_DWORD /d "00000000" /f >nul 2>&1
-Reg add "HKLM\Software\WOW6432Node\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable network level authentication
+:: Disable Network Level Authentication
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /t Reg_SZ /d "1" /f >nul 2>&1
 
-:: no tcp connection limit
+:: No TCP Connection Limit
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxConnectionsPerServer" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: max port to 65534
+:: Set Max Port to 65534
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /t Reg_DWORD /d "65534" /f >nul 2>&1
 
-:: reduce time_wait
+:: Reduce Time_Wait
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /t Reg_DWORD /d "32" /f >nul 2>&1
 
-:: reduce time to live
+:: Reduce TTL (Time to Live)
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DefaultTTL" /t Reg_DWORD /d "64" /f >nul 2>&1
 
-:: duplicate acks
+:: Duplicate ACKS
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpMaxDupAcks" /t Reg_DWORD /d "2" /f >nul 2>&1
 
-:: disable sacks
+:: Disable Sacks
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "SackOpts" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable multicast
+:: Disable Multicast
 Reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable tcp extensions
+:: Disable TCP Extensions
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable smart name resolution
-:: this may cause a DNS leak
+:: Disable Smart Name Resolution
+:: This may cause DNS leaks
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "DisableParallelAandAAAA" /t REG_DWORD /d 1 /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d 1 /f >nul 2>&1
  
-:: allow icmp redirects to override ospf generated routes
+:: Allow ICMP redirects to override OSPF generated routes
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t Reg_DWORD /d "1" /f >nul 2>&1
 
-:: tcp window size
+:: TCP Window Size
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "GlobalMaxTcpWindowSize" /t Reg_DWORD /d "8760" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpWindowSize" /t Reg_DWORD /d "8760" /f >nul 2>&1
 
-:: Disable network discovery
+:: Disable Network Discovery
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff" /f >nul 2>&1
 
-:: enable dns over https
+:: Enable DNS > HTTPS
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t Reg_DWORD /d "2" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "NegativeCacheTime" /t Reg_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "NegativeSOACacheTime" /t Reg_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "NetFailureCacheTime" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable llmnr
+:: Disable LLMNR
 Reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable administrative shares
+:: Disable Administrative Shares
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "AutoShareWks" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: enable the network adapter's onboard processor
+:: Enable Network Offloading
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DisableTaskOffload" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: disable the tcp autotuning diagnostic tool
+:: Disable the TCP Autotuning Diagnostic Tool
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableWsd" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: host resolution priority
+:: Host Resolution Priority
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t Reg_DWORD /d "6" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t Reg_DWORD /d "5" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t Reg_DWORD /d "4" /f >nul 2>&1
@@ -547,33 +593,34 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "Class
 Reg add "HKLM\System\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /t Reg_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f >nul 2>&1
 Reg add "HKLM\System\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /t Reg_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f >nul 2>&1
 
-:: detect congestion failure
+:: Detect Congestion Failure
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCongestionControl" /t Reg_DWORD /d "00000001" /f >nul 2>&1
 
-:: disable syn-dos protection
-Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "SynAttackProtect" /t Reg_DWORD /d "0" /f >nul 2>&1
-Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "UseDelayedAcceptance" /t Reg_DWORD /d "0" /f >nul 2>&1
+:: Disable SYN-DOS Protection
+:: Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "SynAttackProtect" /t Reg_DWORD /d "0" /f >nul 2>&1
+:: Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "UseDelayedAcceptance" /t Reg_DWORD /d "0" /f >nul 2>&1
 
-:: prevent unwanted nic resets
+:: Prevent NIC Resets
 Reg add "HKLM\SYSTEM\CurrentControlSet\services\NDIS\Parameters" /v "DisableNDISWatchDog" /t Reg_DWORD /d "1" /f >nul 2>&1
 
-:: disable nagle's algorithm
+:: Disable Nagle's Algorithm
 :: https://en.wikipedia.org/wiki/Nagle%27s_algorithm
-for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
-    Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t Reg_DWORD /d "1" /f >nul 2>&1
-    Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t Reg_DWORD /d "0" /f >nul 2>&1
-    Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t Reg_DWORD /d "1" /f >nul 2>&1
-)
+:: for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
+::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t Reg_DWORD /d "1" /f >nul 2>&1
+::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t Reg_DWORD /d "0" /f >nul 2>&1
+::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t Reg_DWORD /d "1" /f >nul 2>&1
+:: )
 
-:: disable netbios over tcp
+:: Disable NetBIOS over TCP
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
     Reg add "%%a" /v "NetbiosOptions" /t Reg_DWORD /d "2" /f >nul 2>&1
 )
 
-:: disable network adapters
+:: Disable Network Protocols
+:: This includes IPV6, File and Printer Sharing for Microsoft Networks, Client for Microsoft Networks, etc
 %PowerShell% "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6, ms_msclient, ms_server, ms_lldp, ms_lltdio, ms_rspndr" >nul 2>&1
 
-:: disable IPV6
+:: Disable IPV6 through TCPIP
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "32" /f >nul 2>&1
 
 
