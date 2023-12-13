@@ -489,6 +489,14 @@ netsh int tcp set global chimney=disabled >nul 2>&1
 :: - > CTCP Provides better throughput and latency for gaming
 :: https://www.speedguide.net/articles/tcp-congestion-control-algorithms-comparison-7423
 netsh int tcp set global congestionprovider=ctcp >nul 2>&1
+:: - > Set Congestion Provider to BBR2 on Windows 11
+if "%os%"=="Windows 11" (
+    netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2 >nul 2>&1
+    netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2 >nul 2>&1
+    netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2 >nul 2>&1
+    netsh int tcp set supplemental Template=DatacenterCustom CongestionProvider=bbr2 >nul 2>&1
+    netsh int tcp set supplemental Template=InternetCustom CongestionProvider=bbr2 >nul 2>&1
+)
 :: - > Enable Direct Cache Access
 :: - > This will have a bigger impact on older CPU's
 netsh int tcp set global dca=enabled >nul 2>&1
