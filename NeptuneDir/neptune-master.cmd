@@ -2302,6 +2302,9 @@ IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
 :: System Debloat
 %powershell% "C:\Windows\NeptuneDir\debloat.ps1"
 
+:: Remove Edge
+call %WinDir%\NeptuneDir\edgeremover.exe > nul
+
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
 if "%os%"=="Windows 10" (
