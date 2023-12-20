@@ -20,6 +20,7 @@
 :: - Timecard
 :: - Winaero
 :: - Zusier
+:: - Yoshii64
 
 :: Neptune is a fork of older era AtlasOS
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
@@ -2288,6 +2289,14 @@ if "%os%"=="Windows 10" (
     takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
     icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
     ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
+)
+
+:: Check for OneDrive
+IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
+    %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
+    %SystemRoot%\System32\OneDriveSetup.exe /uninstall
+    rmdir /q /s "%ProgramData%\Microsoft\OneDrive"
+    rmdir /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
 )
 
 :: Delete microcode
