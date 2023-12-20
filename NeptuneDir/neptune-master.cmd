@@ -2299,6 +2299,9 @@ IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
     rmdir /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
 )
 
+:: System Debloat
+%powershell% "C:\Windows\NeptuneDir\debloat.ps1"
+
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
 if "%os%"=="Windows 10" (
@@ -2309,7 +2312,7 @@ if "%os%"=="Windows 10" (
 )
 
 :: Delete neptune setup files
-del /f /q "%WinDir%\NeptuneDir\7z.reg" >nul 2>&1
+del /f /q "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
