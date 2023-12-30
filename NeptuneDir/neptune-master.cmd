@@ -2296,6 +2296,7 @@ if "%os%"=="Windows 10" (
 
 :: Check for OneDrive
 IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
+    taskkill /f /im OneDrive.exe
     %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
     %SystemRoot%\System32\OneDriveSetup.exe /uninstall
     rmdir /q /s "%ProgramData%\Microsoft\OneDrive"
@@ -2303,7 +2304,7 @@ IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
 )
 
 :: System Debloat
-%powershell% "C:\Windows\NeptuneDir\debloat.ps1"
+%powershell% "C:\Windows\NeptuneDir\debloat.ps1" > nul
 
 :: Remove Edge
 call %WinDir%\NeptuneDir\edgeremover.exe > nul
