@@ -6,6 +6,8 @@ $AppXApps = @(
         "*Microsoft.GetHelp*"
         "*Microsoft.Getstarted*"
         "*Microsoft.Messaging*"
+        "*Microsoft.MixedReality.Portal*"
+        "*Microsoft.Office.OneNote*"
         "*Microsoft.Microsoft3DViewer*"
         "*Microsoft.MicrosoftOfficeHub*"
         "*Microsoft.MicrosoftSolitaireCollection*"
@@ -28,6 +30,7 @@ $AppXApps = @(
         "*Microsoft.XboxSpeechToTextOverlay*"
         "*Microsoft.ZuneMusic*"
         "*Microsoft.ZuneVideo*"
+        "*Microsoft.YourPhone*"
 
         #Sponsored Windows 10 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
@@ -44,14 +47,15 @@ $AppXApps = @(
         "*Spotify*"
 
         #Optional: Typically not removed but you can if you need to for some reason
-        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
-        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
-        #"*Microsoft.BingWeather*"
+        "*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
+        "*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
+        "*Microsoft.BingWeather*"
         "*Microsoft.MSPaint*"
         "*Microsoft.MicrosoftStickyNotes*"
         "*Microsoft.Windows.Photos*"
         "*Microsoft.WindowsCalculator*"
         #"*Microsoft.WindowsStore*"
+
     )
     foreach ($App in $AppXApps) {
         Write-Verbose -Message ('Removing Package {0}' -f $App)
