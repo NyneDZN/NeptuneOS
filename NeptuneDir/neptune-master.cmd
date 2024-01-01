@@ -2271,8 +2271,6 @@ dism /Online /Enable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart >nul 2
 dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >nul 2>&1
 :: Disable "Windows Fax and Scan" feature
 dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart >nul 2>&1
-:: Disable "Windows Search" feature
-dism /Online /Disable-Feature /FeatureName:"SearchEngine-Client-Package" /NoRestart >nul 2>&1
 
 :: Capabilities
 :: Remove "Internet Explorer 11
