@@ -2367,12 +2367,17 @@ taskkill /f /im OneDrive.exe
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" >nul 2>&1
 if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" (
     "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall
-) else ( "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall 
+) else (
+    if exist "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" (
+    "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall
+ )
 )
-
 
 :: System Debloat
 %powershell% "C:\Windows\NeptuneDir\debloat.ps1" > nul
+
+:: Remove Components
+call %WinDir%\NeptuneDir\packages.bat
 
 :: Remove Edge
 Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev" /v "AllowUninstall" /t REG_DWORD /d "1" /f >nul 2>&1
