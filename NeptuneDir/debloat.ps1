@@ -1,6 +1,7 @@
 $AppXApps = @(
 
         #Unnecessary Windows 10 AppX Apps
+	    "*Microsoft.Cortana*"
         "*Microsoft.BingNews*"
         "*Microsoft.GetHelp*"
         "*Microsoft.Getstarted*"

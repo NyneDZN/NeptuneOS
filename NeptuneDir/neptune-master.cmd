@@ -1535,7 +1535,7 @@ if "%os%"=="Windows 10" (
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "8" /t REG_SZ /d "Mouse" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "9" /t REG_SZ /d "Network and Sharing Center" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "10" /t REG_SZ /d "Power Options" /f >nul 2>&1
-%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "11" /t REG_SZ /d "Porgrams and Features" /f >nul 2>&1
+%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "11" /t REG_SZ /d "Programs and Features" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "12" /t REG_SZ /d "Region" /f >nul 2>&1 
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "13" /t REG_SZ /d "Sound" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "14" /t REG_SZ /d "Windows Defender Firewall" /f >nul 2>&1
@@ -2295,13 +2295,14 @@ if "%os%"=="Windows 10" (
 )
 
 :: Check for OneDrive
-IF EXIST %SystemRoot%\SysWOW64\OneDriveSetup.exe (
-    taskkill /f /im OneDrive.exe
-    %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
-    %SystemRoot%\System32\OneDriveSetup.exe /uninstall
-    rmdir /q /s "%ProgramData%\Microsoft\OneDrive"
-    rmdir /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
+taskkill /f /im OneDrive.exe
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" >nul 2>&1
+if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" (
+    "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall
 )
+if exist "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" (
+    "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall
+ )
 
 :: System Debloat
 %powershell% "C:\Windows\NeptuneDir\debloat.ps1" > nul
