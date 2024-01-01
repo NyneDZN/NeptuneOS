@@ -2225,6 +2225,56 @@ lodctr /r >nul 2>&1
 lodctr /r >nul 2>&1
 
 
+cls & echo !S_GREEN!Configuring Windows Features...
+:: Enable DirectPlay
+dism /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart >nul 2>&1
+dism /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart >nul 2>&1
+:: Disable Hyper-V
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart >nul 2>&1
+:: Disable Hyper-V Management Tools
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart >nul 2>&1
+:: Disable Hyper-V Module for Windows PowerShell
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart >nul 2>&1
+:: Disable Telnet Client
+dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart >nul 2>&1
+:: Disable Net.TCP Port Sharing
+dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart >nul 2>&1
+:: Disable SMB Direct
+dism /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart >nul 2>&1
+:: Disable TFTP Client
+dism /Online /Disable-Feature /FeatureName:"TFTP" /NoRestart >nul 2>&1
+:: Disable Internet Printing Client
+dism /Online /Disable-Feature /FeatureName:"Printing-Foundation-InternetPrinting-Client" /NoRestart >nul 2>&1
+:: Disable LPD Print Service
+dism /Online /Disable-Feature /FeatureName:"LPDPrintService" /NoRestart >nul 2>&1
+:: Disable Internet Explorer
+dism /Online /Disable-Feature /FeatureName:"Internet-Explorer-Optional-x64" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"Internet-Explorer-Optional-x84" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"Internet-Explorer-Optional-amd64" /NoRestart >nul 2>&1
+:: Disable LPR Port Monitor
+dism /Online /Disable-Feature /FeatureName:"Printing-Foundation-LPRPortMonitor" /NoRestart >nul 2>&1
+:: Disable Microsoft Print to PDF
+dism /Online /Disable-Feature /FeatureName:"Printing-PrintToPDFServices-Features" /NoRestart >nul 2>&1
+:: Disable "PS Services
+dism /Online /Disable-Feature /FeatureName:"Printing-XPSServices-Features" /NoRestart >nul 2>&1
+:: Disable XPS Viewer
+dism /Online /Disable-Feature /FeatureName:"Xps-Foundation-Xps-Viewer" /NoRestart >nul 2>&1
+:: Disable Print and Document Services
+dism /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart >nul 2>&1
+:: Disable Work Folders Client
+dism /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart >nul 2>&1
+:: Enable Windows Media Player
+dism /Online /Enable-Feature /FeatureName:"MediaPlayback" /NoRestart >nul 2>&1
+dism /Online /Enable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart >nul 2>&1
+:: Disable "Scan Management" feature
+dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >nul 2>&1
+:: Disable "Windows Fax and Scan" feature
+dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart >nul 2>&1
+:: Disable "Windows Search" feature
+dism /Online /Disable-Feature /FeatureName:"SearchEngine-Client-Package" /NoRestart >nul 2>&1
+
+
 cls & echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
 "%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x64.exe" /q >nul 2>&1
