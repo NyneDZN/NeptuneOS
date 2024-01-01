@@ -35,7 +35,6 @@ set version=0.4
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
 set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command"
-set "powershellD"=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -Command
 set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide -Wait
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
@@ -2225,7 +2224,8 @@ lodctr /r >nul 2>&1
 lodctr /r >nul 2>&1
 
 
-cls & echo !S_GREEN!Configuring Windows Features...
+cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
+:: Features and Components
 :: Enable DirectPlay
 dism /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart >nul 2>&1
 dism /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart >nul 2>&1
@@ -2273,6 +2273,26 @@ dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >n
 dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart >nul 2>&1
 :: Disable "Windows Search" feature
 dism /Online /Disable-Feature /FeatureName:"SearchEngine-Client-Package" /NoRestart >nul 2>&1
+
+:: Capabilities
+:: Remove "Internet Explorer 11
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
+:: Remove Math Recognizer
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'MathRecognizer*' | Remove-WindowsCapability -Online"
+:: Remove "OneSync" (breaks Mail, People, and Calendar)
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'OneCoreUAP.OneSync*' | Remove-WindowsCapability -Online"
+:: Remove OpenSSH client
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'OpenSSH.Client*' | Remove-WindowsCapability -Online"
+:: Remove PowerShell ISE
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Microsoft.Windows.PowerShell.ISE*' | Remove-WindowsCapability -Online"
+:: Remove Print Management Console
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Print.Management.Console*' | Remove-WindowsCapability -Online"
+:: Remove Quick Assist
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online"
+:: Remove Steps Recorder
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
+:: Remove Windows Fax and Scan
+%PowerShell% -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
 
 
 cls & echo !S_GREEN!Installing Visual C++
