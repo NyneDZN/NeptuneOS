@@ -547,11 +547,3 @@ for %%a in (
     reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "%%a" /f 2>nul
 )
 :: ----------------------------------------------------------
-
-
-:: Pause the script to view the final state
-pause
-:: Restore previous environment settings
-endlocal
-:: Exit the script successfully
-exit /b 0
