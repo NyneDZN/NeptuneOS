@@ -70,12 +70,3 @@ $AppXApps = @(
     Get-AppxPackage -AllUsers | Where-Object {$_.Name -NotMatch $WhitelistedApps} | Remove-AppxPackage
     Get-AppxPackage | Where-Object {$_.Name -NotMatch $WhitelistedApps} | Remove-AppxPackage
     Get-AppxProvisionedPackage -Online | Where-Object {$_.PackageName -NotMatch $WhitelistedApps} | Remove-AppxProvisionedPackage -Online
-
-
-if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" (
-    "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall
-) else (
-    if exist "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" (
-    "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall
- )
-)
