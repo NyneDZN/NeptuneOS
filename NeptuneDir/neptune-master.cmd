@@ -361,7 +361,8 @@ bcdedit /set disabledynamictick yes >nul 2>&1
 :: Use Synthetic Timers
 bcdedit /set useplatformtick yes >nul 2>&1
 :: Disable HPET
-bcdedit /deletevalue useplatformclock >nul 2>&1
+:: This isn't even set by default in windows, commented out.
+:: bcdedit /deletevalue useplatformclock >nul 2>&1
 :: 15 Second Timeout
 bcdedit /timeout 15 >nul 2>&1
 :: Disable Emergency Management Services
