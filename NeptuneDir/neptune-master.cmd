@@ -552,6 +552,9 @@ Reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit
 :: Disable Network Level Authentication
 Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /t Reg_SZ /d "1" /f >nul 2>&1
 
+:: Disable DHCP MediaSense
+Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v " DisableDHCPMediaSense" /t REG_DWORD /d "1" /f >nul 2>&1
+
 :: No TCP Connection Limit
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxConnectionsPerServer" /t Reg_DWORD /d "0" /f >nul 2>&1
 
