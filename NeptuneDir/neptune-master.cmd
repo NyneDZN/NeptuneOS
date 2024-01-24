@@ -6,6 +6,7 @@
 :: - Amit
 :: - Artanis
 :: - AtlasOS
+:: - Ancel
 :: - CatGamerOP
 :: - CoutX
 :: - EverythingTech
@@ -462,6 +463,18 @@ wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
 cls & echo !S_GREEN!Configuring Network Settings
 
 :: Network Shell
+:: Reset the Network Configuration
+ipconfig /release >nul 2>&1
+ipconfig /renew >nul 2>&1
+ipconfig /flushdns >nul 2>&1
+netsh int ip reset >nul 2>&1
+netsh int ipv4 reset >nul 2>&1
+netsh int ipv6 reset >nul 2>&1
+netsh int tcp reset >nul 2>&1
+netsh winsock reset >nul 2>&1
+netsh advfirewall reset >nul 2>&1
+netsh branchcache reset >nul 2>&1
+netsh http flush logbuffer >nul 2>&1
 :: - > Disable IPV6
 :: IPV6 is disabled through regedit, so I'm commenting this out so it doesn't cause unforseen issues.
 :: netsh int 6to4 set state disabled >nul 2>&1
@@ -2301,7 +2314,7 @@ dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart
 :: Remove Windows Fax and Scan
 %PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
 
-:: UWP Deprovisation
+:: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.3DBuilder_8wekyb3d8bbwe" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.BingFinance_8wekyb3d8bbwe" /f >nul 2>&1
