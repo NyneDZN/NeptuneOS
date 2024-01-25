@@ -1622,6 +1622,18 @@ Reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\
 Reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\Security" /v "DisableSecuritySettingsCheck" /t REG_DWORD /d "1" /f >nul 2>&1
 
+:: Disable ShellBags
+Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /v "BagMRU Size" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /v "BagMRU Size" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >nul 2>&1
+Reg add "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
+Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f >nul 2>&1
+Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
+Reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >nul 2>&1
+Reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
+Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f >nul 2>&1
+Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f >nul 2>&1
+
 :: Storage Sense Configuration
 :: - > Clean files once a month
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" /v "01" /t REG_DWORD /d "1" /f >nul 2>&1
