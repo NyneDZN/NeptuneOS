@@ -2348,33 +2348,6 @@ dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart
 :: Remove Windows Fax and Scan
 %PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
 
-:: UWP Debloat
-PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
-
 :: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.3DBuilder_8wekyb3d8bbwe" /f >nul 2>&1
@@ -2475,6 +2448,9 @@ call %WinDir%\NeptuneDir\packages.bat
 
 :: Remove Start Mneu Pins
 call %WinDir%\NeptuneDir\PINS.ps1
+
+:: System Debloat
+call %WinDir%\NeptuneDir\debloat.ps1
 
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
