@@ -2096,7 +2096,6 @@ Reg delete "HKU\S-1-5-20\System\GameConfigStore" /f >nul 2>&1
 %currentuser% Reg add HKCU\System\GameConfigStore /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add HKCU\System\GameConfigStore /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "1" /f >nul 2>&1
 
-
 :: Disable FastBoot (HiberBoot)
 Reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 
@@ -2337,6 +2336,65 @@ dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart
 :: Remove Windows Fax and Scan
 %PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
 
+:: UWP Debloat
+%PowerShell% "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *ActiproSoftwareLLC* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *AdobeSystemsIncorporated.AdobePhotoshopExpress* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *bing* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage" >nul 2>&1 
+%PowerShell% "Get-AppxPackage -allusers *CandyCrush* | Remove-AppxPackage" >nul 2>&1 
+%PowerShell% "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage" >nul 2>&1 
+%PowerShell% "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage" >nul 2>&1 
+%PowerShell% "Get-AppxPackage -allusers *Duolingo-LearnLanguagesforFree* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *EclipseManager* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage" >nul 2>&1 
+%PowerShell% "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Flipboard* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.BingNews* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.BingWeather* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Cortana* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.GetHelp* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Getstarted* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Microsoft3DViewer* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.MixedReality.Portal* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.MSPaint* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.NetworkSpeedTest* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Office.OneNote* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Office.Sway* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.OneConnect* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.People* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Print3D* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.SkypeApp* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Windows.Photos* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsAlarms* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsCalculator* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsCamera* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *microsoft.windowscommunicationsapps* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsMaps* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.WindowsSoundRecorder* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.Xbox.TCUI* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.XboxApp* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.XboxGameOverlay* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.XboxIdentityProvider* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.YourPhone* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.ZuneMusic* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Microsoft.ZuneVideo* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *PandoraMediaInc* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Spotify* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage" >nul 2>&1
+%PowerShell% "Get-AppxPackage -allusers *Wunderlist* | Remove-AppxPackage" >nul 2>&1
+
 :: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.3DBuilder_8wekyb3d8bbwe" /f >nul 2>&1
@@ -2431,9 +2489,6 @@ if "%os%"=="Windows 10" (
     icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
     ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
 )
-
-:: System Debloat
-%powershell% "C:\Windows\NeptuneDir\debloat.ps1" > nul
 
 :: Remove Components
 call %WinDir%\NeptuneDir\packages.bat

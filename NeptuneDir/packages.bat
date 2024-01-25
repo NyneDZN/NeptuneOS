@@ -619,6 +619,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
 :: --------Remove OneDrive through official installer--------
 :: ----------------------------------------------------------
 echo --- Remove OneDrive through official installer
+taskkill /f /im OneDrive.exe
 if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" (
     "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall
 ) else (
