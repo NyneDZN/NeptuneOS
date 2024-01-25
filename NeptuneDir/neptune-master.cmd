@@ -993,6 +993,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "Disab
 
 :: Disable Fault Tolerant Heap
 Reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f >nul 2>&1
+rundll32.exe fthsvc.dll,FthSysprepSpecialize
 
 :: Windows Defender Configuration
 :: - > Disable Windows Defender
