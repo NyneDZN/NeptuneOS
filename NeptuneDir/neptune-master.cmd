@@ -2118,9 +2118,11 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePageCombining" /t REG_DWORD /d "1" /f >nul 2>&1
 
 :: Graphics Card Scheduling
-:: - > Disable V-SYNC Control (?)
+:: - > Disable V-SYNC Interrupt Control
+:: This reduces the amount of V-SYNC monitor refresh interrupts occur
+:: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/saving-energy-with-vsync-control
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "VsyncIdleTimeout" /t REG_DWORD /d "0" /f >nul 2>&1 
-:: - > Disable GPU Preemption
+:: - > Enable GPU Preemption
 :: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/changing-the-behavior-of-the-gpu-scheduler-for-debugging
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "EnablePreemption" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "DisablePreemption" /t REG_DWORD /d "0" /f >nul 2>&1
