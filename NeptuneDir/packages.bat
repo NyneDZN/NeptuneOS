@@ -619,7 +619,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
 :: --------Remove OneDrive through official installer--------
 :: ----------------------------------------------------------
 echo --- Remove OneDrive through official installer
-start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
 rd C:\OneDriveTemp /q /s
 rd "%USERPROFILE%\OneDrive" /q /s
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /q /s
