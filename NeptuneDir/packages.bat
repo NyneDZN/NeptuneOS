@@ -606,16 +606,6 @@ tasklist /fi "ImageName eq OneDrive.exe" /fo csv 2>NUL | find /i "OneDrive.exe">
 )
 :: ----------------------------------------------------------
 
-
-:: ----------------------------------------------------------
-:: ---------------Remove OneDrive from startup---------------
-:: ----------------------------------------------------------
-echo --- Remove OneDrive from startup
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f 2>nul
-:: ----------------------------------------------------------
-
-
-:: ----------------------------------------------------------
 :: --------Remove OneDrive through official installer--------
 :: ----------------------------------------------------------
 echo --- Remove OneDrive through official installer
@@ -624,6 +614,16 @@ rd C:\OneDriveTemp /q /s
 rd "%USERPROFILE%\OneDrive" /q /s
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /q /s
 rd "%PROGRAMDATA%\Microsoft OneDrive" /q /s
+:: ----------------------------------------------------------
+
+
+:: ----------------------------------------------------------
+
+:: ----------------------------------------------------------
+:: ---------------Remove OneDrive from startup---------------
+:: ----------------------------------------------------------
+echo --- Remove OneDrive from startup
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f 2>nul
 :: ----------------------------------------------------------
 
 
@@ -688,57 +688,3 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNa
 :: Disable scheduled task(s): `\OneDrive Per-Machine Standalone Update`
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Per-Machine Standalone Update'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }"
 :: ----------------------------------------------------------
-
-
-:: ----------------------------------------------------------
-:: -----------Clear OneDrive environment variable------------
-:: ----------------------------------------------------------
-echo --- Clear OneDrive environment variable
-reg delete "HKCU\Environment" /v "OneDrive" /f 2>nul
-:: ----------------------------------------------------------
-
-:: Debloat
-PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Clipchamp.Clipchamp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Cortana* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GamingApp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GetHelp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.OutlookForWindows* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Todos* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Windows.Photos* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Xbox* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.YourPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Windows.DevHome* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsCalculator* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
-
