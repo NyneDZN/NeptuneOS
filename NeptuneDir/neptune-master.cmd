@@ -2443,14 +2443,6 @@ if "%os%"=="Windows 10" (
     ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
 )
 
-:: Remove Components
-call %WinDir%\NeptuneDir\packages.bat
-
-:: Remove Start Mneu Pins
-call %WinDir%\NeptuneDir\PINS.ps1
-
-:: System Debloat
-call %WinDir%\NeptuneDir\debloat.ps1
 
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
