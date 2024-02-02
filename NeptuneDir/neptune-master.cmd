@@ -2331,6 +2331,8 @@ dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart
 dism /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart >nul 2>&1
 :: Disable Remote Differential Compression
 dism /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart >nul 2>&1
+:: Disable WCF Services
+dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart >nul 2>&1
 
 
 :: Capabilities
