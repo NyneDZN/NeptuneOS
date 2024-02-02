@@ -2329,6 +2329,8 @@ dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >n
 dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart >nul 2>&1
 :: Disable PowerShell V2
 dism /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart >nul 2>&1
+:: Disable Remote Differential Compression
+dism /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart >nul 2>&1
 
 
 :: Capabilities
