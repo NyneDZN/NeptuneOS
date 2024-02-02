@@ -265,6 +265,8 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-A
 PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
+move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop"
+rmdir /s /q "C:\Neptune" >nul 2>&1
 cls & echo Finished.
 echo Enjoy NeptuneOS.
 timeout /t 2 /nobreak >nul
