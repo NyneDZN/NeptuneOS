@@ -2473,9 +2473,8 @@ del /f /q "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\Packages\Z-Atlas-NoTelemetry-Package31bf3856ad364e35amd643.0.0.0.cab"
-del /f /q "%WinDir%\NeptuneDir\Packages\Z-Atlas-NoDefender-Package31bf3856ad364e35amd643.0.0.0.cab"
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
+rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1

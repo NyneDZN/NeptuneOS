@@ -268,13 +268,16 @@ start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
 move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop"
 :: Cleanup
 rmdir /s /q "C:\Neptune" >nul 2>&1
-dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+del /f /q "%WinDir%\NeptuneDir\packages.bat" >nul 2>&1
+del /f /q "%WinDir%\NeptuneDir\neptune-master.cmd" >nul 2>&1
 del /s /f /q C:\Windows\Temp\*.*
 del /s /f /q %USERPROFILE%\appdata\local\temp\*.*
 cd %systemroot%
 del *.log /s /f /q /a
 cd %homepath%
 del *.log /s /f /q /a
+cd %systemroot%
+dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 cls & echo Finished.
 echo Enjoy NeptuneOS.
 timeout /t 2 /nobreak >nul
