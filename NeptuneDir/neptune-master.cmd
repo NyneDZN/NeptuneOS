@@ -2475,7 +2475,6 @@ del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\Packages\Z-Atlas-NoTelemetry-Package31bf3856ad364e35amd643.0.0.0.cab"
 del /f /q "%WinDir%\NeptuneDir\Packages\Z-Atlas-NoDefender-Package31bf3856ad364e35amd643.0.0.0.cab"
-rmdir /s /q "C:\Neptune" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 
 :: Set notice text

@@ -266,7 +266,9 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPa
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
 move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop"
+:: Cleanup
 rmdir /s /q "C:\Neptune" >nul 2>&1
+dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 cls & echo Finished.
 echo Enjoy NeptuneOS.
 timeout /t 2 /nobreak >nul
