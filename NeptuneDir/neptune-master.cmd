@@ -2327,12 +2327,15 @@ dism /Online /Enable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart >nul 2
 dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >nul 2>&1
 :: Disable "Windows Fax and Scan" feature
 dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart >nul 2>&1
+:: Disable PowerShell V2
+dism /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart >nul 2>&1
+
 
 :: Capabilities
 :: Remove "Internet Explorer 11
 %PowerShell% "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
 :: Remove Math Recognizer
-%PowerShell% "Get-WindowsCapability -Online -Name 'MathRecognizer*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'MathRecognizer~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
 :: Remove "OneSync" (breaks Mail, People, and Calendar)
 %PowerShell% "Get-WindowsCapability -Online -Name 'OneCoreUAP.OneSync*' | Remove-WindowsCapability -Online"
 :: Remove OpenSSH client
@@ -2347,6 +2350,14 @@ dism /Online /Disable-Feature /FeatureName:"FaxServicesClientPackage" /NoRestart
 %PowerShell% "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
 :: Remove Windows Fax and Scan
 %PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
+:: Remove Hello Face
+%PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+:: Remove WordPad
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+:: Remove Legacy NotePad
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.Notepad.System~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+:: Remove Extended Wallpapers
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
 
 :: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
