@@ -765,6 +765,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% HvHost 4
 %svc% IKEEXT 4
 %svc% iphlpsvc 4
+%svc% lfsvc 4
 %svc% LanManServer 4
 %svc% LanmanWorkstation 4
 %svc% lmhosts 4
