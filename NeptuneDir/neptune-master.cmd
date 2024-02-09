@@ -779,6 +779,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 :: This seems to break the Oculus app
 :: %svc% ShellHWDetection 4
 %svc% Spooler 4
+%svc% SgrmBroker 4
 :: SuperFetch Driver
 %svc% SysMain 4
 %svc% vmicguestinterface 4
