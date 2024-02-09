@@ -20,5 +20,5 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 echo NeptuneOS Installer
 echo The script will initialize Phase 1, then your PC will restart to initialize Phase 2.
-timeout /t 2 > nul
+timeout /t 5 > nul
 call C:\Neptune\Scripts\phase1.cmd
