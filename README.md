@@ -84,12 +84,16 @@ This project is a fork of AtlasOS.
 
 - [x] NeptuneOS
    - [x] Windows 10 Branch   
-      - [ ] 1803
+      - [ ] 1803?
       - [X] 22H2                             
    - [x] Windows 11 Branch
       - [X] 23H2
-      - [X] Canary (24H2)
-   - [ ] 
+      - [ ] Canary (24H2)
+   - [x] Features
+      - [x] Windows Update 
+      - [x] Windows Defender
+      - [ ] Neptune OOBE
+      - [x] Updated Script Deployment Method
                                
 - [ ] Complete the Discord
    - [ ] Channels
