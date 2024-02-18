@@ -277,7 +277,7 @@ del *.log /s /f /q /a
 cd %homepath%
 del *.log /s /f /q /a
 cd %systemroot%
-dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+:: dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 cls & echo Finished.
 echo Enjoy NeptuneOS.
 timeout /t 2 /nobreak >nul
