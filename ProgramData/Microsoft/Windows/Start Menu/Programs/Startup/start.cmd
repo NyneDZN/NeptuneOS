@@ -1,5 +1,5 @@
 :: Start the post script
-start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.cmd" /postinstall
+start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall
 
 :: Delete this batch file & exit
 del /F /Q %0
