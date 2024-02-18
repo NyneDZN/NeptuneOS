@@ -218,64 +218,65 @@ Reg.exe add "HKCU\Software\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f 
 Reg.exe add "HKCU\Software\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"C:\Program Files\7-Zip\7zFM.exe\" \"%%1\"" /f >nul
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
+cls
 
 :: Debloating UWP again to prevent leftovers
 PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = $True;  Path = "^""$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:Public\Desktop\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:SystemRoot\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $False; Path = "^""$env:UserProfile\Desktop\Microsoft Edge.lnk"^""; }; ); foreach ($shortcut in $shortcuts) {; if (-Not (Test-Path $shortcut.Path)) {; Write-Host "^""Skipping, shortcut does not exist: `"^""$($shortcut.Path)`"^""."^""; continue; }; try {; Remove-Item -Path $shortcut.Path -Force -ErrorAction Stop; Write-Output "^""Successfully removed shortcut: `"^""$($shortcut.Path)`"^""."^""; } catch {; Write-Error "^""Encountered an issue while attempting to remove shortcut at: `"^""$($shortcut.Path)`"^""."^""; }; }"
-PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Clipchamp.Clipchamp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Cortana* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GamingApp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GetHelp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.OutlookForWindows* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Todos* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Windows.Photos* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Xbox* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Microsoft.YourPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *Windows.DevHome* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsCalculator* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Clipchamp.Clipchamp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Cortana* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GamingApp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GetHelp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.OutlookForWindows* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Todos* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Windows.Photos* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Xbox* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.YourPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Windows.DevHome* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsCalculator* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage" >nul
 start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
 move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop"
 :: Cleanup
 rmdir /s /q "C:\Neptune" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\packages.bat" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\neptune-master.cmd" >nul 2>&1
-del /s /f /q C:\Windows\Temp\*.*
-del /s /f /q %USERPROFILE%\appdata\local\temp\*.*
+del /s /f /q C:\Windows\Temp\*.* >nul 2>&1
+del /s /f /q %USERPROFILE%\appdata\local\temp\*.* >nul 2>&1
 cd %systemroot%
-del *.log /s /f /q /a
+del *.log /s /f /q /a >nul 2>&1
 cd %homepath%
-del *.log /s /f /q /a
+del *.log /s /f /q /a >nul 2>&1
 cd %systemroot%
 :: dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 cls & echo Finished.
