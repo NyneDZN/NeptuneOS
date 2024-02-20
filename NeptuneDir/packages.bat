@@ -691,6 +691,7 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNa
 
 cls
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
+set "%CMDLINE:,=" & set "%"
 echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
 echo !S_GRAY!Press any key to let the system reboot.
