@@ -2491,8 +2491,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.bat" /f >nul 2>&1
 
 cls
-echo !S_GRAY!This window will now close, and the other command window will continue.
-echo !S_GRAY!Please wait until the other window has prompted you.
+echo !S_GRAY!This window has finished.
 timeout /t 5 /nobreak >nul
 
 
