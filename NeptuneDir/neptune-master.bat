@@ -2344,31 +2344,31 @@ dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart >nul 2>&1
 
 :: Capabilities
 :: Remove "Internet Explorer 11
-%PowerShell% "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Math Recognizer
-%PowerShell% "Get-WindowsCapability -Online -Name 'MathRecognizer~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'MathRecognizer~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove "OneSync" (breaks Mail, People, and Calendar)
-%PowerShell% "Get-WindowsCapability -Online -Name 'OneCoreUAP.OneSync*' | Remove-WindowsCapability -Online"
-:: Remove OpenSSH client
-%PowerShell% "Get-WindowsCapability -Online -Name 'OpenSSH.Client*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'OneCoreUAP.OneSync*' | Remove-WindowsCapability -Online" >nul 2>&1
+:: Remove OpenSSH client 
+%PowerShell% "Get-WindowsCapability -Online -Name 'OpenSSH.Client*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove PowerShell ISE
-%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.PowerShell.ISE*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.PowerShell.ISE*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Print Management Console
-%PowerShell% "Get-WindowsCapability -Online -Name 'Print.Management.Console*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Print.Management.Console*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Quick Assist
-%PowerShell% "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Steps Recorder
-%PowerShell% "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Windows Fax and Scan
-%PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Hello Face
-%PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1 
 :: Remove WordPad
-%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Legacy NotePad
-%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.Notepad.System~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.Notepad.System~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Extended Wallpapers
-%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online"
+%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 
 :: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
