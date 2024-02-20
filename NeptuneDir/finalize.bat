@@ -270,6 +270,9 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPacka
 PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage" >nul
 PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage" >nul
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.Microsoft3DViewer' | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.MixedReality.Portal' | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.MSPaint' | Remove-AppxPackage" >nul
 if "%os%"=="Windows 11" (
     start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
 )
