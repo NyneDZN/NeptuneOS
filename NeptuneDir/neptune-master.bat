@@ -2445,24 +2445,23 @@ if "%os%"=="Windows 10" (
 )
 
 cls & echo !S_GREEN!Finalizing Setup
-:: Disable windows search and start menu
-taskkill /f /im explorer.exe >nul 2>&1
-taskkill /f /im searchapp.exe >nul 2>&1
-taskkill /f /im SearchHost.exe >nul 2>&1
-taskkill /f /im StartMenuExperienceHost.exe >nul 2>&1
-cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul 2>&1
-takeown /f "searchapp.exe" >nul 2>&1
-icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul 2>&1
-ren searchapp.exe searchapp.old >nul 2>&1
-cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
-takeown /f "SearchHost.exe" >nul 2>&1
-icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
+:: Disable windows search and start menu on Windows 10
 if "%os%"=="Windows 10" (
     ren SearchHost.exe SearchHost.old >nul 2>&1
     cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
     takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
     icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
     ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
+    taskkill /f /im searchapp.exe >nul 2>&1
+    taskkill /f /im SearchHost.exe >nul 2>&1
+    taskkill /f /im StartMenuExperienceHost.exe >nul 2>&1
+    cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul 2>&1
+    takeown /f "searchapp.exe" >nul 2>&1
+    icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul 2>&1
+    ren searchapp.exe searchapp.old >nul 2>&1
+    cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
+    takeown /f "SearchHost.exe" >nul 2>&1
+    icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
 )
 
 
