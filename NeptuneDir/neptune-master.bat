@@ -746,6 +746,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% tcpipReg 4
 %svc% tdx 4
 %svc% Telemetry 4
+%svc% uhssvc 4
 %svc% wanarp 4
 %svc% wanarpv6 4
 :: Windows Defender Drivers
