@@ -586,11 +586,14 @@ tasklist /fi "ImageName eq OneDrive.exe" /fo csv 2>NUL | find /i "OneDrive.exe">
 :: --------Remove OneDrive through official installer--------
 :: ----------------------------------------------------------
 echo --- Remove OneDrive through official installer
-start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
-rd C:\OneDriveTemp /q /s
-rd "%USERPROFILE%\OneDrive" /q /s
-rd "%LOCALAPPDATA%\Microsoft\OneDrive" /q /s
-rd "%PROGRAMDATA%\Microsoft OneDrive" /q /s
+if "%os%"=="Windows 11" (
+    start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
+)
+
+if "%os%"=="Windows 10" (
+    start /wait "" "%SYSTEMROOT%\SysWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+)
+
 :: ----------------------------------------------------------
 
 

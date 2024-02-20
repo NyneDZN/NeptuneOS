@@ -1,4 +1,9 @@
 @echo off
+for /f "tokens=6 delims=[.] " %%a in ('ver') do (set "win_version=%%a")
+if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
+for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
+for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
+cls
 echo Finalizing the OS. This script will close and delete itself when it is finished.
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /f >nul
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /f >nul
@@ -265,8 +270,14 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPacka
 PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage" >nul
 PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage" >nul
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage" >nul
-start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
-move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop"
+if "%os%"=="Windows 11" (
+    start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL
+)
+
+if "%os%"=="Windows 10" (
+    start /wait "" "%SYSTEMROOT%\SysWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+)
+move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop" >nul 2>&1
 :: Cleanup
 rmdir /s /q "C:\Neptune" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\packages.bat" >nul 2>&1
