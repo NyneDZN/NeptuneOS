@@ -734,7 +734,8 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% NetBIOS 4
 %svc% NetBT 4
 %svc% PptpMiniport 4
-%svc% QWAVEdrv 4
+:: Oculus needs this driver to function
+:: %svc% QWAVEdrv 4
 %svc% RasAgileVpn 4
 %svc% Rasl2tp 4
 %svc% RasPppoe 4
@@ -778,7 +779,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% RFCOMM 4
 %svc% RmSvc 4
 %svc% TrkWks 4
-:: This seems to break the Oculus app
+:: This seems to break the Oculus app aswell
 :: %svc% ShellHWDetection 4
 %svc% Spooler 4
 %svc% SgrmBroker 4
