@@ -411,6 +411,7 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "PCI Simple Communications Controller" >nul 2>&1
 %DevMan% /disable "PCI standard RAM Controller" >nul 2>&1
 %DevMan% /disable "Programmable interrupt controller" >nul 2>&1
+%DevMan% /disable "Remote Desktop Device Redirector Bus" >nul 2>&1
 %DevMan% /disable "SM Bus Controller"
 %DevMan% /disable "System board" >nul 2>&1
 %DevMan% /disable "System Speaker" >nul 2>&1
