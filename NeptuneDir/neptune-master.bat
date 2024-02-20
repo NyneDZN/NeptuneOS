@@ -2305,6 +2305,10 @@ dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart >nul 2>&1
 dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart >nul 2>&1
 :: Disable SMB Direct
 dism /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart >nul 2>&1
+:: Disable SMB1 Protocol
+dism /online /Disable-Feature /FeatureName:"SMB1Protocol" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"SMB1Protocol-Client" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"SMB1Protocol-Server" /NoRestart >nul 2>&1
 :: Disable TFTP Client
 dism /Online /Disable-Feature /FeatureName:"TFTP" /NoRestart >nul 2>&1
 :: Disable Internet Printing Client
