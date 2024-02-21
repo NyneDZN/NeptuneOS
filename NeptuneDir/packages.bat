@@ -937,6 +937,6 @@ set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_M
 set "%CMDLINE:,=" & set "%"
 echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
-echo !S_GRAY!Press any key to let the system reboot.
-pause>nul
+echo !S_GRAY!Press any key to let the system reboot, or wait 10 seconds.
+timeout /t 10 >nul
 shutdown /f /r /t 0
