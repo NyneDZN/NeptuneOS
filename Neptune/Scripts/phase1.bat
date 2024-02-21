@@ -1,4 +1,5 @@
 @echo off
+cls & echo This will take a moment.
 
 :: UAC Permissions
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "0" /f > nul
