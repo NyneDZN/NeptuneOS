@@ -1,6 +1,7 @@
 @echo off
 curl https://codeload.github.com/NyneDZN/NeptuneOS/zip/refs/heads/main --output neptune.7z
 move neptune.7z C:\Neptune
+cd "C:\Neptune"
 7za x neptune.7z
 cd "NeptuneOS-main"
 move NeptuneDir %WinDir%
