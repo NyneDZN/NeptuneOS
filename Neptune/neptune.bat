@@ -21,5 +21,6 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 echo NeptuneOS Installer
 echo Welcome to the NeptuneOS Installer. Please report any issues you encounter with the script in the Discord or GitHub.
 echo Press any key to let the script restart your PC and install NeptuneOS.
+taskkill /f /im powershell.exe >nul
 pause>nul
 call C:\Neptune\Scripts\phase1.bat
