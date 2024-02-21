@@ -713,7 +713,6 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% ADP80XX 4
 %svc% AmdK8 4
 %svc% Beep 4
-%svc% BTAGService 4
 %svc% BthA2dp 4
 %svc% BthAvctpSvc 4
 %svc% BthEnum 4
@@ -755,6 +754,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WdNisDrv 4
 
 :: Services
+%svc% BTAGService 4
 %svc% BluetoothUserService 4
 %svc% bthserv 4
 %svc% diagsvc 4
