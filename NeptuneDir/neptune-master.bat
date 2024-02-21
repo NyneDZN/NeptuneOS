@@ -27,7 +27,7 @@
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
 
 @echo off
-setlocal EnableDelayedExpansion
+:: setlocal EnableDelayedExpansion
 
 :: NeptuneOS Variables
 set version=0.4
