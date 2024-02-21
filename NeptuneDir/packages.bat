@@ -669,6 +669,55 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNa
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Per-Machine Standalone Update'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }"
 :: ----------------------------------------------------------
 
+:: UWP DEbloat
+PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = $True;  Path = "^""$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:Public\Desktop\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:SystemRoot\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $False; Path = "^""$env:UserProfile\Desktop\Microsoft Edge.lnk"^""; }; ); foreach ($shortcut in $shortcuts) {; if (-Not (Test-Path $shortcut.Path)) {; Write-Host "^""Skipping, shortcut does not exist: `"^""$($shortcut.Path)`"^""."^""; continue; }; try {; Remove-Item -Path $shortcut.Path -Force -ErrorAction Stop; Write-Output "^""Successfully removed shortcut: `"^""$($shortcut.Path)`"^""."^""; } catch {; Write-Error "^""Encountered an issue while attempting to remove shortcut at: `"^""$($shortcut.Path)`"^""."^""; }; }"
+PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Clipchamp.Clipchamp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Cortana* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GamingApp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.GetHelp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.OutlookForWindows* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Todos* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Windows.Photos* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Xbox* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.YourPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *Windows.DevHome* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsCalculator* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *WindowsTerminal* | Remove-AppxPackage" >nul
+PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.Microsoft3DViewer' | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.MixedReality.Portal' | Remove-AppxPackage" >nul
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage 'Microsoft.MSPaint' | Remove-AppxPackage" >nul
+
 cls
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
