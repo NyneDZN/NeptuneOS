@@ -8,6 +8,7 @@ move NeptuneDir %WinDir%
 move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\layout.xml" "%WinDir%"
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\regjump.exe" "%WinDir%"
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%"
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" >nul
