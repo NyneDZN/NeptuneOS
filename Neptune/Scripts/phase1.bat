@@ -73,7 +73,7 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$propertyName = 'ScanPurgeIte
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Scan" /v "PurgeItemsAfterDelay" /t REG_DWORD /d "1" /f
 
 :: RunOnce Phase 2
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\Neptune\nsudo\nsudolg.exe -U:C -ShowWindowMode:Show -Wait \"C:\Neptune\Scripts\phase2.bat\"" /f > nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\Neptune\nsudo\nsudolg.exe -U:C -ShowWindowMode:Show -Wait \"C:\NeptuneOS-installer\Neptune\Scripts\phase2.bat\"" /f > nul
 
 ::: Finalize
 cls & echo Restarting...

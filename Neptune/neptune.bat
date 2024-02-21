@@ -24,4 +24,4 @@ echo Press any key to let the script restart your PC and install NeptuneOS.
 del "%temp%\installer.zip"
 taskkill /f /im powershell.exe >nul
 pause>nul
-call C:\Neptune\Scripts\phase1.bat
+call C:\NeptuneOS-installer\Neptune\Scripts\phase1.bat
