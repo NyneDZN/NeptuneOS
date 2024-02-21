@@ -220,8 +220,8 @@ Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = $True;  Path = "^""$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:AppData\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:Public\Desktop\Microsoft Edge.lnk"^""; }; @{ Revert = $True;  Path = "^""$env:SystemRoot\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk"^""; }; @{ Revert = $False; Path = "^""$env:UserProfile\Desktop\Microsoft Edge.lnk"^""; }; ); foreach ($shortcut in $shortcuts) {; if (-Not (Test-Path $shortcut.Path)) {; Write-Host "^""Skipping, shortcut does not exist: `"^""$($shortcut.Path)`"^""."^""; continue; }; try {; Remove-Item -Path $shortcut.Path -Force -ErrorAction Stop; Write-Output "^""Successfully removed shortcut: `"^""$($shortcut.Path)`"^""."^""; } catch {; Write-Error "^""Encountered an issue while attempting to remove shortcut at: `"^""$($shortcut.Path)`"^""."^""; }; }" >nul
 :: Cleanup
-move "C:\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop" >nul 2>&1
-rmdir /s /q "C:\Neptune" >nul 2>&1
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "%USERPROFILE%\Desktop" >nul 2>&1
+rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\packages.bat" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\neptune-master.cmd" >nul 2>&1
 del /s /f /q C:\Windows\Temp\*.* >nul 2>&1
