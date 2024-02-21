@@ -22,4 +22,4 @@ echo NeptuneOS Installer
 echo Welcome to the NeptuneOS Installer. Please report any issues you encounter with the script in the Discord or GitHub.
 echo Press any key to let the script restart your PC and install NeptuneOS.
 pause>nul
-call C:\Neptune\Scripts\phase1.cmd
+call C:\Neptune\Scripts\phase1.bat
