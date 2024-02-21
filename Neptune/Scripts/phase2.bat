@@ -22,4 +22,4 @@ echo Press any key to start the script.
 pause>nul
 :: The Master Script should always be infront of the Package Debloat script window.
 start "First Batch" cmd /c call "%WinDir%\NeptuneDir\packages.bat"
-start "Second Batch" cmd /c call "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd"
+start "Second Batch" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall
