@@ -12,7 +12,7 @@ move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%"
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" >nul
-C:\NeptuneOS-installer\Neptune\nsudo\NSudoLG.exe -U:T -P:E -ShowWindowMode:Show -Wait "takeown /f "C:\Windows\Web" /r" >nul
+takeown /f "C:\Windows\Web" /r >nul
 rmdir /s /q "C:\Windows\Web" >nul
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\Web" "%WinDir%" >nul
 cls
