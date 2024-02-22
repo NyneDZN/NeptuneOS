@@ -55,10 +55,7 @@ This is a guide on how to install NeptuneOS.
 YOU are fully responsible for whatever happens to your system during your time using NeptuneOS
 
 ### Prerequisites
-Download your ethernet drivers prior to installing NeptuneOS.
-Common vendors are provided, but you might want to download prior to installation, just incase.
-* [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)
-* [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html)
+It may save some time to download the [batch file](https://cdn.discordapp.com/attachments/1096471308239376517/1210133893995303013/neptune_currentbranch.bat?ex=65e97403&is=65d6ff03&hm=9e0356dc3d1558f7492625d81251a3346197dcba747a89f6eaa99b46783fe6c4&) with the powershell installation command to put on your USB drive prior to installation.
 
 You MUST begin with a clean, stock installation of [Windows 10](https://software.download.prss.microsoft.com/dbazure/Win10_22H2_English_x64v1.iso?t=4d3f143d-ad29-4ef9-9c11-01e5a05e4490&P1=1708674319&P2=601&P3=2&P4=XEiEzOFWipK4ADtywT65EOd8TFNm9SL3ZfS6NH3psbPlqdHpvR%2fzbyeCTEk0Of93BMgcLXlKGR%2bUFrRy7tYAFsOphGMe4kI4KIjWmRPW%2fF%2fZV%2bQV99%2fxoRgYwMe95Cm9fVd6uSJOQHdjjdZf1ZjKZzqBjr3l75PPCiEDnDOfqJg1bAD43gRY5YtQzKX%2bk9w9u7OboeYdZFYyODYj%2bX2mgorwGKL09g9rmVsbLPTtq1WbgIuBc%2f2wUha40ZrDdGZl%2bTFIGGWjDkS3sFK1q8WuHCZsZAiNrM9t99bzJkBojhKZfXnHTuDBl%2fsloMFq6wNWr2hrOBqqzDgP8%2fkBEwDCdQ%3d%3d) or [Windows 11](https://software.download.prss.microsoft.com/dbazure/Win11_23H2_English_x64v2.iso?t=fe1f1d84-93e9-4075-b990-fae3286c5d0a&P1=1708674270&P2=601&P3=2&P4=gLCT1py3ZHRfVXlYg08SMuwTAQjdoDxXO7u%2bVy1ZMzYifznomP4v1%2b3DXi0JV5nVFvjzLeIA37bZqep6%2bQ%2fJzGut6msOWqnk8i8poe%2ffUVnEgR1sttPWuMxXXIg19cFin%2b8AozjuZw7xJxR33cZ3EmnyU5S0T8abvxN5h8jJ6MdGPByeWOpDzVgBRhV%2fNFhES5pAlx9pPqd2XTPFVwf1F%2bGysOd3al1Isjyb41NejFK3Ldfy0S7ES%2bzAJ77R%2bF6g7MM9lxAqBhU38imtnvsZAiChJOTN32U%2bBDMrVI9ikaREhP4jNGOXEgnY86WLdu9LuOBtpS9dDYoKNoEGu4frig%3d%3d) Pro. 
 
