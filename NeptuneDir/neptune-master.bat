@@ -763,6 +763,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% DispBrokerDesktopSvc 4
 %svc% DisplayEnhancementService 4
 %svc% DPS 4
+%svc% DusmSvc 4
 %svc% edgeupdate 4
 %svc% edgeupdatem 4
 %svc% FontCache 4
