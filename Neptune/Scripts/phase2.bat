@@ -1,4 +1,5 @@
 @echo off
+net stop wuauserv > nul
 curl https://codeload.github.com/NyneDZN/NeptuneOS/zip/refs/heads/main --output neptune.7z
 move neptune.7z C:\NeptuneOS-installer\Neptune
 cd "C:\NeptuneOS-installer\Neptune"
