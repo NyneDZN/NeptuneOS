@@ -4,20 +4,20 @@ curl -o neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/tags/rel
 move neptune.7z C:\NeptuneOS-installer\Neptune
 cd "C:\NeptuneOS-installer\Neptune"
 7za x neptune.7z
-cd "NeptuneOS-main"
+cd "NeptuneOS-releases"
 move NeptuneDir %WinDir%
 move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
-move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\layout.xml" "%WinDir%"
-move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\regjump.exe" "%WinDir%"
-move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%"
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\layout.xml" "%WinDir%"
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\regjump.exe" "%WinDir%"
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\serviwin.exe" "%WinDir%"
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r >nul
 icacls C:\ProgramData\Microsoft\User Account Pictures\ /grant administrators:F /T >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
-move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" >nul
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" >nul
 takeown /f "C:\Windows\Web" /r >nul
 icacls C:\Windows\Web\ /grant administrators:F /T >nul
 rmdir /s /q "C:\Windows\Web" >nul
-move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\Web" "%WinDir%" >nul
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\Web" "%WinDir%" >nul
 cls
 echo This will execute 2 command prompt windows for the installation process. Please ignore any errors you might see in both windows, as these are normal.
 echo Wait until you are asked to restart your PC.
