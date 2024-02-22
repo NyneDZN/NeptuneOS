@@ -43,6 +43,7 @@ Before you begin, make sure you have the following:
 2. **Initial Windows Setup**:
    - If you're unfamiliar with installing Windows, watch [this guide](https://www.youtube.com/watch?v=0s23L1m7u5I).
    - If you don't have a USB drive, follow [this guide](https://github.com/iidanL/InstallWindowsWithoutUSB).
+   - Your USB drive may have deleted the batch file from using rufus. Place it back to the root of the USB drive if it has been.
 
 3. **Windows Installation Customizations**:
    - For Windows 10: Disconnect your Ethernet cable during installation to skip using a Microsoft Account.
