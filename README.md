@@ -50,17 +50,15 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is a guide on how to install NeptuneOS.
-
 YOU are fully responsible for whatever happens to your system during your time using NeptuneOS
 
-### Prerequisites
-It is recommended that you backup your files and reinstall windows before you proceed with installing Neptune. This is to prevent any unforseen issues with any tweaks or configurations you or any applications might have applied to your system.
+Backup your files and reinstall windows before you proceed with installing Neptune. This is to prevent any unforseen issues with any tweaks or configurations you or any applications might have applied to your system.
+
+To install NeptuneOS, visit the [Installation Repo](https://github.com/NyneDZN/NeptuneOS/tree/installer)
 
 NeptuneOS includes GPU driver installation tools, such as [Radeon Software Slimmer](https://github.com/GSDragoon/RadeonSoftwareSlimmer) and [NVCleanStall](https://www.techpowerup.com/download/techpowerup-nvcleanstall/).
 
 It is recommended that you install your Ethernet drivers from your vendor website, e.g [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software) or [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html).
-
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
