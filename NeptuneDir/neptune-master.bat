@@ -44,12 +44,12 @@ set svc=call :setSvc
 :: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: Fetch RAM amount
-for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
+:: for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
 
 :: Check GPU
-for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value') do (
-for %%n in (GeForce NVIDIA RTX GTX) do echo %%a | find /I "%%n" >nul && set GPU=NVIDIA
-)
+:: for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value') do (
+:: for %%n in (GeForce NVIDIA RTX GTX) do echo %%a | find /I "%%n" >nul && set GPU=NVIDIA
+:: )
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11
