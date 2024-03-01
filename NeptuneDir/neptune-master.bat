@@ -44,7 +44,7 @@ set svc=call :setSvc
 :: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: Fetch RAM amount
-:: for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
+for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
 
 :: Check GPU
 :: for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value') do (
