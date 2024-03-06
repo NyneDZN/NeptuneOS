@@ -54,7 +54,8 @@ Before you begin, make sure you have the following:
    - For Windows 11: Enter "gg@gmail.com" and "gg" for email and password to trigger an error, allowing local account setup.
 
 4. **NeptuneOS Installation**:
-   - After reaching the desktop, press Win+R, type `CMD`, and hit Enter.
+   - After reaching the desktop, type open up the Windows Security app, click 'Virus & Threat Protection' and disable 'Real Time Protection'
+   - After that, hit Win+R on your keyboard, and type 'cmd' into the run prompt.
    - Paste the following command into the Command Prompt:
      ```powershell
      powershell Invoke-WebRequest -Uri 'https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer.zip' -OutFile "$env:TEMP\installer.zip"; Expand-Archive -Path "$env:TEMP\installer.zip" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer\Neptune\neptune.bat'
