@@ -40,14 +40,15 @@ Before you begin, make sure you have the following:
 
 ### Installation Steps 🚀
 
-1. **Preparation**: Download the [batch file](https://cdn.discordapp.com/attachments/1096471308239376517/1210133893995303013/neptune_currentbranch.bat?ex=65e97403&is=65d6ff03&hm=9e0356dc3d1558f7492625d81251a3346197dcba747a89f6eaa99b46783fe6c4&) containing the PowerShell installation command. Save it to your USB drive if you have one.
+1. **Preparation**: Download the [batch file](https://cdn.discordapp.com/attachments/1096471308239376517/1210133893995303013/neptune_currentbranch.bat?ex=65e97403&is=65d6ff03&hm=9e0356dc3d1558f7492625d81251a3346197dcba747a89f6eaa99b46783fe6c4&) containing the PowerShell installation command. There is an alternative, but this is recommended.
 
 2. **Initial Windows Setup**:
    - If you're unfamiliar with installing Windows, watch [this guide](https://www.youtube.com/watch?v=0s23L1m7u5I).
    - If you don't have a USB drive, follow [this guide](https://github.com/iidanL/InstallWindowsWithoutUSB).
-   - Your USB drive may have deleted the batch file from using rufus. Place it back to the root of the USB drive if it has been.
+   - If you used the USB method, please move the batch file containing the powershell command to the drive.
+   - IF you used the non-USB method, please come back to this page after you installed Windows, and follow Step 4.3.
 
-3. **Windows Installation Customizations**:
+3. **Windows OOBE**:
    - For Windows 10: Disconnect your Ethernet cable during installation to skip using a Microsoft Account.
    - During setup, choose "no" or "don't allow" for any Cortana prompts.
    - For Windows 10: When prompted for network connection, select "I don't have internet" for a local account setup.
@@ -55,8 +56,8 @@ Before you begin, make sure you have the following:
 
 4. **NeptuneOS Installation**:
    - After reaching the desktop, type open up the Windows Security app, click 'Virus & Threat Protection' and disable 'Real Time Protection'
-   - After that, hit Win+R on your keyboard, and type 'cmd' into the run prompt.
-   - Paste the following command into the Command Prompt:
+   - After you have disabled Real Time Protection, you may move the batch file you placed onto your USB drive to your desktop, and proceed with running it.
+   - Alternatively, if you used the non-USB method, and didn't download the batch file, you can open the run prompt with Win+R and open 'cmd', and run this command.
      ```powershell
      powershell Invoke-WebRequest -Uri 'https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer.zip' -OutFile "$env:TEMP\installer.zip"; Expand-Archive -Path "$env:TEMP\installer.zip" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer\Neptune\neptune.bat'
      ```
