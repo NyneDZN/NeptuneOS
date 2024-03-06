@@ -668,6 +668,12 @@ PowerShell -ExecutionPolicy Unrestricted -Command  "Disable-NetAdapterBinding -N
 :: Disable IPV6 through TCPIP
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "32" /f >nul 2>&1
 
+:: Disable Telemetry IP's
+cd %SystemRoot%\System32\drivers\etc
+if not exist hosts.bak ren hosts hosts.bak >nul 2>&1
+curl -l -s https://winhelp2002.mvps.org/hosts.txt -o hosts
+if not exist hosts ren hosts.bak hosts >nul 2>&1
+
 
 cls & echo !S_GREEN!Disabling Drivers and Services
 :: Configuring the services and drivers in Windows
