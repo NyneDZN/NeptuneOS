@@ -46,6 +46,14 @@
 </details>
 
 
+<!-- GETTING STARTED -->
+## Windows Version Compatibility
+
+- [x] Windows 10
+- [x] Windows 11
+- [x] Windows LTSC
+- [ ] Windows Server
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -75,34 +83,6 @@ This project is a fork of AtlasOS.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] NeptuneOS
-   - [x] Windows 10 Branch   
-      - [ ] 1803?
-      - [X] 22H2                             
-   - [x] Windows 11 Branch
-      - [X] 23H2
-      - [ ] Canary (24H2)
-   - [x] Features
-      - [x] Windows Update 
-      - [x] Windows Defender
-      - [ ] Neptune OOBE
-      - [x] Updated Script Deployment Method
-                               
-- [ ] Complete the Discord
-   - [ ] Channels
-      - [x] NeptuneOS Category
-   - [ ] Roles
-   - [X] WebHooks
-                                       
-- [ ] Complete the GitHub
-   - [ ] README.md
-   - [ ] Wiki
-   - [ ] Benchmarks
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
 
