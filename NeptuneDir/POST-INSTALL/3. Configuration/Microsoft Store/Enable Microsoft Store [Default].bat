@@ -37,5 +37,5 @@ sc config usosvc start=auto
 %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "2" /f 
 %WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "Start" /t REG_DWORD /d "2" /f 
 cls
-echo MS Store enabled. Please restart
+echo The store has been enabled. Please restart.
 pause

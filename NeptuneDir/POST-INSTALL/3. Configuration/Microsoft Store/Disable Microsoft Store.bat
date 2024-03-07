@@ -18,6 +18,9 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
+echo Disabling the store will also break Xbox app functionality, press any key if you still want to continue.
+pause>nul
+
 :: Disabling Microsoft Store
 sc config InstallService start=disabled
 sc config wlidsvc start=disabled
@@ -31,5 +34,5 @@ sc config FileInfo start=disabled
 sc config FileCrypt start=disabled
 sc config usosvc start=disabled
 cls
-echo MS Store disabled. Please restart.
+echo The store has been disabled. Please restart.
 pause
