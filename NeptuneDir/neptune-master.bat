@@ -820,6 +820,9 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WinHttpAutoProxySvc 4 
 %svc% WPDBusEnum 4
 %svc% WSearch 4
+%svc% WpnService 4
+%svc% WpnUserService 4
+
 :: Windows Defender Services
 %svc% WinDefend 4
 %svc% WdNisSvc 4
