@@ -782,6 +782,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% edgeupdate 4
 %svc% edgeupdatem 4
 %svc% FontCache 4
+%svc% FontCache3.0.0.0 4
 %svc% HvHost 4
 %svc% IKEEXT 4
 %svc% iphlpsvc 4
