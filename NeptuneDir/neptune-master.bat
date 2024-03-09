@@ -2148,6 +2148,10 @@ dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart >nul 2>&1
 :: Remove Extended Wallpapers
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 
+if "%server%"=="yes" (
+    %PowerShell% "Remove-WindowsFeature AzureArcSetup"
+)
+
 :: UWP Deprovision
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.3DBuilder_8wekyb3d8bbwe" /f >nul 2>&1
