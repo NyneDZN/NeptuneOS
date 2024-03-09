@@ -741,6 +741,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 :: %svc% luafv 4
 %svc% mrxsmb 4
 %svc% mrxsmb20 4
+%svc% MsLldp 4
 %svc% NdisCap 4
 %svc% NdisTapi 4
 %svc% NdisWan 4
