@@ -1,6 +1,6 @@
 @echo off
 net stop wuauserv > nul
-curl -o neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/tags/releases.zip
+curl -o neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 move neptune.7z C:\NeptuneOS-installer\Neptune
 cd "C:\NeptuneOS-installer\Neptune"
 7za x neptune.7z
