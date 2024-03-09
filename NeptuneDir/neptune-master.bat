@@ -60,6 +60,10 @@ if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
 for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
+if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.lnk" (
+    set "server=yes"
+)
+
 :: Setting path variables for NeptuneDir
 setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
 setx path "%path%;C:\Windows\NeptuneDir\Tools;" -m >nul 2>&1
