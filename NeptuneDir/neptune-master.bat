@@ -62,6 +62,8 @@ for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
 
 if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.lnk" (
     set "server=yes"
+) else (
+    set "server=no"
 )
 
 :: Setting path variables for NeptuneDir
