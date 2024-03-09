@@ -766,6 +766,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WdBoot 4
 %svc% WdFilter 4
 %svc% WdNisDrv 4
+%svc% MsSecCore 4
 
 :: Services
 %svc% BTAGService 4
@@ -822,7 +823,6 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% WSearch 4
 %svc% WpnService 4
 %svc% WpnUserService 4
-
 :: Windows Defender Services
 %svc% WinDefend 4
 %svc% WdNisSvc 4
