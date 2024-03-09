@@ -25,4 +25,4 @@ net stop wuauserv >nul 2>&1
 del "%temp%\installer.zip"
 taskkill /f /im powershell.exe >nul 2>&1
 timeout /t 10 >nul
-call C:\NeptuneOS-installer\Neptune\Scripts\phase1.bat
+call C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
