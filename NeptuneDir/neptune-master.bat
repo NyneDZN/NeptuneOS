@@ -736,6 +736,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% cdrom 4
 %svc% flpydisk 4
 %svc% GpuEnergyDrv 4
+%svc% lltdio 4
 :: Driver related to UAC
 :: %svc% luafv 4
 %svc% mrxsmb 4
@@ -754,6 +755,7 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 %svc% Rasl2tp 4
 %svc% RasPppoe 4
 %svc% RasSstp 4
+%svc% rspndr 4
 %svc% srv2 4
 %svc% srvnet 4
 %svc% tcpipReg 4
