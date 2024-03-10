@@ -262,7 +262,7 @@ Reg add "HKLM\Software\Policies\Microsoft\Windows Defender\UX Configuration" /v 
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" /v "HideSystray" /t REG_DWORD /d "1" /f >nul 2>&1
 
 :: RunOnce Phase 2
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\nsudo\nsudolg.exe -U:C -ShowWindowMode:Show -Wait \"C:\NeptuneOS-installer\Neptune\Scripts\phase2.bat\"" /f > nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\nsudo\nsudolg.exe -U:C -ShowWindowMode:Show -Wait \"C:\NeptuneOS-installer-dev\Neptune\Scripts\phase2.bat\"" /f > nul
 
 ::: Finalize
 cls & echo Restarting...
