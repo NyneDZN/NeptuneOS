@@ -1922,6 +1922,8 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32Priorit
 :: Enable Timer Resolution on Windows 11
 if "%os%"=="Windows 11" (
     Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
+) else if "%server%"=="yes" (
+    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
 :: Disable WatchDog Timer
