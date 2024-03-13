@@ -2254,6 +2254,11 @@ if "%os%"=="Windows 10" (
     takeown /f "TextInputHost.exe" >nul 2>&1
     icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul 2>&1
     ren TextInputHost.exe TextInputHost.old >nul 2>&1
+    cd C:\Windows\System32
+    taskkill /f /im RuntimeBroker.exe
+    icacls "C:\Windows\System32\RuntimeBroker.exe" /grant Administrators:F >nul 2>&1
+    takeown /f "RuntimeBroker.exe" >nul 2>&1
+    ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
 )
 
 
