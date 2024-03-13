@@ -2249,7 +2249,11 @@ if "%os%"=="Windows 10" (
     ren searchapp.exe searchapp.old >nul 2>&1
     cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
     takeown /f "SearchHost.exe" >nul 2>&1
+    taskkill /f /im TextInputHost.exe
     icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
+    takeown /f "TextInputHost.exe" >nul 2>&1
+    icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul 2>&1
+    ren TextInputHost.exe TextInputHost.old >nul 2>&1
 )
 
 
