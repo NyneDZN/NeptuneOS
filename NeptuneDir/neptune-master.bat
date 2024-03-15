@@ -2328,10 +2328,25 @@ timeout /t 5 /nobreak >nul
 
 :setSvc
 :: %svc% (service name) (0-4)
-if "%1"=="" (echo You need to run this with a service to disable. && exit /b 1)
-if "%2"=="" (echo You need to run this with an argument ^(1-4^) to configure the service's startup. && exit /b 1)
-if %2 LSS 0 (echo Invalid configuration. && exit /b 1)
-if %2 GTR 4 (echo Invalid configuration. && exit /b 1)
-Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (echo The specified service/driver is not found. && exit /b 1)
+if "%1"=="" (
+    echo You need to run this with a service to disable. 
+    echo You need to run this with an argument ^(1-4^) to configure the service's startup.
+    exit /b 1
+)
+if "%2"=="" (
+    echo You need to run this with an argument ^(1-4^) to configure the service's startup. 
+    exit /b 1 )
+if %2 LSS 0 (
+    echo Invalid configuration. 
+    exit /b 1 )
+if %2 GTR 4 (
+    echo Invalid configuration. 
+    exit /b 1 )
+Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
+    echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\Logs
+    exit /b 1 )
 Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
-exit /b 0
+echo Service/Driver %1 configured with startup
+
+
+
