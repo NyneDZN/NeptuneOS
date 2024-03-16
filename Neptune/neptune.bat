@@ -38,7 +38,6 @@ if errorlevel 1 goto NeptuneInstall
 cls & net stop wuauserv >nul 2>&1
 del "%temp%\installer.zip"
 taskkill /f /im powershell.exe >nul 2>&1
-timeout /t 10 >nul
 start "" C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
 exit
 
