@@ -2184,18 +2184,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\De
 
 
 cls & echo !S_GREEN!Installing Visual C++
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x86.exe" /q >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2005_x64.exe" /q >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2008_x86.exe" /qb >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2008_x64.exe" /qb >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2010_x86.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2010_x64.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2012_x86.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2012_x64.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2013_x86.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2013_x64.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x86.exe" /passive /norestart >nul 2>&1
-"%WinDir%\NeptuneDir\Prerequisites\vcredist2015_2017_2019_2022_x64.exe" /passive /norestart >nul 2>&1
+"%WinDir%\NeptuneDir\Prerequisites\vcredist.exe" /ai8X239T >nul 2>&1
 
 cls & echo !S_GREEN!Installing DirectX
 "%WinDir%\NeptuneDir\Prerequisites\DirectX\DXSETUP.exe" /silent >nul 2>&1
