@@ -1,4 +1,4 @@
-@echo off & color 1f
+@echo off & color f1
 cls & echo This will take a moment.
 echo We are disabling defender.
 
