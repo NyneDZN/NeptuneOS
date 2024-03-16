@@ -26,8 +26,7 @@
 :: Neptune is a fork of older era AtlasOS
 :: https://github.com/Atlas-OS/Atlas/tree/main/src
 
-@echo off
-setlocal EnableDelayedExpansion
+@echo off & setlocal EnableDelayedExpansion
 
 :: NeptuneOS Variables
 set version=0.4
