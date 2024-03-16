@@ -433,10 +433,7 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1 
 
 :: TPM Devices
-if "%os%"=="Windows 10" (
-    %DevMan% /disable "AMD PSP 10.0 Device"
-    %DevMan% /disable "Trusted Platform Module 2.0"
-)
+if "%os%"=="Windows 10" (%DevMan% /disable "AMD PSP 10.0 Device" & %DevMan% /disable "Trusted Platform Module 2.0")
 
 :: MSI Mode
 :: Enable MSI mode on USB, GPU, SATA controllers and network adapters
