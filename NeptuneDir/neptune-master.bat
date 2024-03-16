@@ -68,10 +68,6 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
     set "server=no"
 )
 
-:: Setting path variables for NeptuneDir
-setx path "%path%;C:\Windows\NeptuneDir\Apps;" -m >nul 2>&1
-setx path "%path%;C:\Windows\NeptuneDir\Tools;" -m >nul 2>&1
-setx path "%path%;C:\Windows\NeptuneDir\Prerequisites;" -m >nul 2>&1
 
 :: Script index
 :: Scripts must be run through a shortcut with the proper arguments
