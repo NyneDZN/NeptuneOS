@@ -42,6 +42,9 @@ set svc=call :setSvc
 :: logs functionality will be fully implemented in the future
 :: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
+:: Create Log File
+echo. > %WinDir%\NeptuneDir\neptune.log
+
 :: Fetch User SID
 for /f "tokens=2 delims==" %%A in ('wmic useraccount where "name='%username%'" get sid /value') do (set "sid=%%A")
 
@@ -2323,7 +2326,7 @@ if %2 GTR 4 (
     echo Invalid configuration. 
     exit /b 1 )
 Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
-    echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\Logs
+    echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.log
     exit /b 1 )
 Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
 echo Service/Driver %1 configured with startup
