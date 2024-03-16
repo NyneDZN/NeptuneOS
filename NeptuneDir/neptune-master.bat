@@ -32,7 +32,7 @@
 set version=0.4
 
 :: Check if this is a development build or not
-if /i "%~1"=="/devbuild"   set "devbuild=yes"
+if /i "%~2"=="/devbuild"   set "devbuild=yes"
 
 :: Batch Variables
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
