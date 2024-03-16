@@ -1,4 +1,4 @@
-@echo off
+@echo off & color 1f
 net stop wuauserv > nul
 curl -o neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 move neptune.7z C:\NeptuneOS-installer-dev\Neptune
