@@ -28,14 +28,14 @@ echo ========================
 echo 1. Install NeptuneOS
 echo 2. Disable Automatic Driver Installation
 echo ========================
-set /p choice=Select a choice: 
+choice /c 12 /n /m "Select a choice: "
 
-if "%choice%"=="1" goto NeptuneInstall
-if "%choice%"=="2" goto DisableAutoDriver
+if errorlevel 2 goto DisableAutoDriver
+if errorlevel 1 goto NeptuneInstall
 
 
 :NeptuneInstall
-net stop wuauserv >nul 2>&1
+cls & net stop wuauserv >nul 2>&1
 del "%temp%\installer.zip"
 taskkill /f /im powershell.exe >nul 2>&1
 timeout /t 10 >nul
