@@ -43,6 +43,9 @@ set svc=call :setSvc
 :: logs functionality will be fully implemented in the future
 :: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
+:: Fetch User SID
+for /f "tokens=2 delims==" %%A in ('wmic useraccount where "name='%username%'" get sid /value') do (set "sid=%%A")
+
 :: Fetch RAM amount
 for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
 
