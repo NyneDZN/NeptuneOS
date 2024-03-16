@@ -17,7 +17,7 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
-
+color f1
 goto menu
 
 :menu
