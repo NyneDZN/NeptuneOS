@@ -22,5 +22,4 @@ echo Wait until you are asked to restart your PC.
 echo The script will start in 10 seconds, or you can press any key.
 timeout /t 10 >nul
 :: The Master Script should always be infront of the Package Debloat script window.
-start "First Batch" cmd /c call "%WinDir%\NeptuneDir\packages.bat"
-start "Second Batch" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall /devbuild
+start "" cmd /c call "%WinDir%\NeptuneDir\packages.bat" & start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall /devbuild
