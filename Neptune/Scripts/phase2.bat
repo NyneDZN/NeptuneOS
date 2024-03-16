@@ -10,12 +10,10 @@ move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\P
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\layout.xml" "%WinDir%"
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\regjump.exe" "%WinDir%"
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%"
-takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r >nul
-icacls C:\ProgramData\Microsoft\User Account Pictures\ /grant administrators:F /T >nul
+takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r & icacls C:\ProgramData\Microsoft\User Account Pictures\ /grant administrators:F /T >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" >nul
-takeown /f "C:\Windows\Web" /r >nul
-icacls C:\Windows\Web\ /grant administrators:F /T >nul
+takeown /f "C:\Windows\Web" /r & icacls C:\Windows\Web\ /grant administrators:F /T >nul
 rmdir /s /q "C:\Windows\Web" >nul
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\Web" "%WinDir%" >nul
 cls

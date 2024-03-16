@@ -18,11 +18,37 @@ if %errorlevel% neq 0 (
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 
-echo NeptuneOS Installer
-echo Welcome to the NeptuneOS Installer. Please report any issues you encounter with the script in the Discord or GitHub.
-echo Press any key to let the script initialize and restart your PC, or wait 10 seconds.
+goto menu
+
+:menu
+cls
+echo ========================
+echo NeptuneOS Installer.
+echo ========================
+echo 1. Install NeptuneOS
+echo 2. Disable Automatic Driver Installation
+echo ========================
+set /p choice=Select a choice: 
+
+if "%choice%"=="1" goto NeptuneInstall
+if "%choice%"=="2" goto DisableAutoDriver
+
+
+:NeptuneInstall
 net stop wuauserv >nul 2>&1
 del "%temp%\installer.zip"
 taskkill /f /im powershell.exe >nul 2>&1
 timeout /t 10 >nul
-call C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
+start "" C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
+exit
+
+:DisableAutoDriver
+Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "DontSearchWindowsUpdate" /t REG_DWORD /d "1" /f
+goto menu
