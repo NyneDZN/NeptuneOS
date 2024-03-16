@@ -19,7 +19,6 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 mode 70,30
 color f1
-goto menu
 
 :menu
 cls
@@ -43,6 +42,11 @@ start "" C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
 exit
 
 :DisableAutoDriver
+cls
+echo.
+echo ===========================
+echo    Disabling Driver Installation...
+echo ===========================
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
@@ -51,6 +55,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDrive
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f > nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f > nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "DontSearchWindowsUpdate" /t REG_DWORD /d "1" /f  > nul
-Done
-timeout /2 >nul
+echo Done
+timeout /t 1 >nul
 goto menu
