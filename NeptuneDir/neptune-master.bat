@@ -1576,6 +1576,7 @@ for %%a in (
     "SubscribedContent-353696Enabled"
     "SubscribedContent-338387Enabled"
     "RotatingLockScreenOverlayEnabled"
+    "RotatingLockScreenEnabled"
     "SubscribedContent-338388Enabled"
     "SystemPaneSuggestionsEnabled"
     "SubscribedContent-338389Enabled"
