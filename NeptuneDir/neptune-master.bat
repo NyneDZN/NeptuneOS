@@ -2144,9 +2144,27 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Hid
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "RunStartupScriptSync" /t REG_DWORD /d "0" /f >nul 2>&1
 
 
-cls & echo !S_GREEN!Rebuilding Performance Counters
+cls & echo !S_GREEN!Rebuilding Performance Counters...
 lodctr /r >nul 2>&1
 lodctr /r >nul 2>&1
+
+
+cls & echo !S_GREEN!Debloating Windows...
+for %%i in (
+    3DBuilder bing bingfinance bingsports BingWeather
+    Clipchamp.Clipchamp CommsPhone "Drawboard PDF" Facebook
+    Getstarted Microsoft.549981C3F5F10 Microsoft.Cortana Microsoft.GamingApp
+    Microsoft.GetHelp Microsoft.Messaging Microsoft.MicrosoftEdge.Stable Microsoft.MicrosoftStickyNotes
+    Microsoft.OutlookForWindows Microsoft.PowerAutomateDesktop Microsoft.Todos Microsoft.Windows.Photos
+    Microsoft.Xbox Microsoft.YourPhone MicrosoftCorporationII.QuickAssist MicrosoftOfficeHub
+    Office.OneNote OneNote people SkypeApp solit Sway
+    Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
+    windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
+    WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
+    Microsoft.MSPaint
+) do (
+    %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
+)
 
 
 cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
