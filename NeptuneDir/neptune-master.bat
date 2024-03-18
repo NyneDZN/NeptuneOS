@@ -49,7 +49,7 @@ set svc=call :setSvc
 echo. > %WinDir%\NeptuneDir\neptune.txt
 
 :: Fetch User SID
-for /f "tokens=2 delims==" %%A in ('wmic useraccount where "name='%username%'" get sid /value') do (set "sid=%%A")
+for /f "tokens=2 delims==" %%A in ('wmic useraccount where "name='%username%'" get sid /value') do (set "SID=%%A")
 
 :: Fetch RAM amount
 for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined TOTAL_MEMORY set "TOTAL_MEMORY=%%i"
