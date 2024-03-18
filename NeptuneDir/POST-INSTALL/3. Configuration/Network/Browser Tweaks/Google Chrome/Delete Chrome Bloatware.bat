@@ -1,11 +1,6 @@
 @echo off
 echo Deleting Chrome Bloatware
 
-@echo off
-for /F "delims=" %%D in ('dir /B /AD ^| findstr /V "^web."') do (
-   rmdir %%D /s /q
-)
-
 taskkill /f /im "GoogleUpdate.exe" >nul 2>&1
 taskkill /f /im "GoogleUpdateSetup.exe" >nul 2>&1
 taskkill /f /im "GoogleCrashHandler.exe" >nul 2>&1
