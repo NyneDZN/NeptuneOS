@@ -20,7 +20,6 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 
 echo.  Disabling the volmgrx driver will break dynamic volumes and RAID.
-echo.  Use at your own risk
 
 
 echo.	Press 1 to Enable
