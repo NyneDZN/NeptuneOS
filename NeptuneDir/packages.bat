@@ -531,8 +531,16 @@ for %%a in (
 :: ----------Remove Edge through official installer----------
 :: ----------------------------------------------------------
 echo --- Remove Edge through official installer
+taskkill /f /im msedge.exe
+taskkill /f /im MicrosoftEdgeUpdate.exe
+taskkill /f /im elevation_service.exe
+taskkill /f /im MicrosoftEdgeUpdate.exe
 reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev" /v "AllowUninstall" /t REG_DWORD /d "1" /f
 PowerShell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem "^""$($env:ProgramFiles)*\Microsoft\Edge\Application\*\Installer\setup.exe"^""); if (!$installer) {; Write-Host 'Installer not found. Microsoft Edge may already be uninstalled.'; } else {; $installer | ForEach-Object {; $uninstallerPath = $_.FullName; $installerArguments = @("^""--uninstall"^"", "^""--system-level"^"", "^""--verbose-logging"^"", "^""--force-uninstall"^""); Write-Output "^""Uninstalling through uninstaller: $uninstallerPath"^""; $process = Start-Process -FilePath "^""$uninstallerPath"^"" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) {; Write-Host "^""Successfully uninstalled Edge."^""; } else {; Write-Error "^""Failed to uninstall, uninstaller failed with exit code $($process.ExitCode)."^""; }; }; }"
+rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge" >nul 2>&1
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate" >nul 2>&1
+rmdir /s /q "C:\Program Files (x86)\Microsoft\EdgeCore" >nul 2>&1
+
 :: ----------------------------------------------------------
 
 
