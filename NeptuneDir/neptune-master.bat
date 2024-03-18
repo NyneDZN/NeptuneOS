@@ -75,7 +75,7 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 
 :: Post-install 
 if /i "%~1"=="/postinstall"   goto postinstall
-if /i "%~1"=="/testPrompt"    goto testPrompt
+if /i "%~1"=="/testPrompt"goto testPrompt
 
 :argumentFAIL
 echo The master script had no arguments passed to it. You're either launching the script directly, or "%~nx0" is broken/corrupted.
@@ -224,14 +224,14 @@ cls & echo !S_GREEN!Configuring NTFS
 
 :: Adjust MFT (master file table) and paged pool memory cache levels according to ram size
 if !TOTAL_MEMORY! LSS 8000000 (
-    FSUTIL behavior set memoryusage 1 >nul 2>&1
-    FSUTIL behavior set mftzone 1 >nul 2>&1
+FSUTIL behavior set memoryusage 1 >nul 2>&1
+FSUTIL behavior set mftzone 1 >nul 2>&1
 ) else if !TOTAL_MEMORY! LSS 16000000 (
-    FSUTIL behavior set memoryusage 1 >nul 2>&1
-    FSUTIL behavior set mftzone 2 >nul 2>&1
+FSUTIL behavior set memoryusage 1 >nul 2>&1
+FSUTIL behavior set mftzone 2 >nul 2>&1
 ) else (
-    FSUTIL behavior set memoryusage 2 >nul 2>&1
-    FSUTIL behavior set mftzone 2 >nul 2>&1
+FSUTIL behavior set memoryusage 2 >nul 2>&1
+FSUTIL behavior set mftzone 2 >nul 2>&1
 )
 
 :: Disallows characters from the extended character set to be used in 8.3 character-length short file names 
@@ -259,24 +259,24 @@ FSUTIL behavior set symlinkevaluation L2L:1 >nul 2>&1
 FSUTIL repair set C: 0 >nul 2>&1
 
 :: Disable Write Cache Buffer
-    for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
-        for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "CacheIsPowerProtected" /t Reg_DWORD /d "1" /f >nul 2>&1
-    )
-    for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
-        for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "UserWriteCacheSetting" /t Reg_DWORD /d "1" /f >nul 2>&1
-    )
+for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
+for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "CacheIsPowerProtected" /t Reg_DWORD /d "1" /f >nul 2>&1
+)
+for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SCSI"^| findstr "HKEY"') do (
+for /f "tokens=*" %%a in ('Reg query "%%i"^| findstr "HKEY"') do Reg add "%%a\Device Parameters\Disk" /v "UserWriteCacheSetting" /t Reg_DWORD /d "1" /f >nul 2>&1
+)
 )
 
 :: Disable HIPM, DIPM, and HDD parking
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "EnableHIPM"^| FINDSTR /V "EnableHIPM"') DO (
-    Reg add "%%a" /F /V "EnableHIPM" /T Reg_DWORD /d 0 >nul 2>&1
-    Reg add "%%a" /F /V "EnableDIPM" /T Reg_DWORD /d 0 >nul 2>&1
-    Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
+Reg add "%%a" /F /V "EnableHIPM" /T Reg_DWORD /d 0 >nul 2>&1
+Reg add "%%a" /F /V "EnableDIPM" /T Reg_DWORD /d 0 >nul 2>&1
+Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
 )
 
 :: IOLATENCYCAP to 0
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "IoLatencyCap"^| FINDSTR /V "IoLatencyCap"') DO (
-    Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
+Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
 )
 
 
@@ -284,52 +284,52 @@ FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F
 cls & echo !S_GREEN!Configuring Scheduled Tasks
 
 for %%a in (
-    "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
-    "\Microsoft\Windows\Application Experience\StartupAppTask"
-    "\Microsoft\Windows\ApplicationData\appuriverifierdaily"
-    "\Microsoft\Windows\ApplicationData\appuriverifierinstall"
-    "\Microsoft\Windows\ApplicationData\DsSvcCleanup"
-    "\Microsoft\Windows\BrokerInfrastructure\BgTaskRegistrationMaintenanceTask"
-    "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask"
-    "\Microsoft\Windows\Defrag\ScheduledDefrag"
-    "\Microsoft\Windows\Device Setup\Metadata Refresh"
-    "\Microsoft\Windows\Diagnosis\Scheduled"
-    "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"
-    "\Microsoft\Windows\DiskFootprint\Diagnostics"
-    "\Microsoft\Windows\InstallService\ScanForUpdates"
-    "\Microsoft\Windows\InstallService\ScanForUpdatesAsUser"
-    "\Microsoft\Windows\InstallService\SmartRetry"
-    "\Microsoft\Windows\International\Synchronize Language Settings"
-    "\Microsoft\Windows\Maintenance\WinSAT"
-    "\Microsoft\Windows\Management\Provisioning\Cellular"
-    "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"
-    "\Microsoft\Windows\MUI\LPRemove"
-    "\Microsoft\Windows\PI\Sqm-Tasks"
-    "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
-    "\Microsoft\Windows\Printing\EduPrintProv"
-    "\Microsoft\Windows\PushToInstall\LoginCheck"
-    "\Microsoft\Windows\Ras\MobilityManager"
-    "\Microsoft\Windows\Registry\RegIdleBackup"
-    "\Microsoft\Windows\RetailDemo\CleanupOfflineContent"
-    "\Microsoft\Windows\Shell\FamilySafetyMonitor"
-    "\Microsoft\Windows\Shell\FamilySafetyRefresh"
-    "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance"
-    "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTaskNetwork"
-    "\Microsoft\Windows\StateRepository\MaintenanceTasks"
-    "\Microsoft\Windows\Time Synchronization\ForceSynchronizeTime"
-    "\Microsoft\Windows\Time Synchronization\SynchronizeTime"
-    "\Microsoft\Windows\Time Zone\SynchronizeTimeZone"
-    "\Microsoft\Windows\UpdateOrchestrator\Report policies"
-    "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task"
-    "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
-    "\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker"
-    "\Microsoft\Windows\UPnP\UPnPHostConfig"
-    "\Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange"
-    "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-    "\Microsoft\Windows\Wininet\CacheTask"
-    "\Microsoft\XblGameSave\XblGameSaveTask"
+"\Microsoft\Windows\Application Experience\PcaPatchDbTask"
+"\Microsoft\Windows\Application Experience\StartupAppTask"
+"\Microsoft\Windows\ApplicationData\appuriverifierdaily"
+"\Microsoft\Windows\ApplicationData\appuriverifierinstall"
+"\Microsoft\Windows\ApplicationData\DsSvcCleanup"
+"\Microsoft\Windows\BrokerInfrastructure\BgTaskRegistrationMaintenanceTask"
+"\Microsoft\Windows\CloudExperienceHost\CreateObjectTask"
+"\Microsoft\Windows\Defrag\ScheduledDefrag"
+"\Microsoft\Windows\Device Setup\Metadata Refresh"
+"\Microsoft\Windows\Diagnosis\Scheduled"
+"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"
+"\Microsoft\Windows\DiskFootprint\Diagnostics"
+"\Microsoft\Windows\InstallService\ScanForUpdates"
+"\Microsoft\Windows\InstallService\ScanForUpdatesAsUser"
+"\Microsoft\Windows\InstallService\SmartRetry"
+"\Microsoft\Windows\International\Synchronize Language Settings"
+"\Microsoft\Windows\Maintenance\WinSAT"
+"\Microsoft\Windows\Management\Provisioning\Cellular"
+"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"
+"\Microsoft\Windows\MUI\LPRemove"
+"\Microsoft\Windows\PI\Sqm-Tasks"
+"\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+"\Microsoft\Windows\Printing\EduPrintProv"
+"\Microsoft\Windows\PushToInstall\LoginCheck"
+"\Microsoft\Windows\Ras\MobilityManager"
+"\Microsoft\Windows\Registry\RegIdleBackup"
+"\Microsoft\Windows\RetailDemo\CleanupOfflineContent"
+"\Microsoft\Windows\Shell\FamilySafetyMonitor"
+"\Microsoft\Windows\Shell\FamilySafetyRefresh"
+"\Microsoft\Windows\Shell\IndexerAutomaticMaintenance"
+"\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTaskNetwork"
+"\Microsoft\Windows\StateRepository\MaintenanceTasks"
+"\Microsoft\Windows\Time Synchronization\ForceSynchronizeTime"
+"\Microsoft\Windows\Time Synchronization\SynchronizeTime"
+"\Microsoft\Windows\Time Zone\SynchronizeTimeZone"
+"\Microsoft\Windows\UpdateOrchestrator\Report policies"
+"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task"
+"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
+"\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker"
+"\Microsoft\Windows\UPnP\UPnPHostConfig"
+"\Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange"
+"\Microsoft\Windows\WindowsUpdate\Scheduled Start"
+"\Microsoft\Windows\Wininet\CacheTask"
+"\Microsoft\XblGameSave\XblGameSaveTask"
 ) do (
-    schtasks /change /disable /TN %%a >nul 2>&1
+schtasks /change /disable /TN %%a >nul 2>&1
 )
 
 :: Enable Storage Sense
@@ -433,22 +433,22 @@ if "%os%"=="Windows 10" (%DevMan% /disable "AMD PSP 10.0 Device" & %DevMan% /dis
 :: Enable MSI mode on USB, GPU, SATA controllers and network adapters
 :: Deleting DevicePriority sets the priority to undefined
 for %%a in (
-    Win32_USBController, 
-    Win32_VideoController, 
-    Win32_NetworkAdapter, 
-    Win32_IDEController
+Win32_USBController, 
+Win32_VideoController, 
+Win32_NetworkAdapter, 
+Win32_IDEController
 ) do (
-    for /f %%i in ('wmic path %%a get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
-        Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t Reg_DWORD /d "1" /f > nul 2>nul
-        Reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f > nul 2>nul
-    )
+for /f %%i in ('wmic path %%a get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
+Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t Reg_DWORD /d "1" /f > nul 2>nul
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f > nul 2>nul
+)
 )
 
 :: if e.g. VMWare is used, set network adapter to normal priority as undefined on some virtual machines may break internet connection
 wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
-    for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
-        Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t Reg_DWORD /d "2"  /f > nul 2>nul
-    )
+for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
+Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t Reg_DWORD /d "2"  /f > nul 2>nul
+)
 )
 
 
@@ -498,11 +498,11 @@ netsh int tcp set global chimney=disabled >nul 2>&1
 netsh int tcp set global congestionprovider=ctcp >nul 2>&1
 :: - > Set Congestion Provider to BBR2 on Windows 11
 if "%os%"=="Windows 11" (
-    netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2 >nul 2>&1
-    netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2 >nul 2>&1
-    netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2 >nul 2>&1
-    netsh int tcp set supplemental Template=DatacenterCustom CongestionProvider=bbr2 >nul 2>&1
-    netsh int tcp set supplemental Template=InternetCustom CongestionProvider=bbr2 >nul 2>&1
+netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2 >nul 2>&1
+netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2 >nul 2>&1
+netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2 >nul 2>&1
+netsh int tcp set supplemental Template=DatacenterCustom CongestionProvider=bbr2 >nul 2>&1
+netsh int tcp set supplemental Template=InternetCustom CongestionProvider=bbr2 >nul 2>&1
 )
 :: - > Enable Direct Cache Access
 :: - > This will have a bigger impact on older CPU's
@@ -643,14 +643,14 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\services\NDIS\Parameters" /v "DisableNDIS
 :: Disable Nagle's Algorithm
 :: https://en.wikipedia.org/wiki/Nagle%27s_algorithm
 :: for /f %%a in ('wmic path Win32_NetworkAdapter get GUID ^| findstr "{"') do (
-::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t Reg_DWORD /d "1" /f >nul 2>&1
-::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t Reg_DWORD /d "0" /f >nul 2>&1
-::     Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t Reg_DWORD /d "1" /f >nul 2>&1
+:: Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpAckFrequency" /t Reg_DWORD /d "1" /f >nul 2>&1
+:: Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TcpDelAckTicks" /t Reg_DWORD /d "0" /f >nul 2>&1
+:: Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\%%a" /v "TCPNoDelay" /t Reg_DWORD /d "1" /f >nul 2>&1
 :: )
 
 :: Disable NetBIOS over TCP
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
-    Reg add "%%a" /v "NetbiosOptions" /t Reg_DWORD /d "2" /f >nul 2>&1
+Reg add "%%a" /v "NetbiosOptions" /t Reg_DWORD /d "2" /f >nul 2>&1
 )
 
 :: Disable Network Protocols
@@ -681,7 +681,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc" /v "DependOnService" /t 
 :: Configure Driver Filters
 :: - > ReadyBoost
 if "%server%"=="no" (
-    Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t Reg_MULTI_SZ /d "fvevol\0iorate" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t Reg_MULTI_SZ /d "fvevol\0iorate" /f >nul 2>&1
 )
 
 :: Split Audio Services
@@ -694,15 +694,15 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImageP
 set BACKUP="%WINDIR%\NeptuneDir\POST-INSTALL\Troubleshooting\windows-default-services.Reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
-    for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
-        for /l %%c in (0,1,4) do (
-            if "%%b"=="0x%%c" (
-                echo. >>%BACKUP%
-                echo [%%~a] >>%BACKUP%
-                echo "Start"=dword:0000000%%c >>%BACKUP%
-            ) 
-        ) 
-    ) 
+for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
+for /l %%c in (0,1,4) do (
+if "%%b"=="0x%%c" (
+echo. >>%BACKUP%
+echo [%%~a] >>%BACKUP%
+echo "Start"=dword:0000000%%c >>%BACKUP%
+) 
+) 
+) 
 ) >nul 2>&1
 
 :: Configure Drivers and Services
@@ -822,15 +822,15 @@ set BACKUP=%WINDIR%\NeptuneDir\POST-INSTALL\Troubleshooting\neptune-default-serv
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
-    for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
-        for /l %%c in (0,1,4) do (
-            if "%%b"=="0x%%c" (
-                echo. >>%BACKUP%
-                echo [%%~a] >>%BACKUP%
-                echo "Start"=dword:0000000%%c >>%BACKUP%
-            ) 
-        ) 
-    ) 
+for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
+for /l %%c in (0,1,4) do (
+if "%%b"=="0x%%c" (
+echo. >>%BACKUP%
+echo [%%~a] >>%BACKUP%
+echo "Start"=dword:0000000%%c >>%BACKUP%
+) 
+) 
+) 
 ) >nul 2>&1
 
 :: check if battery information is available to determine system type
@@ -839,36 +839,36 @@ for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
 :: re-enable keyboard control on VM by running Desktop\POST-INSTALL\Advanced Configuration\Services and Drivers\Serial Port\Enable Serial Port.reg
 :: wmic path Win32_Battery get BatteryStatus > nul 2>&1
 :: if %errorlevel% equ 0 (
-::     set SystemType=Desktop
+:: set SystemType=Desktop
 :: ) else (
-::     set SystemType=Laptop
+:: set SystemType=Laptop
 :: )
 :: if "%SystemType%"=="Laptop" (
-::     echo Running Laptop Configuration...
-::     %svc% serenum 3
-::     %svc% sermouse 3
-::     %svc% serial 3
-::     %svc% i8042prt 3
-::     %svc% wlansvc 2
-::     %svc% wmiacpi 2
-::     Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t Reg_DWORD /d "0" /f >nul 2>&1
-::     %DevMan% /enable "Communications Port (COM1)" >nul 2>&1
-::     %DevMan% /enable "Communications Port (COM2)" >nul 2>&1
-::     %DevMan% /enable "Communications Port (SER1)" >nul 2>&1
-::     %DevMan% /enable "Communications Port (SER2)" >nul 2>&1
+:: echo Running Laptop Configuration...
+:: %svc% serenum 3
+:: %svc% sermouse 3
+:: %svc% serial 3
+:: %svc% i8042prt 3
+:: %svc% wlansvc 2
+:: %svc% wmiacpi 2
+:: Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t Reg_DWORD /d "0" /f >nul 2>&1
+:: %DevMan% /enable "Communications Port (COM1)" >nul 2>&1
+:: %DevMan% /enable "Communications Port (COM2)" >nul 2>&1
+:: %DevMan% /enable "Communications Port (SER1)" >nul 2>&1
+:: %DevMan% /enable "Communications Port (SER2)" >nul 2>&1
 :: ) else (
-::     %svc% acpiex 4
-::     %svc% acpipagr 4
-::     %svc% acpimi 4
-::     %svc% acpipmi 4
-::     %svc% acpitime 4
-::     %svc% iaLPSS2i_GPIO2 4
-::     %svc% iaLPSS2i_I2C 4
-::     %svc% iaLPSSi_GPIO 4
-::     %svc% iaLPSSi_I2C 4
-::     %svc% sermouse 4
-::     %svc% serial 4
-::     %svc% i8042prt 4
+:: %svc% acpiex 4
+:: %svc% acpipagr 4
+:: %svc% acpimi 4
+:: %svc% acpipmi 4
+:: %svc% acpitime 4
+:: %svc% iaLPSS2i_GPIO2 4
+:: %svc% iaLPSS2i_I2C 4
+:: %svc% iaLPSSi_GPIO 4
+:: %svc% iaLPSSi_I2C 4
+:: %svc% sermouse 4
+:: %svc% serial 4
+:: %svc% i8042prt 4
 :: )
 
 
@@ -892,22 +892,22 @@ PowerShell -ExecutionPolicy Unrestricted -Command  "Set-ProcessMitigation -Syste
 ::  - > Disable Process Mitigations (credit: xos)
 for /f "tokens=3 skip=2" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions"') do set mitigation_mask=%%a
 for /L %%a in (0,1,9) do (
-    set "mitigation_mask=!mitigation_mask:%%a=2!
+set "mitigation_mask=!mitigation_mask:%%a=2!
 )
 for %%a in (
-    fontdrvhost.exe
-    dwm.exe
-    lsass.exe
-    svchost.exe
-    WmiPrvSE.exe
-    winlogon.exe
-    csrss.exe
-    audiodg.exe
-    ntoskrnl.exe
-    services.exe
+fontdrvhost.exe
+dwm.exe
+lsass.exe
+svchost.exe
+WmiPrvSE.exe
+winlogon.exe
+csrss.exe
+audiodg.exe
+ntoskrnl.exe
+services.exe
 ) do (
-    Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
-    Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationAuditOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%a" /v "MitigationAuditOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 )
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t Reg_BINARY /d "!mitigation_mask!" /f >nul 2>&1
@@ -986,7 +986,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "DisableA
 :: Disable DMA Remapping
 :: https://docs.microsoft.com/en-us/windows-hardware/drivers/pci/enabling-dma-remapping-for-device-drivers
 for /f %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "DmaRemappingCompatible" ^| find /i "Services\" ') do (
-    Reg add "%%a" /v "DmaRemappingCompatible" /t Reg_DWORD /d "0" /f >nul 2>&1
+Reg add "%%a" /v "DmaRemappingCompatible" /t Reg_DWORD /d "0" /f >nul 2>&1
 )
 
 :: Disable DMA Memory Protection
@@ -1153,26 +1153,26 @@ Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
 :: - > Remove 'print' from Context Menus
 Reg add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
 for %%a in (
-    "batfile"
-    "cmdfile"
-    "docxfile"
-    "fonfile"
-    "htmlfile"
-    "inffile"
-    "inifile"
-    "JSEFile"
-    "otffile"
-    "pfmfile"
-    "regfile"
-    "rtffile"
-    "ttcfile"
-    "ttffile"
-    "txtfile"
-    "VBEFile"
-    "VBSFile"
-    "WSFFile"
+"batfile"
+"cmdfile"
+"docxfile"
+"fonfile"
+"htmlfile"
+"inffile"
+"inifile"
+"JSEFile"
+"otffile"
+"pfmfile"
+"regfile"
+"rtffile"
+"ttcfile"
+"ttffile"
+"txtfile"
+"VBEFile"
+"VBSFile"
+"WSFFile"
 ) do (
-    Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
+Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
 )
 :: - > Remove 'include in library' from Context Menus
 Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul 2>&1
@@ -1297,7 +1297,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "LockedStartLayou
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy Objects\{2F5183E9-4A32-40DD-9639-F9FAF80C79F4}Machine\Software\Policies\Microsoft\Windows\Explorer" /v "StartLayoutFile" /t REG_EXPAND_SZ /d "%WinDir%\layout.xml" /f >nul 2>&1
 :: - > Disable action center on the Taskbar
 if "%os%"=="Windows 10" (
-    Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 :: - > Disable notifications
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1313,10 +1313,10 @@ if "%os%"=="Windows 11" do (%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windo
 
 :: Enable the legacy photo viewer from windows 7 era
 for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-    Reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~a" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~a" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul 2>&1
 )
 for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-    %currentuser% Reg add "HKCU\SOFTWARE\Classes\.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul 2>&1
+%currentuser% Reg add "HKCU\SOFTWARE\Classes\.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul 2>&1
 )
 :: - > File Explorer as only taskbar pin
 Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "FavoritesResolve" /t REG_BINARY /d "4a0300004c0000000114020000000000c0000000000000468300800020200000590db5b8fc78da012421b5b8fc78da011558413ce243d701970100000000000001000000000000000000000000000000a4013a001f80c827341f105c1042aa032ee45287d668260001002600efbe122000006e14cad6a972da01640049dba972da01e25d6fc3cb78da01140056003100000000007258e03211205461736b42617200400009000400efbe6a58d5297258e0322e0000004f9301000000010000000000000000000000000000009217c8005400610073006b00420061007200000016001201320097010000a852e041202046696c65204578706c6f7265722e6c6e6b007c0009000400efbe7258e0327258e0322e0000002096010000001f000000000000000000520000000000ebc1fe00460069006c00650020004500780070006c006f007200650072002e006c006e006b00000040007300680065006c006c00330032002e0064006c006c002c002d003200320030003600370000002000220000001e00efbe02005500730065007200500069006e006e006500640000002000120000002b00efbe3a36b6b8fc78da012000420000001d00efbe02004d006900630072006f0073006f00660074002e00570069006e0064006f00770073002e004500780070006c006f00720065007200000020000000af0000001c000000010000001c0000003800000000000000ae0000001c00000003000000283ae86810000000536572766572203230323200433a5c55736572735c41646d696e6973747261746f725c417070446174615c526f616d696e675c4d6963726f736f66745c496e7465726e6574204578706c6f7265725c517569636b204c61756e63685c557365722050696e6e65645c5461736b4261725c46696c65204578706c6f7265722e6c6e6b000060000000030000a0580000000000000077696e2d66717039616c756637386f008e8df7fd4d0d9e428f794b128d12d1b1d6ca9e90e6e4ee11846b7085c23c97408e8df7fd4d0d9e428f794b128d12d1b1d6ca9e90e6e4ee11846b7085c23c974045000000090000a03900000031535053b1166d44ad8d7048a748402ea43d788c1d000000680000000048000000b0bedfad7c6eda01580fcd443e37ed00000000000000000000000000" /f >nul 2>&1
@@ -1325,7 +1325,7 @@ Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" 
 
 :: Hide pages in UWP settings
 if "%os%"=="Windows 10" (
-    Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:recovery;autoplay;usb;maps;maps-downloadmaps;findmydevice;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-location;privacy-general;sync;printers;cortana-windowssearch;mobile-devices;mobile-devices-addphone;backup;" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:recovery;autoplay;usb;maps;maps-downloadmaps;findmydevice;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-location;privacy-general;sync;printers;cortana-windowssearch;mobile-devices;mobile-devices-addphone;backup;" /f >nul 2>&1
 )
 :: - >  Hide unneeded control panel applets
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "RestrictCpl" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -1452,25 +1452,25 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl\StorageTelemetry" /v
 
 :: Configure Windows 11 File Explorer
 if "%os%"=="Windows 11" (
-    :: - > Restore default context menu
-    %currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /ve /t REG_SZ /d "" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /t REG_SZ /d "" /f >nul 2>&1
-    :: - > Disable Start Menu Recommendations
-    %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d "0" /f >nul 2>&1
-    :: - > Disable Widgets
-    Reg add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f >nul 2>&1
-    :: - > Disable Dynamic Lighting
-    %currentuser% Reg.exe add "HKCU\Software\Microsoft\Lighting" /v "AmbientLightingEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-    :: - > Allign the taskbar to the left
-    %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul 2>&1
-    :: - > Use compact view mode in File Explorer
-    %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "UseCompactMode" /t REG_DWORD /d "1" /f >nul 2>&1
-    :: - > Hide UWP settings pages
-    Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:home;recovery;autoplay;usb;maps;maps-downloadmaps;findmydevice;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-location;privacy-general;sync;printers;cortana-windowssearch;mobile-devices;mobile-devices-addphone;backup;" /f >nul 2>&1
-    :: - > Hide gallery in File Explorer
-    %currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>&1
-    :: - > Show more pins in start menu
-    %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_Layout" /t REG_DWORD /d "1" /f >nul 2>&1
+:: - > Restore default context menu
+%currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /ve /t REG_SZ /d "" /f >nul 2>&1
+%currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /t REG_SZ /d "" /f >nul 2>&1
+:: - > Disable Start Menu Recommendations
+%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d "0" /f >nul 2>&1
+:: - > Disable Widgets
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f >nul 2>&1
+:: - > Disable Dynamic Lighting
+%currentuser% Reg.exe add "HKCU\Software\Microsoft\Lighting" /v "AmbientLightingEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+:: - > Allign the taskbar to the left
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul 2>&1
+:: - > Use compact view mode in File Explorer
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "UseCompactMode" /t REG_DWORD /d "1" /f >nul 2>&1
+:: - > Hide UWP settings pages
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:home;recovery;autoplay;usb;maps;maps-downloadmaps;findmydevice;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-location;privacy-general;sync;printers;cortana-windowssearch;mobile-devices;mobile-devices-addphone;backup;" /f >nul 2>&1
+:: - > Hide gallery in File Explorer
+%currentuser% Reg add "HKCU\SOFTWARE\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>&1
+:: - > Show more pins in start menu
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_Layout" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
 
@@ -1580,24 +1580,24 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftL
 ::   - > Disable start menu suggestions
 ::   - > Disable get tips, tricks, and suggestions as you use windows
 for %%a in (
-    "ContentDeliveryAllowed"
-    "OemPreInstalledAppsEnabled"
-    "PreInstalledAppsEnabled"
-    "PreInstalledAppsEverEnabled"
-    "SilentInstalledAppsEnabled"
-    "SubscribedContent-310093Enabled"
-    "SubscribedContent-338393Enabled"
-    "SubscribedContent-353694Enabled"
-    "SubscribedContent-353696Enabled"
-    "SubscribedContent-338387Enabled"
-    "RotatingLockScreenOverlayEnabled"
-    "RotatingLockScreenEnabled"
-    "SubscribedContent-338388Enabled"
-    "SystemPaneSuggestionsEnabled"
-    "SubscribedContent-338389Enabled"
-    "SoftLandingEnabled"
+"ContentDeliveryAllowed"
+"OemPreInstalledAppsEnabled"
+"PreInstalledAppsEnabled"
+"PreInstalledAppsEverEnabled"
+"SilentInstalledAppsEnabled"
+"SubscribedContent-310093Enabled"
+"SubscribedContent-338393Enabled"
+"SubscribedContent-353694Enabled"
+"SubscribedContent-353696Enabled"
+"SubscribedContent-338387Enabled"
+"RotatingLockScreenOverlayEnabled"
+"RotatingLockScreenEnabled"
+"SubscribedContent-338388Enabled"
+"SystemPaneSuggestionsEnabled"
+"SubscribedContent-338389Enabled"
+"SoftLandingEnabled"
 ) do (
-    %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "%%~a" /t Reg_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "%%~a" /t Reg_DWORD /d "0" /f >nul 2>&1
 )
 
 :: Disable License Telemetry
@@ -1696,24 +1696,24 @@ setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul 2>&1
 
 :: Disable AutoLoggers
 for %%a in (
-    Circular Kernel Context Logger
-    CloudExperienceHostOobe
-    DefenderApiLogger
-    DefenderAuditLogger
-    Diagtrack-Listener
-    LwtNetLog
-    Microsoft-Windows-Rdp-Graphics-RdpIdd-Trace
-    NetCore
-    NtfsLog
-    RadioMgr
-    RdrLog
-    ReadyBoot
-    SpoolerLogger
-    UBPM
-    WdiContextLog
-    WiFiSession
+Circular Kernel Context Logger
+CloudExperienceHostOobe
+DefenderApiLogger
+DefenderAuditLogger
+Diagtrack-Listener
+LwtNetLog
+Microsoft-Windows-Rdp-Graphics-RdpIdd-Trace
+NetCore
+NtfsLog
+RadioMgr
+RdrLog
+ReadyBoot
+SpoolerLogger
+UBPM
+WdiContextLog
+WiFiSession
 ) do (
-    Reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\%%a" /v "Start" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\%%a" /v "Start" /t REG_DWORD /d "0" /f >nul 2>&1
 )
 
 :: Delete Device Metadata
@@ -1784,7 +1784,7 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{3E4D4F
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{3E4D4F1C-2AEE-11D1-9D3D-00C04FC30DF6}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{435899C9-44AB-11D1-AF00-080036234103}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{435899C9-44AB-11D1-AF00-080036234103}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1           
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1   
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1   
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{64AB4BB7-111E-11D1-8F79-00C04FC2FBE1}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{64AB4BB7-111E-11D1-8F79-00C04FC2FBE1}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
@@ -2010,9 +2010,9 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32Priorit
 
 :: Enable Timer Resolution on Windows 11
 if "%os%"=="Windows 11" (
-    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 ) else if "%server%"=="yes" (
-    Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
 :: Disable WatchDog Timer
@@ -2054,21 +2054,21 @@ for /f "delims=" %%a in ('Reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 
 :: Disable Audio Enhancements
 for %%a in ("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture", "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render") do (
-    for /f "delims=" %%b in ('reg query "%%a"') do (
-        Reg add "%%b\FxProperties" /v "{1da5d803-d492-4edd-8c23-e0c0ffee7f0e},5" /t REG_DWORD /d "1" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{1b5c2483-0839-4523-ba87-95f89d27bd8c},3" /t REG_BINARY /d "030044CD0100000000000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{73ae880e-8258-4e57-b85f-7daa6b7d5ef0},3" /t REG_BINARY /d "030044CD0100000001000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{9c00eeed-edce-4cd8-ae08-cb05e8ef57a0},3" /t REG_BINARY /d "030044CD0100000004000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{fc52a749-4be9-4510-896e-966ba6525980},3" /t REG_BINARY /d "0B0044CD0100000000000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{ae7f0b2a-96fc-493a-9247-a019f1f701e1},3" /t REG_BINARY /d "0300BC5B0100000001000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{1864a4e0-efc1-45e6-a675-5786cbf3b9f0},4" /t REG_BINARY /d "030044CD0100000000000000" /f >nul 2>&1
-        Reg add "%%b\FxProperties" /v "{61e8acb9-f04f-4f40-a65f-8f49fab3ba10},4" /t REG_BINARY /d "030044CD0100000050000000" /f >nul 2>&1
-        Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},0" /t REG_BINARY /d "4100FE6901000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul 2>&1
-        Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},1" /t REG_BINARY /d "41008EC901000000A086010000000000" /f >nul 2>&1
-        Reg add "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},3" /t REG_BINARY /d "4100020001000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul 2>&1
-        Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >nul 2>&1
-        Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >nul 2>&1
-    )
+for /f "delims=" %%b in ('reg query "%%a"') do (
+Reg add "%%b\FxProperties" /v "{1da5d803-d492-4edd-8c23-e0c0ffee7f0e},5" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{1b5c2483-0839-4523-ba87-95f89d27bd8c},3" /t REG_BINARY /d "030044CD0100000000000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{73ae880e-8258-4e57-b85f-7daa6b7d5ef0},3" /t REG_BINARY /d "030044CD0100000001000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{9c00eeed-edce-4cd8-ae08-cb05e8ef57a0},3" /t REG_BINARY /d "030044CD0100000004000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{fc52a749-4be9-4510-896e-966ba6525980},3" /t REG_BINARY /d "0B0044CD0100000000000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{ae7f0b2a-96fc-493a-9247-a019f1f701e1},3" /t REG_BINARY /d "0300BC5B0100000001000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{1864a4e0-efc1-45e6-a675-5786cbf3b9f0},4" /t REG_BINARY /d "030044CD0100000000000000" /f >nul 2>&1
+Reg add "%%b\FxProperties" /v "{61e8acb9-f04f-4f40-a65f-8f49fab3ba10},4" /t REG_BINARY /d "030044CD0100000050000000" /f >nul 2>&1
+Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},0" /t REG_BINARY /d "4100FE6901000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul 2>&1
+Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},1" /t REG_BINARY /d "41008EC901000000A086010000000000" /f >nul 2>&1
+Reg add "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},3" /t REG_BINARY /d "4100020001000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul 2>&1
+Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >nul 2>&1
+Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >nul 2>&1
+)
 )
 
 :: Power Registry
@@ -2159,19 +2159,19 @@ lodctr /r >nul 2>&1
 
 cls & echo !S_GREEN!Debloating Windows...
 for %%i in (
-    3DBuilder bing bingfinance bingsports BingWeather
-    Clipchamp.Clipchamp CommsPhone "Drawboard PDF" Facebook
-    Getstarted Microsoft.549981C3F5F10 Microsoft.Cortana Microsoft.GamingApp
-    Microsoft.GetHelp Microsoft.Messaging Microsoft.MicrosoftEdge.Stable Microsoft.MicrosoftStickyNotes
-    Microsoft.OutlookForWindows Microsoft.PowerAutomateDesktop Microsoft.Todos Microsoft.Windows.Photos
-    Microsoft.Xbox Microsoft.YourPhone MicrosoftCorporationII.QuickAssist MicrosoftOfficeHub
-    Office.OneNote OneNote people SkypeApp solit Sway
-    Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
-    windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
-    WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
-    Microsoft.MSPaint
+3DBuilder bing bingfinance bingsports BingWeather
+Clipchamp.Clipchamp CommsPhone "Drawboard PDF" Facebook
+Getstarted Microsoft.549981C3F5F10 Microsoft.Cortana Microsoft.GamingApp
+Microsoft.GetHelp Microsoft.Messaging Microsoft.MicrosoftEdge.Stable Microsoft.MicrosoftStickyNotes
+Microsoft.OutlookForWindows Microsoft.PowerAutomateDesktop Microsoft.Todos Microsoft.Windows.Photos
+Microsoft.Xbox Microsoft.YourPhone MicrosoftCorporationII.QuickAssist MicrosoftOfficeHub
+Office.OneNote OneNote people SkypeApp solit Sway
+Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
+windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
+WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
+Microsoft.MSPaint
 ) do (
-    %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
+%currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
 )
 
 :: Remove OneDrive
@@ -2286,7 +2286,7 @@ dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart >nul 2>&1
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 
 if "%server%"=="yes" (
-    %PowerShell% "Remove-WindowsFeature AzureArcSetup"
+%PowerShell% "Remove-WindowsFeature AzureArcSetup"
 )
 
 :: UWP Deprovision
@@ -2324,71 +2324,527 @@ cls & echo !S_GREEN!Installing DirectX
 cls & echo !S_GREEN!Installing 7-Zip
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 
+:: Context Menu Options
+
+:: Context Menu Options
+%currentuser% Reg add "HKCU\Software\7-Zip\FM\Columns" /v "RootFolder" /t REG_BINARY /d "0100000000000000010000000400000001000000A0000000" /f >nul
+%currentuser% Reg add "HKCU\Software\7-Zip\Options" /v "ElimDupExtract" /t REG_DWORD /d "0" /f >nul
+%currentuser% Reg add "HKCU\Software\7-Zip\Options" /v "ContextMenu" /t REG_DWORD /d "4100" /f >nul
+Reg add "HKU\%SID%\SOFTWARE\7-Zip\Options" /v "ContextMenu" /t REG_DWORD /d "1073746726" /f
+:: File Assoc
+reg add "HKU\%SID%\SOFTWARE\Classes\.001" /ve /t REG_SZ /d "7-Zip.001" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.7z" /ve /t REG_SZ /d "7-Zip.7z" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.apfs" /ve /t REG_SZ /d "7-Zip.apfs" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.arj" /ve /t REG_SZ /d "7-Zip.arj" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.bz2" /ve /t REG_SZ /d "7-Zip.bz2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.bzip2" /ve /t REG_SZ /d "7-Zip.bzip2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.cab" /ve /t REG_SZ /d "7-Zip.cab" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.cpio" /ve /t REG_SZ /d "7-Zip.cpio" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.deb" /ve /t REG_SZ /d "7-Zip.deb" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.dmg" /ve /t REG_SZ /d "7-Zip.dmg" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.esd" /ve /t REG_SZ /d "7-Zip.esd" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.fat" /ve /t REG_SZ /d "7-Zip.fat" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.gz" /ve /t REG_SZ /d "7-Zip.gz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.gzip" /ve /t REG_SZ /d "7-Zip.gzip" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.hfs" /ve /t REG_SZ /d "7-Zip.hfs" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.iso" /ve /t REG_SZ /d "7-Zip.iso" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.lha" /ve /t REG_SZ /d "7-Zip.lha" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.lzh" /ve /t REG_SZ /d "7-Zip.lzh" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.lzma" /ve /t REG_SZ /d "7-Zip.lzma" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.ntfs" /ve /t REG_SZ /d "7-Zip.ntfs" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.rar" /ve /t REG_SZ /d "7-Zip.rar" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.rpm" /ve /t REG_SZ /d "7-Zip.rpm" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.squashfs" /ve /t REG_SZ /d "7-Zip.squashfs" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.swm" /ve /t REG_SZ /d "7-Zip.swm" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.tar" /ve /t REG_SZ /d "7-Zip.tar" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.taz" /ve /t REG_SZ /d "7-Zip.taz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.tbz" /ve /t REG_SZ /d "7-Zip.tbz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.tbz2" /ve /t REG_SZ /d "7-Zip.tbz2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.tgz" /ve /t REG_SZ /d "7-Zip.tgz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.tpz" /ve /t REG_SZ /d "7-Zip.tpz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.txz" /ve /t REG_SZ /d "7-Zip.txz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.vhd" /ve /t REG_SZ /d "7-Zip.vhd" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.vhdx" /ve /t REG_SZ /d "7-Zip.vhdx" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.wim" /ve /t REG_SZ /d "7-Zip.wim" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.xar" /ve /t REG_SZ /d "7-Zip.xar" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.xz" /ve /t REG_SZ /d "7-Zip.xz" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.z" /ve /t REG_SZ /d "7-Zip.z" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\.zip" /ve /t REG_SZ /d "7-Zip.zip" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.001" /ve /t REG_SZ /d "001 Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.001\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,9" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.001\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.001\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.001\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.7z" /ve /t REG_SZ /d "7z Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.7z\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,0" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.7z\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.7z\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.7z\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.apfs" /ve /t REG_SZ /d "apfs Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.apfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,25" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.apfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.apfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.apfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.arj" /ve /t REG_SZ /d "arj Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.arj\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,4" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.arj\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.arj\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.arj\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bz2" /ve /t REG_SZ /d "bz2 Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bz2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bz2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bz2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bz2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bzip2" /ve /t REG_SZ /d "bzip2 Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bzip2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bzip2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bzip2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.bzip2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cab" /ve /t REG_SZ /d "cab Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cab\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,7" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cab\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cab\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cab\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cpio" /ve /t REG_SZ /d "cpio Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cpio\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,12" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cpio\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cpio\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.cpio\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.deb" /ve /t REG_SZ /d "deb Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.deb\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,11" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.deb\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.deb\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.deb\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.dmg" /ve /t REG_SZ /d "dmg Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.dmg\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,17" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.dmg\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.dmg\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.dmg\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.esd" /ve /t REG_SZ /d "esd Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.esd\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.esd\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.esd\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.esd\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.fat" /ve /t REG_SZ /d "fat Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.fat\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,21" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.fat\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.fat\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.fat\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gz" /ve /t REG_SZ /d "gz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gzip" /ve /t REG_SZ /d "gzip Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gzip\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gzip\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gzip\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.gzip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.hfs" /ve /t REG_SZ /d "hfs Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.hfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,18" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.hfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.hfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.hfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.iso" /ve /t REG_SZ /d "iso Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.iso\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,8" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.iso\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.iso\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.iso\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lha" /ve /t REG_SZ /d "lha Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lha\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,6" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lha\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lha\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lha\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzh" /ve /t REG_SZ /d "lzh Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzh\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,6" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzh\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzh\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzh\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzma" /ve /t REG_SZ /d "lzma Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzma\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,16" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzma\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzma\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.lzma\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.ntfs" /ve /t REG_SZ /d "ntfs Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.ntfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,22" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.ntfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.ntfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.ntfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rar" /ve /t REG_SZ /d "rar Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,3" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rar\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rar\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rpm" /ve /t REG_SZ /d "rpm Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rpm\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,10" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rpm\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rpm\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.rpm\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.squashfs" /ve /t REG_SZ /d "squashfs Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.squashfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,24" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.squashfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.squashfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.squashfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.swm" /ve /t REG_SZ /d "swm Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.swm\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.swm\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.swm\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.swm\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tar" /ve /t REG_SZ /d "tar Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,13" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tar\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tar\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.taz" /ve /t REG_SZ /d "taz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.taz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,5" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.taz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.taz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.taz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz" /ve /t REG_SZ /d "tbz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz2" /ve /t REG_SZ /d "tbz2 Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tbz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tgz" /ve /t REG_SZ /d "tgz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tgz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tgz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tgz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tgz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tpz" /ve /t REG_SZ /d "tpz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tpz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tpz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tpz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.tpz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.txz" /ve /t REG_SZ /d "txz Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.txz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,23" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.txz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.txz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.txz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhd" /ve /t REG_SZ /d "vhd Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhd\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,20" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhd\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhd\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhd\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx" /ve /t REG_SZ /d "vhdx Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,20" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim" /ve /t REG_SZ /d "wim Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell\open" /ve /t REG_SZ /d "" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar" /ve /t REG_SZ /d "xar Archive" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,19" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell" /ve /t REG_SZ /d "" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell\open" /ve /t REG_SZ /d "" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz" /ve /t REG_SZ /d "xz Archive" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,23" /freg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z" /ve /t REG_SZ /d "z Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,5" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.zip" /ve /t REG_SZ /d "zip Archive" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,1" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.zip\shell" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\.001" /ve /t REG_SZ /d "7-Zip.001" /f
+reg add "HKLM\SOFTWARE\Classes\.7z" /ve /t REG_SZ /d "7-Zip.7z" /f
+reg add "HKLM\SOFTWARE\Classes\.apfs" /ve /t REG_SZ /d "7-Zip.apfs" /f
+reg add "HKLM\SOFTWARE\Classes\.arj" /ve /t REG_SZ /d "7-Zip.arj" /f
+reg add "HKLM\SOFTWARE\Classes\.bz2" /ve /t REG_SZ /d "7-Zip.bz2" /f
+reg add "HKLM\SOFTWARE\Classes\.bzip2" /ve /t REG_SZ /d "7-Zip.bzip2" /f
+reg add "HKLM\SOFTWARE\Classes\.cab" /ve /t REG_SZ /d "7-Zip.cab" /f
+reg add "HKLM\SOFTWARE\Classes\.cpio" /ve /t REG_SZ /d "7-Zip.cpio" /f
+reg add "HKLM\SOFTWARE\Classes\.deb" /ve /t REG_SZ /d "7-Zip.deb" /f
+reg add "HKLM\SOFTWARE\Classes\.dmg" /ve /t REG_SZ /d "7-Zip.dmg" /f
+reg add "HKLM\SOFTWARE\Classes\.esd" /ve /t REG_SZ /d "7-Zip.esd" /f
+reg add "HKLM\SOFTWARE\Classes\.fat" /ve /t REG_SZ /d "7-Zip.fat" /f
+reg add "HKLM\SOFTWARE\Classes\.gz" /ve /t REG_SZ /d "7-Zip.gz" /f
+reg add "HKLM\SOFTWARE\Classes\.gzip" /ve /t REG_SZ /d "7-Zip.gzip" /f
+reg add "HKLM\SOFTWARE\Classes\.hfs" /ve /t REG_SZ /d "7-Zip.hfs" /f
+reg add "HKLM\SOFTWARE\Classes\.iso" /ve /t REG_SZ /d "7-Zip.iso" /f
+reg add "HKLM\SOFTWARE\Classes\.lha" /ve /t REG_SZ /d "7-Zip.lha" /f
+reg add "HKLM\SOFTWARE\Classes\.lzh" /ve /t REG_SZ /d "7-Zip.lzh" /f
+reg add "HKLM\SOFTWARE\Classes\.lzma" /ve /t REG_SZ /d "7-Zip.lzma" /f
+reg add "HKLM\SOFTWARE\Classes\.ntfs" /ve /t REG_SZ /d "7-Zip.ntfs" /f
+reg add "HKLM\SOFTWARE\Classes\.rar" /ve /t REG_SZ /d "7-Zip.rar" /f
+reg add "HKLM\SOFTWARE\Classes\.rpm" /ve /t REG_SZ /d "7-Zip.rpm" /f
+reg add "HKLM\SOFTWARE\Classes\.squashfs" /ve /t REG_SZ /d "7-Zip.squashfs" /f
+reg add "HKLM\SOFTWARE\Classes\.swm" /ve /t REG_SZ /d "7-Zip.swm" /f
+reg add "HKLM\SOFTWARE\Classes\.tar" /ve /t REG_SZ /d "7-Zip.tar" /f
+reg add "HKLM\SOFTWARE\Classes\.taz" /ve /t REG_SZ /d "7-Zip.taz" /f
+reg add "HKLM\SOFTWARE\Classes\.tbz" /ve /t REG_SZ /d "7-Zip.tbz" /f
+reg add "HKLM\SOFTWARE\Classes\.tbz2" /ve /t REG_SZ /d "7-Zip.tbz2" /f
+reg add "HKLM\SOFTWARE\Classes\.tgz" /ve /t REG_SZ /d "7-Zip.tgz" /f
+reg add "HKLM\SOFTWARE\Classes\.tpz" /ve /t REG_SZ /d "7-Zip.tpz" /f
+reg add "HKLM\SOFTWARE\Classes\.txz" /ve /t REG_SZ /d "7-Zip.txz" /f
+reg add "HKLM\SOFTWARE\Classes\.vhd" /ve /t REG_SZ /d "7-Zip.vhd" /f
+reg add "HKLM\SOFTWARE\Classes\.vhdx" /ve /t REG_SZ /d "7-Zip.vhdx" /f
+reg add "HKLM\SOFTWARE\Classes\.wim" /ve /t REG_SZ /d "7-Zip.wim" /f
+reg add "HKLM\SOFTWARE\Classes\.xar" /ve /t REG_SZ /d "7-Zip.xar" /f
+reg add "HKLM\SOFTWARE\Classes\.xz" /ve /t REG_SZ /d "7-Zip.xz" /f
+reg add "HKLM\SOFTWARE\Classes\.z" /ve /t REG_SZ /d "7-Zip.z" /f
+reg add "HKLM\SOFTWARE\Classes\.zip" /ve /t REG_SZ /d "7-Zip.zip" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.001" /ve /t REG_SZ /d "001 Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.001\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,9" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.001\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.001\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.001\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.7z" /ve /t REG_SZ /d "7z Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.7z\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,0" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.7z\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.7z\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.7z\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.apfs" /ve /t REG_SZ /d "apfs Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.apfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,25" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.apfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.apfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.apfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.arj" /ve /t REG_SZ /d "arj Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.arj\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,4" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.arj\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.arj\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.arj\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bz2" /ve /t REG_SZ /d "bz2 Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bz2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bz2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bz2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bz2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bzip2" /ve /t REG_SZ /d "bzip2 Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bzip2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bzip2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bzip2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.bzip2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cab" /ve /t REG_SZ /d "cab Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cab\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,7" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cab\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cab\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cab\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cpio" /ve /t REG_SZ /d "cpio Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cpio\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,12" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cpio\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cpio\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.cpio\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.deb" /ve /t REG_SZ /d "deb Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.deb\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,11" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.deb\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.deb\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.deb\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.dmg" /ve /t REG_SZ /d "dmg Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.dmg\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,17" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.dmg\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.dmg\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.dmg\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.esd" /ve /t REG_SZ /d "esd Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.esd\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.esd\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.esd\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.esd\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.fat" /ve /t REG_SZ /d "fat Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.fat\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,21" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.fat\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.fat\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.fat\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gz" /ve /t REG_SZ /d "gz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gzip" /ve /t REG_SZ /d "gzip Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gzip\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gzip\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gzip\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.gzip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.hfs" /ve /t REG_SZ /d "hfs Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.hfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,18" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.hfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.hfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.hfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.iso" /ve /t REG_SZ /d "iso Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.iso\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,8" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.iso\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.iso\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.iso\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lha" /ve /t REG_SZ /d "lha Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lha\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,6" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lha\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lha\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lha\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzh" /ve /t REG_SZ /d "lzh Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzh\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,6" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzh\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzh\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzh\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzma" /ve /t REG_SZ /d "lzma Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzma\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,16" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzma\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzma\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.lzma\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.ntfs" /ve /t REG_SZ /d "ntfs Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.ntfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,22" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.ntfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.ntfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.ntfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rar" /ve /t REG_SZ /d "rar Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,3" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rar\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rar\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rpm" /ve /t REG_SZ /d "rpm Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rpm\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,10" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rpm\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rpm\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.rpm\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.squashfs" /ve /t REG_SZ /d "squashfs Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.squashfs\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,24" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.squashfs\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.squashfs\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.squashfs\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.swm" /ve /t REG_SZ /d "swm Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.swm\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.swm\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.swm\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.swm\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tar" /ve /t REG_SZ /d "tar Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,13" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tar\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tar\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.taz" /ve /t REG_SZ /d "taz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.taz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,5" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.taz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.taz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.taz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz" /ve /t REG_SZ /d "tbz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz2" /ve /t REG_SZ /d "tbz2 Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz2\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz2\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz2\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz2\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,2" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tbz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tgz" /ve /t REG_SZ /d "tgz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tgz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tgz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tgz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tgz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tpz" /ve /t REG_SZ /d "tpz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tpz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,14" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tpz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tpz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.tpz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.txz" /ve /t REG_SZ /d "txz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.txz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,23" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.txz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.txz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.txz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhd" /ve /t REG_SZ /d "vhd Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhd\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,20" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhd\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhd\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhd\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhdx" /ve /t REG_SZ /d "vhdx Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhdx\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,20" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhdx\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhdx\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.vhdx\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.wim" /ve /t REG_SZ /d "wim Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.wim\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.wim\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.wim\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xar" /ve /t REG_SZ /d "xar Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,19" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xar\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xar\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xz" /ve /t REG_SZ /d "xz Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,23" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xz\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xz\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.xz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.z" /ve /t REG_SZ /d "z Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.z\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,5" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.z\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.z\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.z\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.zip" /ve /t REG_SZ /d "zip Archive" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,1" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f
+reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+
 if "%os%"=="Windows 11" (
-    cls & echo !S_GREEN!Installing Timer Resolution Service
-    "%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
+cls & echo !S_GREEN!Installing Timer Resolution Service
+"%WinDir%\NeptuneDir\Tools\TimerResolution.exe" -install >nul 2>&1
 )
 
 if "%os%"=="Windows 10" (
-    cls & echo !S_GREEN!Installing Open Shell
-    "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
+cls & echo !S_GREEN!Installing Open Shell
+"%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
-    cls & echo !S_GREEN!Configuring Open Shell
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "Version" /t REG_DWORD /d "67371150" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkipMetro" /t REG_DWORD /d "1" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuStyle" /t REG_SZ /d "Win7" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ProgramsMenuDelay" /t REG_DWORD /d "99999999" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "StartScreenShortcut" /t REG_DWORD /d "0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinW7" /t REG_SZ /d "" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinVariationW7" /t REG_SZ /d "" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinOptionsW7" /t REG_MULTI_SZ /d "USER_IMAGE=1\0SMALL_ICONS=1\0THICK_BORDER=0\0SOLID_SELECTION=0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuItems7" /t REG_MULTI_SZ /d "Item1.Command=user_files\0Item1.Settings=NOEXPAND\0Item2.Command=user_documents\0Item2.Settings=NOEXPAND\0Item3.Command=user_pictures\0Item3.Settings=NOEXPAND\0Item4.Command=user_music\0Item4.Settings=NOEXPAND\0Item5.Command=user_videos\0Item5.Settings=ITEM_DISABLED\0Item6.Command=downloads\0Item6.Settings=ITEM_DISABLED\0Item7.Command=homegroup\0Item7.Settings=ITEM_DISABLED\0Item8.Command=separator\0Item9.Command=games\0Item9.Settings=TRACK_RECENT|NOEXPAND|ITEM_DISABLED\0Item10.Command=favorites\0Item10.Settings=ITEM_DISABLED\0Item11.Command=computer\0Item11.Settings=NOEXPAND\0Item12.Command=downloads\0Item12.Settings=NOEXPAND\0Item13.Command=network\0Item13.Settings=ITEM_DISABLED\0Item14.Command=network_connections\0Item14.Settings=ITEM_DISABLED\0Item15.Command=separator\0Item16.Command=control_panel\0Item16.Settings=TRACK_RECENT|NOEXPAND\0Item17.Command=pc_settings\0Item17.Settings=TRACK_RECENT\0Item18.Command=admin\0Item18.Settings=TRACK_RECENT|ITEM_DISABLED\0Item19.Command=devmgmt.msc\0Item19.Label=Device Manager\0Item19.Icon=C:\Windows\system32\devmgr.dll, 201\0Item19.Settings=NOEXPAND\0Item20.Command=defaults\0Item20.Settings=ITEM_DISABLED\0Item21.Command=help\0Item21.Settings=ITEM_DISABLED\0Item22.Command=run\0Item23.Command=apps\0Item23.Settings=ITEM_DISABLED\0Item24.Command=windows_security\0Item24.Settings=ITEM_DISABLED" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ShiftRight" /t REG_DWORD /d "1" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "RecentPrograms" /t REG_SZ /d "None" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchTrack" /t REG_DWORD /d "0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchAutoComplete" /t REG_DWORD /d "0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
-    %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
+cls & echo !S_GREEN!Configuring Open Shell
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "Version" /t REG_DWORD /d "67371150" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkipMetro" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuStyle" /t REG_SZ /d "Win7" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ProgramsMenuDelay" /t REG_DWORD /d "99999999" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "StartScreenShortcut" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinW7" /t REG_SZ /d "" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinVariationW7" /t REG_SZ /d "" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkinOptionsW7" /t REG_MULTI_SZ /d "USER_IMAGE=1\0SMALL_ICONS=1\0THICK_BORDER=0\0SOLID_SELECTION=0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuItems7" /t REG_MULTI_SZ /d "Item1.Command=user_files\0Item1.Settings=NOEXPAND\0Item2.Command=user_documents\0Item2.Settings=NOEXPAND\0Item3.Command=user_pictures\0Item3.Settings=NOEXPAND\0Item4.Command=user_music\0Item4.Settings=NOEXPAND\0Item5.Command=user_videos\0Item5.Settings=ITEM_DISABLED\0Item6.Command=downloads\0Item6.Settings=ITEM_DISABLED\0Item7.Command=homegroup\0Item7.Settings=ITEM_DISABLED\0Item8.Command=separator\0Item9.Command=games\0Item9.Settings=TRACK_RECENT|NOEXPAND|ITEM_DISABLED\0Item10.Command=favorites\0Item10.Settings=ITEM_DISABLED\0Item11.Command=computer\0Item11.Settings=NOEXPAND\0Item12.Command=downloads\0Item12.Settings=NOEXPAND\0Item13.Command=network\0Item13.Settings=ITEM_DISABLED\0Item14.Command=network_connections\0Item14.Settings=ITEM_DISABLED\0Item15.Command=separator\0Item16.Command=control_panel\0Item16.Settings=TRACK_RECENT|NOEXPAND\0Item17.Command=pc_settings\0Item17.Settings=TRACK_RECENT\0Item18.Command=admin\0Item18.Settings=TRACK_RECENT|ITEM_DISABLED\0Item19.Command=devmgmt.msc\0Item19.Label=Device Manager\0Item19.Icon=C:\Windows\system32\devmgr.dll, 201\0Item19.Settings=NOEXPAND\0Item20.Command=defaults\0Item20.Settings=ITEM_DISABLED\0Item21.Command=help\0Item21.Settings=ITEM_DISABLED\0Item22.Command=run\0Item23.Command=apps\0Item23.Settings=ITEM_DISABLED\0Item24.Command=windows_security\0Item24.Settings=ITEM_DISABLED" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "ShiftRight" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "RecentPrograms" /t REG_SZ /d "None" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchTrack" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchAutoComplete" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 )
 
 cls & echo !S_GREEN!Finalizing Setup
 :: Disable windows search and start menu on Windows 10
 if "%os%"=="Windows 10" (
-    ren SearchHost.exe SearchHost.old >nul 2>&1
-    cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
-    takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
-    icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
-    ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
-    taskkill /f /im searchapp.exe >nul 2>&1
-    taskkill /f /im SearchHost.exe >nul 2>&1
-    taskkill /f /im StartMenuExperienceHost.exe >nul 2>&1
-    cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul 2>&1
-    takeown /f "searchapp.exe" >nul 2>&1
-    icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul 2>&1
-    ren searchapp.exe searchapp.old >nul 2>&1
-    cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
-    icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
-    takeown /f "SearchHost.exe" >nul 2>&1
-    taskkill /f /im TextInputHost.exe
-    takeown /f "TextInputHost.exe" >nul 2>&1
-    icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul 2>&1
-    ren TextInputHost.exe TextInputHost.old >nul 2>&1
-    cd C:\Windows\System32
-    taskkill /f /im RuntimeBroker.exe
-    icacls "C:\Windows\System32\RuntimeBroker.exe" /grant Administrators:F >nul 2>&1
-    takeown /f "RuntimeBroker.exe" >nul 2>&1
-    ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
+ren SearchHost.exe SearchHost.old >nul 2>&1
+cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul 2>&1
+takeown /f "StartMenuExperienceHost.exe" >nul 2>&1
+icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul 2>&1
+ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul 2>&1
+taskkill /f /im searchapp.exe >nul 2>&1
+taskkill /f /im SearchHost.exe >nul 2>&1
+taskkill /f /im StartMenuExperienceHost.exe >nul 2>&1
+cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul 2>&1
+takeown /f "searchapp.exe" >nul 2>&1
+icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul 2>&1
+ren searchapp.exe searchapp.old >nul 2>&1
+cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul 2>&1
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul 2>&1
+takeown /f "SearchHost.exe" >nul 2>&1
+taskkill /f /im TextInputHost.exe
+takeown /f "TextInputHost.exe" >nul 2>&1
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul 2>&1
+ren TextInputHost.exe TextInputHost.old >nul 2>&1
+cd C:\Windows\System32
+taskkill /f /im RuntimeBroker.exe
+icacls "C:\Windows\System32\RuntimeBroker.exe" /grant Administrators:F >nul 2>&1
+takeown /f "RuntimeBroker.exe" >nul 2>&1
+ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
 )
 
 
 :: Delete microcode
 :: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
 :: if "%os%"=="Windows 10" (
-::     takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
-::     takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
-::     del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
-::     del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
+:: takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
+:: takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
+:: del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
+:: del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 :: )
 
 :: Delete neptune setup files
@@ -2449,22 +2905,22 @@ timeout /t 5 /nobreak >nul
 :setSvc
 :: %svc% (service name) (0-4)
 if "%1"=="" (
-    echo You need to run this with a service to disable. 
-    echo You need to run this with an argument ^(1-4^) to configure the service's startup.
-    exit /b 1
+echo You need to run this with a service to disable. 
+echo You need to run this with an argument ^(1-4^) to configure the service's startup.
+exit /b 1
 )
 if "%2"=="" (
-    echo You need to run this with an argument ^(1-4^) to configure the service's startup. 
-    exit /b 1 )
+echo You need to run this with an argument ^(1-4^) to configure the service's startup. 
+exit /b 1 )
 if %2 LSS 0 (
-    echo Invalid configuration. 
-    exit /b 1 )
+echo Invalid configuration. 
+exit /b 1 )
 if %2 GTR 4 (
-    echo Invalid configuration. 
-    exit /b 1 )
+echo Invalid configuration. 
+exit /b 1 )
 Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
-    echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.txt
-    exit /b 1 )
+echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.txt
+exit /b 1 )
 Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
 echo Service/Driver %1 configured with startup
 
