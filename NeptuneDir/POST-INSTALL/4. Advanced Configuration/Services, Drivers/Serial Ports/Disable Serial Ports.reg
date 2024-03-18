@@ -1,0 +1,13 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Serenum] 
+"Start"=dword:00000004 
+ 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Serial] 
+"Start"=dword:00000004 
+ 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\sermouse] 
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt] 
+"Start"=dword:00000004 
