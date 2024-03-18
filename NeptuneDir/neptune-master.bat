@@ -42,8 +42,6 @@ set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
-:: logs functionality will be fully implemented in the future
-:: set "user_log=%WinDir%\NeptuneDir\other\logs\user_logs.log"
 
 :: Create Log File
 echo. > %WinDir%\NeptuneDir\neptune.txt
