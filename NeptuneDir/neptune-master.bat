@@ -2865,8 +2865,11 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.bat" /f >nul 2>&1
 
 cls
-echo !S_GRAY!This window has finished.
-timeout /t 5 /nobreak >nul
+echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
+echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
+echo !S_GRAY!Press any key to let the system reboot, or wait 10 seconds.
+timeout /t 10 >nul
+shutdown /f /r /t 0
 
 
 
