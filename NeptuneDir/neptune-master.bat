@@ -2262,6 +2262,8 @@ dism /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /N
 dism /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart >nul 2>&1
 :: Disable WCF Services
 dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart >nul 2>&1
+:: Disable Remote Desktop Connection
+dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /NoRestart >nul 2>&1
 
 
 :: Capabilities
@@ -2543,7 +2545,7 @@ Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.vhdx\shell\open\command" /ve /t REG_SZ
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim" /ve /t REG_SZ /d "wim Archive" /f
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,15" /f
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell" /ve /t REG_SZ /d "" /f
-Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell\open" /ve /t REG_SZ /d "" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar" /ve /t REG_SZ /d "xar Archive" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,19" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell" /ve /t REG_SZ /d "" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell\open" /ve /t REG_SZ /d "" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xar\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz" /ve /t REG_SZ /d "xz Archive" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\DefaultIcon" /ve /t REG_SZ /d "%ProgramFiles%\7-Zip\7z.dll,23" /fReg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell" /ve /t REG_SZ /d "" /f
+Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.wim\shell\open" /ve /t REG_SZ /d "" /f
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell\open" /ve /t REG_SZ /d "" /f
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.xz\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
 Reg add "HKU\%SID%\SOFTWARE\Classes\7-Zip.z" /ve /t REG_SZ /d "z Archive" /f
