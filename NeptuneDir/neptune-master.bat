@@ -2183,8 +2183,8 @@ Microsoft.MSPaint ScreenSketch MSPaint
 
 :: Remove OneDrive
 taskkill /f /im OneDrive.exe
-if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
-    
+if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\neptune.txt 2>&1) else ("%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\neptune.txt 2>&1) > nul
+    > %WinDir%\NeptuneDir\neptune.txt
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
