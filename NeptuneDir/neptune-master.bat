@@ -2182,7 +2182,6 @@ Microsoft.MSPaint ScreenSketch MSPaint
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
 
 :: Remove OneDrive
-setlocal DisableDelayedExpansion
 taskkill /f /im OneDrive.exe
 if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
     
@@ -2204,7 +2203,6 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = 
 %currentuser% PowerShell -ExecutionPolicy Unrestricted -Command "Set-Location "^""HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace"^""; Get-ChildItem | ForEach-Object {Get-ItemProperty $_.pspath} | ForEach-Object {; $leftnavNodeName = $_."^""(default)"^"";; if (($leftnavNodeName -eq "^""OneDrive"^"") -Or ($leftnavNodeName -eq "^""OneDrive - Personal"^"")) {; if (Test-Path $_.pspath) {; Write-Host "^""Deleting $($_.pspath)."^""; Remove-Item $_.pspath;; }; }; }" >nul 2>&1
 
 
-setlocal EnableDelayedExpansion
 cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
 :: Features and Components
 :: Enable DirectPlay
