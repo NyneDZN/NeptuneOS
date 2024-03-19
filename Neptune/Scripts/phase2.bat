@@ -22,5 +22,5 @@ echo This will execute 2 command prompt windows for the installation process. Pl
 echo Wait until you are asked to restart your PC.
 echo The script will start in 10 seconds, or you can press any key.
 timeout /t 10 >nul
-:: The Master Script should always be infront of the Package Debloat script window.
-start "" cmd /c call "%WinDir%\NeptuneDir\packages.bat" & start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall /devbuild
+:: Install Neptune
+start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall /devbuild
