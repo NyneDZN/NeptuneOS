@@ -2783,7 +2783,7 @@ Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\
 
 if "%os%"=="Windows 11" (
 cls & echo !S_GREEN!Installing Timer Resolution Service
-move "%WinDir%\NeptuneDir\SetTimerResolution.exe" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1
+move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1
 )
 
 if "%os%"=="Windows 10" (
