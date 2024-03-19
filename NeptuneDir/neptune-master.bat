@@ -2173,7 +2173,7 @@ Office.OneNote OneNote people SkypeApp solit Sway
 Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
 windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
 WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
-Microsoft.MSPaint
+Microsoft.MSPaint ScreenSketch MSPaint
 ) do (
 %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
 )
@@ -2184,7 +2184,7 @@ Microsoft.MSPaint
 :: Remove OneDrive
 setlocal DisableDelayedExpansion
 taskkill /f /im OneDrive.exe
-if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
+if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
     
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
