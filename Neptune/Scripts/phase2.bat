@@ -23,4 +23,4 @@ echo Wait until you are asked to restart your PC.
 echo The script will start in 10 seconds, or you can press any key.
 timeout /t 10 >nul
 :: Install Neptune
-start "" "%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T -P:E "%WinDir%\NeptuneDir\neptune-master.bat" /postinstall /devbuild
+PowerRun.exe /SW:1 "C:\Windows\NeptuneDir\neptune-master.bat" /postinstall /devbuild
