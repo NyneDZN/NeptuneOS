@@ -2174,6 +2174,9 @@ Microsoft.MSPaint
 %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
 )
 
+:: Remove Microsoft Edge Chromium
+Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
+
 :: Remove OneDrive
 taskkill /f /im OneDrive.exe
 taskkill /f /im OneDrive.exe
@@ -2852,6 +2855,7 @@ del /f /q "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
+del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 
