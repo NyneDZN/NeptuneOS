@@ -17,6 +17,7 @@ move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\ProgramData\Microsoft\Us
 takeown /f "C:\Windows\Web" /r & icacls C:\Windows\Web\ /grant administrators:F /T >nul
 rmdir /s /q "C:\Windows\Web" >nul
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\Web" "%WinDir%" >nul
+del /q /f "C:\Users\Nyne\Desktop\neptune_dev.bat" > nul
 cls
 echo This will execute 2 command prompt windows for the installation process. Please ignore any errors you might see in both windows, as these are normal.
 echo Wait until you are asked to restart your PC.
