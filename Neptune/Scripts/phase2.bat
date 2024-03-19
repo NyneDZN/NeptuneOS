@@ -10,7 +10,7 @@ move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\P
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\layout.xml" "%WinDir%"
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\regjump.exe" "%WinDir%"
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\serviwin.exe" "%WinDir%"
-move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desktop"
+move "C:\NeptuneOS-installer\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desktop"
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r >nul
 icacls C:\ProgramData\Microsoft\User Account Pictures\ /grant administrators:F /T >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
@@ -19,7 +19,7 @@ takeown /f "C:\Windows\Web" /r >nul
 icacls C:\Windows\Web\ /grant administrators:F /T >nul
 rmdir /s /q "C:\Windows\Web" >nul
 move "C:\NeptuneOS-installer\Neptune\NeptuneOS-releases\Web" "%WinDir%" >nul
-del C:\Users\%USERNAME%\Desktop\neptune_dev.bat
+:: del C:\Users\%USERNAME%\Desktop\neptune_dev.bat
 cls
 echo This will execute 2 command prompt windows for the installation process. Please ignore any errors you might see in both windows, as these are normal.
 echo Wait until you are asked to restart your PC.
