@@ -2183,7 +2183,6 @@ Microsoft.MSPaint
 
 :: Remove OneDrive
 taskkill /f /im OneDrive.exe
-taskkill /f /im OneDrive.exe
 if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
     
 
