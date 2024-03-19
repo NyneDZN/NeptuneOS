@@ -2172,8 +2172,8 @@ Microsoft.Xbox Microsoft.YourPhone MicrosoftCorporationII.QuickAssist MicrosoftO
 Office.OneNote OneNote people SkypeApp solit Sway
 Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
 windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
-WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
-Microsoft.MSPaint ScreenSketch MSPaint
+WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal 
+ScreenSketch Microsoft.Paint
 ) do (
 %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
 )
