@@ -9,7 +9,8 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 
 :: OneDrive
 taskkill /f /im OneDrive.exe
-if exist "C:\Windows\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1)
+if exist "C:\" ("%WINDIR%\System32\OneDriveSetup.exe" /uninstall) else ("%WINDIR%\SysWOW64\OneDriveSetup.exe" /uninstall)
+Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
 :: Defender
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f >nul 2>&1
