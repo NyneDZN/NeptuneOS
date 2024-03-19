@@ -2175,7 +2175,7 @@ Microsoft.MSPaint
 )
 
 :: Remove Microsoft Edge Chromium
-Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
 
 :: Remove OneDrive
 taskkill /f /im OneDrive.exe
