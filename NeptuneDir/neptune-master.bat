@@ -2184,8 +2184,8 @@ Microsoft.MSPaint
 :: Remove OneDrive
 taskkill /f /im OneDrive.exe
 taskkill /f /im OneDrive.exe
-if "%os%"=="Windows 11" (start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL >nul) 
-if "%os%"=="Windows 10" (start /wait "" "%SYSTEMROOT%\SysWOW64\ONEDRIVESETUP.EXE" /UNINSTALL >nul)
+if "%os%"=="Windows 11" (%currentuser% start /wait "" "%SYSTEMROOT%\System32\ONEDRIVESETUP.EXE" /UNINSTALL >nul) 
+if "%os%"=="Windows 10" (%currentuser% start /wait "" "%SYSTEMROOT%\SysWOW64\ONEDRIVESETUP.EXE" /UNINSTALL >nul)
 
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
