@@ -807,6 +807,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% webthreatdefusersvc 4
 %svc% WinHttpAutoProxySvc 4 
 %svc% WPDBusEnum 4
+%svc% webthreatdefsvc 4
 %svc% WerSvc 4
 %svc% WSearch 4
 %svc% WpnService 4
