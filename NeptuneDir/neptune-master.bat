@@ -2182,6 +2182,7 @@ Microsoft.MSPaint
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
 
 :: Remove OneDrive
+setlocal DisableDelayedExpansion
 taskkill /f /im OneDrive.exe
 if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" ("%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall) else ("%WinDir%\NeptuneDir\Tools\NSudoLG.exe" -U:T "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall) > nul
     
@@ -2203,6 +2204,7 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = 
 %currentuser% PowerShell -ExecutionPolicy Unrestricted -Command "Set-Location "^""HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace"^""; Get-ChildItem | ForEach-Object {Get-ItemProperty $_.pspath} | ForEach-Object {; $leftnavNodeName = $_."^""(default)"^"";; if (($leftnavNodeName -eq "^""OneDrive"^"") -Or ($leftnavNodeName -eq "^""OneDrive - Personal"^"")) {; if (Test-Path $_.pspath) {; Write-Host "^""Deleting $($_.pspath)."^""; Remove-Item $_.pspath;; }; }; }" >nul 2>&1
 
 
+setlocal EnableDelayedExpansion
 cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
 :: Features and Components
 :: Enable DirectPlay
@@ -2330,6 +2332,7 @@ cls & echo !S_GREEN!Installing DirectX
 
 cls & echo !S_GREEN!Installing 7-Zip
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
+setlocal DisableDelayedExpansion
 
 :: Context Menu Options
 %currentuser% Reg add "HKCU\Software\7-Zip\FM\Columns" /v "RootFolder" /t REG_BINARY /d "0100000000000000010000000400000001000000A0000000" /f >nul
@@ -2785,6 +2788,7 @@ Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell" /ve /t REG_SZ /d "" /f
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
 
+setlocal EnableDelayedExpansion
 if "%os%"=="Windows 11" (
 cls & echo !S_GREEN!Installing Timer Resolution Service
 move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1
