@@ -2182,8 +2182,8 @@ ScreenSketch Microsoft.Paint
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
 
 :: Remove OneDrive
-taskkill /f /im OneDrive.exe
-if exist "C:\Windows\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1)
+:: taskkill /f /im OneDrive.exe
+:: if exist "C:\Windows\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1)
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
