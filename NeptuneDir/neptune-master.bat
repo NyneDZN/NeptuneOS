@@ -2859,7 +2859,7 @@ echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
 echo !S_GRAY!Press any key to let the system reboot, or wait 10 seconds.
 timeout /t 10 >nul
-shutdown /f /r /t 0
+shutdown /f /r /t 0 & del "%~f0"
 
 
 
