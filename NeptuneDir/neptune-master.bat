@@ -979,7 +979,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >nul 2>&1
 
 :: Disable Lockscreen Security on Servers
-if "%server%"=="yes" (Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f nul 2>&1) 
+if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f nul 2>&1) 
 
 
 :: Configuring the Windows Registry
