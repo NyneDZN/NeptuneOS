@@ -751,10 +751,10 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% wanarp 4
 %svc% wanarpv6 4
 :: Windows Defender Drivers
-%svc% WdBoot 4
-%svc% WdFilter 4
-%svc% WdNisDrv 4
-%svc% MsSecCore 4
+%system% %svc% WdBoot 4
+%system% %svc% WdFilter 4
+%system% %svc% WdNisDrv 4
+%system% %svc% MsSecCore 4
 
 :: Services
 %svc% BTAGService 4
@@ -813,10 +813,10 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% WpnService 4
 %svc% WpnUserService 4
 :: Windows Defender Services
-%svc% WinDefend 4
-%svc% WdNisSvc 4
-%svc% SecurityHealthService 4
-%svc% Sense 4
+%system% %svc% WinDefend 4
+%system% %svc% WdNisSvc 4
+%system% %svc% SecurityHealthService 4
+%system% %svc% Sense 4
 
 :: Backup default NeptuneOS drivers and services
 set BACKUP=%WINDIR%\NeptuneDir\POST-INSTALL\Troubleshooting\neptune-default-services.Reg"
