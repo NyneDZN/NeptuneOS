@@ -2246,9 +2246,9 @@ dism /Online /Disable-Feature /FeatureName:"Xps-Foundation-Xps-Viewer" /NoRestar
 dism /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart >nul 2>&1
 :: Disable Work Folders Client
 dism /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart >nul 2>&1
-:: Enable Windows Media Player
-dism /Online /Enable-Feature /FeatureName:"MediaPlayback" /NoRestart >nul 2>&1
-dism /Online /Enable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart >nul 2>&1
+:: Disable Windows Media Player
+dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart >nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart >nul 2>&1
 :: Disable "Scan Management" feature
 dism /Online /Disable-Feature /FeatureName:"ScanManagementConsole" /NoRestart >nul 2>&1
 :: Disable "Windows Fax and Scan" feature
