@@ -8,7 +8,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "0" /f > nul
 
 :: OneDrive
-taskkill /f /im OneDrive.exe
+taskkill /f /im OneDrive.exe >nul 2>&1
 if exist "C:\" ("%WINDIR%\System32\OneDriveSetup.exe" /uninstall) else ("%WINDIR%\SysWOW64\OneDriveSetup.exe" /uninstall)
 Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
