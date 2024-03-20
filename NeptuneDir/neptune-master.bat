@@ -2795,8 +2795,6 @@ cls & echo !S_GREEN!Configuring Open Shell
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 )
 
-cls & echo !S_GREEN!Installing MPV
-call "%WINDIR%\NeptuneDir\Tools\MPV\installer\mpv-install.bat"
 
 cls & echo !S_GREEN!Finalizing Setup
 :: Disable windows search and start menu on Windows 10
