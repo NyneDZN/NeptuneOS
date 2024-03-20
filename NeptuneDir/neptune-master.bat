@@ -834,43 +834,6 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 ) 
 ) >nul 2>&1
 
-:: check if battery information is available to determine system type
-:: if this method ends up being unreliable it will be replaced, but it seems to be working as of now.
-:: a VM detection method needs to be implemented into this, as it breaks VM keyboard control
-:: re-enable keyboard control on VM by running Desktop\POST-INSTALL\Advanced Configuration\Services and Drivers\Serial Port\Enable Serial Port.reg
-:: wmic path Win32_Battery get BatteryStatus > nul 2>&1
-:: if %errorlevel% equ 0 (
-:: set SystemType=Desktop
-:: ) else (
-:: set SystemType=Laptop
-:: )
-:: if "%SystemType%"=="Laptop" (
-:: echo Running Laptop Configuration...
-:: %svc% serenum 3
-:: %svc% sermouse 3
-:: %svc% serial 3
-:: %svc% i8042prt 3
-:: %svc% wlansvc 2
-:: %svc% wmiacpi 2
-:: Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t Reg_DWORD /d "0" /f >nul 2>&1
-:: %DevMan% /enable "Communications Port (COM1)" >nul 2>&1
-:: %DevMan% /enable "Communications Port (COM2)" >nul 2>&1
-:: %DevMan% /enable "Communications Port (SER1)" >nul 2>&1
-:: %DevMan% /enable "Communications Port (SER2)" >nul 2>&1
-:: ) else (
-:: %svc% acpiex 4
-:: %svc% acpipagr 4
-:: %svc% acpimi 4
-:: %svc% acpipmi 4
-:: %svc% acpitime 4
-:: %svc% iaLPSS2i_GPIO2 4
-:: %svc% iaLPSS2i_I2C 4
-:: %svc% iaLPSSi_GPIO 4
-:: %svc% iaLPSSi_I2C 4
-:: %svc% sermouse 4
-:: %svc% serial 4
-:: %svc% i8042prt 4
-:: )
 
 
 :: Configuring security vulnerabilities and hardening Windows
