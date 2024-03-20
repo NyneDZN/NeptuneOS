@@ -5,12 +5,10 @@ Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f >nul
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
-rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\packages.bat" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\neptune-master.bat" >nul 2>&1
 del /s /f /q C:\Windows\Temp\*.* >nul 2>&1
 del /s /f /q %USERPROFILE%\appdata\local\temp\*.* >nul 2>&1
-if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev")
 cd %systemroot% & del *.log /s /f /q /a >nul 2>&1
 cd %homepath% & del *.log /s /f /q /a >nul 2>&1
 :: dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase

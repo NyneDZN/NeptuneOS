@@ -2843,6 +2843,9 @@ del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
+if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
+if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1) 
+
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
