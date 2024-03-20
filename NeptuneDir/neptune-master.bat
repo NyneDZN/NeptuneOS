@@ -978,6 +978,9 @@ rundll32.exe fthsvc.dll,FthSysprepSpecialize
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t Reg_DWORD /d "0" /f >nul 2>&1
 Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >nul 2>&1
 
+:: Disable Lockscreen Security on Servers
+if "%server%"=="yes" do (Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f) nul 2>&1
+
 
 :: Configuring the Windows Registry
 : - > Configuring the explorer and UI in Windows
