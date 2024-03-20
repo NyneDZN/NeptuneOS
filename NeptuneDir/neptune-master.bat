@@ -2268,7 +2268,7 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 
 if "%server%"=="yes" (
-PowerShell -ExecutionPolicy Unrestricted -Command "Remove-WindowsFeature AzureArcSetup"
+	PowerShell -ExecutionPolicy Unrestricted -Command "Remove-WindowsFeature AzureArcSetup"
 )
 
 :: UWP Deprovision
