@@ -4,6 +4,7 @@ curl -o neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/ma
 move neptune.7z C:\NeptuneOS-installer-dev\Neptune
 cd "C:\NeptuneOS-installer-dev\Neptune"
 7za x neptune.7z
+del neptune.7z
 cd "NeptuneOS-main"
 move NeptuneDir %WinDir%
 move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
