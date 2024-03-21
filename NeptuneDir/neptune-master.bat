@@ -108,6 +108,9 @@ exit
 :: killing explorer
 taskkill /f /im explorer.exe >nul 2>&1
 
+:: ngen, from atlas
+Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\NGEN.ps1"
+
 cls & echo !S_GREEN!Configuring NTP Server
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org" >nul 2>&1
