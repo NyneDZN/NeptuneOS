@@ -2935,7 +2935,7 @@ exit /b 1 )
 Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
 echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.txt
 exit /b 1 )
-Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
+%system% Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
 echo Service/Driver %1 configured with startup
 
 
