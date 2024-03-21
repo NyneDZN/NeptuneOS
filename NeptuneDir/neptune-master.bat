@@ -75,19 +75,19 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 
 :: Post-install 
 if /i "%~1"=="/postinstall"   goto postinstall
-if /i "%~1"=="/postinstall"   goto PowerConfiguration
-if /i "%~1"=="/postinstall"   goto NTFSConfiguration
-if /i "%~1"=="/postinstall"   goto TaskConfiguration
-if /i "%~1"=="/postinstall"   goto BCDConfiguration
-if /i "%~1"=="/postinstall"   goto DevConfiguration
-if /i "%~1"=="/postinstall"   goto NetworkConfiguration
-if /i "%~1"=="/postinstall"   goto ServiceConfiguration
-if /i "%~1"=="/postinstall"   goto SecurityConfiguration
-if /i "%~1"=="/postinstall"   goto RegistryCongiruation
-if /i "%~1"=="/postinstall"   goto PerformanceCounters
-if /i "%~1"=="/postinstall"   goto TaskConfiguration
-if /i "%~1"=="/postinstall"   goto DebloatWindows
-if /i "%~1"=="/postinstall"   goto ConfigureFeatures
+if /i "%~1"=="/PowerConfiguration"   goto PowerConfiguration
+if /i "%~1"=="/NTFSConfiguration"   goto NTFSConfiguration
+if /i "%~1"=="/TaskConfiguration"   goto TaskConfiguration
+if /i "%~1"=="/BCDConfiguration"   goto BCDConfiguration
+if /i "%~1"=="/DevConfiguration"   goto DevConfiguration
+if /i "%~1"=="/NetworkConfiguration"   goto NetworkConfiguration
+if /i "%~1"=="/ServiceConfiguration"   goto ServiceConfiguration
+if /i "%~1"=="/SecurityConfiguration"   goto SecurityConfiguration
+if /i "%~1"=="/RegistryCongiruation"   goto RegistryCongiruation
+if /i "%~1"=="/PerformanceCounters"   goto PerformanceCounters
+if /i "%~1"=="/TaskConfiguration"   goto TaskConfiguration
+if /i "%~1"=="/DebloatWindows"   goto DebloatWindows
+if /i "%~1"=="/ConfigureFeatures"   goto ConfigureFeatures
 
 if /i "%~1"=="/testPrompt"    goto testPrompt
 
