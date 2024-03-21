@@ -2783,6 +2783,10 @@ Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "%Program
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell" /ve /t REG_SZ /d "" /f
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
+Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.zip\UserChoice" /v "ProgId" /t REG_SZ /d "7-Zip.zip" /f
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.zip\UserChoice" /v "Hash" /t REG_SZ /d "UlGQDiAIpLM=" /f
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "ProgId" /t REG_SZ /d "7-Zip.7z" /f
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "Hash" /t REG_SZ /d "KHHMPIHu3tI=" /f
 
 setlocal EnableDelayedExpansion
 if "%os%"=="Windows 11" (
