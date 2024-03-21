@@ -793,7 +793,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% BluetoothUserService 4
 %svc% bthserv 4
 %svc% diagsvc 4
-%svc% Diag1 4
+%svc% DiagTrack 4
 %svc% DispBrokerDesktopSvc 4
 %svc% DisplayEnhancementService 4
 %svc% DPS 4
