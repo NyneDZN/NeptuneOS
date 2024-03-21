@@ -83,7 +83,7 @@ if /i "%~1"=="/DevConfiguration"   goto DevConfiguration
 if /i "%~1"=="/NetworkConfiguration"   goto NetworkConfiguration
 if /i "%~1"=="/ServiceConfiguration"   goto ServiceConfiguration
 if /i "%~1"=="/SecurityConfiguration"   goto SecurityConfiguration
-if /i "%~1"=="/RegistryCongiruation"   goto RegistryCongiruation
+if /i "%~1"=="/RegistryConfigruation"   goto RegistryConfiguration
 if /i "%~1"=="/PerformanceCounters"   goto PerformanceCounters
 if /i "%~1"=="/TaskConfiguration"   goto TaskConfiguration
 if /i "%~1"=="/DebloatWindows"   goto DebloatWindows
