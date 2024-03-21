@@ -2,6 +2,9 @@
 cls & echo This will take a moment.
 echo We are disabling defender.
 
+:: NGEN from Atlas
+ Powershell -ExecutionPolicy Unrestricted "C:\NeptuneOS-installer-dev\Neptune\NGEN.ps1"
+ 
 :: UAC Permissions
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "0" /f > nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "0" /f > nul
