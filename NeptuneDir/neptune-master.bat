@@ -75,7 +75,21 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 
 :: Post-install 
 if /i "%~1"=="/postinstall"   goto postinstall
-if /i "%~1"=="/testPrompt"goto testPrompt
+if /i "%~1"=="/postinstall"   goto PowerConfiguration
+if /i "%~1"=="/postinstall"   goto NTFSConfiguration
+if /i "%~1"=="/postinstall"   goto TaskConfiguration
+if /i "%~1"=="/postinstall"   goto BCDConfiguration
+if /i "%~1"=="/postinstall"   goto DevConfiguration
+if /i "%~1"=="/postinstall"   goto NetworkConfiguration
+if /i "%~1"=="/postinstall"   goto ServiceConfiguration
+if /i "%~1"=="/postinstall"   goto SecurityConfiguration
+if /i "%~1"=="/postinstall"   goto RegistryCongiruation
+if /i "%~1"=="/postinstall"   goto PerformanceCounters
+if /i "%~1"=="/postinstall"   goto TaskConfiguration
+if /i "%~1"=="/postinstall"   goto DebloatWindows
+if /i "%~1"=="/postinstall"   goto ConfigureFeatures
+
+if /i "%~1"=="/testPrompt"    goto testPrompt
 
 :argumentFAIL
 echo The master script had no arguments passed to it. You're either launching the script directly, or "%~nx0" is broken/corrupted.
@@ -105,8 +119,10 @@ net start w32time >nul 2>&1
 w32tm /config /update >nul 2>&1
 w32tm /resync >nul 2>&1
 %svc% W32Time 4 >nul 2>&1
+goto PowerConfiguration
 
 
+:PowerConfiguration
 cls & echo !S_GREEN!Configuring Powerplan
 :: Unhide Hidden Power Configuration
 :: source: https://gist.github.com/Velocet/7ded4cd2f7e8c5fa475b8043b76561b5#file-unlock-powercfg-ps1
@@ -217,8 +233,10 @@ PowerShell -ExecutionPolicy Unrestricted -Command  "$usb_devices = @('Win32_USBC
 
 :: Disable Powersaving on Network Adapter
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "DefaultPnPCapabilities" /t REG_DWORD /d "24" /f >nul 2>&1
+goto NTFSConfiguration
 
 
+:NTFSConfiguration
 cls & echo !S_GREEN!Configuring NTFS
 :: Configuring the NTFS file system in Windows
 
@@ -278,9 +296,11 @@ Reg add "%%a" /F /V "EnableHDDParking" /T Reg_DWORD /d 0 >nul 2>&1
 FOR /F "eol=E" %%a in ('Reg QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "IoLatencyCap"^| FINDSTR /V "IoLatencyCap"') DO (
 Reg add "%%a" /F /V "IoLatencyCap" /T Reg_DWORD /d 0 >nul 2>&1
 )
+goto TaskConfiguration
 
 
 :: Configuring the task scheduler in Windows
+:TaskConfiguration
 cls & echo !S_GREEN!Configuring Scheduled Tasks
 
 for %%a in (
@@ -339,9 +359,11 @@ schtasks /change /enable /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup" >nul
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Reporting Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1 
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Standalone Update Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1 
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Per-Machine Standalone Update'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1
+goto BCDConfiguration
 
 
 :: Configuring the Boot Configuration Data in Windows
+:BCDConfiguration
 cls & echo !S_GREEN!Configuring BCDEdit
 
 :: Enable the Legacy Boot Menu 
@@ -380,9 +402,11 @@ bcdedit /set uselegacyapicmode no >nul 2>&1
 :: https://en.wikipedia.org/wiki/Intel_5-level_paging
 bcdedit /set linearaddress57 OptOut >nul 2>&1
 bcdedit /set increaseuserva 268435328 >nul 2>&1
+goto DevConfiguration
 
 
 :: Configuring devices in Windows
+:DevConfiguration
 cls & echo !S_GREEN!Configuring Devices and MSI Mode
 
 :: Device Manager
@@ -450,9 +474,11 @@ for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /L "PC
 Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t Reg_DWORD /d "2"  /f > nul 2>nul
 )
 )
+goto NetworkConfiguration
 
 
 :: Configuring network settings and the NIC adapter in Windows
+:NetworkConfiguration
 cls & echo !S_GREEN!Configuring Network Settings
 
 :: Network Shell
@@ -665,9 +691,11 @@ cd %SystemRoot%\System32\drivers\etc
 if not exist hosts.bak ren hosts hosts.bak >nul 2>&1
 curl -l -s https://winhelp2002.mvps.org/hosts.txt -o hosts
 if not exist hosts ren hosts.bak hosts >nul 2>&1
+goto ServiceConfiguration
 
 
 cls & echo !S_GREEN!Disabling Drivers and Services
+:ServiceConfiguration
 :: Configuring the services and drivers in Windows
 
 :: Configuring Driver Dependencies
@@ -833,10 +861,12 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 ) 
 ) 
 ) >nul 2>&1
+goto SecurityConfiguration
 
 
 
 :: Configuring security vulnerabilities and hardening Windows
+:SecurityConfiguration
 cls & echo !S_GREEN!Security and Hardening
 
 :: Mitigations
@@ -900,7 +930,6 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "DisableRemoteScmEndpoints" /
 :: Block enumeration of anonymous SAM accounts
 :: https://www.stigviewer.com/stig/windows_10/2021-03-10/finding/V-220929
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymousSAM" /t REG_DWORD /d "1" /f >nul 2>&1
-
 
 :: Enable UAC
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "1" /f > nul 2>&1
@@ -980,10 +1009,12 @@ Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScree
 
 :: Disable Lockscreen Security on Servers
 if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f >nul 2>&1) 
+goto RegistryCongiruation
 
 
 :: Configuring the Windows Registry
 : - > Configuring the explorer and UI in Windows
+:RegistryCongiruation
 cls & echo !S_GREEN!Configuring Registry
 
 :: Explorer Quickness
@@ -1990,9 +2021,9 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32Priorit
 
 :: Enable Timer Resolution on Windows 11
 if "%os%"=="Windows 11" (
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 ) else if "%server%"=="yes" (
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
 :: Disable WatchDog Timer
@@ -2130,13 +2161,17 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Hid
 :: Run Startup Scripts Asynchronously
 :: https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.Scripts::Run_Startup_Script_Sync
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "RunStartupScriptSync" /t REG_DWORD /d "0" /f >nul 2>&1
+goto PerformanceCounters
 
 
+:PerformanceCounters
 cls & echo !S_GREEN!Rebuilding Performance Counters...
 lodctr /r >nul 2>&1
 lodctr /r >nul 2>&1
+goto DebloatWindows
 
 
+:DebloatWindows
 cls & echo !S_GREEN!Debloating Windows...
 for %%i in (
 3DBuilder bing bingfinance bingsports BingWeather
@@ -2177,8 +2212,10 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$pathGlobPattern = "^""$($dir
 :: Delete OneDrive Shortcuts
 PowerShell -ExecutionPolicy Unrestricted -Command "$shortcuts = @(; @{ Revert = $True;  Path = "^""$env:APPDATA\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"^""; }; @{ Revert = $False; Path = "^""$env:USERPROFILE\Links\OneDrive.lnk"^""; }; @{ Revert = $False; Path = "^""$env:WINDIR\ServiceProfiles\LocalService\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"^""; }; @{ Revert = $False; Path = "^""$env:WINDIR\ServiceProfiles\NetworkService\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"^""; }; ); foreach ($shortcut in $shortcuts) {; if (-Not (Test-Path $shortcut.Path)) {; Write-Host "^""Skipping, shortcut does not exist: `"^""$($shortcut.Path)`"^""."^""; continue; }; try {; Remove-Item -Path $shortcut.Path -Force -ErrorAction Stop; Write-Output "^""Successfully removed shortcut: `"^""$($shortcut.Path)`"^""."^""; } catch {; Write-Error "^""Encountered an issue while attempting to remove shortcut at: `"^""$($shortcut.Path)`"^""."^""; }; }" >nul 2>&1
 %currentuser% PowerShell -ExecutionPolicy Unrestricted -Command "Set-Location "^""HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace"^""; Get-ChildItem | ForEach-Object {Get-ItemProperty $_.pspath} | ForEach-Object {; $leftnavNodeName = $_."^""(default)"^"";; if (($leftnavNodeName -eq "^""OneDrive"^"") -Or ($leftnavNodeName -eq "^""OneDrive - Personal"^"")) {; if (Test-Path $_.pspath) {; Write-Host "^""Deleting $($_.pspath)."^""; Remove-Item $_.pspath;; }; }; }" >nul 2>&1
+goto ConfigureFeatures
 
 
+:ConfigureFeatures
 cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
 setlocal EnableDelayedExpansion
 :: Features and Components
@@ -2278,8 +2315,10 @@ for %%a in (1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy Microsoft.3DBuild
 Microsoft.Microsoft3DViewer_8wekyb3d8bbwe Microsoft.MicrosoftEdge_8wekyb3d8bbwe Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe Microsoft.Office.OneNote_8wekyb3d8bbwe Microsoft.Office.Sway_8wekyb3d8bbwe
 Microsoft.StorePurchaseApp_8wekyb3d8bbwe Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy Microsoft.Windows.Phone_8wekyb3d8bbwe Microsoft.WindowsPhone_8wekyb3d8bbwe Microsoft.WindowsStore_8wekyb3d8bbwe Microsoft.Xbox.TCUI_8wekyb3d8bbwe
 Microsoft.XboxApp_8wekyb3d8bbwe Microsoft.XboxGameOverlay_8wekyb3d8bbwe Microsoft.XboxGamingOverlay_8wekyb3d8bbwe Microsoft.XboxIdentityProvider_8wekyb3d8bbwe Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe) do Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\%%a" /f >nul 2>&1
+goto PrerequisitesInstallation
 
 
+:PrerequisitesInstallation
 cls & echo !S_GREEN!Installing Visual C++
 "%WinDir%\NeptuneDir\Prerequisites\vcredist.exe" /ai8X239T >nul 2>&1
 
@@ -2772,8 +2811,10 @@ cls & echo !S_GREEN!Configuring Open Shell
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
 )
+goto PartingPhase
 
 
+:PartingPhase
 cls & echo !S_GREEN!Finalizing Setup
 :: Disable windows search and start menu on Windows 10
 if "%os%"=="Windows 10" (
