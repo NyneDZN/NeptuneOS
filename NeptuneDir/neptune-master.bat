@@ -351,6 +351,12 @@ for %%a in (
 "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
 "\Microsoft\Windows\Wininet\CacheTask"
 "\Microsoft\XblGameSave\XblGameSaveTask"
+"\Microsoft\Windows\Windows Defender\Windows Defender Verification"
+"\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
+"\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
+"\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
+"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh"
+
 ) do (
 schtasks /change /disable /TN %%a >nul 2>&1
 )
