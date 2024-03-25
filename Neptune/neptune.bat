@@ -60,8 +60,15 @@ Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
 %sudo% Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f > nul
 %sudo% Reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "1" /f > nul
 %sudo% Reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRawWriteNotification" /t REG_DWORD /d "1" /f > nul
-:: - > Disable "Microsoft Defender Antivirus Boot Driver" service
+:: - > Disable Defender Services
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\MsSecCore" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\Sense" /v "Start" /t Reg_DWORD /d "4" /f > nul
 %sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdBoot" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t Reg_DWORD /d "4" /f > nul
+%sudo% Reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t Reg_DWORD /d "4" /f > nul
 :: - > Disable Windows Defender
 %sudo% Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f > nul
 :: - > Disable always running antimalware service
