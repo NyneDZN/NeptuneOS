@@ -19,8 +19,8 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 mode 70,30
 color f1
-set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe -U:T -P:E -ShowWindowMode:Hide -Wait"
-set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe -U:C -ShowWindowMode:Hide -Wait"
+set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
+set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
 :menu
 cls
@@ -42,9 +42,6 @@ echo We are disabling defender.
 del "%temp%\installer.zip"
 :: taskkill /f /im powershell.exe >nul 2>&1
 :: start "" C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
-
-:: NGEN from Atlas
-Powershell -ExecutionPolicy Unrestricted "C:\NeptuneOS-installer-dev\Neptune\NGEN.ps1"
 
 :: UAC Permissions
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "0" /f > nul
@@ -287,7 +284,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune
 cls & echo Restarting...
 timeout /t 1 > nul
 shutdown /f /r /t 0
-
+"C:\NeptuneOS-installer-dev\Neptune\nsudo.exe"
 
 
 
