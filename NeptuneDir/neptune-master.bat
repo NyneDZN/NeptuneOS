@@ -2030,12 +2030,9 @@ if "%server%"=="yes" (Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session
 :: Win32PrioritySeperation (short variable 1:1, no foreground boost)
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "38" /f >nul 2>&1
 
-:: Enable Timer Resolution on Windows 11
-if "%os%"=="Windows 11" (
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
-) else if "%server%"=="yes" (
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1
-)
+:: Enable Timer Resolution on Windows 11 and Server
+if "%os%"=="Windows 11" (Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1)
+if "%server%"=="yes" (Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f >nul 2>&1)
 
 :: Disable WatchDog Timer
 :: https://www.analog.com/en/design-notes/disable-the-watchdog-timer-during-system-reboot.html
