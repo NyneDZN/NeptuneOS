@@ -38,7 +38,7 @@ if errorlevel 1 goto NeptuneInstall
 cls & echo This will take a moment.
 echo We are disabling defender.
 del "%temp%\installer.zip"
-taskkill /f /im powershell.exe >nul 2>&1
+:: taskkill /f /im powershell.exe >nul 2>&1
 :: start "" C:\NeptuneOS-installer-dev\Neptune\Scripts\phase1.bat
 
 :: NGEN from Atlas
