@@ -2885,6 +2885,9 @@ del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
+if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Server Configuration")
+if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 11")
+if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 10")
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1) 
 
