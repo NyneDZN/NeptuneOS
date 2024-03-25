@@ -754,7 +754,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% flpydisk 4
 %svc% GpuEnergyDrv 4
 %svc% lltdio 4
-:: Driver related to UAC
+:: - > Driver related to UAC UI, it gets disabled when UAC is disabled
 :: %svc% luafv 4
 %svc% mrxsmb 4
 %svc% mrxsmb20 4
@@ -767,7 +767,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% NetBIOS 4
 %svc% NetBT 4
 %svc% PptpMiniport 4
-:: Oculus needs this driver to function
+:: - > Oculus needs this driver to function
 :: %svc% QWAVEdrv 4
 %svc% RasAgileVpn 4
 %svc% Rasl2tp 4
@@ -781,13 +781,16 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% uhssvc 4
 %svc% wanarp 4
 %svc% wanarpv6 4
-:: Windows Defender Drivers
+:: - > Windows Defender Drivers
 %svc% WdBoot 4
 %svc% WdFilter 4
 %svc% WdNisDrv 4
 %svc% MsSecCore 4
 
 :: Services
+:: - > Audio is disabled on Server by default
+%svc% Audiosrv 2
+%svc% AudioEndpointBuilder 2
 %svc% BTAGService 4
 %svc% BDESVC 4
 %svc% BluetoothUserService 4
