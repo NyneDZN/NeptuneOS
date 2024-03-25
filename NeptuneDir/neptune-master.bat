@@ -2808,6 +2808,8 @@ cls & echo !S_GREEN!Installing Timer Resolution Service
 move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1
 )
 
+if "%server%"=="yes" (move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1)
+
 if "%os%"=="Windows 10" (
 cls & echo !S_GREEN!Installing Open Shell
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
