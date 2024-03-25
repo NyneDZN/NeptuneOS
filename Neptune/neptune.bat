@@ -56,6 +56,9 @@ if exist "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Progr
 if exist "C:\" ("%WINDIR%\System32\OneDriveSetup.exe" /uninstall >nul 2>&1) else ("%WINDIR%\SysWOW64\OneDriveSetup.exe" /uninstall >nul 2>&1) 
 Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
+:: Remove Azure Arc Setup from Startup on Servers
+if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.lnk" (Reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "AzureArcSetup" /f > nul)
+
 :: Disable Defender
 %sudo% Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f > nul
 %sudo% Reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "1" /f > nul
@@ -69,6 +72,8 @@ Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
 %sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t Reg_DWORD /d "4" /f > nul
 %sudo% Reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t Reg_DWORD /d "4" /f > nul
 %sudo% Reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t Reg_DWORD /d "4" /f > nul
+:: - > Remove Security Health Icon from Startup
+Reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f > nul
 :: - > Disable Windows Defender
 %sudo% Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f > nul
 :: - > Disable always running antimalware service
