@@ -2792,6 +2792,8 @@ Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.zip\U
 :: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.zip\UserChoice" /v "Hash" /t REG_SZ /d "UlGQDiAIpLM=" /f
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "ProgId" /t REG_SZ /d "7-Zip.7z" /f
 :: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "Hash" /t REG_SZ /d "KHHMPIHu3tI=" /f
+move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip\7-Zip File Manager.lnk" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
+rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip"
 
 setlocal EnableDelayedExpansion
 if "%os%"=="Windows 11" (
