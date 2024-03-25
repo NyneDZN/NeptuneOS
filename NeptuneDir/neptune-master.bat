@@ -2231,8 +2231,8 @@ goto ConfigureFeatures
 
 
 :ConfigureFeatures
-cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
 setlocal EnableDelayedExpansion
+cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
 :: Features and Components
 :: Enable DirectPlay
 dism /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart >nul 2>&1
