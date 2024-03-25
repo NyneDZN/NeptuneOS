@@ -273,16 +273,12 @@ Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f
 %sudo% Reg add "HKLM\Software\Policies\Microsoft\Windows Defender\UX Configuration" /v "SuppressRebootNotification" /t REG_DWORD /d "1" /f > nul
 :: - > Remove "Windows Security" system tray icon
 %sudo% Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" /v "HideSystray" /t REG_DWORD /d "1" /f > nul
-:: Disable scheduled task(s): `\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh`
-schtasks /Change /TN "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /DISABLE > nul
-:: Disable scheduled task(s): `\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance`
-schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /DISABLE > nul
-:: Disable scheduled task(s): `\Microsoft\Windows\Windows Defender\Windows Defender Cleanup`
-schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /DISABLE > nul
-:: Disable scheduled task(s): `\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan`
-schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /DISABLE > nul
-:: Disable scheduled task(s): `\Microsoft\Windows\Windows Defender\Windows Defender Verification`
-schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /DISABLE > nul
+:: - > Disable Defender Tasks
+schtasks /change /TN "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable > nul
+schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable > nul
+schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable > nul
+schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable > nul
+schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable > nul
 :: RunOnce Phase 2
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\Scripts\phase2.bat" /f > nul
 
