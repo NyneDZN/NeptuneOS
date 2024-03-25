@@ -2820,6 +2820,8 @@ cls & echo !S_GREEN!Configuring Open Shell
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
+move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell Menu Settings.lnk" "%WinDir%\NeptuneDir\POST-INSTALL\3. Configuration\Start Menu" >nul 2>&1
+rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >nul 2>&1
 )
 goto PartingPhase
 
