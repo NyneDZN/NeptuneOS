@@ -703,8 +703,9 @@ if not exist hosts ren hosts.bak hosts >nul 2>&1
 goto ServiceConfiguration
 
 
-cls & echo !S_GREEN!Disabling Drivers and Services
+
 :ServiceConfiguration
+cls & echo !S_GREEN!Disabling Drivers and Services
 :: Configuring the services and drivers in Windows
 
 :: Configuring Driver Dependencies
