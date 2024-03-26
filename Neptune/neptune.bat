@@ -22,6 +22,17 @@ color f1
 set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
 set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
+
+echo By running the NeptuneOS installer, you allow it to make changes to your PC.
+set /p userInput=Please type 'yes' to continue.: 
+
+if /i "%userInput%"=="yes" (goto Menu) else (goto NotAccepted)
+    
+:NotAccepted
+echo You did not type 'yes'
+echo Closing...
+exit /b
+
 :menu
 cls
 echo ========================
