@@ -2019,8 +2019,8 @@ Reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Power" /v "HiberbootE
 for %%i in (OriginWebHelperService.exe ShareX.exe EpicWebHelper.exe SocialClubHelper.exe steamwebhelper.exe StartMenu.exe ) do (
   Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "5" /f >nul 2>&1
 )
-:: - > fontdrvhost, lsasss, wmiprvse, svchost to Low
-for %%i in (fontdrvhost.exe lsass.exe WmiPrvSE.exe svchost.exe ) do (
+:: - > fontdrvhost, lsasss, wmiprvse to Low
+for %%i in (fontdrvhost.exe lsass.exe WmiPrvSE.exe ) do (
   Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "1" /f >nul 2>&1
   Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\%%i\PerfOptions" /v "IoPriority" /t REG_DWORD /d "0" /f >nul 2>&1
 )
