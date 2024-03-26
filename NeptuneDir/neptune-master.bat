@@ -2818,7 +2818,7 @@ move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppDa
 if "%server%"=="yes" (move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1)
 
 if "%os%"=="Windows 10" (
-cls & echo !S_GREEN!Installing Open Shell
+cls & echo !S_GREEN!Installing Open Shell...
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
 cls & echo !S_GREEN!Configuring Open Shell
@@ -2841,6 +2841,9 @@ cls & echo !S_GREEN!Configuring Open Shell
 move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell Menu Settings.lnk" "%WinDir%\NeptuneDir\POST-INSTALL\3. Configuration\Start Menu" >nul 2>&1
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >nul 2>&1
 )
+
+cls & echo !S_GREEN!Installing Chocolatey...
+PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > nul
 goto PartingPhase
 
 
