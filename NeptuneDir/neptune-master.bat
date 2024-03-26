@@ -1028,7 +1028,7 @@ goto RegistryCongiruation
 :: Configuring the Windows Registry
 : - > Configuring the explorer and UI in Windows
 :RegistryCongiruation
-cls & echo !S_GREEN!Configuring Registry
+cls & echo !S_GREEN!Configuring Registry...
 
 :: Explorer Quickness
 :: - > Turn down application launch delays
@@ -2339,13 +2339,13 @@ goto PrerequisitesInstallation
 
 
 :PrerequisitesInstallation
-cls & echo !S_GREEN!Installing Visual C++
+cls & echo !S_GREEN!Installing Visual C++...
 "%WinDir%\NeptuneDir\Prerequisites\vcredist.exe" /ai8X239T >nul 2>&1
 
-cls & echo !S_GREEN!Installing DirectX
+cls & echo !S_GREEN!Installing DirectX...
 "%WinDir%\NeptuneDir\Prerequisites\DirectX\DXSETUP.exe" /silent >nul 2>&1
 
-cls & echo !S_GREEN!Installing 7-Zip
+cls & echo !S_GREEN!Installing 7-Zip...
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 setlocal DisableDelayedExpansion
 
