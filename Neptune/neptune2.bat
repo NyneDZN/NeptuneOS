@@ -1,6 +1,6 @@
 @echo off & color f1
 echo Downloading NeptuneOS...
-curl -o -s neptune.7z -L https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
+curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls
 echo Initializing Installer...
 move neptune.7z C:\NeptuneOS-installer-dev\Neptune >nul
