@@ -73,7 +73,7 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 :: Script index
 :: Scripts must be run through a shortcut with the proper arguments
 
-:: Post-install 
+:: Post-install
 if /i "%~1"=="/postinstall"   goto postinstall
 if /i "%~1"=="/PowerConfiguration"   goto PowerConfiguration
 if /i "%~1"=="/NTFSConfiguration"   goto NTFSConfiguration
@@ -255,9 +255,9 @@ FSUTIL behavior set memoryusage 2 >nul 2>&1
 FSUTIL behavior set mftzone 2 >nul 2>&1
 )
 
-:: Disallows characters from the extended character set to be used in 8.3 character-length short file names 
+:: Disallows characters from the extended character set to be used in 8.3 character-length short file names
 FSUTIL behavior set allowextchar 0 >nul 2>&1
-:: Disallow generation of a bug check 
+:: Disallow generation of a bug check
 FSUTIL behavior set bugcheckoncorrupt 0 >nul 2>&1
 :: Disable 8.3 File Creation
 :: https://ttcshelbyville.wordpress.com/2018/12/02/should-you-disable-8dot3-for-performance-and-security
@@ -365,8 +365,8 @@ schtasks /change /disable /TN %%a >nul 2>&1
 schtasks /change /enable /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup" >nul 2>&1
 
 :: Disable OneDrive Tasks
-PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Reporting Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1 
-PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Standalone Update Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1 
+PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Reporting Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1
+PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Standalone Update Task-*'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1
 PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNamePattern='OneDrive Per-Machine Standalone Update'; Write-Output "^""Disabling tasks matching pattern `"^""$taskNamePattern`"^""."^""; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) {; Write-Output "^""Skipping, no tasks matching pattern `"^""$taskNamePattern`"^"" found, no action needed."^""; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) {; $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) {; Write-Output "^""Skipping, task `"^""$taskName`"^"" is already disabled, no action needed."^""; continue; }; try {; $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output "^""Successfully disabled task `"^""$taskName`"^""."^""; } catch {; Write-Error "^""Failed to disable task `"^""$taskName`"^"": $($_.Exception.Message)"^""; $operationFailed = $true; }; }; if ($operationFailed) {; Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }" >nul 2>&1
 goto BCDConfiguration
 
@@ -375,7 +375,7 @@ goto BCDConfiguration
 :BCDConfiguration
 cls & echo !S_GREEN!Configuring BCDEdit
 
-:: Enable the Legacy Boot Menu 
+:: Enable the Legacy Boot Menu
 bcdedit /set bootmenupolicy legacy >nul 2>&1
 :: Disable Hyper-V
 bcdedit /set hypervisorlaunchtype off >nul 2>&1
@@ -448,16 +448,16 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "Unknown device" >nul 2>&1
 
 :: VPN Devices
-%DevMan% /disable "Microsoft RRAS Root Enumerator" >nul 2>&1 
-%DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (IKEv2)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (IP)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (IPv6)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (L2TP)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (Network Monitor)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (PPPOE)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (PPTP)" >nul 2>&1 
-%DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1 
+%DevMan% /disable "Microsoft RRAS Root Enumerator" >nul 2>&1
+%DevMan% /disable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1
+%DevMan% /disable "WAN Miniport (IKEv2)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (IP)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (IPv6)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (L2TP)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (Network Monitor)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (PPPOE)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (PPTP)" >nul 2>&1
+%DevMan% /disable "WAN Miniport (SSTP)" >nul 2>&1
 
 :: TPM Devices
 if "%os%"=="Windows 10" (%DevMan% /disable "AMD PSP 10.0 Device" & %DevMan% /disable "Trusted Platform Module 2.0")
@@ -466,9 +466,9 @@ if "%os%"=="Windows 10" (%DevMan% /disable "AMD PSP 10.0 Device" & %DevMan% /dis
 :: Enable MSI mode on USB, GPU, SATA controllers and network adapters
 :: Deleting DevicePriority sets the priority to undefined
 for %%a in (
-Win32_USBController, 
-Win32_VideoController, 
-Win32_NetworkAdapter, 
+Win32_USBController,
+Win32_VideoController,
+Win32_NetworkAdapter,
 Win32_IDEController
 ) do (
 for /f %%i in ('wmic path %%a get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
@@ -556,7 +556,7 @@ netsh int tcp set global initialRto=3000 >nul 2>&1
 :: https://medium.com/@avocadi/tcp-syn-retries-f30756ec7c55
 netsh int tcp set global maxsynretransmissions=2 >nul 2>&1
 netsh int tcp set global netdma=enabled >nul 2>&1
-:: - > Disable Non Sack RTT Resiliency 
+:: - > Disable Non Sack RTT Resiliency
 :: - > If you have fluctuating ping and packet loss, enabling this might benefit
 :: https://www.speedguide.net/articles/windows-10-tcpip-tweaks-5077
 netsh int tcp set global nonsackrttresiliency=disabled >nul 2>&1
@@ -583,7 +583,7 @@ netsh int ipv4 set dynamicport tcp start=1025 num=64511 >nul 2>&1
 :: netsh int tcp set security profiles=disabled >nul 2>&1
 netsh int tcp set supplemental Internet congestionprovider=ctcp >nul 2>&1
 netsh int tcp set supplemental template=custom icw=10 >nul 2>&1
-:: - > Disable Teredo 
+:: - > Disable Teredo
 netsh int teredo set state disabled >nul 2>&1
 
 
@@ -625,7 +625,7 @@ Reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opt
 :: This may cause DNS leaks
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v "DisableParallelAandAAAA" /t REG_DWORD /d 1 /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d 1 /f >nul 2>&1
- 
+
 :: Allow ICMP redirects to override OSPF generated routes
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t Reg_DWORD /d "1" /f >nul 2>&1
 
@@ -738,9 +738,9 @@ if "%%b"=="0x%%c" (
 echo. >>%BACKUP%
 echo [%%~a] >>%BACKUP%
 echo "Start"=dword:0000000%%c >>%BACKUP%
-) 
-) 
-) 
+)
+)
+)
 ) >nul 2>&1
 
 :: Configure Drivers and Services
@@ -846,7 +846,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% WarpJITSvc 4
 %svc% WdiServiceHost 4
 %svc% webthreatdefusersvc 4
-%svc% WinHttpAutoProxySvc 4 
+%svc% WinHttpAutoProxySvc 4
 %svc% WPDBusEnum 4
 %svc% webthreatdefsvc 4
 %svc% WerSvc 4
@@ -870,9 +870,9 @@ if "%%b"=="0x%%c" (
 echo. >>%BACKUP%
 echo [%%~a] >>%BACKUP%
 echo "Start"=dword:0000000%%c >>%BACKUP%
-) 
-) 
-) 
+)
+)
+)
 ) >nul 2>&1
 goto SecurityConfiguration
 
@@ -890,9 +890,9 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 ::  - > Disable ASLR Mitigations
 ::  - > This might break TestMem5
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "MoveImages" /t REG_DWORD /d "0" /f >nul 2>&1
-::  - > Disable Control Flow Guard 
+::  - > Disable Control Flow Guard
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f >nul 2>&1
-::  - > NTFS/ReFS Mitigations 
+::  - > NTFS/ReFS Mitigations
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "ProtectionMode" /t REG_DWORD /d "0" /f >nul 2>&1
 ::  - > System Mitigations
 PowerShell -ExecutionPolicy Unrestricted -Command  "Set-ProcessMitigation -System -Disable DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess" >nul 2>&1
@@ -949,7 +949,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Ena
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "1" /f > nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "5" /f > nul 2>&1
 
-:: Mitigation for CVE-2021-40444 and other future activex related attacks 
+:: Mitigation for CVE-2021-40444 and other future activex related attacks
 :: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40444
 :: https://www.huntress.com/blog/cybersecurity-advisory-hackers-are-exploiting-cve-2021-40444
 :: https://nitter.unixfox.eu/wdormann/status/1437530613536501765
@@ -973,7 +973,7 @@ Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLe
 Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "TrustedSites" /t Reg_SZ /d "Disabled" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel" /v "UntrustedSites" /t Reg_SZ /d "Disabled" /f >nul 2>&1
 
-:: Set strong cryptography on 64 bit and 32 bit .net framework 
+:: Set strong cryptography on 64 bit and 32 bit .net framework
 :: https://github.com/ScoopInstaller/Scoop/issues/2040#issuecomment-369686748
 Reg add "HKLM\SOFTWARE\Microsoft\.NetFramework\v4.0.30319" /v "SchUseStrongCrypto" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" /v "SchUseStrongCrypto" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -1008,7 +1008,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorE
 :: Disable DEP
 bcdedit /set nx alwaysoff >nul 2>&1
 
-:: Disable TSX 
+:: Disable TSX
 :: Enabling this could result in improved performance under certain workloads
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f >nul 2>&1
 
@@ -1021,7 +1021,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >nul 2>&1
 
 :: Disable Lockscreen Security on Servers
-if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f >nul 2>&1) 
+if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f >nul 2>&1)
 goto RegistryCongiruation
 
 
@@ -1359,7 +1359,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "S
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "9" /t REG_SZ /d "Network and Sharing Center" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "10" /t REG_SZ /d "Power Options" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "11" /t REG_SZ /d "Programs and Features" /f >nul 2>&1
-%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "12" /t REG_SZ /d "Region" /f >nul 2>&1 
+%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "12" /t REG_SZ /d "Region" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "13" /t REG_SZ /d "Sound" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "14" /t REG_SZ /d "Windows Defender Firewall" /f >nul 2>&1
 
@@ -1382,7 +1382,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloud
 
 :: Disable AutoRun and AutoPlay
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d "255" /f >nul 2>&1 
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d "255" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoAutorun" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoAutoplayfornonVolume" /t REG_DWORD /d "1" /f >nul 2>&1
 
@@ -1459,7 +1459,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl\StorageTelemetry" /v
 
 :: Explorer Audio Configuration
 :: - > Fix volume mixer
-%currentuser% Reg add "HKCU\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore" /f >nul 2>&1 
+%currentuser% Reg add "HKCU\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore" /f >nul 2>&1
 :: - > Don't show disconnected/disabled devices in mmsys.cpl
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio\DeviceCpl" /v "ShowDisconnectedDevices" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Multimedia\Audio\DeviceCpl" /v "ShowHiddenDevices" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1593,7 +1593,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftL
 
 :: Disable Content Delivery Manager
 ::   - > Disable pre-installed apps
-::   - > Disable windows welcome experience 
+::   - > Disable windows welcome experience
 ::   - > Disable suggested content in immersive control panel
 ::   - > Disable fun facts, tips, tricks on windows spotlight
 ::   - > Disable start menu suggestions
@@ -1626,7 +1626,7 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Pro
 Reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Settings\AllowOnlineTips" /v "value" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "AllowOnlineTips" /t REG_DWORD /d "0" /f >nul 2>&1
 
-:: Allow Microphone on Server 
+:: Allow Microphone on Server
 if "%server%"=="yes" (%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v "Value" /t Reg_SZ /d "Allow" /f >nul 2>&1)
 
 :: Disable Server Manager from Startup on Server
@@ -1748,7 +1748,7 @@ Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f >
 
 :: Disable MSRT Telemetry
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\RemovalTools\MpGears" /v "HeartbeatTrackingIndex" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg add "HKLM\SOFTWARE\Microsoft\RemovalTools\MpGears" /v "HeartbeatTrackingIndex" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\RemovalTools\MpGears" /v "SpyNetReportingLocation" /t REG_MULTI_SZ /d "" /f >nul 2>&1
 
 :: Disable Telemetry and Program Compatibility Assistant Channels
@@ -1779,7 +1779,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsof
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t Reg_SZ /d "Deny" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v "Value" /t Reg_SZ /d "Deny" /f >nul 2>&1
 
-:: Disable DCOM 
+:: Disable DCOM
 Reg add "HKLM\SOFTWARE\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f >nul 2>&1
 
@@ -1811,8 +1811,8 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{3E4D4F
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{3E4D4F1C-2AEE-11D1-9D3D-00C04FC30DF6}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{435899C9-44AB-11D1-AF00-080036234103}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{435899C9-44AB-11D1-AF00-080036234103}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1   
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1   
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{4F664F91-FF01-11D0-8AED-00C04FD7B597}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{64AB4BB7-111E-11D1-8F79-00C04FC2FBE1}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{64AB4BB7-111E-11D1-8F79-00C04FC2FBE1}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{65303443-AD66-11D1-9D65-00C04FC30DF6}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -1820,7 +1820,7 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{653034
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{6BF52A52-394A-11D3-B153-00C04F79FAA6}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{6BF52A52-394A-11D3-B153-00C04F79FAA6}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{884E2049-217D-11DA-B2A4-000E7BBB2B09}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{884E2049-217D-11DA-B2A4-000E7BBB2B09}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1 
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{884E2049-217D-11DA-B2A4-000E7BBB2B09}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{884E2051-217D-11DA-B2A4-000E7BBB2B09}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{884E2051-217D-11DA-B2A4-000E7BBB2B09}" /v "Version" /t REG_SZ /d "*" /f >nul 2>&1
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Ext\Settings\{88D96A05-F192-11D4-A65F-0040963251E5}" /v "Flags" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -1961,7 +1961,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPla
 :: Disable Maintenance
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" /v "MaintenanceDisabled" /t REG_DWORD /d "1" /f >nul 2>&1
 
-
 :: Disable Delivery Optimization
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization" /v "SystemSettingsDownloadMode" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -2061,20 +2060,20 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 :: - > Disable V-SYNC Interrupt Control
 :: This reduces the amount of V-SYNC monitor refresh interrupts occur
 :: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/saving-energy-with-vsync-control
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "VsyncIdleTimeout" /t REG_DWORD /d "0" /f >nul 2>&1 
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "VsyncIdleTimeout" /t REG_DWORD /d "0" /f >nul 2>&1
 :: - > Enable GPU Preemption
 :: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/changing-the-behavior-of-the-gpu-scheduler-for-debugging
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "EnablePreemption" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v "DisablePreemption" /t REG_DWORD /d "0" /f >nul 2>&1
 :: - > Force contiguous DirectX memory allocation
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "DpiMapIommuContiguous" /t REG_DWORD /d "1" /f >nul 2>&1
-:: - > Disable GPU Isolation 
+:: - > Disable GPU Isolation
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Enable VRR and Windowed Mode Optimizations
 %currentuser% Reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlobalSettings" /t REG_SZ /d "SwapEffectUpgradeEnable=1;" /f >nul 2>&1
 
-:: SVCHOST Split Threshold 
+:: SVCHOST Split Threshold
 Reg add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f >nul 2>&1
 
 :: Increase decomitting memory threshold
@@ -2113,7 +2112,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWOR
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 :: - > Disable PowerThrottling (8th gen and up?)
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul 2>&1
-:: - > Coalescing Timer 
+:: - > Coalescing Timer
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 
@@ -2206,7 +2205,7 @@ Microsoft.Xbox Microsoft.YourPhone MicrosoftCorporationII.QuickAssist MicrosoftO
 Office.OneNote OneNote people SkypeApp solit Sway
 Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
 windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
-WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal 
+WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
 ScreenSketch Microsoft.Paint MicrosoftCorporationII.MicrosoftFamily MicrosoftTeams Microsoft.MSPaint
 ) do (
 %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
@@ -2308,7 +2307,7 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 %PowerShell% "Get-WindowsCapability -Online -Name 'MathRecognizer~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove "OneSync" (breaks Mail, People, and Calendar)
 %PowerShell% "Get-WindowsCapability -Online -Name 'OneCoreUAP.OneSync*' | Remove-WindowsCapability -Online" >nul 2>&1
-:: Remove OpenSSH client 
+:: Remove OpenSSH client
 %PowerShell% "Get-WindowsCapability -Online -Name 'OpenSSH.Client*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove PowerShell ISE
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.PowerShell.ISE*' | Remove-WindowsCapability -Online" >nul 2>&1
@@ -2321,7 +2320,7 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 :: Remove Windows Fax and Scan
 %PowerShell% "Get-WindowsCapability -Online -Name 'Print.Fax.Scan*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Hello Face
-%PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1 
+%PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove WordPad
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Legacy NotePad
@@ -2897,7 +2896,7 @@ if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Server Config
 if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 11")
 if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 10")
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
-if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1) 
+if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
 
 :: Set notice text
@@ -2953,24 +2952,21 @@ shutdown /f /r /t 0 & del "%~f0"
 :setSvc
 :: %svc% (service name) (0-4)
 if "%1"=="" (
-echo You need to run this with a service to disable. 
+echo You need to run this with a service to disable.
 echo You need to run this with an argument ^(1-4^) to configure the service's startup.
 exit /b 1
 )
 if "%2"=="" (
-echo You need to run this with an argument ^(1-4^) to configure the service's startup. 
+echo You need to run this with an argument ^(1-4^) to configure the service's startup.
 exit /b 1 )
 if %2 LSS 0 (
-echo Invalid configuration. 
+echo Invalid configuration.
 exit /b 1 )
 if %2 GTR 4 (
-echo Invalid configuration. 
+echo Invalid configuration.
 exit /b 1 )
 Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
 echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.txt
 exit /b 1 )
 %system% Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
 echo Service/Driver %1 configured with startup
-
-
-
