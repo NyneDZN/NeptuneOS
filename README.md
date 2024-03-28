@@ -44,52 +44,63 @@ Installing <b>NeptuneOS</b> on any other winver may result in issues.
 
 <!-- GETTING STARTED -->
 ## Getting Started
-<ol style="padding-left: 0;">
-    <li><b>Before installing <u>NeptuneOS</u>, please backup any important files you need. It is <u>not recommended</u> to install this on an already existing Windows install.</b></li>
+<style>
+    ol {
+        padding-left: 20px;
+    }
+
+    ol ol {
+        padding-left: 40px;
+    }
+</style>
+
+<ol>
+    <li><i>Before installing NeptuneOS, please backup any important files you need. It is <b>not recommended</b> to install this on an already existing Windows install.</i></li>
 </ol>
 
 ### Installation Steps 🚀
 
-<ol style="padding-left: 0;">
+<ol>
     <li>
-        <b>Please download the <u>Pro</u> edition of Windows 10 or Windows 11 from <a href="https://massgrave.dev/genuine-installation-media.html">here</a>, or alternatively from <a href="https://uupdump.net/known.php">here if you do not have a USB drive.</a></b>
+        <i>Please download the Pro edition of Windows 10 or Windows 11 from <a href="https://massgrave.dev/genuine-installation-media.html">here</a>, or alternatively from <a href="https://uupdump.net/known.php">here if you do not have a USB drive.</a></i>
     </li>
     <li>
-        <b>Use <a href="https://rufus.ie/en/">Rufus</a>, <a href="https://www.ventoy.net/en/index.html">Ventoy</a>, or if you do not have a USB drive, <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">InstallWithoutUSB</a> to install the image.</b>
-        <ol style="padding-left: 20px;">
+        <i>Use <a href="https://rufus.ie/en/">Rufus</a>, <a href="https://www.ventoy.net/en/index.html">Ventoy</a>, or if you do not have a USB drive, <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">InstallWithoutUSB</a> to install the image.</i>
+        <ol>
             <li>
-                <b>2.1. When installing via USB, please follow <a href="https://www.makeuseof.com/windows-11-select-edition-during-install/">this guide</a> before rebooting to the setup.</b>
+                <i>When installing via USB, please follow <a href="https://www.makeuseof.com/windows-11-select-edition-during-install/">this guide</a> before rebooting to the setup.</i>
             </li>
         </ol>
     </li>
     <li>
-        <b>When you boot to the image for the first time, please disconnect your ethernet.</b>
-        <ol style="padding-left: 20px;">
+        <i>When you boot to the image for the first time, please disconnect your ethernet.</i>
+        <ol>
             <li>
-                <b>3.1. If you are on Windows 11, please press Shift+F10 and type <u>OOBE\BYPASSNRO</u>, this will reboot you back to the Windows OOBE.</b>
+                <i>If you are on Windows 11, please press Shift+F10 and type OOBE\BYPASSNRO, this will reboot you back to the Windows OOBE.</i>
             </li>
         </ol>
     </li>
     <li>
-        <b>When presented with the network connection screen, please click <u>I don't have internet</u></b>
-        <ol style="padding-left: 20px;">
+        <i>When presented with the network connection screen, please click <b>I don't have internet</b></i>
+        <ol>
             <li>
-                <b>4.1. Windows 11 will prompt you with a different message, please click <u>Continue with limited setup</u></b>
+                <i>Windows 11 will prompt you with a different message, please click <b>Continue with limited setup</b></i>
             </li>
         </ol>
     </li>
     <li>
-        <b>Once you reach the desktop, please open the search bar and type <u>Windows Security</u></b>
-        <ol style="padding-left: 20px;">
+        <i>Once you reach the desktop, please open the search bar and type <b>Windows Security</b></i>
+        <ol>
             <li>
-                <b>5.1. In the Windows Security app, please <u>disable Real-Time Protection</u> and <u>Tamper Protection.</u></b>
+                <i>In the Windows Security app, please disable Real-Time Protection and Tamper Protection.</i>
             </li>
         </ol>
     </li>
     <li>
-        <b>Press Win+R and type <i>cmd</i>. Please paste the following command to install NeptuneOS.</b>
+        <i>Press Win+R and type cmd. Please paste the following command to install NeptuneOS.</i>
     </li>
 </ol>
+
 
 ```NeptuneOS Installation
 powershell Invoke-WebRequest -Uri 'https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer.zip' -OutFile "$env:TEMP\installer.zip"; Expand-Archive -Path "$env:TEMP\installer.zip" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer\Neptune\neptune.bat'
