@@ -44,30 +44,51 @@ Installing <b>NeptuneOS</b> on any other winver may result in issues.
 
 <!-- GETTING STARTED -->
 ## Getting Started
-<ol style="list-style:none;padding-left:0">Before installing **NeptuneOS** please backup any important files you need.</ol>
-<ol style="list-style:none;padding-left:0">It is **not recommended** to install this on an already existing windows install.</ol>
+<ol style="padding-left: 0;">
+    <li><b>Before installing <u>NeptuneOS</u>, please backup any important files you need. It is <u>not recommended</u> to install this on an already existing Windows install.</b></li>
+</ol>
 
 ### Installation Steps 🚀
 
-<ol style="list-style:none">
-  <li><b>1.</b> Please download the <b>Pro</b> edition of Windows 10 or Windows 11 from <a href="https://massgrave.dev/genuine-installation-media.html">here</a>, or alternatively from <a href="https://uupdump.net/known.php">here if you do not have a USB drive.</a></li>
-  <li><b>2.</b> Use <a href="https://rufus.ie/en/">Rufus</a>, <a href="https://www.ventoy.net/en/index.html">Ventoy</a>, or if you do not have a USB drive, <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">InstallWithoutUSB</a> to install the image.</li>
-    <ol style="list-style:none">
-      <li><b>2.1.</b> When installing via USB, please follow <a href="https://www.makeuseof.com/windows-11-select-edition-during-install/">this guide</a> before rebooting to the setup.</li>
-    </ol>
-  <li><b>3.</b> When you boot to the image for the first time, please disconnect your ethernet.</li>
-    <ol style="list-style:none">
-      <li><b>3.1.</b> If you are on Windows 11, please press Shift+F10 and type <b>OOBE\BYPASSNRO</b>, this will reboot you back to the Windows OOBE.</li>
-    </ol>
-  <li><b>4.</b> When presented with the network connection screen, please click <b>I don't have internet</b></li>
-    <ol style="list-style:none">
-      <li ><b>4.1.</b> Windows 11 will prompt you with a different message, please click <b>Continue with limited setup</b></li>
-    </ol>
-  <li><b>5.</b> Once you reach the desktop, please open the search bar and type <b>Windows Security</b></li>
-    <ol style="list-style:none">
-      <li><b>5.1.</b> In the Windows Security app, please <b>disable Real-Time Protection</b> and <b>Tamper Protection.</b></li>
-    </ol>
-  <li><b>6.</b> Press Win+R and type <i>cmd</i>. Please paste the following command to install NeptuneOS.
+<ol style="padding-left: 0;">
+    <li>
+        <b>Please download the <u>Pro</u> edition of Windows 10 or Windows 11 from <a href="https://massgrave.dev/genuine-installation-media.html">here</a>, or alternatively from <a href="https://uupdump.net/known.php">here if you do not have a USB drive.</a></b>
+    </li>
+    <li>
+        <b>Use <a href="https://rufus.ie/en/">Rufus</a>, <a href="https://www.ventoy.net/en/index.html">Ventoy</a>, or if you do not have a USB drive, <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">InstallWithoutUSB</a> to install the image.</b>
+        <ol style="padding-left: 20px;">
+            <li>
+                <b>2.1. When installing via USB, please follow <a href="https://www.makeuseof.com/windows-11-select-edition-during-install/">this guide</a> before rebooting to the setup.</b>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <b>When you boot to the image for the first time, please disconnect your ethernet.</b>
+        <ol style="padding-left: 20px;">
+            <li>
+                <b>3.1. If you are on Windows 11, please press Shift+F10 and type <u>OOBE\BYPASSNRO</u>, this will reboot you back to the Windows OOBE.</b>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <b>When presented with the network connection screen, please click <u>I don't have internet</u></b>
+        <ol style="padding-left: 20px;">
+            <li>
+                <b>4.1. Windows 11 will prompt you with a different message, please click <u>Continue with limited setup</u></b>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <b>Once you reach the desktop, please open the search bar and type <u>Windows Security</u></b>
+        <ol style="padding-left: 20px;">
+            <li>
+                <b>5.1. In the Windows Security app, please <u>disable Real-Time Protection</u> and <u>Tamper Protection.</u></b>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <b>Press Win+R and type <i>cmd</i>. Please paste the following command to install NeptuneOS.</b>
+    </li>
 </ol>
 
 ```NeptuneOS Installation
