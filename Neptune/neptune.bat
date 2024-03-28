@@ -23,8 +23,8 @@ color f1
 set sudo="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
 set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
 :: NSUDO Variables
-set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
-set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
+:: set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
+:: set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
 
 echo By running the NeptuneOS installer, you allow it to make changes to your PC.
