@@ -102,6 +102,7 @@ Installing <b>NeptuneOS</b> on any other winver may result in issues.
 </ol>
 
 
+
 ```NeptuneOS Installation
 powershell Invoke-WebRequest -Uri 'https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer.zip' -OutFile "$env:TEMP\installer.zip"; Expand-Archive -Path "$env:TEMP\installer.zip" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer\Neptune\neptune.bat'
 ```
