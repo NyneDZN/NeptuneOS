@@ -11,68 +11,57 @@
   <p align="center">
     A custom windows OS designed for productivity and gaming.
     <br />
-    <a href="https://github.com/NyneDZN/NeptuneOS"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/NyneDZN/NeptuneOS/wiki"><strong>Explore the wiki »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/NyneDZN/NeptuneOS">View Demo</a>
-    ·
     <a href="https://github.com/NyneDZN/NeptuneOS/issues">Report Bug</a>
     ·
-    <a href="https://github.com/NyneDZN/NeptuneOS/issues">Request Feature</a>
+    <a href="https://github.com/NyneDZN/NeptuneOS/discussions">Request Feature</a>
+    ·
+    <a href="https://discord.gg/4YTSkcK8b8">Discord Server</a>
   </p>
 </div>
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-neptuneos">About NeptuneOS</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
 
-
-<!-- GETTING STARTED -->
+<!-- COMPATIBILITY -->
 ## Windows Version Compatibility
+Installing <b>NeptuneOS</b> on any other winver may result in issues.
 
 - [x] Windows 10
- - [x] 21H2
- - [x] 22H2
+  - [ ] 1803
+  - [ ] 1809
+  - [x] 21H2
+  - [x] 22H2
 - [x] Windows 11
- - [x] 22H2
- - [x] 23H2
- - [ ] 24H2 Canary
+  - [x] 22H2
+  - [x] 23H2
+  - [ ] 24H2 Canary
 - [ ] Windows Server
- - [ ] 2022
+  - [ ] 2022
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-YOU are fully responsible for whatever happens to your system during your time using NeptuneOS
+Before installing **NeptuneOS** please backup any important files you need.
+It is **not recommended** to install this on an already existing windows install.
 
-Backup your files and reinstall windows before you proceed with installing Neptune. This is to prevent any unforseen issues with any tweaks or configurations you or any applications might have applied to your system.
-
-To install NeptuneOS, visit the [Installation Repo](https://github.com/NyneDZN/NeptuneOS/tree/installer)
-
-NeptuneOS includes GPU driver installation tools, such as [Radeon Software Slimmer](https://github.com/GSDragoon/RadeonSoftwareSlimmer) and [NVCleanStall](https://www.techpowerup.com/download/techpowerup-nvcleanstall/).
-
-It is recommended that you install your Ethernet drivers from your vendor website, e.g [Realtek](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software) or [Intel](https://www.intel.com/content/www/us/en/download/18293/intel-network-adapter-driver-for-windows-10.html).
-
+### Installation Steps 🚀
+<ol>
+  <li>Please download the <b>Pro</b> edition of Windows 10 or Windows 11 from <a href"https://massgrave.dev/genuine-installation-media.html">here</a>, or alternatively from <a href"https://uupdump.net/known.php>here if you do not have a USB drive.</a></li>
+  <li>Use <a href="https://rufus.ie/en/">Rufus</a>, <a href="https://www.ventoy.net/en/index.html">Ventoy</a>, or if you do not have a USB drive, <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">InstallWithoutUSB</a> to install the image.</li>
+    <ol>2.1. When installing via USB, please follow <a href"https://www.makeuseof.com/windows-11-select-edition-during-install/">this guide</a> before rebooting to the setup.</ol>
+  <li>When you boot to the image for the first time, please disconnect your ethernet.</li>
+    <ol>3.1. If you are on Windows 11, please press Shift+F10 and type <b>OOBE\BYPASSNRO</b>, this will reboot you back to the Windows OOBE.</ol>
+  <li>When presented with the network connection screen, please click <b>I don't have internet</b></li>
+    <ol>4.1. Windows 11 will prompt you with a different message, please click <b>Continue with limited setup</b></ol>
+  <li>Once you reach the desktop, please open the search bar and type <b>Windows Security</b></li>
+    <ol>5.1. In the Windows Security app, please <b>disable Real-Time Protection</b> and <b>Tamper Protection.</b></ol>
+  <li>Press Win+R and type <i>cmd</i>. Please paste the following command to install NeptuneOS.
+</ol>
+```powershell Invoke-WebRequest -Uri 'https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer-dev.zip' -OutFile "$env:TEMP\installer.zip"; Expand-Archive -Path "$env:TEMP\installer.zip" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer-dev\Neptune\neptune.bat'```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,7 +76,6 @@ By fine-tuning system settings and configurations, it aims to deliver a superior
 This project is a fork of AtlasOS.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
 
