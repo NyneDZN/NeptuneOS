@@ -19,7 +19,8 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 mode 80,30
 color f1
-set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
+::set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
+set sudo="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
 set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
 
