@@ -50,9 +50,14 @@
 ## Windows Version Compatibility
 
 - [x] Windows 10
+ - [x] 21H2
+ - [x] 22H2
 - [x] Windows 11
-- [x] Windows LTSC
+ - [x] 22H2
+ - [x] 23H2
+ - [ ] 24H2 Canary
 - [ ] Windows Server
+ - [ ] 2022
 
 
 <!-- GETTING STARTED -->
