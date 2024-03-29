@@ -43,12 +43,12 @@ echo ========================
 echo NeptuneOS Installer.
 echo ========================
 echo 1. Install NeptuneOS
-echo 2. Disable Automatic Driver Installation
+echo 2. Exit
 echo ========================
 choice /c 12 /n /m "Select a choice: "
 
-if errorlevel 2 goto DisableAutoDriver
 if errorlevel 1 goto NeptuneInstall
+if errorlevel 2 goto Nope
 
 
 :NeptuneInstall
@@ -309,20 +309,9 @@ shutdown /f /r /t 0
 
 
 
-:DisableAutoDriver
+:Nope
 cls
 echo.
-echo ===========================
-echo    Disabling Automatic Driver Installation...
-echo ===========================
-Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" /v "value" /t REG_DWORD /d "1" /f > nul 
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f > nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "DontSearchWindowsUpdate" /t REG_DWORD /d "1" /f  > nul
-cls & echo Done
+echo Exiting...
 timeout /t 1 >nul
-goto menu
+exit
