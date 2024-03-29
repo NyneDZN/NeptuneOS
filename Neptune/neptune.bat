@@ -39,12 +39,12 @@ exit /b
 
 :menu
 cls
-echo ========================
+echo]
 echo NeptuneOS Installer.
-echo ========================
+echo]
 echo 1. Install NeptuneOS
 echo 2. Exit
-echo ========================
+echo]
 choice /c 12 /n /m "Select a choice: "
 
 if errorlevel 1 goto NeptuneInstall
