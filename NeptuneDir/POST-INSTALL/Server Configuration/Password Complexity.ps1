@@ -5,7 +5,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Exit
 }
 
-# Define the path to the .cfg file
+# Group Policy Configuration Path
 $filePath = "C:\secconfig.cfg"
 
 # Export the initial configuration using secedit.exe
