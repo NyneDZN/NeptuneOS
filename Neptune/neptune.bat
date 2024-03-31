@@ -33,8 +33,8 @@ set "bullet= %ESC%[34m-%ESC%[0m"
 
 
 echo %ESC%[4mBy running the NeptuneOS installer, you allow it to make changes to your PC.%ESC%[0m
-set /p userInput=Please type 'yes' to continue.: 
 
+set /p userInput=Please type 'yes' to continue.: 
 if /i "%userInput%"=="yes" (goto Menu) else (goto NotAccepted)
     
 :NotAccepted
