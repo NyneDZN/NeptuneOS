@@ -134,7 +134,7 @@ PowerShell -ExecutionPolicy Unrestricted -Command  "$PowerCfg = (Get-ChildItem '
 :: Import Ultimate Powerplan and Rename
 powercfg -import "%WinDir%\NeptuneDir\Prerequisites\power.pow" 11111111-1111-1111-1111-111111111111 >nul 2>&1
 powercfg -setactive 11111111-1111-1111-1111-111111111111 >nul 2>&1
-powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan 3.0." "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
+powercfg -changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan 4.0." "A powerplan created to achieve low latency and high 0.01% lows." >nul 2>&1
 :: Remove Stock Powerplans
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul 2>&1
 powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
@@ -199,7 +199,7 @@ powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 12a
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 7b224883-b3cc-4d79-819f-8374152cbe7c 100 >nul 2>&1
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 4b92d758-5a24-4851-a470-815d78aee119 100 >nul 2>&1
 :: Enable Turbo Boost
-powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTMODE 1 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTMODE 2 >nul 2>&1
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTPOL 100 >nul 2>&1
 :: Prefer Performant Processors
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SHORTSCHEDPOLICY 2 >nul 2>&1
