@@ -10,10 +10,11 @@ cd "C:\NeptuneOS-installer-dev\Neptune" >nul
 del neptune.7z >nul
 cd "NeptuneOS-main" >nul
 move NeptuneDir %WinDir% >nul
+for %%a in (layout.xml, regjump.exe, serviwin.exe) do (move "%%a" "%WinDir%")
 move "ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\start.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup" >nul
-move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\layout.xml" "%WinDir%" >nul
-move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\regjump.exe" "%WinDir%" >nul
-move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%" >nul
+:: move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\layout.xml" "%WinDir%" >nul
+:: move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\regjump.exe" "%WinDir%" >nul
+:: move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\serviwin.exe" "%WinDir%" >nul
 move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desktop"
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r && icacls C:\ProgramData\Microsoft\User Account Pictures\ /grant administrators:F /T >nul
 rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" >nul
