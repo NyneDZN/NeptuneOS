@@ -52,8 +52,12 @@ echo %bullet% 2. Exit
 echo]
 choice /c 12 /n /m "Select a choice: "
 
-if errorlevel 1 goto NeptuneInstall
-if errorlevel 2 goto Nope
+if errorlevel 2 (
+    goto Nope
+) else (
+    goto NeptuneInstall
+)
+
 
 
 :NeptuneInstall
