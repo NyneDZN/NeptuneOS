@@ -729,7 +729,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "ImagePath" /t Reg_
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "ImagePath" /t Reg_EXPAND_SZ /d "%SystemRoot%\System32\audiosvchost.exe -k LocalSystemNetworkRestricted -p" /f >nul 2>&1
 
 :: Backing up default Windows services and drivers
-set BACKUP="%WINDIR%\NeptuneDir\POST-INSTALL\Troubleshooting\windows-default-services.Reg"
+set BACKUP="%WINDIR%\NeptuneDir\Neptune\Troubleshooting\windows-default-services.Reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
 for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
@@ -860,7 +860,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% Sense 4
 
 :: Backup default NeptuneOS drivers and services
-set BACKUP=%WINDIR%\NeptuneDir\POST-INSTALL\Troubleshooting\neptune-default-services.Reg"
+set BACKUP=%WINDIR%\NeptuneDir\Neptune\Troubleshooting\neptune-default-services.Reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
@@ -2838,7 +2838,7 @@ cls & echo !S_GREEN!Configuring Open Shell
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SearchInternet" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MainMenuAnimate" /t REG_DWORD /d "0" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul 2>&1
-move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell Menu Settings.lnk" "%WinDir%\NeptuneDir\POST-INSTALL\3. Configuration\Start Menu" >nul 2>&1
+move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell Menu Settings.lnk" "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" >nul 2>&1
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >nul 2>&1
 )
 
@@ -2896,9 +2896,9 @@ del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
-if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Server Configuration")
-if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 11")
-if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\POST-INSTALL\Optional\Windows 10")
+if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
+if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11")
+if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 10")
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
