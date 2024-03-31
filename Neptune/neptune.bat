@@ -26,8 +26,14 @@ set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
 :: set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
 :: set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
+:: Set ANSI escape characters (AtlasOS)
+cd /d "%~dp0"
+for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
+set "right=%ESC%[<x>C"
+set "bullet= %ESC%[34m-%ESC%[0m"
 
-echo By running the NeptuneOS installer, you allow it to make changes to your PC.
+
+echo %ESC%[4mBy running the NeptuneOS installer, you allow it to make changes to your PC.%ESC%[0m
 set /p userInput=Please type 'yes' to continue.: 
 
 if /i "%userInput%"=="yes" (goto Menu) else (goto NotAccepted)
@@ -40,10 +46,10 @@ exit /b
 :menu
 cls
 echo]
-echo NeptuneOS Installer.
+echo    %ESC%[7mNeptuneOS Installer.%ESC%[0m
 echo]
-echo 1. Install NeptuneOS
-echo 2. Exit
+echo %bullet% 1. Install NeptuneOS
+echo %bullet% 2. Exit
 echo]
 choice /c 12 /n /m "Select a choice: "
 
