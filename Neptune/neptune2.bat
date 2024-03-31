@@ -1,4 +1,5 @@
-@echo off && color f1 && mode 40,20
+@echo off && color f1
+mode 40,20
 echo Downloading NeptuneOS...
 curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls
