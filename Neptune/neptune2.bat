@@ -1,4 +1,6 @@
 @echo off && color f1
+echo Debug
+pause>nul
 mode con: cols=40 lines=20
 echo Downloading NeptuneOS...
 "%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "(New-Object System.Net.WebClient).DownloadFile('https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip', 'C:\NeptuneOS-installer-dev\Neptune\neptune.7z');"
