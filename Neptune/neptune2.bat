@@ -8,7 +8,7 @@ cls & echo Initializing Installer...
 :: Move .7Z to installer-dev
 move "%WinDir%\System32\neptune.7z" "C:\NeptuneOS-installer-dev\Neptune" > nul
 :: Extract and Delete .7z
-%zip% neptune.7z >nul
+%zip% "C:\NeptuneOS-installer-dev\Neptune\neptune.7z" >nul
 :: del neptune.7z >nul
 :: Change Directory into repository folder
 cd "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main" >nul
