@@ -2904,7 +2904,7 @@ if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&
 
 
 :: Set account pictures
-powershell "%WinDir\NeptuneDir\PFP.ps1"
+%PowerShell% "%WinDir\NeptuneDir\PFP.ps1"
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
