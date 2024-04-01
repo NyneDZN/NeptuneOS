@@ -1,7 +1,7 @@
 @echo off && color f1
 mode con: cols=40 lines=20
 echo Downloading NeptuneOS...
-curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
+curl -o C:\NeptuneOS-installer-dev\Neptune\neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
 7za x neptune.7z > nul
