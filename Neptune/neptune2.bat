@@ -5,6 +5,8 @@ mode con: cols=40 lines=20
 echo Downloading NeptuneOS...
 curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
+:: Move .7Z to installer-dev
+move "%WinDir%\System32\neptune.7z" "C:\NeptuneOS-installer-dev\Neptune" > nul
 :: Extract and Delete .7z
 %zip% neptune.7z >nul
 :: del neptune.7z >nul
