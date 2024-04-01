@@ -2880,7 +2880,7 @@ ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
 
 
 :: Delete microcode
-:: deleting this on 24H2 (build 25931) and up will cause boot device not found BSOD
+:: Commented out because this is pointless, and will cause issues on 24H2+ Canary.
 :: if "%os%"=="Windows 10" (
 :: takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
 :: takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
