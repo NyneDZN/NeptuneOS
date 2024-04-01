@@ -7,7 +7,7 @@ curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
 %zip% neptune.7z >nul
-del neptune.7z >nul
+:: del neptune.7z >nul
 :: Change Directory into repository folder
 cd "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main" >nul
 :: Move Neptune Modules to WinDir
