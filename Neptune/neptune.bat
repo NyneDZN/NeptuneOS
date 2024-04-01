@@ -318,6 +318,6 @@ shutdown /f /r /t 0
 cls
 echo]
 echo Exiting...
-rmdir /s /q "C:\NeptuneOS-installer-dev"
+:: rmdir /s /q "C:\NeptuneOS-installer-dev"
 timeout /t 2 >nul
 exit
