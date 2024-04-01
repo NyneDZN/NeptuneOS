@@ -4,6 +4,7 @@ echo Downloading NeptuneOS...
 curl -o C:\NeptuneOS-installer-dev\Neptune\neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
+cd "C:\NeptuneOS-installer-dev\Neptune"
 7za x neptune.7z > nul
 del neptune.7z >nul
 :: Change Directory into repository folder
