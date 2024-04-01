@@ -50,14 +50,10 @@ echo]
 echo %bullet% 1. Install NeptuneOS
 echo %bullet% 2. Exit
 echo]
-choice /c 12 /n /m "Select a choice: "
+set /p choice=Select a choice:
 
-if errorlevel 2 (
-    goto Nope
-) else (
-    goto NeptuneInstall
-)
-
+if "%choice%"=="1" goto NeptuneInstall
+if "%choice%"=="2" goto Nope
 
 
 :NeptuneInstall
