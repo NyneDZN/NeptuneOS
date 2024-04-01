@@ -1,3 +1,5 @@
+set zip="C:\NeptuneOS-installer-dev\Neptune\7za.exe" x
+
 @echo off && color f1
 echo Debug
 pause>nul
@@ -6,10 +8,11 @@ echo Downloading NeptuneOS...
 curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
-7za x neptune.7z >nul
+cd "C:\NeptuneOS-installer-dev\Neptune"
+%zip% neptune.7z >nul
 del neptune.7z >nul
 :: Change Directory into repository folder
-cd "NeptuneOS-main" >nul
+cd "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main" >nul
 :: Move Neptune Modules to WinDir
 move NeptuneDir %WinDir% >nul
 :: Move Desktop Shortcut to USERS Desktop
