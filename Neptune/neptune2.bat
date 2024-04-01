@@ -1,14 +1,11 @@
-set zip="C:\NeptuneOS-installer-dev\Neptune\7za.exe" x
-
 @echo off && color f1
-echo Debug
-pause>nul
+:: 7Z Variable
+set zip="C:\NeptuneOS-installer-dev\Neptune\7za.exe" x
 mode con: cols=40 lines=20
 echo Downloading NeptuneOS...
 curl -o neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
-cd "C:\NeptuneOS-installer-dev\Neptune"
 %zip% neptune.7z >nul
 del neptune.7z >nul
 :: Change Directory into repository folder
