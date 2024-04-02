@@ -2919,7 +2919,6 @@ ren TextInputHost.exe TextInputHost.old >nul 2>&1
 :: icacls "C:\Windows\System32\RuntimeBroker.exe" /grant Administrators:F >nul 2>&1
 :: takeown /f "RuntimeBroker.exe" >nul 2>&1
 :: ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
-)
 
 
 :: Delete microcode
