@@ -2924,11 +2924,11 @@ ren RuntimeBroker.exe RuntimeBroker.old >nul 2>&1
 
 :: Delete microcode
 :: Commented out because this is pointless, and will cause issues on 24H2+ Canary.
-:: if "%os%"=="Windows 10" (
-:: takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
-:: takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
-:: del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
-:: del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
+:: 	if "%os%"=="Windows 10" (
+:: 	takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul 2>&1
+:: 	takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul 2>&1
+:: 	del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul 2>&1
+:: 	del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 :: )
 
 :: Delete neptune setup files
@@ -2940,14 +2940,12 @@ del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
+if "%server%"=="yes" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11")
 if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11")
 if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 10")
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
-
-:: Set account pictures
-%PowerShell% "%WinDir\NeptuneDir\PFP.ps1"
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
