@@ -63,7 +63,7 @@ if errorlevel 2 (
 
 
 :NeptuneInstall
-mode 40,20
+mode con: cols=40 lines=20
 cls & echo This will take a moment.
 echo We are disabling defender.
 del "%temp%\installer.zip"
