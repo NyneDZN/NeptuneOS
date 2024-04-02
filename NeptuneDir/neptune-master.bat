@@ -1227,9 +1227,9 @@ Reg add "HKCR\CABFolder\Shell\RunAs" /ve /t REG_SZ /d "Install" /f >nul 2>&1
 Reg add "HKCR\CABFolder\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "" /f >nul 2>&1
 Reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /online /add-package /packagepath:\"%1\"" /f >nul 2>&1
 :: - > Debloat 'Send To' context menu, hidden files do not show up in the 'Send To' context menu
-attrib +h "C:\Users\%loggedinUsername%\AppData\Roaming\Microsoft\Windows\SendTo\Bluetooth File Transfer.LNK" >nul 2>&1
-attrib +h "C:\Users\%loggedinUsername%\AppData\Roaming\Microsoft\Windows\SendTo\Mail Recipient.MAPIMail" >nul 2>&1
-attrib +h "C:\Users\%loggedinUsername%\AppData\Roaming\Microsoft\Windows\SendTo\Documents.mydocs" >nul 2>&1
+:: attrib +h "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\SendTo\Bluetooth File Transfer.LNK" >nul 2>&1
+:: attrib +h "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\SendTo\Mail Recipient.MAPIMail" >nul 2>&1
+:: attrib +h "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\SendTo\Documents.mydocs" >nul 2>&1
 
 :: File Explorer Configuration
 :: - > Disable 'Network Navigation' in the File Explorer Side Panel
