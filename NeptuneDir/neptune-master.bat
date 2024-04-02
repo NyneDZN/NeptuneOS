@@ -2954,6 +2954,9 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 :: Importing finalization script into RunOnce
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.bat" /f >nul 2>&1
 
+:: Set User Account Icons
+%currentuser% %powershell% "%WinDir%\NeptuneDir\PFP.ps1"
+
 cls
 echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
 echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
