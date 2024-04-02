@@ -43,7 +43,7 @@ echo Closing...
 exit /b
 
 :menu
-cls
+cls & mode con: cols=60 lines=30
 echo]
 echo    %ESC%[7mNeptuneOS Installer.%ESC%[0m
 echo]
