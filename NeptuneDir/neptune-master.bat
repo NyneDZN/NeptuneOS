@@ -2885,9 +2885,9 @@ move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >nul 2>&1
 )
 
-cls & echo !S_GREEN!Installing Chocolatey...
-PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > nul
-call "%WinDir%\NeptuneDir\RefreshEnv.cmd"
+:: cls & echo !S_GREEN!Installing Chocolatey...
+:: PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > nul
+:: call "%WinDir%\NeptuneDir\RefreshEnv.cmd"
 goto PartingPhase
 
 
