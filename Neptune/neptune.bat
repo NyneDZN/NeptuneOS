@@ -17,7 +17,7 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
-mode 80,30
+mode con: cols=80 lines=30
 :: PowerShell Variables
 set sudo="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
 set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
