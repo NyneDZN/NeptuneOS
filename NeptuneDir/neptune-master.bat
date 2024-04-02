@@ -2804,8 +2804,51 @@ Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open" /ve /t REG_SZ /d "" /f
 Reg add "HKLM\SOFTWARE\Classes\7-Zip.zip\shell\open\command" /ve /t REG_SZ /d "\"%ProgramFiles%\7-Zip\7zFM.exe\" \"%%1\"" /f
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts.zip\UserChoice" /v "Hash" /t REG_SZ /d "UfO2BmgRhuY=" /f
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts.zip\UserChoice" /v "ProgId" /t REG_SZ /d "7-Zip.zip" /f
-%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "ProgId" /t REG_SZ /d "7-Zip.7z" /f
-:: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.7z\UserChoice" /v "Hash" /t REG_SZ /d "KHHMPIHu3tI=" /f
+
+:: SetUserFTA
+:: This code is blocked with parantheses because if it is not, it will not put everything on the proper lines
+(
+	echo .7z, 7-Zip.7z
+	echo .zip, 7-Zip.zip
+	echo .rar, 7-Zip.rar
+	echo .001, 7-Zip.001
+	echo .cab, 7-Zip.cab
+	echo .iso, 7-Zip.iso
+	echo .xz, 7-Zip.xz
+	echo .txz, 7-Zip.txz
+	echo .lzma, 7-Zip.lzma
+	echo .tar, 7-Zip.tar
+	echo .cpio, 7-Zip.cpio
+	echo .bz2, 7-Zip.bz2
+	echo .bzip2, 7-Zip.bzip2
+	echo .tbz2, 7-Zip.tbz2
+	echo .tbz, 7-Zip.tbz
+	echo .gz, 7-Zip.gz
+	echo .gzip, 7-Zip.gzip
+	echo .tgz, 7-Zip.tgz
+	echo .tpz, 7-Zip.tpz
+	echo .z, 7-Zip.z
+	echo .taz, 7-Zip.taz
+	echo .lzh, 7-Zip.lzh
+	echo .lha, 7-Zip.lha
+	echo .rpm, 7-Zip.rpm
+	echo .deb, 7-Zip.deb
+	echo .arj, 7-Zip.arj
+	echo .vhd, 7-Zip.vhd
+	echo .wim, 7-Zip.wim
+	echo .swm, 7-Zip.swm
+	echo .esd, 7-Zip.esd
+	echo .fat, 7-Zip.fat
+	echo .ntfs, 7-Zip.ntfs
+	echo .dmg, 7-Zip.dmg
+	echo .hfs, 7-Zip.hfs
+	echo .xar, 7-Zip.xar
+	echo .squashfs, 7-Zip.squashfs
+	echo .apfs, 7-Zip.apfs
+) > assoc.txt
+
+%WinDir%\NeptuneDir\Tools\SetUserFTA.exe "assoc.txt"
+
 move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip\7-Zip File Manager.lnk" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip"
 
