@@ -2955,10 +2955,7 @@ if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" 
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
 :: Set Lockscreen
-%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\lockscreen.ps1"
-
-:: Set User Account Icons
-%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\PFP.ps1"
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
