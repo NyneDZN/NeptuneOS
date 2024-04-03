@@ -210,6 +210,9 @@ powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PER
 :: Prefer Performant Processors
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SHORTSCHEDPOLICY 2 >nul 2>&1
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SCHEDPOLICY 2 >nul 2>&1
+:: Processor performance time check interval - 200 miliseconds
+:: Reduces DPCs, can be set all the way to 5000ms for statically clocked systems
+powercfg -setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 200 >nul 2>&1
 
 :: - Miscellaneous
 :: Set slideshow to paused
