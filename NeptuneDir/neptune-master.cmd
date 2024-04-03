@@ -1334,6 +1334,9 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableCloud
 if "%os%"=="Windows 11" do (%currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f) >nul 2>&1
 if "%os%"=="Windows 11" do (%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f) >nul 2>&1
 
+:: Fix Default Account Icon
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDefaultTile" /t REG_DWORD /d "1" /f >nul 2>&1
+
 :: Enable the legacy photo viewer from windows 7 era
 for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
 Reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~a" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul 2>&1
