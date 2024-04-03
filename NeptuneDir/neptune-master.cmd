@@ -45,7 +45,7 @@ set svc=call :setSvc
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 :: Fullsceen Script
-%currentuser% cscript //nologo "%WinDir%\NeptuneDir\FullScreenCMD.vbs"
+"%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\FullScreenCMD.vbs"
 
 :: Create Log File
 echo. > %WinDir%\NeptuneDir\neptune.txt
