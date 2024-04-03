@@ -17,7 +17,6 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
-
 powershell set-executionpolicy restricted
-Scripts are now disabled on this system.
+echo Scripts are now disabled on this system.
 pause>nul
