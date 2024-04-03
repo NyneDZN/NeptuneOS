@@ -43,6 +43,9 @@ set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide 
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
 
+:: Fullsceen Script
+call "%WinDir%\NeptuneDir\FullscreenCMD.vbs"
+
 :: Create Log File
 echo. > %WinDir%\NeptuneDir\neptune.txt
 
@@ -2953,11 +2956,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalizatio
 :: Set User Account Icons
 %currentuser% %powershell% "%WinDir%\NeptuneDir\PFP.ps1"
 
-cls
-echo !S_GRAY!Finishing up installation and restarting. Enjoy NeptuneOS.
-echo !S_GRAY!Please report any bugs you may find to the discord, or to the github. Thank you for your support.
-echo !S_GRAY!Press any key to let the system reboot, or wait 10 seconds.
-timeout /t 10 >nul
+echo We're finished
 shutdown /f /r /t 0 & del "%~f0"
 
 
