@@ -20,9 +20,8 @@ takeown /f "C:\Windows\Web" /r && icacls C:\Windows\Web\ /grant administrators:F
 :: Move Neptune Account Icons
 takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r && icacls "C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T && rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" && move "C:\NeptuneOS-installer-dev\Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" > nul
 :: Delete the initial batch file
-del /q /f "C:\Users\%USERNAME%\Desktop\neptune_dev.bat" > nul
+del /q /f "C:\Users\%USERNAME%\Desktop\neptune_dev.cmd" > nul
 :: Install Neptune
 cls & echo Opening Installer...
 timeout /t 2 > nul
-start "" "C:\Windows\NeptuneDir\neptune-master.bat" /postinstall /devbuild
-
+start "" "C:\Windows\NeptuneDir\neptune-master.cmd" /postinstall /devbuild
