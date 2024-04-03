@@ -2963,7 +2963,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
 
-echo We're finished
 shutdown /f /r /t 0 & del "%~f0"
 
 
