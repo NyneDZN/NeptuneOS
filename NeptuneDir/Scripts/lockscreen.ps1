@@ -1,5 +1,5 @@
 # Credit: https://superuser.com/a/1343640
-$imagePath = "$([Environment]::GetFolderPath('Windows'))\NeptuneDir\lockscreen.png"
+$imagePath = "$([Environment]::GetFolderPath('Windows'))\C:\Windows\NeptuneDir\lockscreen.png"
 
 if (!(Test-Path $imagePath)) {
     throw "Lockscreen not found."
