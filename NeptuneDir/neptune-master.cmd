@@ -2951,7 +2951,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
 
 :: Importing finalization script into RunOnce
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.bat" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.cmd" /f >nul 2>&1
 
 :: Set User Account Icons
 %currentuser% %powershell% "%WinDir%\NeptuneDir\PFP.ps1"
