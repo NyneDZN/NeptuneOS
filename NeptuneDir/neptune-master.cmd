@@ -29,7 +29,7 @@
 @echo off & setlocal EnableDelayedExpansion
 
 :: NeptuneOS Variables
-set version=0.4
+set version=0.5
 
 :: Check if this is a development build or not
 if /i "%~2"=="/devbuild"   set "devbuild=yes"
