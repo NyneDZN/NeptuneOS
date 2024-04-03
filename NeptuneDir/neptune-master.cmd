@@ -45,7 +45,7 @@ set svc=call :setSvc
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 :: Fullsceen Script
-"%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\FullScreenCMD.vbs"
+%currentuser% "%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\FullScreenCMD.vbs"
 
 :: Create Log File
 echo. > %WinDir%\NeptuneDir\neptune.txt
@@ -59,10 +59,9 @@ for /f "skip=1" %%i in ('wmic os get TotalVisibleMemorySize') do if not defined 
 :: Fetch Disk Type
 for /f %%a in ('PowerShell -NoP -C "(Get-PhysicalDisk -SerialNumber (Get-Disk -Number (Get-Partition -DriveLetter $env:SystemDrive.Substring(0, 1)).DiskNumber).SerialNumber.TrimStart()).MediaType"') do (set "diskDrive=%%a")
   
-:: Check GPU
-:: for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value') do (
-:: for %%n in (GeForce NVIDIA RTX GTX) do echo %%a | find /I "%%n" >nul && set GPU=NVIDIA
-:: )
+:: Fetch GPU
+:: Basic one liner for now that will assume you have a RADEON GPU if NVIDIA is not found
+for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value ^| findstr /i "GeForce NVIDIA RTX GTX Radeon AMD"') do (echo %%a | findstr /i "GeForce NVIDIA RTX GTX" >nul && set GPU=NVIDIA || set GPU=RADEON)
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11
@@ -469,27 +468,31 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 :: TPM Devices
 if "%os%"=="Windows 10" (%DevMan% /disable "AMD PSP 10.0 Device" & %DevMan% /disable "Trusted Platform Module 2.0")
 
-:: MSI Mode
-:: Enable MSI mode on USB, GPU, SATA controllers and network adapters
+:: Enable MSI mode on USB, GPU, Audio, SATA controllers, disk drives and network adapters
 :: Deleting DevicePriority sets the priority to undefined
-for %%a in (
-Win32_USBController,
-Win32_VideoController,
-Win32_NetworkAdapter,
-Win32_IDEController
-) do (
-for /f %%i in ('wmic path %%a get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
-Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t Reg_DWORD /d "1" /f > nul 2>nul
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f > nul 2>nul
-)
+for %%a in ("CIM_NetworkAdapter", "CIM_USBController", "CIM_VideoController" "Win32_IDEController", "Win32_PnPEntity", "Win32_SoundDevice") do (
+    if "%%~a" == "Win32_PnPEntity" (
+        for /f "tokens=*" %%b in ('PowerShell -NoP -C "Get-WmiObject -Class Win32_PnPEntity | Where-Object {($_.PNPClass -eq 'SCSIAdapter') -or ($_.Caption -like '*High Definition Audio*')} | Where-Object { $_.PNPDeviceID -like 'PCI\VEN_*' } | Select-Object -ExpandProperty DeviceID"') do (
+            reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%b\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f > nul
+            reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%b\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f > nul 2>&1
+        )
+    ) else (
+        for /f %%b in ('wmic path %%a get PNPDeviceID ^| findstr /l "PCI\VEN_"') do (
+            reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%b\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f > nul
+            reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%b\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f > nul 2>&1
+        )
+    )
 )
 
-:: if e.g. VMWare is used, set network adapter to normal priority as undefined on some virtual machines may break internet connection
-wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
-for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /L "PCI\VEN_"') do (
-Reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t Reg_DWORD /d "2"  /f > nul 2>nul
+:: If a virtual machine is used, set network adapter to normal priority as Undefined may break internet connection
+for %%a in ("hvm", "hyper", "innotek", "kvm", "parallel", "qemu", "virtual", "xen", "vmware") do (
+    wmic computersystem get manufacturer /format:value | findstr /i /c:%%~a && (
+        for /f %%b in ('wmic path CIM_NetworkAdapter get PNPDeviceID ^| findstr /l "PCI\VEN_"') do (
+            reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%b\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t REG_DWORD /d "2" /f > nul
+        )
+    )
 )
-)
+
 goto NetworkConfiguration
 
 
