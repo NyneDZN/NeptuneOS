@@ -2879,9 +2879,7 @@ Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts.zip\Us
 	echo .squashfs, 7-Zip.squashfs
 	echo .apfs, 7-Zip.apfs
 ) > assoc.txt
-
 %WinDir%\NeptuneDir\Tools\SetUserFTA.exe "assoc.txt"
-
 move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip\7-Zip File Manager.lnk" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip"
 
