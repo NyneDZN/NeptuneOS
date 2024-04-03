@@ -211,7 +211,6 @@ powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PER
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SHORTSCHEDPOLICY 2 >nul 2>&1
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SCHEDPOLICY 2 >nul 2>&1
 :: Processor performance time check interval - 200 miliseconds
-:: Reduces DPCs, can be set all the way to 5000ms for statically clocked systems
 powercfg -setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 200 >nul 2>&1
 
 :: - Miscellaneous
@@ -253,16 +252,16 @@ cls & echo !S_GREEN!Configuring NTFS
 :: Configuring the NTFS file system in Windows
 
 :: Adjust MFT (master file table) and paged pool memory cache levels according to ram size
-if !TOTAL_MEMORY! LSS 8000000 (
-FSUTIL behavior set memoryusage 1 >nul 2>&1
-FSUTIL behavior set mftzone 1 >nul 2>&1
-) else if !TOTAL_MEMORY! LSS 16000000 (
-FSUTIL behavior set memoryusage 1 >nul 2>&1
-FSUTIL behavior set mftzone 2 >nul 2>&1
-) else (
-FSUTIL behavior set memoryusage 2 >nul 2>&1
-FSUTIL behavior set mftzone 2 >nul 2>&1
-)
+:: if !TOTAL_MEMORY! LSS 8000000 (
+:: FSUTIL behavior set memoryusage 1 >nul 2>&1
+:: FSUTIL behavior set mftzone 1 >nul 2>&1
+:: ) else if !TOTAL_MEMORY! LSS 16000000 (
+:: FSUTIL behavior set memoryusage 1 >nul 2>&1
+:: FSUTIL behavior set mftzone 2 >nul 2>&1
+:: ) else (
+:: FSUTIL behavior set memoryusage 2 >nul 2>&1
+:: FSUTIL behavior set mftzone 2 >nul 2>&1
+:: )
 
 :: Disallows characters from the extended character set to be used in 8.3 character-length short file names
 FSUTIL behavior set allowextchar 0 >nul 2>&1
