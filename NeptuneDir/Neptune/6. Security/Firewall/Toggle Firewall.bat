@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 mode 60,20
-cd %WinDir%\NeptuneDir >nul && where ansi.bat >nul && call ansi.bat >nul
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 
 echo              !S_RED!%ESC%[7mFirewall Configuration%ESC%[0m

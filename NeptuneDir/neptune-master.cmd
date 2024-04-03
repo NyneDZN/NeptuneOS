@@ -112,7 +112,7 @@ exit
 taskkill /f /im explorer.exe >nul 2>&1
 
 :: ngen, from atlas
-Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\NGEN.ps1"
+Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\Scripts\NGEN.ps1"
 
 cls & echo !S_GREEN!Configuring NTP Server
 :: change ntp server from windows server to pool.ntp.org
@@ -2216,7 +2216,7 @@ ScreenSketch Microsoft.Paint MicrosoftCorporationII.MicrosoftFamily MicrosoftTea
 )
 
 :: Remove Microsoft Edge Chromium
-%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
 
 :: Remove OneDrive
 :: taskkill /f /im OneDrive.exe
@@ -2945,13 +2945,15 @@ if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windo
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
+:: Set Lockscreen
+powershell "C:\Windows\NeptuneDir\lockscreen.ps1"
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
 
 :: Importing finalization script into RunOnce
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\finalize.cmd" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
 :: Set User Account Icons
 %currentuser% %powershell% "%WinDir%\NeptuneDir\PFP.ps1"
