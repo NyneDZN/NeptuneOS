@@ -2950,7 +2950,7 @@ if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" 
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
 
 :: Set Lockscreen
-%currentuser% Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\lockscreen.ps1"
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\lockscreen.ps1"
 
 :: Set User Account Icons
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\PFP.ps1"
