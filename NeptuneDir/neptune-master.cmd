@@ -44,7 +44,7 @@ set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
 
 :: Fullsceen Script
-call "%WinDir%\NeptuneDir\FullscreenCMD.vbs"
+%currentuser% cscript //nologo "%WinDir%\NeptuneDir\FullScreenCMD.vbs
 
 :: Create Log File
 echo. > %WinDir%\NeptuneDir\neptune.txt
