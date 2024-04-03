@@ -2975,6 +2975,9 @@ if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
+:: Removwe Start Menu Pins
+if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
+
 :: UWP Immersive Control Panel Debloat
 Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
 
