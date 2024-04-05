@@ -1017,8 +1017,6 @@ Reg add "%%a" /v "DmaRemappingCompatible" /t Reg_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\DmaGuard\DeviceEnumerationPolicy" /v "value" /t REG_DWORD /d "2" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f >nul 2>&1
-bcdedit /set vm no >nul 2>&1
-bcdedit /set vsmlaunchtype off >nul 2>&1
 
 :: Disable Core Isolation Memory Integrity
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -1026,7 +1024,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorE
 :: Disable DEP
 bcdedit /set nx alwaysoff >nul 2>&1
 
-:: Disable TSX
+:: Disable TSX 
 :: Enabling this could result in improved performance under certain workloads
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f >nul 2>&1
 
