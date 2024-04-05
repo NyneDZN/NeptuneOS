@@ -869,8 +869,9 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% webthreatdefsvc 4
 %svc% WerSvc 4
 %svc% WSearch 4
-%svc% WpnService 4
-%svc% WpnUserService 4
+:: Notification services will break the calendar on Windows 11
+:: %svc% WpnService 4
+:: %svc% WpnUserService 4
 :: Windows Defender Services
 %svc% WinDefend 4
 %svc% WdNisSvc 4

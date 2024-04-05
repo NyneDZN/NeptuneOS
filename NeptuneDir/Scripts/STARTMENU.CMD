@@ -3,6 +3,7 @@
 
 @echo off
 setlocal EnableDelayedExpansion
+set userProfile=%USERPROFILE%
 
 echo Configuring Start Menu for current user...
 echo ------------------------------------------------------------------------------------------------
