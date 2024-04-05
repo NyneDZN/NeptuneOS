@@ -2898,6 +2898,7 @@ cls & echo !S_GREEN!Installing Open Shell...
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
 cls & echo !S_GREEN!Configuring Open Shell
+%currentuser% Reg add "HKCU\Software\OpenShell\StartMenu" /v "ShowedStyle2" /t REG_DWORD /d "2" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "Version" /t REG_DWORD /d "67371150" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "SkipMetro" /t REG_DWORD /d "1" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "MenuStyle" /t REG_SZ /d "Win7" /f >nul 2>&1
