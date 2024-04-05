@@ -23,6 +23,3 @@ if not exist "%userProfile%\AppData\Local" (
 
 echo Clearing default 'tilegrid'
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f > nul 2>&1
-
-echo Removing advertisements/stubs from Start Menu ^(23H2+^)
-reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f > nul 2>&1
