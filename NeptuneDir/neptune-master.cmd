@@ -369,7 +369,8 @@ for %%a in (
 "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
 "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
 "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh"
-
+"\MicrosoftEdgeUpdateTaskMachineUA"
+"\MicrosoftEdgeUpdateTaskMachineCore"
 ) do (
 schtasks /change /disable /TN %%a >nul 2>&1
 )
