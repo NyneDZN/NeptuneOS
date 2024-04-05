@@ -4,9 +4,6 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: Determine the current user's profile path
-set "userProfile=%USERPROFILE%"
-
 echo Configuring Start Menu for current user...
 echo ------------------------------------------------------------------------------------------------
 
