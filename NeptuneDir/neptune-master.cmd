@@ -1,7 +1,7 @@
 :: Created for NeptuneOS by Nyne
 :: Compatible with Windows 10 21H2 and up
 
-:: I take no credit for any code in this script, this was all compiled from open sources
+:: A majority of the code in this script was forked from open-sourced binaries
 :: Credits, in no particular order:
 :: - Amit
 :: - Artanis
@@ -9,7 +9,7 @@
 :: - Ancel
 :: - CatGamerOP
 :: - CoutX
-:: - EverythingTech
+:: - DuckISO
 :: - he3als
 :: - HeavenOS
 :: - imribiy
@@ -17,7 +17,7 @@
 :: - nohopestage
 :: - Phlegm
 :: - privacy.sexy
-:: - Revision
+:: - ReviOS
 :: - Timecard
 :: - Winaero
 :: - Zusier
