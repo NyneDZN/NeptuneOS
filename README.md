@@ -23,15 +23,9 @@
 </div>
 
 
-
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 Fixing for <b>NepuneOS 0.5</b>
-
-
-
 
 
 <!-- COMPATIBILITY -->
@@ -51,9 +45,6 @@ Installing <b>NeptuneOS</b> on any other winver may result in issues.
   - [ ] 2022
 
 
-
-
-
 <!-- ABOUT NEPTUNEOS -->
 ## About NeptuneOS
 
@@ -64,8 +55,6 @@ This project is a fork of AtlasOS. We wouldn't be here without them.
 
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
-
-
 
 <!-- CONTACT -->
 ## Contact
