@@ -727,8 +727,6 @@ cls & echo !S_GREEN!Disabling Drivers and Services
 :: Configuring the services and drivers in Windows
 
 :: Configuring Driver Dependencies
-:: - > Audio Service
-Reg add "HKLM\System\CurrentControlSet\Services\Audiosrv" /v "DependOnService" /t Reg_MULTI_SZ /d "" /f >nul 2>&1
 :: - > DHCP, allows for TDX to be disabled
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t Reg_MULTI_SZ /d "NSI\0Afd" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t Reg_MULTI_SZ /d "nsi" /f >nul 2>&1
