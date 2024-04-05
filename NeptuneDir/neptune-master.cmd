@@ -1178,29 +1178,7 @@ Reg delete "HKCR\*\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
 Reg delete "HKCR\Directory\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
 Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
 :: - > Remove 'print' from Context Menus
-%currentuser% Reg add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
-for %%a in (
-"batfile"
-"cmdfile"
-"docxfile"
-"fonfile"
-"htmlfile"
-"inffile"
-"inifile"
-"JSEFile"
-"otffile"
-"pfmfile"
-"regfile"
-"rtffile"
-"ttcfile"
-"ttffile"
-"txtfile"
-"VBEFile"
-"VBSFile"
-"WSFFile"
-) do (
-%currentuser% Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1
-)
+%currentuser% Reg add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1 & for %%a in ("batfile" "cmdfile" "docxfile" "fonfile" "htmlfile" "inffile" "inifile" "JSEFile" "otffile" "pfmfile" "regfile" "rtffile" "ttcfile" "ttffile" "txtfile" "VBEFile" "VBSFile" "WSFFile") do (%currentuser% Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul 2>&1)
 :: - > Remove 'include in library' from Context Menus
 Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul 2>&1
 Reg delete "HKLM\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul 2>&1
