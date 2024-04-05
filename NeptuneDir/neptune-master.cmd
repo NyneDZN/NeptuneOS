@@ -849,7 +849,6 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% ShellHWDetection 4
 %svc% Spooler 4
 %svc% SgrmBroker 4
-:: SuperFetch Driver
 %svc% SysMain 4
 %svc% vmicguestinterface 4
 %svc% vmicheartbeat 4
