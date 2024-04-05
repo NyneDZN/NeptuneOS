@@ -25,6 +25,15 @@
 
 
 
+
+<!-- GETTING STARTED -->
+## Getting Started
+Fixing for <b>NepuneOS 0.5</b>
+
+
+
+
+
 <!-- COMPATIBILITY -->
 ## Windows Version Compatibility
 Installing <b>NeptuneOS</b> on any other winver may result in issues.
@@ -42,41 +51,28 @@ Installing <b>NeptuneOS</b> on any other winver may result in issues.
   - [ ] 2022
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-Fixing for <b>NepuneOS 0.5</b>
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- ABOUT NEPTUNEOS -->
 ## About NeptuneOS
 
-NeptuneOS is a tailored version of Windows that prioritizes optimal performance and minimal latency, all while preserving seamless compatibility with standard Windows applications and functions. 
-By fine-tuning system settings and configurations, it aims to deliver a superior user experience for those seeking peak performance without sacrificing compatibility.
+NeptuneOS is a open source project, we use batch and powershell scripts that aim to fine-tune Windows for optimal latency when gaming, and compatibility for general use.
                                        
-This project is a fork of AtlasOS.
+This project is a fork of AtlasOS. We wouldn't be here without them.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 See the [open issues](https://github.com/NyneDZN/NeptuneOS/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@NyneDZN](https://twitter.com/NyneDZN) 
+[My Twitter](https://twitter.com/NyneDZN) 
 
-Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
-
-Discord: nyne.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+[Discord Server](https://discord.gg/4YTSkcK8b8)
 
 
 
@@ -84,11 +80,10 @@ Discord: nyne.
 ## Acknowledgments
 
 * [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
-* [Optimization Guide by supermanZ (Very Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
 * [Atlas](https://github.com/Atlas-OS/)
 * [N1ko](https://n1kobg.blogspot.com/)
 * [AMIT](https://github.com/amitxv)
 * [CoutX](https://github.com/UnLovedCookie/CoutX)
 * [Yoshii](https://github.com/Yoshii64)
+* [DuckISO](https://github.com/duckISO/duckISO)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
