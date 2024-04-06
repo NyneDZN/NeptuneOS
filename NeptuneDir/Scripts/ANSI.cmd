@@ -7,3 +7,4 @@ set "right=%ESC%[<x>C"
 set "bullet= %ESC%[34m-%ESC%[0m"
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
+set neptlog= %WinDir%\NeptuneDir\neptune.txt
