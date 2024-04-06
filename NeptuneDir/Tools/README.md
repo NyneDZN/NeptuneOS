@@ -11,6 +11,12 @@ To verify the legitamacy of the executables provided in NeptuneOS, we verify the
 - Location: `%WinDir\NeptuneDir\Tools`
 - `The 7-Zip standalone console version beta was extracted and verified`
 
+## Chocolatey
+- SHA256: (`choco.exe`): `924E37885D4B3B365225C773A6C4266ED7076494E3693EC487BEC066AB5BC5F7`
+- Source: https://chocolatey.org/install
+- `We use the command provided for chocolatey installation.`
+- `When we use chocolatey to install a package, we use the --ignore-checksums variable to avoid errors, please verify checksums manually`
+
 ### DevManView
 - SHA256: (`dmv.exe`): `269F9C9A117508EB62B1E5C4F0AA5AB75307A36FADEFCA3DACD39C1C9BB56343`
 - Source: https://www.nirsoft.net/utils/device_manager_view.html
