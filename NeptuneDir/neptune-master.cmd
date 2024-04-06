@@ -41,6 +41,7 @@ set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svc=call :setSvc
+set delf=del /f /s /q
 
 :: Fetch ANSI
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
@@ -2936,11 +2937,11 @@ if "%os%"=="Windows 10" (
 :: )
 
 :: Delete neptune setup files
-del /f /q "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
-del /f /q "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
