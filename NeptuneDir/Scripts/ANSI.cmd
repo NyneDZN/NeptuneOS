@@ -1,5 +1,6 @@
 :: Credit AtlasOS
 :: Modified a tad by Nyne
+@echo off
 cd /d "%~dp0"
 for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
 set "right=%ESC%[<x>C"
