@@ -50,7 +50,7 @@ cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 %currentuser% "%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\FullScreenCMD.vbs"
 
 :: Create Log File
-echo. > %WinDir%\NeptuneDir\neptune.txt
+echo %time% %date% Started neptune-master.cmd. >> %neptlog%
 
 :: Fetch PC Type
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
@@ -2967,7 +2967,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 :: Importing finalization script into RunOnce
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
-
+echo %date% %time% Finished neptune-master.cmd >> %neptlog%
 shutdown /f /r /t 0 & del "%~f0"
 
 
