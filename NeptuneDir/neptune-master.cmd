@@ -1,4 +1,5 @@
 :: Created for NeptuneOS by Nyne
+:: https://github.com/NyneDZN/NeptuneOS
 :: Compatible with Windows 10 21H2 and up
 
 :: A majority of the code in this script was forked from open-sourced binaries
@@ -2959,7 +2960,7 @@ if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
 Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
 
 :: Set notice text
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom OS catered towards gamers. " /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom windows modification." /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
 
 :: Importing finalization script into RunOnce
