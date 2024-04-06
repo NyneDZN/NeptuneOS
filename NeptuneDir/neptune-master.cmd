@@ -218,7 +218,9 @@ powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PER
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SHORTSCHEDPOLICY 2 >nul 2>&1
 powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SCHEDPOLICY 2 >nul 2>&1
 :: Processor performance time check interval - 200 miliseconds
-powercfg -setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 200 >nul 2>&1
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 200 >nul 2>&1
+:: Allow Throttle States to Off
+powercfg -setacvalueindex 11111111-1111-1111-1111-111111111111 54533251-82be-4824-96c1-47b60b740d00 3b04d4fd-1cc7-4f23-ab1c-d1337819c4bb 0 >nul 2>&1
 
 :: - Miscellaneous
 :: Set slideshow to paused
@@ -236,18 +238,58 @@ wevtutil set-log "Microsoft-Windows-UserModePowerService/Diagnostic" /e:false >n
 
 
 cls & echo !S_GREEN!Disabling PowerSaving
-for /f "tokens=*" %%i in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr "USB\VID_"') do (
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnhancedPowerManagementEnabled" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "AllowIdleIrpInD3" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnableSelectiveSuspend" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DeviceSelectiveSuspended" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendEnabled" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendOn" /t Reg_DWORD /d "0" /f
-	Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "D3ColdSupported" /t Reg_DWORD /d "0" /f
-) >nul 2>&1
+:: Most of this section is forked from AtlasOS
+if "!DEVICE_TYPE!"=="PC" (
+	PowerShell -NoP -C "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}"
 
-:: Disable PnP Powersaving
-PowerShell -ExecutionPolicy Unrestricted -Command  "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}" >nul 2>&1
+    for %%a in (
+        "AllowIdleIrpInD3"
+        "D3ColdSupported"
+        "DeviceSelectiveSuspended"
+        "EnableIdlePowerManagement"
+        "EnableSelectiveSuspend"
+        "EnhancedPowerManagementEnabled"
+        "IdleInWorkingState"
+        "SelectiveSuspendEnabled"
+        "SelectiveSuspendOn"
+        "WaitWakeEnabled"
+        "WakeEnabled"
+        "WdfDirectedPowerTransitionEnable"
+    ) do (
+        for /f "delims=" %%b in ('reg query "HKLM\SYSTEM\CurrentControlSet\Enum" /s /f "%%~a" ^| findstr "HKEY"') do (
+            reg add "%%b" /v "%%~a" /t REG_DWORD /d "0" /f
+        )
+    )
+	:: Disable PnP Powersaving
+	PowerShell -ExecutionPolicy Unrestricted -Command  "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}" >nul 2>&1
+
+	:: Disable Storage Powersaving
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Storage" /v "StorageD3InModernStandby" /t REG_DWORD /d "0" /f >nul 2>&1
+
+    ::  Disable IdlePowerMode for stornvme.sys 
+    Reg add "HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device" /v "IdlePowerMode" /t REG_DWORD /d "0" /f >nul 2>&1
+
+	:: - > Disable Energy Estimation
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EnergyEstimationEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+	
+	:: - > Disable Connected Standby
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul
+
+    :: Disable power throttling
+    :: https://blogs.windows.com/windows-insider/2017/04/18/introducing-power-throttling
+    Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul 2>&1
+
+	:: Disable Timer Coalescing
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&
+ 
+
+	:: Disable Advanced Configuration Power Interfaces
+	%DevMan% "ACPI Processor Aggregator" /disable
+	%DevMan% "Microsoft Windows Management Interface for ACPI" /disable
+)
+
 
 :: Disable Powersaving on Network Adapter
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "DefaultPnPCapabilities" /t REG_DWORD /d "24" /f >nul 2>&1
@@ -436,7 +478,6 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 
 :: Device Manager
 :: - > System Devices
-%DevMan% /disable "ACPI Processor AggRegator" >nul 2>&1
 %DevMan% /disable "ACPI Wake Alarm" >nul 2>&1
 %DevMan% /disable "Composite Bus Enumerator" >nul 2>&1
 %DevMan% /disable "Direct memory access controller" >nul 2>&1
@@ -445,7 +486,6 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "Microsoft GS Wavetable Synth" >nul 2>&1
 %DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul 2>&1
 %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul 2>&1
-%DevMan% /disable "Microsoft Windows Management Interface for ACPI" >nul 2>&1
 %DevMan% /disable "Motherboard resources" >nul 2>&1
 %DevMan% /disable "Numeric data processor" >nul 2>&1
 %DevMan% /disable "PCI Data Acquisition and Signal Processing Controller" >nul 2>&1
@@ -2112,20 +2152,6 @@ Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >nu
 )
 )
 
-:: Power Registry
-:: - > Disable Energy Estimation
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EnergyEstimationEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-:: - > Disable Connected Standby
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-:: - > Disable PowerThrottling (8th gen and up?)
-:: - > Don't disable throttling on laptops
-if "%DEVICE_TYPE%"=="PC" (Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul 2>&1)
-:: - > Coalescing Timer
-if "%DEVICE_TYPE%"=="PC" (
-	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
-	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
-)
 
 :: Disable WPBT
 :: https://github.com/Jamesits/dropWPBT
