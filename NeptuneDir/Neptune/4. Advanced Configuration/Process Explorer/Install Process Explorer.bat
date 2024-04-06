@@ -162,6 +162,11 @@ Reg.exe add "HKCU\SOFTWARE\Sysinternals\Process Explorer\ProcessColumns" /v "7" 
 Reg.exe add "HKCU\SOFTWARE\Sysinternals\Process Explorer\ProcessColumns" /v "8" /t REG_DWORD /d "49" /f
 Reg.exe add "HKCU\SOFTWARE\Sysinternals\Process Explorer\ProcessColumns" /v "9" /t REG_DWORD /d "53" /f
 Reg.exe add "HKCU\SOFTWARE\Sysinternals\Process Explorer\ProcessColumns" /v "10" /t REG_DWORD /d "100" /f
+
+
+:: Echo to Logger
+cls & echo %date% %time% Replaced Task Manager with Process Explorer. >> %neptlog%
+:: Echo to User
 cls & echo Replaced Task Manager with Process Explorer.
 timeout /t 2 >nul
 exit /b
