@@ -1019,8 +1019,8 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequir
 :: Disable Core Isolation Memory Integrity
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f >nul 2>&1
 
-:: Disable DEP
-bcdedit /set nx alwaysoff >nul 2>&1
+:: Enable DEP
+bcdedit /set nx on >nul 2>&1
 
 :: Disable TSX 
 :: Enabling this could result in improved performance under certain workloads
