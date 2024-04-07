@@ -73,6 +73,16 @@ del "%temp%\installer.zip"
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "0" /f > nul
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "0" /f > nul
 
+:: Install Chocolatey
+PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >nul
+
+:: Disable Global Confirmation in Chocolatey
+choco feature enable -n allowGlobalConfirmation > nul
+
+:: Disable Hash Checking in Chocolatey
+:: This is due to it causing errors, if you need to check the hashes, please do this manually
+choco feature disable -n checksumFiles > nul
+
 :: Remove Server Manager from Startup on Servers
 if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.lnk" (%WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Server\ServerManager" /v "DoNotOpenAtLogon" /t REG_DWORD /d "1" /f >nul 2>&1)
 
