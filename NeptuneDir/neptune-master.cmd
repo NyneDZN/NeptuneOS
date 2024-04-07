@@ -274,7 +274,7 @@ if "!DEVICE_TYPE!"=="PC" (
 
 	:: - > Disable Connected Standby
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 
     :: Disable power throttling
     :: https://blogs.windows.com/windows-insider/2017/04/18/introducing-power-throttling
@@ -282,7 +282,7 @@ if "!DEVICE_TYPE!"=="PC" (
 
 	:: Disable Timer Coalescing
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
-	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&
+	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
  
 
 	:: Disable Advanced Configuration Power Interfaces
