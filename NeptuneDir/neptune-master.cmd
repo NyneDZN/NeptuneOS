@@ -2236,6 +2236,9 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Hid
 :: Run Startup Scripts Asynchronously
 :: https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.Scripts::Run_Startup_Script_Sync
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "RunStartupScriptSync" /t REG_DWORD /d "0" /f >nul 2>&1
+
+:: EULA Accept SysInternals
+%currentuser% Reg add "HKCU\Software\Sysinternals\Regjump" /v "EulaAccepted" /t REG_DWORD /d "1" /f >nul 2>&1
 goto PerformanceCounters
 
 
