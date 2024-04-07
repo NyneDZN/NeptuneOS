@@ -1241,8 +1241,9 @@ Reg add "HKLM\SOFTWARE\Classes\.bat\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >
 Reg add "HKLM\SOFTWARE\Classes\.cmd\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Classes\.cmd\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "@C:\Windows\System32\acppage.dll,-6003" /f >nul 2>&1
 :: - > Add '.ps1' to 'new' Context Menus
-%system% Reg add "HKLM\SOFTWARE\Classes\.ps1\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >nul 2>&1
-%system% Reg add "HKLM\SOFTWARE\Classes\.ps1\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "New file" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Classes\.ps1\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Classes\.ps1\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "New file" /f >nul 2>&1
+if "%os%"=="Windows 11" (Reg.exe add "HKCR\.ps1" /ve /t REG_SZ /d "ps1legacy" /f & Reg.exe add "HKCR\.ps1\ShellNew" /v "NullFile" /t REG_SZ /d "" /f & Reg.exe add "HKCR\ps1legacy" /ve /t REG_SZ /d "Windows PowerShell Script" /f & Reg.exe add "HKCR\ps1legacy" /v "FriendlyTypeName" /t REG_SZ /d "Windows PowerShell Script" /f) >nul 2>&1
 :: - > Add '.reg' to 'new' Context Menus
 Reg add "HKLM\SOFTWARE\Classes\.reg\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Classes\.reg\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "@C:\Windows\regedit.exe,-309" /f >nul 2>&1
