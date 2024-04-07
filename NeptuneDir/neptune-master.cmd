@@ -286,8 +286,8 @@ if "!DEVICE_TYPE!"=="PC" (
  
 
 	:: Disable Advanced Configuration Power Interfaces
-	%DevMan% "ACPI Processor Aggregator" /disable
-	%DevMan% "Microsoft Windows Management Interface for ACPI" /disable
+	%DevMan% /disable "ACPI Processor Aggregator" 
+	%DevMan% /disable "Microsoft Windows Management Interface for ACPI" 
 )
 
 
