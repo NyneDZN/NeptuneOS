@@ -2385,7 +2385,8 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 for %%a in (1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy Microsoft.3DBuilder_8wekyb3d8bbwe Microsoft.BingFinance_8wekyb3d8bbwe Microsoft.BingNews_8wekyb3d8bbwe Microsoft.BingSports_8wekyb3d8bbwe Microsoft.BingWeather_8wekyb3d8bbwe
 Microsoft.Microsoft3DViewer_8wekyb3d8bbwe Microsoft.MicrosoftEdge_8wekyb3d8bbwe Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe Microsoft.Office.OneNote_8wekyb3d8bbwe Microsoft.Office.Sway_8wekyb3d8bbwe
 Microsoft.StorePurchaseApp_8wekyb3d8bbwe Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy Microsoft.Windows.Phone_8wekyb3d8bbwe Microsoft.WindowsPhone_8wekyb3d8bbwe Microsoft.WindowsStore_8wekyb3d8bbwe Microsoft.Xbox.TCUI_8wekyb3d8bbwe
-Microsoft.XboxApp_8wekyb3d8bbwe Microsoft.XboxGameOverlay_8wekyb3d8bbwe Microsoft.XboxGamingOverlay_8wekyb3d8bbwe Microsoft.XboxIdentityProvider_8wekyb3d8bbwe Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe) do Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\%%a" /f >nul 2>&1
+Microsoft.XboxApp_8wekyb3d8bbwe Microsoft.XboxGameOverlay_8wekyb3d8bbwe Microsoft.XboxGamingOverlay_8wekyb3d8bbwe Microsoft.XboxIdentityProvider_8wekyb3d8bbwe Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe 
+Microsoft.MicrosoftTeams_8wekyb3d8bbwe) do Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\%%a" /f >nul 2>&1
 goto PrerequisitesInstallation
 
 
