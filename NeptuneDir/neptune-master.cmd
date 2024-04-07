@@ -3069,7 +3069,7 @@ if %2 GTR 4 (
 echo Invalid configuration.
 exit /b 1 )
 Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul 2>&1 || (
-echo The specified service/driver %1 is not found. >> C:\Windows\NeptuneDir\neptune.txt
+echo The specified service/driver %1 is not found. >> %neptlog%
 exit /b 1 )
 %system% Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
 echo Service/Driver %1 was configured
