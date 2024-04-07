@@ -261,7 +261,7 @@ if "!DEVICE_TYPE!"=="PC" (
         )
     )
 	 >nul 2>&1
-	 
+
 	:: Disable Storage Powersaving
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Storage" /v "StorageD3InModernStandby" /t REG_DWORD /d "0" /f >nul 2>&1
 
@@ -2974,6 +2974,24 @@ if "%os%"=="Windows 10" (
 :: 	del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul 2>&1
 :: )
 
+
+
+:: Set Lockscreen
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
+
+:: Removwe Start Menu Pins
+if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
+
+:: UWP Immersive Control Panel Debloat
+Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
+
+:: Set notice text
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom windows modification." /f >nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
+
+:: Importing finalization script into RunOnce
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
+
 :: Delete neptune setup files
 %delF% "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
 %delF% "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
@@ -2995,22 +3013,6 @@ if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windo
 if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 10")
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
-
-:: Set Lockscreen
-%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
-
-:: Removwe Start Menu Pins
-if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
-
-:: UWP Immersive Control Panel Debloat
-Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
-
-:: Set notice text
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom windows modification." /f >nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
-
-:: Importing finalization script into RunOnce
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
 echo %date% %time% Finished neptune-master.cmd >> %neptlog%
 shutdown /f /r /t 0 & del "%~f0"
