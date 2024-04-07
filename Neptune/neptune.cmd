@@ -324,10 +324,10 @@ call "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd"
 :: %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd" /f > nul
 
 :: Finalize
-cls & echo Restarting...
-timeout /t 1 > nul
-shutdown /f /r /t 0
-exit /b
+:: cls & echo Restarting...
+:: timeout /t 1 > nul
+:: shutdown /f /r /t 0
+:: exit /b
 
 
 
