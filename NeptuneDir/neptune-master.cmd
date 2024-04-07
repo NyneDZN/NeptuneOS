@@ -271,7 +271,7 @@ if "!DEVICE_TYPE!"=="PC" (
 
 	:: - > Disable Energy Estimation
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EnergyEstimationEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
-	
+
 	:: - > Disable Connected Standby
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f >nul
@@ -1437,6 +1437,12 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoAutoplayfornon
 :: https://www.makeuseof.com/desktop-ini-files-guide/#:~:text=these%20files%20important%3F-,The%20desktop.,configuring%20specific%20file%2Dsharing%20settings.
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDesktopIniCache" /t REG_DWORD /d "0" /f >nul 2>&1
 
+:: Legacy Notepad
+:: This removes the banner telling you to install the new NotePad
+Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "ShowStoreBanner" /t REG_DWORD /d "0" /f >nul 2>&1
+Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "fWrap" /t REG_DWORD /d "1" /f >nul 2>&1
+Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "StatusBar" /t REG_DWORD /d "1" /f >nul 2>&1
+
 :: Set icon cache to 51.2MB
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "Max Cached Icons" /t REG_SZ /d "51200" /f >nul 2>&1
 
@@ -2244,6 +2250,7 @@ Twitter Windows.DevHome WindowsAlarms WindowsCalculator WindowsCamera
 windowscommunicationsapps WindowsFeedbackHub WindowsMaps WindowsPhone
 WindowsSoundRecorder WindowsTerminal zune Microsoft.Microsoft3DViewer Microsoft.MixedReality.Portal
 ScreenSketch Microsoft.Paint MicrosoftCorporationII.MicrosoftFamily MicrosoftTeams Microsoft.MSPaint
+Microsoft.WindowsNotepad
 ) do (
 %currentuser% PowerShell -Command "Get-AppxPackage -allusers *%%i* | Remove-AppxPackage" >nul
 )
@@ -2360,8 +2367,6 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 %PowerShell% "Get-WindowsCapability -Online -Name 'Hello.Face.20134~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove WordPad
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
-:: Remove Legacy NotePad
-%PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.Notepad.System~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Extended Wallpapers
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Azure Arc Setup
