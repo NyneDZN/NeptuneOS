@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if %errorlevel% neq 0 (
@@ -16,5 +17,15 @@ if %errorlevel% neq 0 (
 :admin
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
-@echo on
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+echo !S_YELLOW!Installing Firefox
+timeout /t 2 >nul
 choco install firefox -y --ignore-checksums
+
+
+:: Echo to Logger
+echo Installed Firefox through Chocolatey. >> %neptlog%
+:: Echo to User
+cls & echo !S_YELLOW!Installed Firefox.
+timeout /2 >nul
+exit

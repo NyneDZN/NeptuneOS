@@ -18,14 +18,14 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
-echo !S_YELLOW!Installing Google Chrome
+echo !S_YELLOW!Installing Origin
 timeout /t 2 >nul
-choco install googlechrome -y --ignore-checksums
+choco install origin -y --ignore-checksums
 
 
 :: Echo to Logger
-echo Installed Google Chrome through Chocolatey. >> %neptlog%
+echo Installed Origin through Chocolatey. >> %neptlog%
 :: Echo to User
-cls & echo !S_YELLOW!Installed Google Chrome.
+cls & echo !S_YELLOW!Installed Origin.
 timeout /2 >nul
 exit

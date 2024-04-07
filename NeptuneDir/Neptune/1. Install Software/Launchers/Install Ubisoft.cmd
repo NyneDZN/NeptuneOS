@@ -18,14 +18,14 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
-echo !S_YELLOW!Installing Google Chrome
+echo !S_YELLOW!Installing Ubisoft Connect
 timeout /t 2 >nul
-choco install googlechrome -y --ignore-checksums
+choco install ubisoft-connect -y --ignore-checksums
 
 
 :: Echo to Logger
-echo Installed Google Chrome through Chocolatey. >> %neptlog%
+echo Installed Ubisoft Connect through Chocolatey. >> %neptlog%
 :: Echo to User
-cls & echo !S_YELLOW!Installed Google Chrome.
+cls & echo !S_YELLOW!Installed Ubisoft Connect.
 timeout /2 >nul
 exit
