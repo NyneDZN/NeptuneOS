@@ -1341,6 +1341,8 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DontUsePowerShellOnWinX" /t REG_DWORD /d "1" /f >nul 2>&1
 :: - > Disable Start Menu Recommendations
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_AccountNotifications" /t REG_DWORD /d "0" /f >nul 2>&1
+:: - > Clear Default TileGrid
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f > nul 2>&1
 :: - > Disable Start Menu Pins
 :: currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "StartMenu_Start_Time" /t REG_BINARY /d "889f04f10c79da01" /f >nul 2>&1
 :: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >nul 2>&1
@@ -2983,17 +2985,18 @@ if "%os%"=="Windows 10" (
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
-:: Removwe Start Menu Pins
-if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
-
 :: UWP Immersive Control Panel Debloat
 Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
 
 :: Remove Header in Immersive Control Panel
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" /grant Administrators:F >nul
 takeown /f "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
-%delF% /f /q "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
+%delF% /f /q "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul
 
+:: Remove Start Menu Pins
+copy /y "%WinDir%\Layout.xml" "%userProfile%\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" >nul
+%delF% "%userProfile%\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start.bin" >nul
+%delF% "%userProfile%\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin" >nul
 
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom windows modification." /f >nul 2>&1
