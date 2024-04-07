@@ -25,11 +25,17 @@ set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
 :: set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
 :: set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
 
+:: Path Variables
+set neptunemain=C:\NeptuneOS-installer\Neptune\
+set neptunedev=C:\NeptuneOS-installer-dev\Neptune\
+
 :: Set ANSI escape characters (AtlasOS)
 cd /d "%~dp0"
 for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
 set "right=%ESC%[<x>C"
 set "bullet= %ESC%[34m-%ESC%[0m"
+set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
+set "%CMDLINE:,=" & set "%"
 
 
 echo %ESC%[4mBy running the NeptuneOS installer, you allow it to make changes to your PC.%ESC%[0m
@@ -64,17 +70,20 @@ if errorlevel 2 (
 
 :NeptuneInstall
 mode con: cols=40 lines=20
-cls & echo This will take a moment.
-echo We are disabling defender.
+cls & echo !S_YELLOW!This will take a moment.
+echo !S_YELLOW!We are disabling defender.
 del "%temp%\installer.zip"
 
-:: UAC Permissions
+:: UAC Permissionss
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "0" /f > nul
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "0" /f > nul
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "0" /f > nul
 
 :: Install Chocolatey
 PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >nul
+
+:: Refresh Enviornment
+call "%neptdev%RefreshEnv.cmd"
 
 :: Disable Global Confirmation in Chocolatey
 choco feature enable -n allowGlobalConfirmation > nul
