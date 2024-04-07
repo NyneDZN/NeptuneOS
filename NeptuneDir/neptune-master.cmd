@@ -1347,6 +1347,8 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds
 :: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >nul 2>&1
 :: - > Remove Advertisements and Stubs from Start Menu
 if "%os%"=="Windows 11" (%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f) > nul 2>&1
+:: -> Hide Recommended Start Menu Apps
+if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Start" /v "ShowRecentList" /t REG_DWORD /d "0" /f) > nul 2>&1
 :: - > Hide Recently Added Apps in the Start Menu
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f >nul 2>&1
 :: - > Hide Recently Opened Items in Start Menu
