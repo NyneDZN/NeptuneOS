@@ -320,7 +320,8 @@ schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Clean
 schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable > nul
 schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable > nul
 :: RunOnce Neptune2
-%WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd" /f > nul
+call "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd"
+:: %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd" /f > nul
 
 :: Finalize
 cls & echo Restarting...
