@@ -2975,6 +2975,11 @@ if "%os%"=="Windows 10" (
 %delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
 %delF% "%WinDir%\NeptuneDir\lockscreen.png"
 %delF% "%WinDir%\NeptuneDir\user.png"
+%delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
+%delF% "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
+%delF% "%WinDir%\NeptuneDir\Scripts\RefreshEnv.cmd"
+%delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1"
+%delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD"
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
