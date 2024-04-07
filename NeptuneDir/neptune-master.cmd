@@ -32,6 +32,9 @@
 :: NeptuneOS Variables
 set version=0.5
 
+:: Window Title
+title "NeptuneOS Installation %version% | By Nyne"
+
 :: Check if this is a development build or not
 if /i "%~2"=="/devbuild"   set "devbuild=yes"
 
