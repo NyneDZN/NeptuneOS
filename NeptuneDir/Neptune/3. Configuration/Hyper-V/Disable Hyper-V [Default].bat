@@ -24,34 +24,34 @@ if errorlevel 2 (
 :DisableHyperV
 cls & echo !S_YELLOW!Disabling Hyper-V
 :: Hyper-V Services/Drivers
-sc config bttflt start=disabled > nul
-sc config gcs start=disabled > nul
-sc config gencounter start=disabled > nul
-sc config hvcrash start=disabled > nul
-sc config hvhost start=disabled > nul
-sc config hvservice start=disabled > nul
-sc config hvsocketcontrol start=disabled > nul
-sc config passthruparser start=disabled > nul
-sc config pvhdparser start=disabled > nul
-sc config spaceparser start=disabled > nul
-sc config storflt start=disabled > nul
-sc config vhdparser start=disabled > nul
-sc config Vid start=disabled > nul
-sc config vkrnlintvsc start=disabled > nul
-sc config vkrnlintvsp start=disabled > nul
-sc config vmbus start=disabled > nul
-sc config vmbusr start=disabled > nul
-sc config vmcompute start=disabled > nul
-sc config vmgid start=disabled > nul
-sc config vmicguestinterface start=disabled > nul
-sc config vmicheartbeat start=disabled > nul
-sc config vmickvpexchange start=disabled > nul
-sc config vmicrdv start=disabled > nul
-sc config vmicshutdown start=disabled > nul
-sc config vmictimesync start=disabled > nul
-sc config vmicvmsession start=disabled > nul
-sc config vmicvss start=disabled > nul
-sc config vpci start=disabled > nul
+%svc% bttflt 4 
+%svc% gcs 4 
+%svc% gencounter 4 
+%svc% hvcrash 4 
+%svc% hvhost 4 
+%svc% hvservice 4 
+%svc% hvsocketcontrol 4 
+%svc% passthruparser 4 
+%svc% pvhdparser 4 
+%svc% spaceparser 4 
+%svc% storflt 4 
+%svc% vhdparser 4 
+%svc% Vid 4 
+%svc% vkrnlintvsc 4 
+%svc% vkrnlintvsp 4 
+%svc% vmbus 4 
+%svc% vmbusr 4 
+%svc% vmcompute 4 
+%svc% vmgid 4 
+%svc% vmicguestinterface 4 
+%svc% vmicheartbeat 4 
+%svc% vmickvpexchange 4 
+%svc% vmicrdv 4 
+%svc% vmicshutdown 4 
+%svc% vmictimesync 4 
+%svc% vmicvmsession 4 
+%svc% vmicvss 4 
+%svc% vpci 4 
 
 :: Hyper-V Devices
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V NT Kernel Integration VSP"

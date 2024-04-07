@@ -14,32 +14,32 @@ fltmc >nul 2>&1 || (
 
 echo !S_YELLOW!Enabling Hyper-V
 :: Hyper-V Services/Drivers
-sc config hvcrash start=disabled > nul
-sc config hvservice start=manual > nul
-sc config vhdparser start=manual > nul
-sc config vmbus start=boot > nul
-sc config Vid start=system > nul
-sc config bttflt start=boot > nul
-sc config gencounter start=manual > nul
-sc config hvsocketcontrol start=manual > nul
-sc config passthruparser start=manual > nul
-sc config pvhdparser start=manual > nul
-sc config spaceparser start=manual > nul
-sc config storflt start=boot > nul
-sc config vmgid start=manual > nul
-sc config vmbusr start=manual > nul
-sc config vpci start=boot > nul
-sc config gcs start=manual > nul
-sc config hvhost start=manual > nul
-sc config vmcompute start=manual > nul
-sc config vmicguestinterface start=manual > nul
-sc config vmicheartbeat start=manual > nul
-sc config vmickvpexchange start=manual > nul
-sc config vmicrdv start=manual > nul
-sc config vmicshutdown start=manual > nul
-sc config vmictimesync start=manual > nul
-sc config vmicvmsession start=manual > nul
-sc config vmicvss start=manual > nul
+%svc% bttflt 0
+%svc% gcs 3
+%svc% gencounter 3
+%svc% hvcrash 4
+%svc% hvhost 3
+%svc% hvservice 3
+%svc% hvsocketcontrol 3
+%svc% passthruparser 3
+%svc% pvhdparser 3
+%svc% spaceparser 3
+%svc% storflt 0
+%svc% vhdparser 3
+%svc% Vid 1
+%svc% vmbus 0 
+%svc% vmbusr 3
+%svc% vmcompute 3 
+%svc% vmgid 3
+%svc% vmicguestinterface 3 
+%svc% vmicheartbeat 3
+%svc% vmickvpexchange 3 
+%svc% vmicrdv 3 
+%svc% vmicshutdown 4 
+%svc% vmictimesync 3 
+%svc% vmicvmsession 3 
+%svc% vmicvss 3 
+%svc% vpci 1
 
 :: Hyper-V Devices
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V NT Kernel Integration VSP"
