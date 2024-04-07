@@ -3003,26 +3003,28 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
 :: Delete neptune setup files
-%delF% "%WinDir%\NeptuneDir\debloat.ps1" >nul 2>&1
-%delF% "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul 2>&1
-%delF% "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
-%delF% "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
-%delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
-%delF% "%WinDir%\NeptuneDir\lockscreen.png"
-%delF% "%WinDir%\NeptuneDir\user.png"
-%delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
-%delF% "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
-%delF% "%WinDir%\NeptuneDir\Scripts\RefreshEnv.cmd"
-%delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1"
-%delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD"
-rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
-rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
-if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
-if "%server%"=="yes" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11")
-if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11")
-if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 10")
+%delF% "%WinDir%\NeptuneDir\debloat.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul
+%delF% "%WinDir%\NeptuneDir\power.pow" >nul
+%delF% "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\lockscreen.png" >nul
+%delF% "%WinDir%\NeptuneDir\user.png" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\RefreshEnv.cmd" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD" >nul
+rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul
+rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul
+if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration") >nul
+if "%server%"=="yes" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11") >nul
+if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11") >nul
+if "%os%"=="Windows 11" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 10") >nul
 if exist "C:\NeptuneOS-installer-dev" (rmdir /s /q "C:\NeptuneOS-installer-dev" >nul 2>&1)
 if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul 2>&1)
+if exist "%userprofile%\Desktop\neptune-dev.cmd" (%delF% "%userprofile%\Desktop\neptune-dev.cmd")
+if exist "%userprofile%\Desktop\neptune-installer.cmd" (%delF% "%userprofile%\Desktop\neptune-installer.cmd")
 
 echo %date% %time% Finished neptune-master.cmd >> %neptlog%
 shutdown /f /r /t 0 & del "%~f0"
