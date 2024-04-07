@@ -1376,8 +1376,8 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificat
 :: - > Disable cloud optimized taskbars
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableCloudOptimizedContent" /t Reg_DWORD /d "1" /f >nul 2>&1
 :: - > Disable CoPilot on Windows 11
-if "%os%"=="Windows 11" do (%currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f) >nul 2>&1
-if "%os%"=="Windows 11" do (%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f) >nul 2>&1
+if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f) >nul 2>&1
+if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f) >nul 2>&1
 
 :: Fix Default Account Icon
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDefaultTile" /t REG_DWORD /d "1" /f >nul 2>&1
