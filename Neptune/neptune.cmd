@@ -86,7 +86,7 @@ del "%temp%\installer.zip"
 PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >nul
 
 :: Refresh Enviornment
-call "%neptdev%RefreshEnv.cmd"
+call "%neptdev%RefreshEnv.cmd" >nul 2>&1
 
 :: Disable Global Confirmation in Chocolatey
 choco feature enable -n allowGlobalConfirmation > nul
