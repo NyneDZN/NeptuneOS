@@ -260,7 +260,6 @@ if "!DEVICE_TYPE!"=="PC" (
             reg add "%%b" /v "%%~a" /t REG_DWORD /d "0" /f
         )
     )
-	 >nul 2>&1
 
 	:: Disable Storage Powersaving
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Storage" /v "StorageD3InModernStandby" /t REG_DWORD /d "0" /f >nul 2>&1
