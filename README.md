@@ -26,7 +26,7 @@
 
 <!-- Installation -->
 ## Getting Started with NeptuneOS Installation 🌊
-
+Please wait for <b>NeptuneOS 0.5</b>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
