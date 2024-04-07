@@ -2989,6 +2989,12 @@ if "%os%"=="Windows 11" (call "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD")
 :: UWP Immersive Control Panel Debloat
 Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
 
+:: Remove Header in Immersive Control Panel
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" /grant Administrators:F >nul
+takeown /f "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
+%delF% /f /q "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
+
+
 :: Set notice text
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "Welcome to NeptuneOS %version%. A custom windows modification." /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "https://discord.gg/4YTSkcK8b8" /f >nul 2>&1
