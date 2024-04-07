@@ -2973,6 +2973,8 @@ if "%os%"=="Windows 10" (
 %delF% "%WinDir%\NeptuneDir\power.pow" >nul 2>&1
 %delF% "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul 2>&1
 %delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul 2>&1
+%delF% "%WinDir%\NeptuneDir\lockscreen.png"
+%delF% "%WinDir%\NeptuneDir\user.png"
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul 2>&1
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul 2>&1
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration")
