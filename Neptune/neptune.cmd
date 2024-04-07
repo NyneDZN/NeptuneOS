@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if %errorlevel% neq 0 (
