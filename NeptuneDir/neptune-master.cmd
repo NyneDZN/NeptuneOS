@@ -2380,8 +2380,6 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Windows.WordPad~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
 :: Remove Extended Wallpapers
 %PowerShell% "Get-WindowsCapability -Online -Name 'Microsoft.Wallpapers.Extended~~~~0.0.1.0*' | Remove-WindowsCapability -Online" >nul 2>&1
-:: Remove Azure Arc Setup
-%PowerShell% "Remove-WindowsFeature AzureArcSetup" >nul 2>&1
 
 :: UWP Deprovision
 for %%a in (1527c705-839a-4832-9118-54d4Bd6a0c89_cw5n1h2txyewy Microsoft.3DBuilder_8wekyb3d8bbwe Microsoft.BingFinance_8wekyb3d8bbwe Microsoft.BingNews_8wekyb3d8bbwe Microsoft.BingSports_8wekyb3d8bbwe Microsoft.BingWeather_8wekyb3d8bbwe
