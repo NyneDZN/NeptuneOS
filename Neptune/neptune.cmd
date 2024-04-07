@@ -1,5 +1,4 @@
 @echo off
-setlocal EnableDelayedExpansion
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if %errorlevel% neq 0 (
@@ -71,6 +70,7 @@ if errorlevel 2 (
 
 :NeptuneInstall
 mode con: cols=40 lines=20
+setlocal EnableDelayedExpansion
 cls & echo !S_YELLOW!This will take a moment.
 echo !S_YELLOW!We are disabling defender.
 del "%temp%\installer.zip"
