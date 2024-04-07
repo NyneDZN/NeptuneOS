@@ -3008,11 +3008,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul 2>&1
 
 :: Delete neptune setup files
-%delF% "%WinDir%\NeptuneDir\debloat.ps1" >nul
-%delF% "%WinDir%\NeptuneDir\FullscreenCMD.vbs" >nul
-%delF% "%WinDir%\NeptuneDir\power.pow" >nul
-%delF% "%WinDir%\NeptuneDir\pnp-powersaving.ps1" >nul
-%delF% "%WinDir%\NeptuneDir\RemoveEdge.ps1" >nul
 %delF% "%WinDir%\NeptuneDir\lockscreen.png" >nul
 %delF% "%WinDir%\NeptuneDir\user.png" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1" >nul
