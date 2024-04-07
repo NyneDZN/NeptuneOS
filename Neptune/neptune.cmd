@@ -10,8 +10,10 @@ fltmc >nul 2>&1 || (
     exit 0
 )
 
-
+:: Window Configuration
 mode con: cols=80 lines=30
+title "NeptuneOS Installer | Created by @NyneDZN"
+
 :: PowerShell Variables
 set sudo="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
 set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
@@ -50,6 +52,8 @@ echo]
 echo %bullet% 1. Install NeptuneOS
 echo %bullet% 2. Exit
 echo]
+echo]
+echo %bullet% https://discord.gg/4YTSkcK8b8
 choice /c 12 /n /m "Select a choice:"
 
 if errorlevel 2 (
