@@ -260,9 +260,8 @@ if "!DEVICE_TYPE!"=="PC" (
             reg add "%%b" /v "%%~a" /t REG_DWORD /d "0" /f
         )
     )
-	:: Disable PnP Powersaving
-	PowerShell -ExecutionPolicy Unrestricted -Command  "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}" >nul 2>&1
-
+	 >nul 2>&1
+	 
 	:: Disable Storage Powersaving
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Storage" /v "StorageD3InModernStandby" /t REG_DWORD /d "0" /f >nul 2>&1
 
