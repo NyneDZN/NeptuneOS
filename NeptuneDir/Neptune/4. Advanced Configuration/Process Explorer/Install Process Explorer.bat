@@ -21,10 +21,12 @@ if %errorlevel% neq 0 (
 :: Delete prompt script
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 echo !S_YELLOW!Process Explorer will replace the default task manager.
-echo !S_YELLOW!Are you sure you want to continue? [Y/N]
-set /p userInput=typyes > nul
-if "%userinput%"=="Y" goto Install
-if "%userinput%"=="N" goto Nope
+choice /C YN /M "Are you sure you want to continue?"
+if errorlevel 2 (
+    goto Nope
+) else (
+    goto Install
+)
 
 
 
