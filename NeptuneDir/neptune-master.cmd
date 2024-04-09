@@ -284,6 +284,10 @@ if "!DEVICE_TYPE!"=="PC" (
 	:: Disable Timer Coalescing
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
 	Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CoalescingTimerInterval" /t REG_DWORD /d "0" /f >nul 2>&1
+
+	:: Disable ACPI C-States
+	:: https://learn.microsoft.com/sl-SI/troubleshoot/windows-server/virtualization/virtual-machines-slow-startup-shutdown
+	Reg add "HKLM\System\CurrentControlSet\Control\Processor" /v "Capabilities" /t REG_DWORD /d "0x0007e066" /f >nul 2>&1
  
 
 	:: Disable Advanced Configuration Power Interfaces
