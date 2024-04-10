@@ -30,9 +30,9 @@ There are a few methods of obtaining a Windows ISO. <br>
 <details><summary>UUP</summary>
 <br>
     <ul>
-<li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li> <br>
-<li> This means you will not have to update Windows upon installing. </li> <br>
-<li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li> <br>
+<li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
+<li> This means you will not have to update Windows upon installing. </li>
+<li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
 <a href="https://uupdump.net/known.php">UUPDump</a>
     </uls>
 
