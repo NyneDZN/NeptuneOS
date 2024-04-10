@@ -14,18 +14,31 @@
 
 ## Reinstalling Windows
 
-You must reinstall windows to install NeptuneOS. This is to prevent unforseen issues in the OS.
+You must reinstall windows to install NeptuneOS. This is to prevent unforseen issues in the OS. <br>
+If you install NeptuneOS over an existing Windows install, especially one that's already optimized. You will experience issues. <br>
 Your Windows ISO edition **must** be Pro or Enterprise.
 
 <details><summary>Why Pro?</summary>
-Home editions do not support numerous amount of registry tweaks that are supported in Pro.
-</details>
-
 <br>
+Home editions do not support numerous amount of registry tweaks that are supported in Pro. <br>
+</details>
 
 ## Downloading your ISO
 
-You can build a clean ISO of Windows from <a href="https://uupdump.net/known.php">UUPDump</a> <br>
-You can also download the official Microsoft ISO's for <a href="https://www.microsoft.com/software-download/windows10">Windows 10</a> or <a href="https://www.microsoft.com/en-us/software-download/windows11">Windows 11</a>
+There are a few methods of obtaining a Windows ISO. <br>
+
+<details><summary>UUP</summary>
+<br>
+Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire. <br>
+This means you will not have to update Windows upon installing. <br>
+However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. <br>
+<a href="https://uupdump.net/known.php">UUPDump</a>
+
+</details>
+<br>
+
+## Installing your ISO
+
+There are numerous methods to install a Windows ISO.
 
 </body>
