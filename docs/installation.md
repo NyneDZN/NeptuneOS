@@ -28,32 +28,4 @@ Home editions do not support numerous amount of registry tweaks that are support
 You can build a clean ISO of Windows from <a href="https://uupdump.net/known.php">UUPDump</a> <br>
 You can also download the official Microsoft ISO's for <a href="https://www.microsoft.com/software-download/windows10">Windows 10</a> or <a href="https://www.microsoft.com/en-us/software-download/windows11">Windows 11</a>
 
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-</style>
-
-<div class="dropdown">
-  <span>Mouse over me</span>
-  <div class="dropdown-content">
-    <p>Hello World!</p>
-  </div>
-</div>
-
 </body>
