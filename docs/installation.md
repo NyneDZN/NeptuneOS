@@ -1,1 +1,10 @@
-# NeptuneOS Installation (Placeholder)
+<!DOCTYPE html>
+<body>
+
+# 🚀 NeptuneOS Installation
+
+---
+
+## Getting Started
+
+</body>
