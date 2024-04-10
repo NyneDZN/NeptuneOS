@@ -2316,6 +2316,9 @@ Microsoft.WindowsNotepad
 :: Remove Content Delivery Manager
 %currentuser% PowerShell -NoProfile -NoLogo -Command "$package = Get-AppxPackage -AllUsers 'Microsoft.Windows.ContentDeliveryManager'; if (!$package) {; Write-Host 'Not installed'; exit 0; }; $directories = @($package.InstallLocation, "^""$env:LOCALAPPDATA\Packages\$($package.PackageFamilyName)"^""); foreach($dir in $directories) {; if ( !$dir -Or !(Test-Path "^""$dir"^"") ) { continue }; cmd /c ('takeown /f "^""' + $dir + '"^"" /r /d y 1> nul'); if($LASTEXITCODE) { throw 'Failed to take ownership' }; cmd /c ('icacls "^""' + $dir + '"^"" /grant administrators:F /t 1> nul'); if($LASTEXITCODE) { throw 'Failed to take ownership' }; $files = Get-ChildItem -File -Path $dir -Recurse -Force; foreach($file in $files) {; if($file.Name.EndsWith('.OLD')) { continue }; $newName =  $file.FullName + '.OLD'; Write-Host "^""Rename '$($file.FullName)' to '$newName'"^""; Move-Item -LiteralPath "^""$($file.FullName)"^"" -Destination "^""$newName"^"" -Force; }; }"
 
+:: Prevent Microsoft Teams reinstallation
+%system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul 2>&1
+
 :: Remove OneDrive
 :: taskkill /f /im OneDrive.exe
 :: if exist "C:\Windows\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1)
