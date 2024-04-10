@@ -1,6 +1,5 @@
-:: Created for NeptuneOS by Nyne
+:: Created for NeptuneOS by Nyne (https://twitter.com/nynedzn)
 :: https://github.com/NyneDZN/NeptuneOS
-:: Compatible with Windows 10 21H2 and up
 
 :: A majority of the code in this script was forked from open-sourced binaries
 :: Credits, in no particular order:
@@ -23,9 +22,6 @@
 :: - Winaero
 :: - Zusier
 :: - Yoshii64
-
-:: Neptune is a fork of older era AtlasOS
-:: https://github.com/Atlas-OS/Atlas/tree/main/src
 
 @echo off && setlocal EnableDelayedExpansion
 
