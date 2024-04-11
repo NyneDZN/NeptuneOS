@@ -31,11 +31,13 @@ There are a few methods of obtaining a Windows ISO. <br>
 
 <details><summary>UUP ⭐</summary>
 <br>
-<h2> UUPDump Guide</h2> 
+<h2> UUPDump Guide</h2>
+    <ul>
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
 <li> This means you will not have to update Windows upon installing. </li>
 <li> Easily supports both USB and Non-USB installation methods 
 <li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
+    </ul>
 <br>
 <h2> Getting your ISO from UUPDump</h2>
 <li>Head over to <a href="https://uupdump.net/known.php">UUPDump</a></li>
@@ -79,8 +81,29 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> This method also requires a few extra steps to install Windows Pro edition from the ISO
 <li> The ISO is already compiled, you are only downloading it
     </ul>
+
+<h2>Getting your ISO from MASS</h2>
+<li> Download Windows 10 <a href="https://drive.massgrave.dev/en-us_windows_10_consumer_editions_version_22h2_updated_march_2024_x64_dvd_2ff6c8a4.iso">from here</a>
+<li> Download Windows 11 <a href="https://drive.massgrave.dev/en-us_windows_11_consumer_editions_version_23h2_updated_march_2024_x64_dvd_bcbf6ac6.iso">from here</a>
+<li> Download Windows Server 2022 (21H1) <a href="https://drive.massgrave.dev/en-us_windows_server_2022_updated_march_2024_x64_dvd_f6700d18.iso">from here</a>
 </details>
 
 ## Installing your ISO
 
+Just like obtaining an ISO, there are multiple ways to install one. <br>
+This section will feature a guide on how to install a Windows Pro ISO with a usb, and without a USB.<br>
+Please note that if you downloaded your ISO from MASS, you will not be able to directly install the ISO without extra steps.<br>
+
+### Without USB Method
+
+To install Windows witohut a USB, please go to <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">this repository</a> and download the ZIP.
+
+<li>Press Win+R and type <i>diskmgmt.msc</i>
+<li>Locate your current drive, and shrink it at least 60 GB
+<li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire
+<li> Assign the drive letter, and remember it
+<li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop
+<li>Open the extracted folder, and open <i>Install Windows.bat<i>
+<li>You will be prompted to locate your ISO and open it
+<li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)
 </body>
