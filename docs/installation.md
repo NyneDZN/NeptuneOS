@@ -6,28 +6,28 @@
 > We are not responsible for any personal files you may lose, or any hardware issues you may experience while using NeptuneOS. <br>
 > We are fully open source, and NOT for sale.
 
-## Prerequisites
+## 🔍 Prerequisites
 
 - A USB (Optional)
 - A backup of your personal files on another drive
 - A general understanding of your system, and windows itself
 
-## Reinstalling Windows
+## 💻 Reinstalling Windows
 
 You must reinstall windows to install NeptuneOS. This is to prevent unforseen issues in the OS. <br>
 If you install NeptuneOS over an existing Windows install, especially one that's already optimized. You will experience issues. <br>
 Your Windows ISO edition **must** be Pro or Enterprise.
 
-<details><summary>Why Pro?</summary>
+<details><summary>Why Pro? 💬</summary>
 <br>
 Home editions do not support numerous amount of registry tweaks that are supported in Pro.
 </details>
 
-## Downloading your ISO
+## 💽 Downloading your ISO
 
 There are a few methods of obtaining a Windows ISO. <br>
 
-<details><summary>UUP</summary>
+<details><summary>UUP ⭐</summary>
 <br>
     <ul>
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
