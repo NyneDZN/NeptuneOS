@@ -29,7 +29,7 @@ Home editions do not support a numerous amount of registry tweaks that are suppo
 
 There are a few methods of obtaining a Windows ISO. <br>
 
-<strong><details><summary>UUP ⭐</summary></strong>
+<strong><details><summary>UUP ⭐</strong></summary>
 <br>
 
 <h2> UUPDump Guide</h2>
@@ -74,7 +74,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <hr>
 </details>
 <br>
-<strong><details><summary>MASS</summary></strong>
+<strong><details><summary>MASS</strong></summary>
 <br>
 <h2> MASS Guide</h2>
     <ul>
@@ -89,6 +89,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> Download Windows 11 <a href="https://drive.massgrave.dev/en-us_windows_11_consumer_editions_version_23h2_updated_march_2024_x64_dvd_bcbf6ac6.iso">from here</a>
 <li> Download Windows Server 2022 (21H1) <a href="https://drive.massgrave.dev/en-us_windows_server_2022_updated_march_2024_x64_dvd_f6700d18.iso">from here</a>
 <hr>
+
 </details>
 
 ## Installing your ISO
