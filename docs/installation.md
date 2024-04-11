@@ -102,13 +102,29 @@ Please note that if you downloaded your ISO from MASS, you will not be able to d
 
 To install Windows witohut a USB, please go to <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">this repository</a> and download the ZIP.
 
-<li>Press Win+R and type <i>diskmgmt.msc</i>
-<li>Locate your current drive, and shrink it at least 60 GB
-<li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire
-<li> Assign the drive letter, and remember it
-<li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop
-<li>Open the extracted folder, and open <i>Install Windows.bat</i>
-<li>You will be prompted to locate your ISO and open it
-<li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)
+<li>Press Win+R and type <i>diskmgmt.msc</i></li>
+<li>Locate your current drive, and shrink it at least 60 GB</li>
+<li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire</li>
+<li> Assign the drive letter, and remember it</li>
+<li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop</li>
+<li>Open the extracted folder, and open <i>Install Windows.bat</i></li>
+<li>You will be prompted to locate your ISO and open it</li>
+<li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)</li>
+<li>Reboot your PC to boot to the newly installed Windows</li>
+
+<br>
+
+### With USB Method
+
+To install windows with a USB, please make sure your USB is at least 8GB.
+
+<details><summary><strong>Ventoy ⭐</strong></summary>
+<li>Start by <a href="https://www.ventoy.net/en/download.html">Downloading Ventoy</a></a>
+
+</details>
+
+<details><summary><strong>Rufus</strong></summary>
+
+</details>
 
 </body>
