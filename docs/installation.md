@@ -48,6 +48,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <br>
 <li> Once you selected your ISO, you will be presented with a list of builds for that version.
 <li> Make sure you select one titled "Windows 1x, version xxxx" as shown in the screenshot. (<i>X = Version Number</i>)</li>
+<li> Also make sure you select <b>amd64</b>, do NOT select arm64
 <br>
 <img src="uup2.png" alt="UUP Screenshot2" style="width: 500px; height:auto;"
 <br>
@@ -59,6 +60,23 @@ There are a few methods of obtaining a Windows ISO. <br>
 <br>
 <img src="uup3.png" alt="UUP Screenshot3" style="width: 400px; height:auto;">
 <br>
+<li> You will download a zip file with a name such as <i>22631.3520_amd64_en-us_professional_57d5718b_convert.zip</i>, please extract this to your desktop to a folder <b>with no spaces</b>
+<li> After extracting, please open the folder and run <i>uup_download_windows.cmd</i> to start compiling the ISO automatically. This will take some time depending on network and processor speeds.
+<li> The script will start runnning and will appear as such</li>
+<br>
+<img src="uup4.png" alt="UUP Screenshot4" style="width: 400px; height:auto;">
+<br>
+<li> When the script finishes, you will have your Windows ISO in the folder that you extracted the script into. </li>
+<br>
+<img src="uup5.png" alt="UUP Screensho5" style="width: 400px; height:auto;"> <img src="uup6.png" alt="UUP Sreenshot6" style="width: 400px; height:auto;">
+<br>
+<li> Please follow the next part of the guide to Install your ISO</li>
+</details>
+<br>
+<details><summary>MSDL</summary>
+
+Placeholder
+
 </details>
 
 ## Installing your ISO
