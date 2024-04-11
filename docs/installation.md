@@ -31,15 +31,12 @@ There are a few methods of obtaining a Windows ISO. <br>
 
 <details><summary>UUP ⭐</summary>
 <br>
-    <ul>
 <h2> UUPDump Guide</h2> 
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
 <li> This means you will not have to update Windows upon installing. </li>
 <li> Easily supports both USB and Non-USB installation methods 
 <li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
-    </ul>
 <br>
-
 <h2> Getting your ISO from UUPDump</h2>
 <li>Head over to <a href="https://uupdump.net/known.php">UUPDump</a></li>
 <li>At the top of the window, choose the latest build of your desired Windows version as shown in the screenshot. Make sure that your system and NeptuneOS support it.</li>
@@ -75,7 +72,6 @@ There are a few methods of obtaining a Windows ISO. <br>
 <br>
 <details><summary>MASS</summary>
 <br>
-
 <h2> MASS Guide</h2>
     <ul>
 <li> Using MASS, you are downloading a full Windows ISO with every edition present</li>
@@ -83,7 +79,6 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> This method also requires a few extra steps to install Windows Pro edition from the ISO
 <li> The ISO is already compiled, you are only downloading it
     </ul>
-
 </details>
 
 ## Installing your ISO
