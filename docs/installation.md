@@ -29,7 +29,7 @@ Home editions do not support a numerous amount of registry tweaks that are suppo
 
 There are a few methods of obtaining a Windows ISO. <br>
 
-<strong><details><summary><div style="background-color: #f0f0f0; padding: 5px;">UUP ⭐</div></strong></summary>
+<strong><details><summary>UUP ⭐</strong></summary>
 <br>
 
 <h2> UUPDump Guide</h2>
