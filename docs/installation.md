@@ -29,8 +29,9 @@ Home editions do not support a numerous amount of registry tweaks that are suppo
 
 There are a few methods of obtaining a Windows ISO. <br>
 
-<details><summary>UUP ⭐</summary>
+<strong><details><summary>UUP ⭐</summary></strong>
 <br>
+
 <h2> UUPDump Guide</h2>
     <ul>
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
@@ -73,7 +74,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <hr>
 </details>
 <br>
-<details><summary>MASS</summary>
+<strong><details><summary>MASS</summary></strong>
 <br>
 <h2> MASS Guide</h2>
     <ul>
