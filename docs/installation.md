@@ -73,9 +73,16 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> Please follow the next part of the guide to Install your ISO</li>
 </details>
 <br>
-<details><summary>MSDL</summary>
+<details><summary>MASS</summary>
+<br>
 
-Placeholder
+<h2> MASS Guide</h2>
+    <ul>
+<li> Using MASS, you are downloading a full Windows ISO with every edition present</li>
+<li> You will have to update Windows upon installation
+<li> This method also requires a few extra steps to install Windows Pro edition from the ISO
+<li> The ISO is already compiled, you are only downloading it
+    </ul>
 
 </details>
 
