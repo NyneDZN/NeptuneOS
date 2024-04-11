@@ -41,8 +41,14 @@ There are a few methods of obtaining a Windows ISO. <br>
 
 <h2> Getting your ISO from UUPDump</h2>
 <li>Head over to <a href="https://uupdump.net/known.php">UUPDump</a></li>
-<li>Choose the latest build of your desired Windows version. Make sure that your system and NeptuneOS support it.</li>
+<li>At the top of the window, choose the latest build of your desired Windows version as shown in the screenshot. Make sure that your system and NeptuneOS support it.</li>
+<br>
 <img src="uup.png" alt="UUP Screenshot" style="width: 300px; height:auto;">
+<br>
+<li> Once you selected your ISO, you will be presented with a list of builds for that version.
+<li> Make sure you select one titled "Windows 1x, version xxxx" as shown in the screenshot. (<i>X = Version Number</i>)
+<br>
+<img src="uup2.png" alt="UUP Screenshot2" style="width: 300px; height:auto;"
 </details>
 
 ## Installing your ISO
