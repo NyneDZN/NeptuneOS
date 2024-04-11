@@ -107,7 +107,7 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire
 <li> Assign the drive letter, and remember it
 <li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop
-<li>Open the extracted folder, and open <i>Install Windows.bat<i>
+<li>Open the extracted folder, and open <i>Install Windows.bat</i>
 <li>You will be prompted to locate your ISO and open it
 <li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)
 
