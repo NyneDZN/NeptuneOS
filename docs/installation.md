@@ -57,7 +57,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> You will be prompted to Choose your Edition. Make sure <b>Windows Pro</b> is the only thing checked.</li>
 <li> The final screen will ask you for Download Options. Please copy the following screenshot. </li>
 <br>
-<img src="uup3.png" alt="UUP Screenshot3" style="width: 300px; height:auto;">
+<img src="uup3.png" alt="UUP Screenshot3" style="width: 400px; height:auto;">
 <br>
 </details>
 
