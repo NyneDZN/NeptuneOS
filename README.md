@@ -22,34 +22,30 @@
   </p>
 </div>
 
-
-
 <!-- Installation -->
-## Getting Started with NeptuneOS Installation 🌊
-Please wait for <b>NeptuneOS 0.5</b>
 
+## Getting Started with NeptuneOS Installation 🌊
+
+Please wait for <b>NeptuneOS 0.5</b>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ABOUT NEPTUNEOS -->
+
 ## About NeptuneOS
 
-NeptuneOS is a tailored version of Windows that prioritizes optimal performance and minimal latency, all while preserving seamless compatibility with standard Windows applications and functions. 
+NeptuneOS is a tailored version of Windows that prioritizes optimal performance and minimal latency, all while preserving seamless compatibility with standard Windows applications and functions.
 By fine-tuning system settings and configurations, it aims to deliver a superior user experience for those seeking peak performance without sacrificing compatibility.
-                                       
+
 This project is a fork of AtlasOS.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
 <!-- CONTACT -->
+
 ## Contact
 
-Your Name - [@NyneDZN](https://twitter.com/NyneDZN) 
+Twitter - [@NyneDZN](https://twitter.com/NyneDZN)
 
 Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
 
@@ -57,14 +53,13 @@ Discord: nyne.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
-* [Optimization Guide by supermanZ (Very Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
-* [Atlas](https://github.com/Atlas-OS/)
-* [N1ko](https://n1kobg.blogspot.com/)
+- [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
+- [Optimization Guide by supermanZ (Very Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
+- [Atlas](https://github.com/Atlas-OS/)
+- [N1ko](https://n1kobg.blogspot.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

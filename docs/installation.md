@@ -35,6 +35,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <h2> UUPDump Guide</h2> 
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
 <li> This means you will not have to update Windows upon installing. </li>
+<li> Easily supports both USB and Non-USB installation methods 
 <li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
     </ul>
 <br>
