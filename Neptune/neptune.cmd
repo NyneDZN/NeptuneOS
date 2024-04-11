@@ -88,7 +88,7 @@ del "%temp%\installer.zip"
 PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >nul
 
 :: Refresh Enviornment
-call "%neptdev%RefreshEnv.cmd" >nul 2>&1
+call "%neptmain%RefreshEnv.cmd" >nul 2>&1
 
 :: Disable Global Confirmation in Chocolatey
 choco feature enable -n allowGlobalConfirmation > nul
@@ -334,7 +334,7 @@ schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Clean
 schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable > nul
 schtasks /change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable > nul
 :: RunOnce Neptune2
-%WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "C:\NeptuneOS-installer-dev\Neptune\neptune2.cmd" /f > nul
+%WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "%neptmain%neptune2.cmd" /f > nul
 
 :: Finalize
 cls & echo Restarting...
