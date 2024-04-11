@@ -20,7 +20,7 @@ Your Windows ISO edition **must** be Pro or Enterprise.
 
 <details><summary>Why Pro? 💬</summary>
 <br>
-Home editions do not support numerous amount of registry tweaks that are supported in Pro.
+Home editions do not support a numerous amount of registry tweaks that are supported in Pro, such as those related to the Group Policy.
 </details>
 
 ## 💽 Downloading your ISO
@@ -30,6 +30,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <details><summary>UUP ⭐</summary>
 <br>
     <ul>
+<h3>Pros and Cons:</h3> 
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
 <li> This means you will not have to update Windows upon installing. </li>
 <li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
