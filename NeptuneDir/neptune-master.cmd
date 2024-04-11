@@ -2992,47 +2992,47 @@ rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >n
 if "%os%"=="Windows 11" (
 cls & echo !S_GREEN!Installing Explorer Patcher..
 "%WinDir%\NeptuneDir\Prerequisites\explorerpatcher.exe"
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ImportOK" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "OldTaskbar" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "AllocConsole" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "CenterMenus" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ClassicThemeMitigations" /t REG_DWORD /d "0" /Reg.exe add "HKCU\Software\ExplorerPatcher" /v "NoPropertiesInContextMenu" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ClockFlyoutOnWinC" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DisableAeroSnapQuadrants" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DisableImmersiveContextMenu" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DisableOfficeHotkeys" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DisableWinFHotkey" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectDateAndTimeToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectNotificationIconsToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectProgramsAndFeaturesToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectSystemToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "EnableSymbolDownload" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ExplorerReadyDelay" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "FlyoutMenus" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "HideControlCenterButton" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "HideExplorerSearchBar" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Language" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "LastSectionInProperties" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "LegacyFileTransferDialog" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Memcheck" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "MicaEffectOnTitlebar" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "NoMenuAccelerator" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "PropertiesInWinX" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ShrinkExplorerAddressBar" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "SkinMenus" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "TaskbarAutohideOnDoubleClick" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ToolbarSeparators" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UpdateAllowDowngrades" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UpdatePolicy" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UpdatePreferStaging" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UpdateURL" /t REG_SZ /d "" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UpdateURLStaging" /t REG_SZ /d "" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "UseClassicDriveGrouping" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ExplorerPatcher" /v "XamlSounds" /t REG_DWORD /d "0" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_RegisterAsShellExtension" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_StartDocked_DisableRecommendedSection" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_FileExplorerCommandUI" /t REG_DWORD /d "1" /f >nul 2>&1
-Reg.exe add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_StartDocked_DisableRecommendedSection" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ImportOK" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "OldTaskbar" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "AllocConsole" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "CenterMenus" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ClassicThemeMitigations" /t REG_DWORD /d "0" /Reg.exe add "HKCU\Software\ExplorerPatcher" /v "NoPropertiesInContextMenu" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ClockFlyoutOnWinC" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DisableAeroSnapQuadrants" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DisableImmersiveContextMenu" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DisableOfficeHotkeys" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DisableWinFHotkey" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectDateAndTimeToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectNotificationIconsToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectProgramsAndFeaturesToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "DoNotRedirectSystemToSettingsApp" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "EnableSymbolDownload" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ExplorerReadyDelay" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "FlyoutMenus" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "HideControlCenterButton" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "HideExplorerSearchBar" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Language" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "LastSectionInProperties" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "LegacyFileTransferDialog" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Memcheck" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "MicaEffectOnTitlebar" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "NoMenuAccelerator" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "PropertiesInWinX" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ShrinkExplorerAddressBar" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "SkinMenus" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "TaskbarAutohideOnDoubleClick" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ToolbarSeparators" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UpdateAllowDowngrades" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UpdatePolicy" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UpdatePreferStaging" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UpdateURL" /t REG_SZ /d "" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UpdateURLStaging" /t REG_SZ /d "" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "UseClassicDriveGrouping" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ExplorerPatcher" /v "XamlSounds" /t REG_DWORD /d "0" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_RegisterAsShellExtension" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_StartDocked_DisableRecommendedSection" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_FileExplorerCommandUI" /t REG_DWORD /d "1" /f >nul 2>&1
+%currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_StartDocked_DisableRecommendedSection" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 
 :: cls & echo !S_GREEN!Installing Chocolatey...
