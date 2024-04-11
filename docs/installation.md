@@ -52,6 +52,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <img src="uup2.png" alt="UUP Screenshot2" style="width: 500px; height:auto;"
 <br>
 <li> The next screen will prompt you for your language. Please select yours, and click Next.
+<br>
 <blockquote> Please note that the NeptuneOS installer will be in English. Language translation <i>may</i> be added in the future.</blockquote>
 <li> You will be prompted to Choose your Edition. Make sure <b>Windows Pro</b> is the only thing checked.</li>
 <li> The final screen will ask you for Download Options. Please copy the following screenshot. </li>
