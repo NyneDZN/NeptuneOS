@@ -2314,7 +2314,7 @@ Microsoft.WindowsNotepad
 )
 
 :: Remove Microsoft Edge Chromium
-%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -NonInteractive > nul
+%currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive > nul
 
 :: Remove Content Delivery Manager
 %currentuser% PowerShell -NoProfile -NoLogo -Command "$package = Get-AppxPackage -AllUsers 'Microsoft.Windows.ContentDeliveryManager'; if (!$package) {; Write-Host 'Not installed'; exit 0; }; $directories = @($package.InstallLocation, "^""$env:LOCALAPPDATA\Packages\$($package.PackageFamilyName)"^""); foreach($dir in $directories) {; if ( !$dir -Or !(Test-Path "^""$dir"^"") ) { continue }; cmd /c ('takeown /f "^""' + $dir + '"^"" /r /d y 1> nul'); if($LASTEXITCODE) { throw 'Failed to take ownership' }; cmd /c ('icacls "^""' + $dir + '"^"" /grant administrators:F /t 1> nul'); if($LASTEXITCODE) { throw 'Failed to take ownership' }; $files = Get-ChildItem -File -Path $dir -Recurse -Force; foreach($file in $files) {; if($file.Name.EndsWith('.OLD')) { continue }; $newName =  $file.FullName + '.OLD'; Write-Host "^""Rename '$($file.FullName)' to '$newName'"^""; Move-Item -LiteralPath "^""$($file.FullName)"^"" -Destination "^""$newName"^"" -Force; }; }"
@@ -2323,8 +2323,9 @@ Microsoft.WindowsNotepad
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul 2>&1
 
 :: Remove OneDrive
-:: taskkill /f /im OneDrive.exe
-:: if exist "C:\Windows\System32\OneDriveSetup.exe" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall > %WinDir%\NeptuneDir\onedrive.txt 2>&1)
+taskkill /f /im OneDrive.exe
+if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul 2>&1) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall >nul 2>&1)
+
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
@@ -3034,10 +3035,6 @@ cls & echo !S_GREEN!Installing Explorer Patcher..
 %currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_FileExplorerCommandUI" /t REG_DWORD /d "1" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "Virtualized_{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_StartDocked_DisableRecommendedSection" /t REG_DWORD /d "1" /f >nul 2>&1
 )
-
-:: cls & echo !S_GREEN!Installing Chocolatey...
-:: %currentuser% PowerShell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > nul
-:: call "%WinDir%\NeptuneDir\RefreshEnv.cmd"
 goto PartingPhase
 
 
