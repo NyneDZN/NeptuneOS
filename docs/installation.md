@@ -6,6 +6,8 @@
 > We are not responsible for any personal files you may lose, or any hardware issues you may experience while using NeptuneOS. <br>
 > We are fully open source, and NOT for sale.
 
+> If something has a ⭐, this means it is the recommended method.
+
 ## 🔍 Prerequisites
 
 - A USB (Optional)
@@ -30,15 +32,18 @@ There are a few methods of obtaining a Windows ISO. <br>
 <details><summary>UUP ⭐</summary>
 <br>
     <ul>
-<h3>Pros and Cons:</h3> 
+<h2> UUPDump Guide</h2> 
 <li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
 <li> This means you will not have to update Windows upon installing. </li>
 <li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
-<li><a href="https://uupdump.net/known.php">UUPDump</a></li>
     </ul>
-
-</details>
 <br>
+
+<h2> Getting your ISO from UUPDump</h2>
+<li>Head over to <a href="https://uupdump.net/known.php">UUPDump</a></li>
+<li>Choose the latest build of your desired Windows version. Make sure that your system and NeptuneOS support it.</li>
+![alt text](uup.png)
+</details>
 
 ## Installing your ISO
 
