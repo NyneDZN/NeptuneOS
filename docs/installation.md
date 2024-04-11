@@ -29,7 +29,7 @@ Home editions do not support a numerous amount of registry tweaks that are suppo
 
 There are a few methods of obtaining a Windows ISO. <br>
 
-<strong><details><summary>UUP ⭐</strong></summary>
+<strong><details><summary><div style="background-color: #f0f0f0; padding: 5px;">UUP ⭐</div></strong></summary>
 <br>
 
 <h2> UUPDump Guide</h2>
@@ -110,4 +110,5 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Open the extracted folder, and open <i>Install Windows.bat<i>
 <li>You will be prompted to locate your ISO and open it
 <li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)
+
 </body>
