@@ -503,6 +503,7 @@ cls & echo !S_GREEN!Configuring Devices and MSI Mode
 %DevMan% /disable "Remote Desktop Device Redirector Bus" >nul 2>&1
 %DevMan% /disable "SM Bus Controller"
 %DevMan% /disable "System board" >nul 2>&1
+%DevMan% /disbale "System CMOS/real time clock" >nul 2>&1
 %DevMan% /disable "System Speaker" >nul 2>&1
 %DevMan% /disable "System Timer" >nul 2>&1
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul 2>&1
