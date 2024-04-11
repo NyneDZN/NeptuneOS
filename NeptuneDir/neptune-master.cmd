@@ -2991,7 +2991,7 @@ rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >n
 
 if "%os%"=="Windows 11" (
 cls & echo !S_GREEN!Installing Explorer Patcher..
-start "%WinDir%\NeptuneDir\Prerequisites\explorerpatcher.exe"
+"%WinDir%\NeptuneDir\Prerequisites\explorerpatcher.exe"
 Reg.exe add "HKCU\Software\ExplorerPatcher" /v "ImportOK" /t REG_DWORD /d "1" /f >nul 2>&1
 Reg.exe add "HKCU\Software\ExplorerPatcher" /v "OldTaskbar" /t REG_DWORD /d "0" /f >nul 2>&1
 Reg.exe add "HKCU\Software\ExplorerPatcher" /v "AllocConsole" /t REG_DWORD /d "0" /f >nul 2>&1
