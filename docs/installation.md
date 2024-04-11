@@ -119,8 +119,12 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 To install windows with a USB, please make sure your USB is at least 8GB.
 
 <details><summary><strong>Ventoy ⭐</strong></summary>
+<h2>Ventoy USB Method</h2>
+<br>
 <li>Start by <a href="https://www.ventoy.net/en/download.html">Downloading Ventoy</a></a>
-
+<li>Extract the downloaded folder, and open <i>Ventoy2Disk.exe</i></li>
+<li>Select your USB in the dropdown, and click Install</li>
+<li>When the process is finished, find your Ventoy drive, and simply drop the ISO in the root of the folder
 </details>
 
 <details><summary><strong>Rufus</strong></summary>
