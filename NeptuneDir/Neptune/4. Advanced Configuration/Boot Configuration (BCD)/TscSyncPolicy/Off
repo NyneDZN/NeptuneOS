@@ -9,5 +9,7 @@ fltmc >nul 2>&1 || (
     exit 0
 )
 
-bcdedit /enum {current}
-pause>nul
+bcdedit /deletevaue tscsyncpolicy
+echo TSCSyncPolicy removed. Please Restart.
+timeout /t 3 /nobreak >nul
+exit

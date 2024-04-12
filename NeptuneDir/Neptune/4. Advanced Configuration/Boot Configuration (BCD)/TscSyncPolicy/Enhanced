@@ -9,5 +9,7 @@ fltmc >nul 2>&1 || (
     exit 0
 )
 
-bcdedit /enum {current}
-pause>nul
+bcdedit /set tscsyncpolicy enhanced
+echo TSCSyncPolicy set to Enhanced. Please Restart.
+timeout /t 3 /nobreak >nul
+exit
