@@ -3086,7 +3086,7 @@ if exist "C:\NeptuneOS-installer" (rmdir /s /q "C:\NeptuneOS-installer" >nul)
 if exist "%userprofile%\Desktop\neptune-dev.cmd" (%delF% "%userprofile%\Desktop\neptune-dev.cmd")
 if exist "%userprofile%\Desktop\neptune-installer.cmd" (%delF% "%userprofile%\Desktop\neptune-installer.cmd")
 
-echo %date% %time% Finished neptune-master.cmd >> %neptlog%
+echo %time% %date% Finished neptune-master.cmd >> %neptlog%
 echo !S_GRAY!We're finished, rebooting in a moment.
 timeout /t 4 /nobreak >nul
 shutdown /f /r /t 0 & del "%~f0"
