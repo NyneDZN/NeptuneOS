@@ -421,7 +421,7 @@ for %%a in (
 "\MicrosoftEdgeUpdateTaskMachineUA"
 "\MicrosoftEdgeUpdateTaskMachineCore"
 ) do (
-schtasks /change /disable /TN %%a >nul
+%system% schtasks.exe /change /disable /TN %%a >nul
 )
 
 :: Enable Storage Sense
