@@ -10,6 +10,7 @@
 :: - CatGamerOP
 :: - CoutX
 :: - DuckISO
+:: - echnobas
 :: - he3als
 :: - HeavenOS
 :: - imribiy
@@ -35,7 +36,7 @@ title "NeptuneOS Installation %version% | By Nyne"
 if /i "%~2"=="/devbuild"   set "devbuild=yes"
 
 :: Batch Variables
-set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command"
+set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
 set currentuser=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide -Wait
 set system=%WinDir%\NeptuneDir\Tools\NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide -Wait
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
