@@ -1050,7 +1050,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /t RE
 bcdedit /set allowedinmemorysettings 0x0 >nul
 
 :: Delete Adobe Font Type Manager
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >nul 2>&1
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "DisableATMFD" /t REG_DWORD /d "1" /f >nul
 
 :: Disable DMA Remapping
@@ -1098,7 +1098,7 @@ rundll32.exe fthsvc.dll,FthSysprepSpecialize
 
 :: Disable SmartScreen
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t Reg_DWORD /d "0" /f >nul
-Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >nul
+Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >nul 2>&1
 
 :: Disable Lockscreen Security on Servers
 if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f >nul)
@@ -1183,71 +1183,71 @@ Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E910
 %currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "NoPreviousVersionsPage" /f >nul 2>&1
 %currentuser% Reg delete "HKCU\SOFTWARE\Policies\Microsoft\PreviousVersions" /v "DisableLocalPage" /f >nul 2>&1
 :: - > Remove 'edit with Paint 3D' from Context Menus
-Reg delete "HKCR\SystemFileAssociations\.3mf\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.bmp\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.fbx\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.gif\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jfif\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpe\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpeg\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpg\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.png\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.tif\Shell\3D Edit" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.tiff\Shell\3D Edit" /f >nul
+Reg delete "HKCR\SystemFileAssociations\.3mf\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.bmp\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.fbx\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.gif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jfif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpe\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpeg\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpg\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.png\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tif\Shell\3D Edit" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tiff\Shell\3D Edit" /f >nul 2>&1
 :: - > Remove 'give access to' from Context Menus
-Reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f >nul
-Reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f >nul
-Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\Sharing" /f >nul
-Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\Sharing" /f >nul
-Reg delete "HKCR\LibraryFolder\background\shellex\ContextMenuHandlers\Sharing" /f >nul
+Reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
+Reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
+Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
+Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
+Reg delete "HKCR\LibraryFolder\background\shellex\ContextMenuHandlers\Sharing" /f >nul 2>&1
 Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\Sharing" /f >nul
 :: - > Remove 'cast to device' from Context Menus
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}" /t REG_SZ /d "" /f >nul
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}" /t REG_SZ /d "" /f >nul 2>&1
 :: - > Remove 'share' in Context Menus
-Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >nul
-Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f >nul
+Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >nul 2>&1
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f >nul 2>&1
 :: - > Remove 'bitmap image' from the 'new' Context Menus
-Reg delete "HKCR\.bmp\ShellNew" /f >nul
+Reg delete "HKCR\.bmp\ShellNew" /f >nul 2>&1
 :: - > Remove 'rich text document' from 'new' Context Menus
-Reg delete "HKCR\.rtf\ShellNew" /f >nul
+Reg delete "HKCR\.rtf\ShellNew" /f >nul 2>&1
 :: - > Remove 'send to' from Context Menus
-Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f >nul
-Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >nul
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f >nul 2>&1
+Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >nul 2>&1
 :: - > Remove 'add to favorites' from Context Menus
-Reg delete "HKCR\*\shell\pintohomefile" /f >nul
+Reg delete "HKCR\*\shell\pintohomefile" /f >nul 2>&1
 :: - > Remove 'rotate left' and 'rotate right' from Context Menus
-Reg delete "HKCR\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
-Reg delete "HKCR\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul
+Reg delete "HKCR\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
+Reg delete "HKCR\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >nul 2>&1
 :: - > Remove 'Scan with Defender' from Context Menus
-Reg delete "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /va /f >nul
-Reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /v "InprocServer32" /f >nul
-Reg delete "HKCR\*\shellex\ContextMenuHandlers" /v "EPP" /f >nul
-Reg delete "HKCR\Directory\shellex\ContextMenuHandlers" /v "EPP" /f >nul
-Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >nul
+Reg delete "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /va /f >nul 2>&1
+Reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /v "InprocServer32" /f >nul 2>&1
+Reg delete "HKCR\*\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
+Reg delete "HKCR\Directory\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
+Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >nul 2>&1
 :: - > Remove 'print' from Context Menus
 %currentuser% Reg add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul & for %%a in ("batfile" "cmdfile" "docxfile" "fonfile" "htmlfile" "inffile" "inifile" "JSEFile" "otffile" "pfmfile" "regfile" "rtffile" "ttcfile" "ttffile" "txtfile" "VBEFile" "VBSFile" "WSFFile") do (%currentuser% Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >nul)
 :: - > Remove 'include in library' from Context Menus
-Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul
-Reg delete "HKLM\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul
+Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >nul 2>&1
 :: - > Remove 'troubleshooting compatibility' from Context Menus
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{1d27f844-3a1f-4410-85ac-14651078412d}" /t REG_SZ /d "" /f >nul
 Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{1d27f844-3a1f-4410-85ac-14651078412d}" /t REG_SZ /d "" /f >nul
@@ -1282,7 +1282,7 @@ Reg add "HKCR\regfile\Shell\RunAs" /ve /t REG_SZ /d "Merge As TrustedInstaller" 
 Reg add "HKCR\regfile\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "1" /f >nul
 Reg add "HKCR\regfile\Shell\RunAs\Command" /ve /t REG_SZ /d "NSudo.exe -U:T -P:E Reg import "%1"" /f >nul
 :: - > Add 'install' to .cab Context Menus
-Reg delete "HKCR\CABFolder\Shell\RunAs" /f >nul
+Reg delete "HKCR\CABFolder\Shell\RunAs" /f >nul 2>&1
 Reg add "HKCR\CABFolder\Shell\RunAs" /ve /t REG_SZ /d "Install" /f >nul
 Reg add "HKCR\CABFolder\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "" /f >nul
 Reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /online /add-package /packagepath:\"%1\"" /f >nul
@@ -1298,13 +1298,13 @@ Reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /onli
 Reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f >nul
 Reg add "HKCR\Wow6432Node\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f >nul
 :: - > Remove Duplicate Removable Drives in the File Explorer Side Panel
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul
-Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul 2>&1
 :: - > Disable 'Quick Access' in the File Explorer Side Panel
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f >nul
 :: - > Disable '3D Objects' in the File Explorer Side Panel
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >nul
-Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >nul 2>&1
 :: - > Hide frequently used files/folders in the 'Quick Access' File Explorer Side Panel
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowFrequent" /t REG_DWORD /d "0" /f >nul
 :: - > Hide recently used files/folders in the 'Quick Access' File Explorer Side Panel
@@ -1325,7 +1325,7 @@ Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f >nul
 :: - > Disable automatic folder type discovery in File Explorer
 :: This might improve explorer performance, but will also make all folders autosort by 'details'
-%currentuser% Reg delete "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >nul
+%currentuser% Reg delete "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
 %currentuser% Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f >nul
 :: - > Show encrypted NTFS files in color in File Explorer
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowEncryptCompressedColor" /t REG_DWORD /d "1" /f >nul
@@ -1347,7 +1347,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "H
 %currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f >nul
 :: - > Hide task view button on the Taskbar
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /D "0" /f >nul
-%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MultiTaskingView\AllUpView" /v "Enabled" /f >nul
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MultiTaskingView\AllUpView" /v "Enabled" /f >nul 2>&1
 :: - > Hide search from the Taskbar
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f >nul
 :: - > Don't pin the store to the Taskbar
@@ -1362,21 +1362,21 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds
 :: - > Disable Start Menu Recommendations
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_AccountNotifications" /t REG_DWORD /d "0" /f >nul
 :: - > Clear Default TileGrid
-%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f > nul 2>&1
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f >nul 2>&1
 :: - > Disable Start Menu Pins
 :: currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "StartMenu_Start_Time" /t REG_BINARY /d "889f04f10c79da01" /f >nul
 :: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >nul
 :: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "StartMenu_Start_Time" /t REG_BINARY /d "889f04f10c79da01" /f >nul
 :: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >nul
 :: - > Remove Advertisements and Stubs from Start Menu
-if "%os%"=="Windows 11" (%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f) > nul 2>&1
+if "%os%"=="Windows 11" (%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f) >nul 2>&1
 :: -> Hide Recommended Start Menu Apps
-if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Start" /v "ShowRecentList" /t REG_DWORD /d "0" /f) > nul 2>&1
+if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Start" /v "ShowRecentList" /t REG_DWORD /d "0" /f) >nul
 :: - > Hide Recently Added Apps in the Start Menu
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f >nul
 :: - > Hide Recently Opened Items in Start Menu
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "1" /f >nul
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "1" /f >nul
 :: - > Set the Start Menu layout.xml for Windows 10
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "StartLayoutFile" /t REG_EXPAND_SZ /d "%WinDir%\layout.xml" /f >nul
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "LockedStartLayout" /t REG_DWORD /d "1" /f >nul
@@ -1409,11 +1409,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociati
 for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
 %currentuser% Reg add "HKCU\SOFTWARE\Classes\.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f >nul
 )
-:: - > File Explorer as only taskbar pin
-:: This is not the correct way to achieve this, I will look into this soon.
-:: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "FavoritesResolve" /t REG_BINARY /d "4a0300004c0000000114020000000000c0000000000000468300800020200000590db5b8fc78da012421b5b8fc78da011558413ce243d701970100000000000001000000000000000000000000000000a4013a001f80c827341f105c1042aa032ee45287d668260001002600efbe122000006e14cad6a972da01640049dba972da01e25d6fc3cb78da01140056003100000000007258e03211205461736b42617200400009000400efbe6a58d5297258e0322e0000004f9301000000010000000000000000000000000000009217c8005400610073006b00420061007200000016001201320097010000a852e041202046696c65204578706c6f7265722e6c6e6b007c0009000400efbe7258e0327258e0322e0000002096010000001f000000000000000000520000000000ebc1fe00460069006c00650020004500780070006c006f007200650072002e006c006e006b00000040007300680065006c006c00330032002e0064006c006c002c002d003200320030003600370000002000220000001e00efbe02005500730065007200500069006e006e006500640000002000120000002b00efbe3a36b6b8fc78da012000420000001d00efbe02004d006900630072006f0073006f00660074002e00570069006e0064006f00770073002e004500780070006c006f00720065007200000020000000af0000001c000000010000001c0000003800000000000000ae0000001c00000003000000283ae86810000000536572766572203230323200433a5c55736572735c41646d696e6973747261746f725c417070446174615c526f616d696e675c4d6963726f736f66745c496e7465726e6574204578706c6f7265725c517569636b204c61756e63685c557365722050696e6e65645c5461736b4261725c46696c65204578706c6f7265722e6c6e6b000060000000030000a0580000000000000077696e2d66717039616c756637386f008e8df7fd4d0d9e428f794b128d12d1b1d6ca9e90e6e4ee11846b7085c23c97408e8df7fd4d0d9e428f794b128d12d1b1d6ca9e90e6e4ee11846b7085c23c974045000000090000a03900000031535053b1166d44ad8d7048a748402ea43d788c1d000000680000000048000000b0bedfad7c6eda01580fcd443e37ed00000000000000000000000000" /f >nul
-:: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "Favorites" /t REG_BINARY /d "00a40100003a001f80c827341f105c1042aa032ee45287d668260001002600efbe122000006e14cad6a972da01640049dba972da01e25d6fc3cb78da01140056003100000000007258e03211205461736b42617200400009000400efbe6a58d5297258e0322e0000004f9301000000010000000000000000000000000000009217c8005400610073006b00420061007200000016001201320097010000a852e041202046696c65204578706c6f7265722e6c6e6b007c0009000400efbe7258e0327258e0322e0000002096010000001f000000000000000000520000000000ebc1fe00460069006c00650020004500780070006c006f007200650072002e006c006e006b00000040007300680065006c006c00330032002e0064006c006c002c002d003200320030003600370000002000120000002b00efbe3a36b6b8fc78da012000420000001d00efbe02004d006900630072006f0073006f00660074002e00570069006e0064006f00770073002e004500780070006c006f0072006500720000002000220000001e00efbe02005500730065007200500069006e006e0065006400000020000000ff" /f >nul
-
 
 :: Hide pages in UWP settings
 if "%os%"=="Windows 10" (
@@ -1469,9 +1464,9 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "U
 
 :: Legacy Notepad
 :: This removes the banner telling you to install the new NotePad
-Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "ShowStoreBanner" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "fWrap" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKU\%SID%\Software\Microsoft\Notepad" /v "StatusBar" /t REG_DWORD /d "1" /f >nul
+Reg add "HKU\%SID%\Software\Microsoft\Notepad" /v "ShowStoreBanner" /t REG_DWORD /d "0" /f >nul
+Reg add "HKU\%SID%\Software\Microsoft\Notepad" /v "fWrap" /t REG_DWORD /d "1" /f >nul
+Reg add "HKU\%SID%\Software\Microsoft\Notepad" /v "StatusBar" /t REG_DWORD /d "1" /f >nul
 
 :: Set icon cache to 51.2MB
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "Max Cached Icons" /t REG_SZ /d "51200" /f >nul
@@ -1488,7 +1483,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "Ver
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowDriveLettersFirst" /t REG_DWORD /d "4" /f >nul
 
 :: Disable USB Errors
-%currentuser% Reg.exe add "HKCU\SOFTWARE\Microsoft\Shell\USB" /v "NotifyOnUsbErrors" /t REG_DWORD /d "0" /f >nul
+%currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Shell\USB" /v "NotifyOnUsbErrors" /t REG_DWORD /d "0" /f >nul
 
 :: Disable 'Open File - Security Warning' message
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\0" /v "1806" /t REG_DWORD /d "0" /f >nul
@@ -1510,12 +1505,12 @@ Reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\Security" /v "Disabl
 %currentuser% Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /v "BagMRU Size" /t REG_DWORD /d "1" /f >nul
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >nul
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >nul
-%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f >nul
-%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >nul
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >nul
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >nul
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f >nul
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f >nul
+%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f >nul 2>&1
 
 :: Storage Sense Configuration
 :: - > Clean files once a month
@@ -1860,7 +1855,7 @@ WiFiSession
 )
 
 :: Delete Device Metadata
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f >nul 2>&1
 
 :: Disable MSRT Telemetry
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "1" /f >nul
@@ -2020,24 +2015,24 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "TargetRelea
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f >nul
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f >nul
 :: - > Prevent DevHome, Outlook and Teams from installing
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate" /f >nul 2>&1
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul
 :: - > Prevent random apps from installing, including Widgets or advertisements
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\Settings" /v "STOREBIZCRITICALAPPS" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\State\CategoryCache" /v "48caba8a"-2e62-2097-dcd8-4255c637b32dUS /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "AccountsService" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "BackupBanner" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "DesktopSpotlight" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "IrisService" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "SystemSettingsExtensions" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WebExperienceHost" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WindowsBackup" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\LastOnlineScanTimeForAppCategory\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >nul
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RequestedAppCategories\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >nul
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\AppIso\FirewallRules" /v "{5D2C72C6-969D-4C1E-8484-41ED53782351}" /f >nul
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{26037439-AD8B-4A56-AF2E-F6CDDB59F6BE}" /f >nul
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{44000509-BE9E-419B-A60B-54E62CF41203}" /f >nul
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\Settings" /v "STOREBIZCRITICALAPPS" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\State\CategoryCache" /v "48caba8a"-2e62-2097-dcd8-4255c637b32dUS /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "AccountsService" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "BackupBanner" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "DesktopSpotlight" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "IrisService" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "SystemSettingsExtensions" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WebExperienceHost" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WindowsBackup" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\LastOnlineScanTimeForAppCategory\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >nul 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RequestedAppCategories\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >nul 2>&1
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\AppIso\FirewallRules" /v "{5D2C72C6-969D-4C1E-8484-41ED53782351}" /f >nul 2>&1
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{26037439-AD8B-4A56-AF2E-F6CDDB59F6BE}" /f >nul 2>&1
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{44000509-BE9E-419B-A60B-54E62CF41203}" /f >nul 2>&1
 :: - > Prevent Malicious Software Removal Tool from installing
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f >nul
 :: - > Do not adjust default option to 'Install Updates and Shut Down' in Shut Down Windows dialog box
@@ -2118,14 +2113,14 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v "AllowGameDVR" /t 
 Reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "0" /f >nul
 
 :: Remove FSO Overrides
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__COMPAT_LAYER" /f >nul
-%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >nul
-%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f >nul
-Reg delete "HKLM\System\GameConfigStore" /f >nul
-Reg delete "HKU\.Default\System\GameConfigStore" /f >nul
-Reg delete "HKU\S-1-5-19\System\GameConfigStore" /f >nul
-Reg delete "HKU\S-1-5-20\System\GameConfigStore" /f >nul
-%currentuser% Reg delete "HKCU\Software\Classes\System\GameConfigStore" /f >nul
+Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__COMPAT_LAYER" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f >nul 2>&1
+Reg delete "HKLM\System\GameConfigStore" /f >nul 2>&1
+Reg delete "HKU\.Default\System\GameConfigStore" /f >nul 2>&1
+Reg delete "HKU\S-1-5-19\System\GameConfigStore" /f >nul 2>&1
+Reg delete "HKU\S-1-5-20\System\GameConfigStore" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Classes\System\GameConfigStore" /f >nul 2>&1
 
 :: Enable FSO
 %currentuser% Reg add HKCU\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f >nul
@@ -2215,8 +2210,8 @@ for /f "delims=" %%b in ('reg query "%%a"') do (
 %system% Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},0" /t REG_BINARY /d "4100FE6901000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul
 %system% Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},1" /t REG_BINARY /d "41008EC901000000A086010000000000" /f >nul
 %system% Reg add "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},3" /t REG_BINARY /d "4100020001000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >nul
-%system% Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >nul
-%system% Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >nul
+%system% Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >nul 2>&1
+%system% Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >nul 2>&1
 )
 )
 
@@ -2337,7 +2332,7 @@ taskkill /f /im OneDrive.exe
 if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall >nul)
 
 :: Remove OneDrive Startup Task
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
 :: Disable OneDrive Usage
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSyncNGSC" /d 1 /f >nul
