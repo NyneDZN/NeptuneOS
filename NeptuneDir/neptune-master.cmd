@@ -2328,7 +2328,6 @@ Microsoft.WindowsNotepad
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul
 
 :: Remove OneDrive
-taskkill /f /im OneDrive.exe
 if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall >nul)
 
 :: Remove OneDrive Startup Task
