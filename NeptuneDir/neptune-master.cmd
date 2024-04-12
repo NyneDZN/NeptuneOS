@@ -2339,10 +2339,10 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "Dis
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSync" /d 1 /f >nul
 
 :: Remove Telemetry Packages via Cab (he3als, echnobas)
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoTelem.cab" >nul
+call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoTelem.cab" >> %neptlog%
 
 :: Remove Defender Packages via Cab 
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoDefender.cab" >nul
+call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoDefender.cab" >> %neptlog%
 
 :: Remove Residual Files
 setlocal DisableDelayedExpansion
