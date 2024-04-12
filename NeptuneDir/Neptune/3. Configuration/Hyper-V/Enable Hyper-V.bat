@@ -49,7 +49,12 @@ C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtual Machine B
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 
 :: DISM
-dism /online /disable-feature:Microsoft-Hyper-V-All /quiet /norestart
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart 
+:: Disable Hyper-V Managenagement Tool
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
+:: Disable Hyper-V Module for Windows PowerShell
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart
 
 :: BCD
 bcdedit /set loadoptions DISABLE-LSA-ISO,DISABLE-VBS > nul

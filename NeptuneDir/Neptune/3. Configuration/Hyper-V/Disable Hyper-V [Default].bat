@@ -61,7 +61,12 @@ C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V Virtual Machine 
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 
 :: DISM
-dism /online /disable-feature:Microsoft-Hyper-V-All /quiet /norestart
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart 
+:: Disable Hyper-V Management Tool
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
+:: Disable Hyper-V Module for Windows PowerShell
+dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart
 
 :: BCD
 bcdedit /set hypervisorlaunchtype off > nul
