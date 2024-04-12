@@ -11,7 +11,7 @@ set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_M
 set "%CMDLINE:,=" & set "%"
 set neptlog=%WinDir%\NeptuneDir\neptune.txt
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
-set svc=call :setSvc
+set svc=call %WinDir%\NeptuneDir\setSvc.cmd
 set delf=del /f /s /q
 
 
