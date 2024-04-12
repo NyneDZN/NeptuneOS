@@ -123,7 +123,7 @@ taskkill /f /im explorer.exe >nul 2>&1
 :: ngen, from atlas
 Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\Scripts\NGEN.ps1"
 
-cls & echo !S_GREEN!Configuring NTP Server
+cls & echo !S_GREEN!Configuring NTP Server [1/15]
 :: change ntp server from windows server to pool.ntp.org
 w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org" >nul 2>&1
 
@@ -138,7 +138,7 @@ goto PowerConfiguration
 
 
 :PowerConfiguration
-cls & echo !S_GREEN!Configuring Powerplan
+cls & echo !S_GREEN!Configuring Powerplan [2/15]
 :: Unhide Hidden Power Configuration
 :: source: https://gist.github.com/Velocet/7ded4cd2f7e8c5fa475b8043b76561b5#file-unlock-powercfg-ps1
 PowerShell -ExecutionPolicy Unrestricted -Command  "$PowerCfg = (Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings' -Recurse).Name -notmatch '\bDefaultPowerSchemeValues|(\\[0-9]|\b255)$';foreach ($item in $PowerCfg) { Set-ItemProperty -Path $item.Replace('HKEY_LOCAL_MACHINE','HKLM:') -Name 'Attributes' -Value 0 -Force}" >nul 2>&1
@@ -236,7 +236,7 @@ wevtutil set-log "Microsoft-Windows-Kernel-Processor-Power/Diagnostic" /e:false 
 wevtutil set-log "Microsoft-Windows-UserModePowerService/Diagnostic" /e:false >nul 2>&1
 
 
-cls & echo !S_GREEN!Disabling PowerSaving
+cls & echo !S_GREEN!Disabling PowerSaving [3/15]
 :: Most of this section is forked from AtlasOS
 if "!DEVICE_TYPE!"=="PC" (
 	PowerShell -NoP -C "$usb_devices = @('Win32_USBController', 'Win32_USBControllerDevice', 'Win32_USBHub'); $power_device_enable = Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi; foreach ($power_device in $power_device_enable){$instance_name = $power_device.InstanceName.ToUpper(); foreach ($device in $usb_devices){foreach ($hub in Get-WmiObject $device){$pnp_id = $hub.PNPDeviceID; if ($instance_name -like \"*$pnp_id*\"){$power_device.enable = $False; $power_device.psbase.put()}}}}"
@@ -298,7 +298,7 @@ goto NTFSConfiguration
 
 
 :NTFSConfiguration
-cls & echo !S_GREEN!Configuring NTFS
+cls & echo !S_GREEN!Configuring NTFS [4/15]
 :: Configuring the NTFS file system in Windows
 
 :: Adjust MFT (master file table) and paged pool memory cache levels according to ram size
@@ -366,7 +366,7 @@ goto TaskConfiguration
 
 :: Configuring the task scheduler in Windows
 :TaskConfiguration
-cls & echo !S_GREEN!Configuring Scheduled Tasks
+cls & echo !S_GREEN!Configuring Scheduled Tasks [5/15]
 
 for %%a in (
 "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
@@ -436,7 +436,7 @@ goto BCDConfiguration
 
 :: Configuring the Boot Configuration Data in Windows
 :BCDConfiguration
-cls & echo !S_GREEN!Configuring BCDEdit
+cls & echo !S_GREEN!Configuring BCDEdit [6/16]
 
 :: Enable the Legacy Boot Menu
 bcdedit /set bootmenupolicy legacy >nul 2>&1
@@ -479,7 +479,7 @@ goto DevConfiguration
 
 :: Configuring devices in Windows
 :DevConfiguration
-cls & echo !S_GREEN!Configuring Devices and MSI Mode
+cls & echo !S_GREEN!Configuring Devices and MSI Mode [7/15]
 
 :: Device Manager
 :: - > System Devices
@@ -554,7 +554,7 @@ goto NetworkConfiguration
 
 :: Configuring network settings and the NIC adapter in Windows
 :NetworkConfiguration
-cls & echo !S_GREEN!Configuring Network Settings
+cls & echo !S_GREEN!Configuring Network Settings [8/15]
 
 :: Network Shell
 :: Reset the Network Configuration
@@ -771,7 +771,7 @@ goto ServiceConfiguration
 
 
 :ServiceConfiguration
-cls & echo !S_GREEN!Disabling Drivers and Services
+cls & echo !S_GREEN!Disabling Drivers and Services [9/15]
 :: Configuring the services and drivers in Windows
 
 :: Configuring Driver Dependencies
@@ -944,7 +944,7 @@ goto SecurityConfiguration
 
 :: Configuring security vulnerabilities and hardening Windows
 :SecurityConfiguration
-cls & echo !S_GREEN!Security and Hardening
+cls & echo !S_GREEN!Security and Hardening [10/15]
 
 :: Mitigations
 :: - > Spectre & Meltdown
@@ -1108,7 +1108,7 @@ goto RegistryCongiruation
 :: Configuring the Windows Registry
 : - > Configuring the explorer and UI in Windows
 :RegistryCongiruation
-cls & echo !S_GREEN!Configuring Registry...
+cls & echo !S_GREEN!Configuring Registry... [11/15]
 
 :: Explorer Quickness
 :: - > Turn down application launch delays
@@ -2290,14 +2290,14 @@ goto PerformanceCounters
 
 
 :PerformanceCounters
-cls & echo !S_GREEN!Rebuilding Performance Counters...
+cls & echo !S_GREEN!Rebuilding Performance Counters... [12/15]
 lodctr /r >nul 2>&1
 lodctr /r >nul 2>&1
 goto DebloatWindows
 
 
 :DebloatWindows
-cls & echo !S_GREEN!Debloating Windows...
+cls & echo !S_GREEN!Debloating Windows... [13/15]
 for %%i in (
 3DBuilder bing bingfinance bingsports BingWeather
 Clipchamp.Clipchamp CommsPhone "Drawboard PDF" Facebook
@@ -2350,7 +2350,7 @@ goto ConfigureFeatures
 
 :ConfigureFeatures
 setlocal EnableDelayedExpansion
-cls & echo !S_GREEN!Configuring Windows Features and Capabilities...
+cls & echo !S_GREEN!Configuring Windows Features and Capabilities... [14/15]
 :: Features and Components
 :: Enable DirectPlay
 dism /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart >nul 2>&1
@@ -2447,13 +2447,13 @@ goto PrerequisitesInstallation
 
 
 :PrerequisitesInstallation
-cls & echo !S_GREEN!Installing Visual C++...
+cls & echo !S_GREEN!Installing Visual C++... [15/15]
 "%WinDir%\NeptuneDir\Prerequisites\vcredist.exe" /ai8X239T >nul 2>&1
 
-cls & echo !S_GREEN!Installing DirectX...
+cls & echo !S_GREEN!Installing DirectX... [16/15]
 "%WinDir%\NeptuneDir\Prerequisites\DirectX\DXSETUP.exe" /silent >nul 2>&1
 
-cls & echo !S_GREEN!Installing 7-Zip...
+cls & echo !S_GREEN!Installing 7-Zip... [17/15]
 "%WinDir%\NeptuneDir\Prerequisites\7z.exe" /S  >nul 2>&1
 setlocal DisableDelayedExpansion
 
@@ -2957,17 +2957,11 @@ Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts.zip\Us
 %WinDir%\NeptuneDir\Tools\SetUserFTA.exe "assoc.txt"
 move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip\7-Zip File Manager.lnk" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip"
-
 setlocal EnableDelayedExpansion
-if "%os%"=="Windows 11" (
-cls & echo !S_GREEN!Installing Timer Resolution Service
-move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1
-)
 
-if "%server%"=="yes" (move "%WinDir%\NeptuneDir\SetTimerResolution.exe.lnk" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >nul 2>&1)
 
 if "%os%"=="Windows 10" (
-cls & echo !S_GREEN!Installing Open Shell...
+cls & echo !S_GREEN!Installing Open Shell... [18/15]
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul 2>&1
 
 cls & echo !S_GREEN!Configuring Open Shell
@@ -2993,7 +2987,7 @@ rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >n
 )
 
 if "%os%"=="Windows 11" (
-cls & echo !S_GREEN!Installing Explorer Patcher..
+cls & echo !S_GREEN!Installing Explorer Patcher... [18/15]
 "%WinDir%\NeptuneDir\Prerequisites\explorerpatcher.exe"
 %currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "ImportOK" /t REG_DWORD /d "1" /f >nul 2>&1
 %currentuser% Reg add "HKCU\Software\ExplorerPatcher" /v "OldTaskbar" /t REG_DWORD /d "0" /f >nul 2>&1
@@ -3041,7 +3035,7 @@ goto PartingPhase
 
 
 :PartingPhase
-cls & echo !S_GREEN!Finalizing Setup
+cls & echo !S_GREEN!Finalizing Setup 
 :: Disable windows search and start menu on Windows 10
 if "%os%"=="Windows 10" (
 	ren SearchHost.exe SearchHost.old >nul 2>&1
@@ -3123,6 +3117,8 @@ if exist "%userprofile%\Desktop\neptune-dev.cmd" (%delF% "%userprofile%\Desktop\
 if exist "%userprofile%\Desktop\neptune-installer.cmd" (%delF% "%userprofile%\Desktop\neptune-installer.cmd")
 
 echo %date% %time% Finished neptune-master.cmd >> %neptlog%
+echo !S_GRAY!We're finished, rebooting in a moment.
+timeout /t 4 /nobreak >nul
 shutdown /f /r /t 0 & del "%~f0"
 
 
