@@ -32,20 +32,21 @@ if /i %c% equ 1 goto :go
 if /i %c% equ 2 goto :closed
 
 :go
+%svc% 
 %svc% 3ware 4
 %svc% acpipagr 4
 %svc% ADP80XX 4
 %svc% amdgpio2 4
 %svc% AmdK8 4
+%svc% AppXSvc 4
 %svc% AsyncMac 4
+%svc% b06bdrv 4
+%svc% bam 4
 %svc% BDESVC 4
 %svc% Beep 4
 %svc% bindflt 4
 %svc% BITS 4
 %svc% BluetoothUserService 4
-%svc% iaStorAVC 4
-%svc% vsmraid 4
-%svc% b06bdrv 4
 %svc% BTAGService 4
 %svc% BthA2dp 4
 %svc% BthAvctpSvc 4
@@ -54,8 +55,13 @@ if /i %c% equ 2 goto :closed
 %svc% bthleenum 4
 %svc% BTHMODEM 4
 %svc% bthserv 4
+%svc% CDBUserSvc 4
+%svc% CDPSvc 4
 %svc% cdrom 4
+%svc% CldFlt 4
 %svc% CLFS 4
+%svc% ClipSVC 4
+%svc% CSC 4
 %svc% dam 4
 %svc% Dfsc 4
 %svc% diagsvc 4
@@ -68,12 +74,14 @@ if /i %c% equ 2 goto :closed
 %svc% edgeupdatem 4
 %svc% EventLog 4
 %svc% EventSystem 4
+%svc% FileCrypt 4
 %svc% flpydisk 4
 %svc% FontCache 4
 %svc% FontCache3.0.0.0 4
 %svc% GPIOClx0101 4
 %svc% GpuEnergyDrv 4
 %svc% HvHost 4
+%svc% iaStorAVC 4
 %svc% IKEEXT 4
 %svc% IntelPMT 4
 %svc% iphlpsvc 4
@@ -85,9 +93,11 @@ if /i %c% equ 2 goto :closed
 %svc% lmhosts 4
 %svc% MapsBroker 4
 %svc% microsoft_bluetooth_avrcptransport 4
+%svc% mpsdrv 4
 %svc% mrxsmb 4
 %svc% mrxsmb20 4
 %svc% MSDTC 4
+%svc% msisadrv 4
 %svc% MsLldp 4
 %svc% MsSecCore 4
 %svc% NdisCap 4
@@ -98,7 +108,9 @@ if /i %c% equ 2 goto :closed
 %svc% NetBIOS 4
 %svc% NetBT 4
 %svc% npsvctrig 4
+%svc% PcaSvc 4
 %svc% PEAUTH 4
+%svc% PlugPlay 4
 %svc% PptpMiniport 4
 %svc% PrintNotify 4
 %svc% PRM 4
@@ -107,12 +119,16 @@ if /i %c% equ 2 goto :closed
 %svc% RasMan 4
 %svc% RasPppoe 4
 %svc% RasSstp 4
+%svc% rdbss 4
 %svc% rdyboost 4
 %svc% RFCOMM 4
 %svc% RmSvc 4
 %svc% rspndr 4
+%svc% SamSs 4
+%svc% savdrv 4
 %svc% Schedule 4
 %svc% SecurityHealthService 4
+%svc% SENS 4
 %svc% Sense 4
 %svc% SgrmAgent 4
 %svc% SgrmBroker 4
@@ -122,14 +138,18 @@ if /i %c% equ 2 goto :closed
 %svc% srv2 4
 %svc% srvnet 4
 %svc% storqosflt 4
+%svc% StorSvc 4
 %svc% swenum 4
 %svc% SysMain 4
 %svc% SystemEventsBroker 4
 %svc% tcpipReg 4
 %svc% tdx 4
 %svc% Telemetry 4
+%svc% TextInputManagementService 4
+%svc% Themes 4
 %svc% TimeBrokerSvc 4
 %svc% TrkWks 4
+%svc% UdkUserSvc 4
 %svc% UEFI 4
 %svc% uhssvc 4
 %svc% UnionFS 4
@@ -143,11 +163,13 @@ if /i %c% equ 2 goto :closed
 %svc% vmicvmsession 4
 %svc% vmicvss 4
 %svc% volmgrx 4
+%svc% vsmraid 4
 %svc% W32Time 4
 %svc% WaaSMedicSvc 4
 %svc% wanarp 4
 %svc% wanarpv6 4
 %svc% WarpJITSvc 4
+%svc% wcifs 4
 %svc% WdBoot 4
 %svc% WdFilter 4
 %svc% WdiServiceHost 4
@@ -159,19 +181,13 @@ if /i %c% equ 2 goto :closed
 %svc% WindowsTrustedRT 4
 %svc% WindowsTrustedRTProxy 4
 %svc% WinHttpAutoProxySvc 4 
+%svc% Wof 4
 %svc% WPDBusEnum 4
 %svc% WpnService 4
 %svc% WpnUserService 4
+%svc% wscsvc 4
 %svc% WSearch 4
-%svc% CldFlt 4
-%svc% wcifs 4
-%svc% savdrv 4
-%svc% Wof 4
-%svc% mpsdrv 4
-%svc% bam 4
-%svc% FileCrypt 4
-%svc% rdbss 4
-
+%svc% wtd 4
 :closed
 exit
 
