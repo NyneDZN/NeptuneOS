@@ -1,5 +1,4 @@
 @echo off
-if /i "%~1"=="/disable"         goto disable
 
 title Windows Search toggle script
 cls
