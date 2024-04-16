@@ -59,6 +59,11 @@ C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V PCI Server"
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V Virtual Disk Server"
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V Virtual Machine Bus Provider"
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hypervisor Service"
+C:\Windows\NeptuneDir\Tools\dmv.exe /disable "NDIS Virtual Network Adapter Enumerator"
+C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Remote Desktop Device Redirector Bus"
+
+
 
 :: DISM
 dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart

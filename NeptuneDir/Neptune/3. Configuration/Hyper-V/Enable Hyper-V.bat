@@ -47,6 +47,9 @@ C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V PCI Server"
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtual Disk Server"
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtual Machine Bus Provider"
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hypervisor Service"
+C:\Windows\NeptuneDir\Tools\dmv.exe /enable "NDIS Virtual Network Adapter Enumerator"
+C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Remote Desktop Device Redirector Bus"
 
 :: DISM
 dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
