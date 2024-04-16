@@ -1,25 +1,21 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
 
-:: Check if script is escelated
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-if %errorlevel% neq 0 (
-    echo You are about to be prompted with the UAC. Please click yes when prompted.
-) ELSE (
-    goto admin
+:: Call Administrator
+fltmc >nul 2>&1 || (
+    echo Administrator privileges are required.
+    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
+        echo Right-click on the script and select 'Run as administrator'.
+        pause & exit 1
+    )
+    exit 0
 )
-
-:prompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\prompt.vbs"
-    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\prompt.vbs"
-    "%temp%\prompt.vbs"
-    exit /B
-
-:admin
-:: Delete prompt script
-if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 
 echo.  Disabling the Microsoft System Management BIOS will cause certain applications to misbehave.
+echo]
+echo]
 echo.  GTA 5 will not work.
 
 
@@ -32,8 +28,8 @@ if /i %c% equ 2 goto :disable
 
 :disable
 %WinDir%\neptunedir\tools\dmv.exe /disable "Microsoft System Management BIOS Driver" > nul
-Reg add "HKLM\SYSTEM\CurrentControlSet\Services\mssmbios" /v "Start" /t REG_DWORD /d "4" /f > nul 
+%svcF% mssmbios 4
 
 :enable
 %WinDir%\neptunedir\tools\dmv.exe /enable "Microsoft System Management BIOS Driver" > nul
-Reg add "HKLM\SYSTEM\CurrentControlSet\Services\mssmbios" /v "Start" /t REG_DWORD /d "1" /f > nul 
+%svcF% mssmbios 1
