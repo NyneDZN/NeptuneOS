@@ -40,6 +40,10 @@ echo !S_YELLOW!Enabling Hyper-V
 %svcF% vmicvmsession 3 
 %svcF% vmicvss 3 
 %svcF% vpci 1
+%svcF% rdpbus 3
+%svcF% NdisVirtualBus 3
+
+
 
 :: Hyper-V Devices
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V NT Kernel Integration VSP"

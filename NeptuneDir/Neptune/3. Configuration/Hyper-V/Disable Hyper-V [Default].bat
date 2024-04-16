@@ -51,7 +51,9 @@ cls & echo !S_YELLOW!Disabling Hyper-V
 %svcF% vmictimesync 4 
 %svcF% vmicvmsession 4 
 %svcF% vmicvss 4 
-%svcF% vpci 4 
+%svcF% vpci 4
+%svcF% rdpbus 4
+%svcF% NdisVirtualBus 4
 
 :: Hyper-V Devices
 C:\Windows\NeptuneDir\Tools\dmv.exe /disable "Microsoft Hyper-V NT Kernel Integration VSP"
