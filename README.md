@@ -34,10 +34,9 @@ Please wait for <b>NeptuneOS 0.5</b>
 
 ## About NeptuneOS
 
-NeptuneOS is a tailored version of Windows that prioritizes optimal performance and minimal latency, all while preserving seamless compatibility with standard Windows applications and functions.
-By fine-tuning system settings and configurations, it aims to deliver a superior user experience for those seeking peak performance without sacrificing compatibility.
+NeptuneOS is a open source project, we use batch and powershell scripts that aim to fine-tune Windows for optimal latency when gaming, and compatibility for general use.
 
-This project is a fork of AtlasOS.
+This project is a fork of AtlasOS. We wouldn't be here without them.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
