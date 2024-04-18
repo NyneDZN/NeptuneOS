@@ -15,8 +15,11 @@ mode con: cols=80 lines=30
 title "NeptuneOS Installer | Created by @NyneDZN"
 
 :: PowerShell Variables
-set sudo="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
-set currentuser="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
+set sudo="C:\NeptuneOS-installer\Neptune\PowerRun_x64.exe" /SW:0 /SYS
+set currentuser="C:\NeptuneOS-installer\Neptune\PowerRun_x64.exe" /SW:0
+:: Dev Branch
+set sudoDev="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0 /SYS
+set currentuserDev="C:\NeptuneOS-installer-dev\Neptune\PowerRun_x64.exe" /SW:0
 :: NSUDO Variables
 :: set sudo="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:T -P:E -ShowWindowMode:Hide -Wait
 :: set currentuser="C:\NeptuneOS-installer-dev\Neptune\nsudo.exe" -U:C -ShowWindowMode:Hide -Wait
