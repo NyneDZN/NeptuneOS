@@ -10,7 +10,7 @@ timeout /t 5 /nobreak > nul
 curl -o %neptunemain%neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
-cd "%neptunemain%Neptune" > nul
+cd "%neptunemain%" > nul
 7za x neptune.7z > nul
 del neptune.7z > nul
 :: Change Directory into repository folder
