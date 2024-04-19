@@ -3050,17 +3050,6 @@ takeown /f "smartscreen.exe" >nul
 icacls "%WinDir%\System32\smartscreen.exe" /grant Administrators:F >nul
 ren smartscreen.exe smartscreen.old >nul
 
-:: Delete microcode
-:: Commented out because this is pointless, and will cause issues on 24H2+ Canary.
-:: 	if "%os%"=="Windows 10" (
-:: 	takeown /f C:\Windows\System32\mcupdate_GenuineIntel.dll >nul
-:: 	takeown /f C:\Windows\System32\mcupdate_AuthenticAMD.dll >nul
-:: 	del C:\Windows\System32\mcupdate_GenuineIntel.dll /s /f /q >nul
-:: 	del C:\Windows\System32\mcupdate_AuthenticAMD.dll /s /f /q >nul
-:: )
-
-
-
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
