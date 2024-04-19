@@ -3050,6 +3050,13 @@ takeown /f "smartscreen.exe" >nul
 icacls "%WinDir%\System32\smartscreen.exe" /grant Administrators:F >nul
 ren smartscreen.exe smartscreen.old >nul
 
+:: Remove MobSync
+taskkill /f /im mobsync.exe
+cd %WinDir%\System32 >nul
+takeown /f "mobsync.exe" >nul
+icacls "%WinDir%\System32\mobsync.exe" /grant Administrators:F >nul
+ren mobsync.exe mobsync.old >nul
+
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
