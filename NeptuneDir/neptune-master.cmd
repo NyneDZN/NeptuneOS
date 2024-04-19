@@ -1010,9 +1010,9 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "DisableRemoteScmEndpoints" /
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymousSAM" /t REG_DWORD /d "1" /f >nul
 
 :: Enable UAC
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "1" /f > nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "0" /f > nul 2>&1
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "5" /f > nul 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "1" /f >nul
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "0" /f >nul
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "5" /f >nul
 
 :: Mitigation for CVE-2021-40444 and other future activex related attacks
 :: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40444
@@ -1207,8 +1207,8 @@ Reg add "HKCR\txtfile\shell\printto\command" /ve /t REG_EXPAND_SZ /d "%%SystemRo
 Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" /f >nul 2>&1
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\OpenWithList" /f >nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\OpenWithProgids" /v "txtfile" /t REG_NONE /d "" /f >nul
-Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "Hash" /t REG_SZ /d "hyXk/CpboWw=" /f >nul
-Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "ProgId" /t REG_SZ /d "txtfile" /f >nul
+%system% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "Hash" /t REG_SZ /d "hyXk/CpboWw=" /f >nul
+%system% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "ProgId" /t REG_SZ /d "txtfile" /f >nul
 Reg delete "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt" /f >nul 2>&1
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt\UserChoice" /v "Hash" /t REG_SZ /d "FvJcqeZpmOE=" /f >nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt\UserChoice" /v "ProgId" /t REG_SZ /d "txtfile" /f >nul
@@ -1808,15 +1808,15 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice" /v "LocationSyncEnabled"
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d "1" /f >nul
 
 :: Track only important failure events
-Auditpol /set /subcategory:"Process Termination" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"RPC Events" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"Filtering Platform Connection" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"DPAPI Activity" /success:disable /failure:disable > nul 2>&1
-Auditpol /set /subcategory:"IPsec Driver" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"Other System Events" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"Security State Change" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"Security System Extension" /success:disable /failure:enable > nul 2>&1
-Auditpol /set /subcategory:"System Integrity" /success:disable /failure:enable > nul 2>&1
+Auditpol /set /subcategory:"Process Termination" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"RPC Events" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"Filtering Platform Connection" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"DPAPI Activity" /success:disable /failure:disable >nul
+Auditpol /set /subcategory:"IPsec Driver" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"Other System Events" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"Security State Change" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"Security System Extension" /success:disable /failure:enable >nul
+Auditpol /set /subcategory:"System Integrity" /success:disable /failure:enable >nul
 
 :: Disable Sleep Study
 wevtutil set-log "Microsoft-Windows-SleepStudy/Diagnostic" /e:false >nul
@@ -2367,16 +2367,12 @@ if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul) else 
 
 :: Remove OneDrive Startup Task
 %currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f >nul 2>&1
 
 :: Disable OneDrive Usage
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSyncNGSC" /d 1 /f >nul
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSync" /d 1 /f >nul
 
-:: Remove Telemetry Packages via Cab (he3als, echnobas)
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoTelem.cab" >> %neptlog%
-
-:: Remove Defender Packages via Cab 
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoDefender.cab" >> %neptlog%
 
 :: Remove Residual Files
 setlocal DisableDelayedExpansion
