@@ -853,11 +853,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% uhssvc 4
 %svc% wanarp 4
 %svc% wanarpv6 4
-:: - > Windows Defender Drivers
-%svc% WdBoot 4
-%svc% WdFilter 4
-%svc% WdNisDrv 4
-%svc% MsSecCore 4
+
 
 :: Services
 :: - > Audio is disabled on Server by default
@@ -918,11 +914,6 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 :: Notification services will break the calendar on Windows 11
 :: %svc% WpnService 4
 :: %svc% WpnUserService 4
-:: Windows Defender Services
-%svc% WinDefend 4
-%svc% WdNisSvc 4
-%svc% SecurityHealthService 4
-%svc% Sense 4
 
 :: Backup default NeptuneOS drivers and services
 set BACKUP="%WINDIR%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Neptune Default.reg"
