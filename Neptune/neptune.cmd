@@ -76,7 +76,7 @@ mode con: cols=40 lines=20
 title "Please wait..."
 setlocal EnableDelayedExpansion
 cls & echo !S_YELLOW!This will take a moment.
-echo !S_YELLOW!We are disabling defender and UAC.
+echo !S_YELLOW!We are preparing your system.
 echo]
 echo]
 echo !S_YELLOW!We will restart when this is done.
