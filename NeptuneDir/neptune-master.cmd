@@ -2373,11 +2373,6 @@ if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul) else 
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSyncNGSC" /d 1 /f >nul
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSync" /d 1 /f >nul
 
-:: Remove Telemetry Packages via Cab (he3als, echnobas)
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoTelem.cab" >> %neptlog%
-
-:: Remove Defender Packages via Cab 
-call "%WinDir%\Scripts\online-sxs.cmd" "%WinDir\NeptuneDir\Packages\NoDefender.cab" >> %neptlog%
 
 :: Remove Residual Files
 setlocal DisableDelayedExpansion
