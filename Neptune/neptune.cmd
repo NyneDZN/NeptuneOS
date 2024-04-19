@@ -113,7 +113,7 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 
 :: Disable Defender via Cab
 cd %neptunemain%
-start "" "online-sxs.cmd" NoDefender.cab -Silent >nul
+call "online-sxs.cmd" NoDefender.cab -Silent
 
 :: RunOnce Neptune2
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "%neptmain%neptune2.cmd" /f > nul
