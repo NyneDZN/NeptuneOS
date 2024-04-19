@@ -115,6 +115,9 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 cd %neptunemain%
 call "online-sxs.cmd" NoDefender.cab -Silent
 
+:: Remove Security Tray Startup
+%WinDir%\System32\Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f > nul
+
 :: RunOnce Neptune2
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "%neptunemain%neptune2.cmd" /f > nul
 
