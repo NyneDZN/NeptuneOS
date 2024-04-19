@@ -3043,6 +3043,12 @@ if "%os%"=="Windows 10" (
 	ren TextInputHost.exe TextInputHost.old >nul
 )
 
+:: Rename SmartScreen
+taskkill /f /im smartscreen.exe
+cd %WinDir%\System32 >nul
+takeown /f "smartscreen.exe" >nul
+icacls "%WinDir%\System32\smartscreen.exe" /grant Administrators:F >nul
+ren smartscreen.exe smartscreen.old >nul
 
 :: Delete microcode
 :: Commented out because this is pointless, and will cause issues on 24H2+ Canary.
