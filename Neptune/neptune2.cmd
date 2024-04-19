@@ -6,6 +6,7 @@ set neptunemain=C:\NeptuneOS-installer\Neptune\
 set neptunedev=C:\NeptuneOS-installer-dev\Neptune\
 
 echo Downloading NeptuneOS...
+timeout /t 5 /nobreak > nul
 curl -o %neptunemain%neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
@@ -29,4 +30,4 @@ del /q /f "%USERPROFILE%Desktop\neptune_dev.cmd" > nul
 :: Install Neptune
 cls & echo Opening Installer...
 timeout /t 2 > nul
-start "" "C:\Windows\NeptuneDir\neptune-master.cmd" /postinstall /devbuild
+start "" "C:\Windows\NeptuneDir\neptune-master.cmd" /postinstall
