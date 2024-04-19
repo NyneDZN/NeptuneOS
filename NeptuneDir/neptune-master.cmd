@@ -3094,7 +3094,7 @@ move "%WinDir%\NeptuneDir\Scripts\activate.cmd" %WinDir%
 %delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\RefreshEnv.cmd" >nul
-%delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" >nul
+:: %delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD" >nul
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul
 rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul
