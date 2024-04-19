@@ -5,6 +5,7 @@ mode con: cols=40 lines=20
 set neptunemain=C:\NeptuneOS-installer\Neptune\
 set neptunedev=C:\NeptuneOS-installer-dev\Neptune\
 
+timeout /t 10 /nobreak >nul
 echo Downloading NeptuneOS...
 curl -o %neptmain%Neptune\neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
