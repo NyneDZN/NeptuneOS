@@ -6,7 +6,7 @@ set neptunemain=C:\NeptuneOS-installer\Neptune\
 set neptunedev=C:\NeptuneOS-installer-dev\Neptune\
 
 echo Downloading NeptuneOS...
-curl -o %neptunemain%Neptune\neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
+curl -o %neptunemain%neptune.7z -L -s https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/main.zip
 cls & echo Initializing Installer...
 :: Extract and Delete .7z
 cd "%neptunemain%Neptune" > nul
