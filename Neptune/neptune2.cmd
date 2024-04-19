@@ -18,7 +18,7 @@ cd "%neptunemain%NeptuneOS-main" > nul
 :: Move Neptune Modules to WinDir
 move NeptuneDir %WinDir% > nul
 :: Move Desktop Shortcut to USERS Desktop
-move "%nepunemain%NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desktop" > nul
+move "%neptunemain%NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desktop" > nul
 :: Move Neptune Utilities to WinDir
 for %%a in (layout.xml, regjump.exe, serviwin.exe) do (move "%%a" "%WinDir%")
 :: Move Neptune Wallpapers
@@ -30,4 +30,4 @@ del /q /f "%USERPROFILE%Desktop\neptune_dev.cmd" > nul
 :: Install Neptune
 cls & echo Opening Installer...
 timeout /t 2 > nul
-start "" "C:\Windows\NeptuneDir\neptune-master.cmd" /postinstall
+start "" "%WinDir%\NeptuneDir\neptune-master.cmd" /postinstall
