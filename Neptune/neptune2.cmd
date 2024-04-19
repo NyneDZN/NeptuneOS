@@ -22,9 +22,9 @@ move "%neptunemain%NeptuneOS-main\Desktop\Neptune.lnk" "C:\Users\%USERNAME%\Desk
 :: Move Neptune Utilities to WinDir
 for %%a in (layout.xml, regjump.exe, serviwin.exe) do (move "%%a" "%WinDir%")
 :: Move Neptune Wallpapers
-takeown /f "C:\Windows\Web" /r && icacls C:\Windows\Web\ /grant administrators:F /T && rmdir /s /q "C:\Windows\Web" && move "%neptunemain%Neptune\NeptuneOS-main\Web" "%WinDir%" > nul
+takeown /f "C:\Windows\Web" /r && icacls C:\Windows\Web\ /grant administrators:F /T && rmdir /s /q "C:\Windows\Web" && move "%neptunemain%NeptuneOS-main\Web" "%WinDir%" > nul
 :: Move Neptune Account Icons
-takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r && icacls "C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T && rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" && move "%neptunemain%Neptune\NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" > nul
+takeown /f "C:\ProgramData\Microsoft\User Account Pictures" /r && icacls "C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T && rmdir /s /q "C:\ProgramData\Microsoft\User Account Pictures" && move "%neptunemain%NeptuneOS-main\ProgramData\Microsoft\User Account Pictures" "C:\ProgramData\Microsoft" > nul
 :: Delete the initial batch file
 del /q /f "%USERPROFILE%Desktop\neptune_dev.cmd" > nul
 :: Install Neptune
