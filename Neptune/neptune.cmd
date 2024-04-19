@@ -119,8 +119,7 @@ call "online-sxs.cmd" NoDefender.cab -Silent
 %WinDir%\System32\Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Neptune" /t REG_SZ /d "%neptunemain%neptune2.cmd" /f > nul
 
 :: Finalize
-echo Restarting...
-pause
+cls & echo Restarting...
 timeout /t 1 > nul
 shutdown /f /r /t 0
 exit /b
