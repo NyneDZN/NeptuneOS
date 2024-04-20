@@ -106,7 +106,6 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 :: Remove OneDrive
 if exist "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" (taskkill /f /im OneDrive.exe >nul 2>&1)
 if exist "C:\" ("%WINDIR%\System32\OneDriveSetup.exe" /uninstall >nul 2>&1) else ("%WINDIR%\SysWOW64\OneDriveSetup.exe" /uninstall >nul 2>&1) 
-%WinDir%\System32\Reg.exe delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>&1
 
 :: Remove Azure Arc Setup from Startup on Servers
 if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.lnk" (%WinDir%\System32\Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "AzureArcSetup" /f >nul 2>&1)
@@ -114,6 +113,9 @@ if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Server Manager.ln
 :: Disable Defender via Cab
 cd %neptunemain%
 call "online-sxs.cmd" NoDefender.cab -Silent
+
+:: Disable Telemetry Packages via Cab
+call "online-sxs.cmd" NoTelemetry.cab -Silent
 
 :: Remove Security Tray Startup
 %WinDir%\System32\Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f > nul
