@@ -3099,7 +3099,6 @@ move "%WinDir%\NeptuneDir\Scripts\activate.cmd" %WinDir%
 :: %delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD" >nul
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul
-rmdir /s /q "%WinDir%\NeptuneDir\Packages" >nul
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration") >nul
 if "%server%"=="yes" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11") >nul
 if "%os%"=="Windows 10" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Optional\Windows 11") >nul
