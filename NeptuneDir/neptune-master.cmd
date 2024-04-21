@@ -490,7 +490,6 @@ cls & echo !S_YELLOW!Configuring Devices and MSI Mode [7/18]
 %DevMan% /disable "High precision event timer" >nul
 %DevMan% /disable "Legacy device" >nul
 %DevMan% /disable "Microsoft GS Wavetable Synth" >nul
-%DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul
 %DevMan% /disable "Microsoft Kernel Debug Network Adapter" >nul
 %DevMan% /disable "Motherboard resources" >nul
 %DevMan% /disable "Numeric data processor" >nul
@@ -501,7 +500,6 @@ cls & echo !S_YELLOW!Configuring Devices and MSI Mode [7/18]
 %DevMan% /disable "PCI Simple Communications Controller" >nul
 %DevMan% /disable "PCI standard RAM Controller" >nul
 %DevMan% /disable "Programmable interrupt controller" >nul
-%DevMan% /disable "Remote Desktop Device Redirector Bus" >nul
 %DevMan% /disable "SM Bus Controller"
 %DevMan% /disable "System board" >nul
 %DevMan% /disable "System CMOS/real time clock" >nul
@@ -509,6 +507,10 @@ cls & echo !S_YELLOW!Configuring Devices and MSI Mode [7/18]
 %DevMan% /disable "System Timer" >nul
 %DevMan% /disable "UMBus Root Bus Enumerator" >nul
 %DevMan% /disable "Unknown device" >nul
+
+:: Hyper-V
+%DevMan% /disable "Microsoft Hyper-V Virtualization Infrastructure Driver" >nul
+%DevMan% /disable "Remote Desktop Device Redirector Bus" >nul
 
 :: VPN Devices
 %DevMan% /disable "Microsoft RRAS Root Enumerator" >nul
