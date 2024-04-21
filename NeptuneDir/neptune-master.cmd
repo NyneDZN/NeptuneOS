@@ -3014,6 +3014,7 @@ setlocal EnableDelayedExpansion
 
 if "%os%"=="Windows 10" (
 cls & echo !S_YELLOW!Installing Open Shell... [17/18]
+:: Disable windows search and start menu on Windows 10
 "%WinDir%\NeptuneDir\Prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu >nul
 
 cls & echo !S_YELLOW!Configuring Open Shell
@@ -3036,35 +3037,33 @@ cls & echo !S_YELLOW!Configuring Open Shell
 %currentuser% Reg add "HKCU\Software\OpenShell\StartMenu\Settings" /v "FontSmoothing" /t REG_SZ /d "Default" /f >nul
 move "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell\Open-Shell Menu Settings.lnk" "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" >nul
 rmdir /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Open-Shell" >nul
+
+:: Disable default start menu
+cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul
+takeown /f "StartMenuExperienceHost.exe" >nul
+icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul
+ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul
+taskkill /f /im searchapp.exe >nul
+taskkill /f /im SearchHost.exe >nul
+taskkill /f /im StartMenuExperienceHost.exe >nul
+cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul
+takeown /f "searchapp.exe" >nul
+icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul
+ren searchapp.exe searchapp.old >nul
+cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul
+takeown /f "SearchHost.exe" >nul
+ren SearchHost.exe SearchHost.old >nul
+taskkill /f /im TextInputHost.exe
+takeown /f "TextInputHost.exe" >nul
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul
+ren TextInputHost.exe TextInputHost.old >nul
 )
 goto PartingPhase
 
 
 :PartingPhase
 cls & echo !S_YELLOW!Finalizing Setup 
-:: Disable windows search and start menu on Windows 10
-if "%os%"=="Windows 10" (
-	ren SearchHost.exe SearchHost.old >nul
-	cd C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy >nul
-	takeown /f "StartMenuExperienceHost.exe" >nul
-	icacls "C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /grant Administrators:F >nul
-	ren StartMenuExperienceHost.exe StartMenuExperienceHost.old >nul
-	taskkill /f /im searchapp.exe >nul
-	taskkill /f /im SearchHost.exe >nul
-	taskkill /f /im StartMenuExperienceHost.exe >nul
-	cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy >nul
-	takeown /f "searchapp.exe" >nul
-	icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F >nul
-	ren searchapp.exe searchapp.old >nul
-	cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy >nul
-	icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F >nul
-	takeown /f "SearchHost.exe" >nul
-	taskkill /f /im TextInputHost.exe
-	takeown /f "TextInputHost.exe" >nul
-	icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /grant Administrators:F >nul
-	ren TextInputHost.exe TextInputHost.old >nul
-)
-
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
 
