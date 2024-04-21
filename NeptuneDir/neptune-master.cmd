@@ -460,7 +460,8 @@ bcdedit /timeout 15 >nul
 :: bcdedit /set ems no >nul
 :: bcdedit /set bootems no >nul
 :: Disable Kernel Debugging
-bcdedit /set debug no >nul
+:: Unable to disable with secure boot enabled
+:: bcdedit /set debug no >nul
 :: Stop using uncontiguous portions of low-memory
 :: https://sites.google.com/view/melodystweaks/basictweaks
 :: bcdedit /set firstmegabytepolicy useall >nul
