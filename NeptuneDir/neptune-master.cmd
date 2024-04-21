@@ -3088,7 +3088,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Supp
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "Finalization" /t REG_SZ /d "%WinDir%\NeptuneDir\Scripts\FINAL.cmd" /f >nul
 
 :: Move activate.cmd to %WinDir%
-move "%WinDir%\NeptuneDir\Scripts\activate.cmd" %WinDir%
+move "%WinDir%\NeptuneDir\Scripts\activate.cmd" "%WinDir%"
 
 :: Delete neptune setup files
 %delF% "%WinDir%\NeptuneDir\lockscreen.png" >nul
