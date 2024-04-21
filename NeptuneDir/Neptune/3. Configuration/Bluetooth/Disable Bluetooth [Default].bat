@@ -1,15 +1,31 @@
 @echo off
-sc config RFCOMM start=disabled
-sc config BthEnum start=disabled
-sc config bthleenum start=disabled
-sc config BTHMODEM start=disabled
-sc config BthA2dp start=disabled
-sc config microsoft_bluetooth_avrcptransport start=disabled
-sc config BthHFEnum start=disabled
-sc config BTAGService start=disabled
-sc config bthserv start=disabled
-sc config BluetoothUserService start=disabled
-sc config BthAvctpSvc start=disabled
-cls
-echo Bluetooh disabled. Please reboot.
-pause
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
+
+:: Call Administrator
+fltmc >nul 2>&1 || (
+    echo Administrator privileges are required.
+    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
+        echo Right-click on the script and select 'Run as administrator'.
+        pause & exit 1
+    )
+    exit 0
+)
+
+%svcF% RFCOMM 4
+%svcF% BthEnum 4
+%svcF% bthleenum 4
+%svcF% BTHMODEM 4
+%svcF% BthA2dp 4
+%svcF% microsoft_bluetooth_avrcptransport 4
+%svcF% BthHFEnum 4
+%svcF% BTAGService 4
+%svcF% bthserv 4
+%svcF% BluetoothUserService 4
+%svcF% BthAvctpSvc 4
+Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t Reg_SZ /d "Deny" /f >nul
+
+
+cls & echo !S_YELLOW!Bluetooth has been disabled. Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
+exit
