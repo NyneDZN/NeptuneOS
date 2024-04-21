@@ -370,6 +370,8 @@ goto TaskConfiguration
 cls & echo !S_YELLOW!Configuring Scheduled Tasks [5/18]
 
 for %%a in (
+"\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319"
+"\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64"
 "\Microsoft\Windows\Application Experience\PcaPatchDbTask"
 "\Microsoft\Windows\Application Experience\StartupAppTask"
 "\Microsoft\Windows\ApplicationData\appuriverifierdaily"
