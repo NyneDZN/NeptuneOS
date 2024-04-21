@@ -2353,6 +2353,28 @@ Microsoft.WindowsNotepad
 :: Prevent Microsoft Teams reinstallation
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >nul
 
+:: UWP Immersive Control Panel Debloat
+Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
+
+:: Remove Header in Immersive Control Panel
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" /grant Administrators:F >nul
+takeown /f "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
+%delF% /f /q "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul
+
+:: Rename SmartScreen
+taskkill /f /im smartscreen.exe
+cd %WinDir%\System32 >nul
+takeown /f "smartscreen.exe" >nul
+icacls "%WinDir%\System32\smartscreen.exe" /grant Administrators:F >nul
+ren smartscreen.exe smartscreen.old >nul
+
+:: Remove MobSync
+taskkill /f /im mobsync.exe
+cd %WinDir%\System32 >nul
+takeown /f "mobsync.exe" >nul
+icacls "%WinDir%\System32\mobsync.exe" /grant Administrators:F >nul
+ren mobsync.exe mobsync.old >nul
+
 :: Remove OneDrive
 if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >nul) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall >nul)
 
@@ -3043,30 +3065,8 @@ if "%os%"=="Windows 10" (
 	ren TextInputHost.exe TextInputHost.old >nul
 )
 
-:: Rename SmartScreen
-taskkill /f /im smartscreen.exe
-cd %WinDir%\System32 >nul
-takeown /f "smartscreen.exe" >nul
-icacls "%WinDir%\System32\smartscreen.exe" /grant Administrators:F >nul
-ren smartscreen.exe smartscreen.old >nul
-
-:: Remove MobSync
-taskkill /f /im mobsync.exe
-cd %WinDir%\System32 >nul
-takeown /f "mobsync.exe" >nul
-icacls "%WinDir%\System32\mobsync.exe" /grant Administrators:F >nul
-ren mobsync.exe mobsync.old >nul
-
 :: Set Lockscreen
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1"
-
-:: UWP Immersive Control Panel Debloat
-Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1"
-
-:: Remove Header in Immersive Control Panel
-icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" /grant Administrators:F >nul
-takeown /f "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul 
-%delF% /f /q "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SystemSettingsExtensions.dll" >nul
 
 :: Remove Start Menu Pins
 copy /y "%WinDir%\Layout.xml" "%userProfile%\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" >nul
@@ -3092,11 +3092,13 @@ move "%WinDir%\NeptuneDir\Scripts\activate.cmd" "%WinDir%"
 
 :: Delete neptune setup files
 %delF% "%WinDir%\NeptuneDir\lockscreen.png" >nul
-%delF% "%WinDir%\NeptuneDir\user.png" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\CLIENTCBS.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\lockscreen.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\NGEN.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\Scripts\online-sxs.cmd" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\RefreshEnv.cmd" >nul
-:: %delF% "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" >nul
+%delF% "%WinDir%\NeptuneDir\user.png" >nul
 %delF% "%WinDir%\NeptuneDir\Scripts\STARTMENU.CMD" >nul
 rmdir /s /q "%WinDir%\NeptuneDir\Prerequisites" >nul
 if "%server%"=="no" (rmdir /s /q "%WinDir%\NeptuneDir\Neptune\Server Configuration") >nul
