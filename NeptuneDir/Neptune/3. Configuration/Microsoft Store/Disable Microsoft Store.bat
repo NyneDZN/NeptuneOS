@@ -1,4 +1,6 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
@@ -10,22 +12,25 @@ fltmc >nul 2>&1 || (
     exit 0
 )
 
-
-echo Disabling the store will also break Xbox app functionality, press any key if you still want to continue.
+echo !S_YELLOW!Disabling the store will also break Xbox app functionality, press any key if you still want to continue.
 pause>nul
-
-:: Disabling Microsoft Store
-sc config InstallService start=disabled
-sc config wlidsvc start=disabled
-sc config AppXSvc start=disabled
-sc config BFE start=disabled
-sc config TokenBroker start=disabled
-sc config LicenseManager start=disabled
-sc config AppXSVC start=disabled
-sc config ClipSVC start=disabled
-sc config FileInfo start=disabled
-sc config FileCrypt start=disabled
-sc config usosvc start=disabled
+:: Enable Microsoft Store
+%svcF% AppXSvc 4
+%svcF% ClipSVC 4
+%svcF% FileCrypt 4
+%svcF% FileInfo 4
+%svcF% InstallService 4
+%svcF% LicenseManager 4
+%svcF% TokenBroker 4
+%svcF% usosvc 4
+%svcF% WinHttpAutoProxySvc 4
+%svcF% wlidsvc 4
+%svcF% wuauserv 4
 cls
-echo The store has been disabled. Please restart.
-pause
+
+:: Echo to Log
+Echo Microsoft Store was disabled >> %neptlog%
+:: Echo to User
+echo The Microsoft Store has been disabled. Please restart.
+timeout /t 3 /nobreak >nul
+exit

@@ -1,4 +1,5 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 setlocal EnableDelayedExpansion
 
 :: Call Administrator
@@ -24,6 +25,6 @@ Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "L
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d "0" /f >nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "3" /f >nul
 
-echo Disabled Animations. Restart your device to apply the changes.
-pause
-exit /b
+echo !S_YELLOW!Disabled Animations. Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
+exit

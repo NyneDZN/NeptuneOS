@@ -42,6 +42,7 @@ if "%userinput%"=="off" goto Disable
 
 :Enable
 echo]
+Reg.exe add "HKLM\System\CurrentControlSet\Services\mpsdrv" /v "Start" /t REG_DWORD /d "3" /f > nul
 Reg.exe add "HKLM\System\CurrentControlSet\Services\mpssvc" /v "Start" /t REG_DWORD /d "2" /f > nul
 Reg.exe add "HKLM\System\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "2" /f > nul
 cls & echo  !S_YELLOW!Firewall Enabled
@@ -52,6 +53,7 @@ exit /b
 
 :Disable
 echo]
+Reg.exe add "HKLM\System\CurrentControlSet\Services\mpsdrv" /v "Start" /t REG_DWORD /d "4" /f > nul
 Reg.exe add "HKLM\System\CurrentControlSet\Services\mpssvc" /v "Start" /t REG_DWORD /d "4" /f > nul
 Reg.exe add "HKLM\System\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "4" /f > nul
 cls & echo  !S_YELLOW!Firewall Disabled
