@@ -26,8 +26,8 @@ fltmc >nul 2>&1 || (
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t Reg_SZ /d "Deny" /f >nul
 
 :: Echo to Log
-echo Bluetooth was disabled >> %neptlog%
+echo %date% %time% Disabled Bluetooth >> %userlog%
 :: Echo to User
-cls & echo !S_YELLOW!Bluetooth has been disabled. Restart your device to apply the changes.
+echo !S_YELLOW!Disabled Bluetooth. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
 exit

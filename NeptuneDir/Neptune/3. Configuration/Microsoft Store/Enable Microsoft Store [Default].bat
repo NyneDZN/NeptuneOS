@@ -32,8 +32,8 @@ cls
 
 
 :: Echo to Log
-Echo Microsoft Store and Firewall were enabled >> %neptlog%
+Echo Microsoft Store and Firewall were enabled >> %userlog%
 :: Echo to User
-echo The Microsoft Store and Firewall have been enabled. Please restart.
+echo The Microsoft Store and Firewall have been enabled. Please restart your device.
 timeout /t 3 /nobreak >nul
 exit

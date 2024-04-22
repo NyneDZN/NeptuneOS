@@ -49,10 +49,12 @@ cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 :: Fullsceen Script
 %currentuser% "%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\FullScreenCMD.vbs"
 
-:: Create Log File
+:: Create Log Files (neptune.txt, user.txt)
 echo This log is completely local and is not uploaded anywhere. >> %neptlog%
 echo --------------------------------------------------------- >> %neptlog%
 echo %time% %date% Started neptune-master.cmd. >> %neptlog%
+echo This log is completely local and is not uploaded anywhere. >> %userlog%
+echo --------------------------------------------------------- >> %userlog%
 
 :: Fetch PC Type
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
@@ -898,14 +900,16 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 %svc% Spooler 4
 %svc% SgrmBroker 4
 %svc% SysMain 4
-%svc% vmicguestinterface 4
-%svc% vmicheartbeat 4
-%svc% vmickvpexchange 4
-%svc% vmicrdv 4
-%svc% vmicshutdown 4
-%svc% vmictimesync 4
-%svc% vmicvmsession 4
-%svc% vmicvss 4
+:: Hyper-V
+:: Don't disable these by defauit so Neptune in HPV works properly
+:: %svc% vmicguestinterface 4
+:: %svc% vmicheartbeat 4
+:: %svc% vmickvpexchange 4
+:: %svc% vmicrdv 4
+:: %svc% vmicshutdown 4
+:: %svc% vmictimesync 4
+:: %svc% vmicvmsession 4
+:: %svc% vmicvss 4
 %svc% W32Time 4
 %svc% WaaSMedicSvc 4
 %svc% WarpJITSvc 4

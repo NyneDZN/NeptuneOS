@@ -25,6 +25,7 @@ if defined DNS2 call:isValidIP %DNS2%
 :: EXIT PROGRAM IF AN IP IS INVALID
 if defined _notValidIP (
 	echo Setting a static IP failed.
+	echo %date% %time% Failed to set a Static IP >> %userlog%
 	pause
 	exit /b 1
 )
@@ -44,6 +45,7 @@ echo.
 netsh int ipv4 set address name="%INTERFACE%" static %IP% %MASK% %GATEWAY% >nul 2>&1
 netsh int ipv4 set dns name="%INTERFACE%" static %DNS1% primary >nul 2>&1
 if defined DNS2 netsh int ipv4 add dns name="%INTERFACE%" %DNS2% index=2 >nul 2>&1
+echo %date% %time% Set Static IP >> %userlog%
 
 :: CHECK DHCP STATUS
 for /f "tokens=3 delims=: " %%i in ('netsh int ip show config name^="%INTERFACE%" ^| findstr "DHCP" ^| findstr [a-z]') do set DHCP=%%i
@@ -51,6 +53,7 @@ for /f "tokens=3 delims=: " %%i in ('netsh int ip show config name^="%INTERFACE%
 :: RESTART NETWORK ADAPTER
 if "%DHCP%"=="Yes" (
 	echo Setting a static IP failed.
+	echo %date% %time% Failed to set a Static IP >> %userlog%
 	pause
 	exit /b 2
 ) else (

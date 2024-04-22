@@ -26,8 +26,8 @@ fltmc >nul 2>&1 || (
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t Reg_SZ /d "Allow" /f >nul
 
 :: Echo to Log
-echo Bluetooth was enabled >> %neptlog%
+echo %date% %time% Enabled Bluetooth >> %userlog%
 :: Echo to User
-cls & echo !S_YELLOW!Bluetooth has been enabled. Restart your device to apply the changes.
+echo !S_YELLOW!Enabled Bluetooth. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
 exit

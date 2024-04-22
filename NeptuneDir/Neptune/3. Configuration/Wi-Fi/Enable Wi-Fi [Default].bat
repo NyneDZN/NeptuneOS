@@ -1,4 +1,6 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if %errorlevel% neq 0 (
@@ -18,12 +20,12 @@ if %errorlevel% neq 0 (
 if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 :: Enabling Wi-Fi
-sc config netprofm start=demand
-sc config NlaSvc start=auto
-sc config WlanSvc start=demand
-sc config vwififlt start=system
-sc config WlanSvc start=auto
-sc config eventlog start=auto
-cls
-echo WiFi enabled. Please reboot.
-pause
+%svcF% WlanSvc 3
+%svcF% vwififlt 1
+
+:: Echo to Log
+echo %date% %time% Enabled Wi-Fi >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Wi-Fi has been Enabled. Please restart your device.
+timeout /t 3 /nobreak >nul
+exit

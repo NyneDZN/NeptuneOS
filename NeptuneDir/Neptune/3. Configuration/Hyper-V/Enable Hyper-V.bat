@@ -87,11 +87,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorE
 
 
 
-cls
 :: Echo to Log
-echo Hyper-V was enabled >> %neptlog%
+echo %date% %time% Enabled Hyper-V >> %userlog%
 :: Echo to User
-echo !S_YELLOW!Hyper-V enabled. Please reboot.
-timeout /t 3 >nul
+echo !S_YELLOW!Enabled Hyper-V. Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
 exit
-

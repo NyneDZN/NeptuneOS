@@ -1,4 +1,6 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
 
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -20,8 +22,12 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 
 
 :: Disabling Wi-Fi
-sc config WlanSvc start=disabled
-sc config vwififlt start=disabled
-cls
-echo WiFi disabled. Please reboot.
-pause
+%svcF% WlanSvc 4
+%svcF% vwififlt 4
+
+:: Echo to Log
+echo %date% %time% Disabled Wi-Fi >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Wi-Fi has been disabled. Please restart your device.
+timeout /t 3 /nobreak >nul
+exit

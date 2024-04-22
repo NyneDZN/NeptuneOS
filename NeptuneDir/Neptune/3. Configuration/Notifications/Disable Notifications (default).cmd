@@ -17,5 +17,9 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "T
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f > nul 2>&1
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Deny" /f > nul 2>&1
 
-echo Disabled Notifications. Restart your device to apply the changes.
+:: Echo to Log
+echo %date% %time% Disabled Notifications >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Disabled Notifications. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
+exit

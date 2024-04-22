@@ -22,5 +22,9 @@ fltmc >nul 2>&1 || (
 %svcF% Qwave 3
 %svcF% FontCache 2
 
-echo Enabled Oculus VR. Reboot your device to apply the changes.
+:: Echo to Log
+echo %date% %time% Enabled Oculus VR >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Enabled Oculus VR. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
+exit

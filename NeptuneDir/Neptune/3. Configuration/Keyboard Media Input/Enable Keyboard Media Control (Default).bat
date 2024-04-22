@@ -14,8 +14,8 @@ fltmc >nul 2>&1 || (
 %svcF% hidserv 2
 
 :: Echo to Log
-echo Keyboard Media Control was enabled >> %neptlog%
+echo %date% %time% Enabled Keyboard Media Input >> %userlog%
 :: Echo to User
-echo !S_YELLOW!Keyboard Media Control has been enabled, you may have to restart your PC for changes to apply.
+echo !S_YELLOW!Enabled Keyboard Media Input. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
 exit

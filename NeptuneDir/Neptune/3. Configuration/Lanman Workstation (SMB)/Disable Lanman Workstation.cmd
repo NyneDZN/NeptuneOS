@@ -31,12 +31,11 @@ Reg add "HKLM\System\CurrentControlSet\Services\LanmanWorkstation" /v "Start" /t
 dism /Online /Disable-Feature /FeatureName:SmbDirect /norestart
 
 
-cls
 :: Echo to Log
-echo Lanman Workstation (SMB) was disabled >> %neptlog%
+echo %date% %time% Disabled Lanman Workstation (SMB) >> %userlog%
 :: Echo to User
-echo !S_YELLOW!Lanman Workstation (SMB) disabled. Please reboot.
-timeout /t 3 >nul
+echo !S_YELLOW!Disabled Lanman Workstation (SMB). Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
 exit
 
 

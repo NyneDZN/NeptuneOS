@@ -92,12 +92,11 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequireMicrosoft
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "WasEnabledBy" /t REG_DWORD /d "0" /f > nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f > nul
 
-cls
 :: Echo to Log
-echo Hyper-V was disabled >> %neptlog%
+echo %date% %time% Disabled Hyper-V >> %userlog%
 :: Echo to User
-echo !S_YELLOW!Hyper-V disabled. Please reboot.
-timeout /t 3 >nul
+echo !S_YELLOW!Disabled Hyper-V. Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
 exit
 
 

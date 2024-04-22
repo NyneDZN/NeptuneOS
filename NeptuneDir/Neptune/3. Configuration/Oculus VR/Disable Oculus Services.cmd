@@ -16,5 +16,9 @@ fltmc >nul 2>&1 || (
 %svcF% Qwave 4
 %svcF% FontCache 4
 
-echo Disabled Oculus VR. Reboot your device to apply the changes.
+:: Echo to Log
+echo %date% %time% Disabled Oculus VR >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Disabled Oculus VR. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
+exit

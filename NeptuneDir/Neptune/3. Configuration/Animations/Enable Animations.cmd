@@ -17,6 +17,10 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "1" /f > nul
 reg add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e078012000000" /f > nul
 
+
+:: Echo to Log
+echo %date% %time% Enabled Animations >> %userlog%
+:: Echo to User
 echo !S_YELLOW!Enabled Animations. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
 exit

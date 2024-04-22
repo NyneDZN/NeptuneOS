@@ -1,4 +1,6 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
 
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -28,3 +30,10 @@ cd "C:\Program Files\Open-Shell"
 start StartMenu.exe
 cd %windir%
 start explorer.exe
+
+:: Echo to Log
+echo %date% %time% Enabled OpenShell >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Open-Shell has been enabled.
+timeout /t 3 /nobreak >nul
+exit

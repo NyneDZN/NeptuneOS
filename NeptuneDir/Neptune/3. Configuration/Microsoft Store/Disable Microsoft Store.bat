@@ -29,8 +29,8 @@ pause>nul
 cls
 
 :: Echo to Log
-Echo Microsoft Store was disabled >> %neptlog%
+echo %date% %time% Microsoft Store disabled. >> %userlog%
 :: Echo to User
-echo The Microsoft Store has been disabled. Please restart.
+echo !S_YELLOW!Disabled Microsoft Store. Restart your device to apply the changes.
 timeout /t 3 /nobreak >nul
 exit
