@@ -125,6 +125,12 @@ exit
 :: killing explorer
 taskkill /f /im explorer.exe >> %neptlog%
 
+:: echo to user
+echo !S_YELLOW!Beginning NeptuneOS !S_RED!%version% !S_YELLOW!Installation.
+echo]
+echo !S_YELLOW!Please ignore any errors you may see in this script, and report any issues to our Discord Server, or GitHub.
+timeout /t 7 /nobreak >nul
+
 :: ngen, from atlas
 Powershell -ExecutionPolicy Unrestricted "C:\Windows\NeptuneDir\Scripts\NGEN.ps1"
 
@@ -3120,8 +3126,8 @@ if exist "%userprofile%\Desktop\neptune-installer.cmd" (%delF% "%userprofile%\De
 
 echo %time% %date% Finished neptune-master.cmd >> %neptlog%
 echo --------------------------------- >> %neptlog%
-echo !S_GRAY!We're finished, rebooting in a moment.
-timeout /t 4 /nobreak >> %neptlog%
+cls & echo !S_RED!We're finished, rebooting in a moment.
+timeout /t 4 /nobreak >nul
 shutdown /f /r /t 0 & del "%~f0"
 
 
