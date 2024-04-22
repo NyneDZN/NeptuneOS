@@ -25,7 +25,7 @@ if %___edge%==0 (
 )
 
 echo]
-set "___ps=powershell -nop -noni -c "^& """%windir%\NeptuneDir\Scripts\RemoveEdge.ps1""" -NonInteractive -InstallWebView"
+set "___ps=powershell -nop -noni -ep bypass -c "^& """%windir%\NeptuneDir\Scripts\RemoveEdge.ps1""" -NonInteractive -InstallWebView"
 if %___edge%==0 (
 	%___ps% -InstallEdge"
 ) else (
