@@ -51,6 +51,7 @@ cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 :: Create Log File
 echo %time% %date% Started neptune-master.cmd. >> %neptlog%
+echo This log is completely local and is not uploaded anywhere. >> %neptlog%
 
 :: Fetch PC Type
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
