@@ -1057,7 +1057,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "RestrictAnonymous" /t RE
 bcdedit /set allowedinmemorysettings 0x0 >> %neptlog%
 
 :: Delete Adobe Font Type Manager
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >> %neptlog% 
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v "DisableATMFD" /t REG_DWORD /d "1" /f >> %neptlog%
 
 :: Disable DMA Remapping
@@ -1105,7 +1105,7 @@ rundll32.exe fthsvc.dll,FthSysprepSpecialize
 
 :: Disable SmartScreen
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t Reg_DWORD /d "0" /f >> %neptlog%
-Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f >> %neptlog% 
 
 :: Disable Lockscreen Security on Servers
 if "%server%"=="yes" (Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "disablecad" /t REG_DWORD /d "1" /f >> %neptlog%)
@@ -1179,30 +1179,30 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM" /v "DisallowComposition" 
 :: - > Disable wide Context Menus
 Reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\FlightedFeatures" /v "ImmersiveContextMenu" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Remove 'restore previous versions' from Context Menus and File Properties
-Reg delete "HKCR\AllFilesystemObjects\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Directory\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Drive\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "NoPreviousVersionsPage" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\SOFTWARE\Policies\Microsoft\PreviousVersions" /v "DisableLocalPage" /f >> %neptlog% 2>&1
+Reg delete "HKCR\AllFilesystemObjects\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\Directory\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\Drive\shellex\PropertySheetHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\CLSID\{450D8FBA-AD25-11D0-98A8-0800361B1103}\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\{596AB062-B4D2-4215-9F74-E9109B0A8153}" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "NoPreviousVersionsPage" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\SOFTWARE\Policies\Microsoft\PreviousVersions" /v "DisableLocalPage" /f >> %neptlog% 
 :: - Restore 'new text file' in Context Menus
-Reg delete "HKCR\.txt\ShellNew" /f >> %neptlog% 2>&1
+Reg delete "HKCR\.txt\ShellNew" /f >> %neptlog% 
 Reg add "HKCR\.txt\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "@%%SystemRoot%%\system32\notepad.exe,-470" /f >> %neptlog%
 Reg add "HKCR\.txt\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >> %neptlog%
-Reg delete "HKCR\.txt" /f >> %neptlog% 2>&1
+Reg delete "HKCR\.txt" /f >> %neptlog% 
 Reg add "HKCR\.txt" /ve /t REG_SZ /d "txtfile" /f >> %neptlog%
 Reg add "HKCR\.txt" /v "Content Type" /t REG_SZ /d "text/plain" /f >> %neptlog%
 Reg add "HKCR\.txt" /v "PerceivedType" /t REG_SZ /d "text" /f >> %neptlog%
 Reg add "HKCR\.txt\PersistentHandler" /ve /t REG_SZ /d "{5e941d80-bf96-11cd-b579-08002b30bfeb}" /f >> %neptlog%
 Reg add "HKCR\.txt\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "@%%SystemRoot%%\system32\notepad.exe,-470" /f >> %neptlog%
 Reg add "HKCR\.txt\ShellNew" /v "NullFile" /t REG_SZ /d "" /f >> %neptlog%
-Reg delete "HKCR\SystemFileAssociations\.txt" /f >> %neptlog% 2>&1
+Reg delete "HKCR\SystemFileAssociations\.txt" /f >> %neptlog% 
 Reg add "HKCR\SystemFileAssociations\.txt" /v "PerceivedType" /t REG_SZ /d "document" /f >> %neptlog%
-Reg delete "HKCR\txtfile" /f >> %neptlog% 2>&1
+Reg delete "HKCR\txtfile" /f >> %neptlog% 
 Reg add "HKCR\txtfile" /ve /t REG_SZ /d "Text Document" /f >> %neptlog%
 Reg add "HKCR\txtfile" /v "EditFlags" /t REG_DWORD /d "2162688" /f >> %neptlog%
 Reg add "HKCR\txtfile" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%SystemRoot%%\system32\notepad.exe,-469" /f >> %neptlog%
@@ -1210,80 +1210,80 @@ Reg add "HKCR\txtfile\DefaultIcon" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\syste
 Reg add "HKCR\txtfile\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\system32\NOTEPAD.EXE %%1" /f >> %neptlog%
 Reg add "HKCR\txtfile\shell\print\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\system32\NOTEPAD.EXE /p %%1" /f >> %neptlog%
 Reg add "HKCR\txtfile\shell\printto\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\system32\notepad.exe /pt \"%%1\" \"%%2\" \"%%3\" \"%%4\"" /f >> %neptlog%
-Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" /f >> %neptlog% 2>&1
+Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" /f >> %neptlog% 
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\OpenWithList" /f >> %neptlog%
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\OpenWithProgids" /v "txtfile" /t REG_NONE /d "" /f >> %neptlog%
 %system% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "Hash" /t REG_SZ /d "hyXk/CpboWw=" /f >> %neptlog%
 %system% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt\UserChoice" /v "ProgId" /t REG_SZ /d "txtfile" /f >> %neptlog%
-Reg delete "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt" /f >> %neptlog% 2>&1
+Reg delete "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt" /f >> %neptlog% 
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt\UserChoice" /v "Hash" /t REG_SZ /d "FvJcqeZpmOE=" /f >> %neptlog%
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.txt\UserChoice" /v "ProgId" /t REG_SZ /d "txtfile" /f >> %neptlog%
 :: - > Remove 'edit with Paint 3D' from Context Menus
-Reg delete "HKCR\SystemFileAssociations\.3mf\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.bmp\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.fbx\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.gif\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jfif\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpe\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpeg\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpg\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.png\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.tif\Shell\3D Edit" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.tiff\Shell\3D Edit" /f >> %neptlog% 2>&1
+Reg delete "HKCR\SystemFileAssociations\.3mf\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.bmp\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.fbx\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.gif\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jfif\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpe\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpeg\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpg\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.png\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.tif\Shell\3D Edit" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.tiff\Shell\3D Edit" /f >> %neptlog% 
 :: - > Remove 'give access to' from Context Menus
-Reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 2>&1
-Reg delete "HKCR\LibraryFolder\background\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 2>&1
+Reg delete "HKCR\*\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 
+Reg delete "HKCR\Directory\Background\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 
+Reg delete "HKCR\Directory\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 
+Reg delete "HKCR\Drive\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 
+Reg delete "HKCR\LibraryFolder\background\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog% 
 Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\Sharing" /f >> %neptlog%
 :: - > Remove 'cast to device' from Context Menus
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}" /t REG_SZ /d "" /f >> %neptlog% 2>&1
+Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}" /t REG_SZ /d "" /f >> %neptlog% 
 :: - > Remove 'share' in Context Menus
-Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >> %neptlog% 2>&1
-Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f >> %neptlog% 2>&1
+Reg delete "HKCR\*\shellex\ContextMenuHandlers\ModernSharing" /f >> %neptlog% 
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f >> %neptlog% 
 :: - > Remove 'bitmap image' from the 'new' Context Menus
-Reg delete "HKCR\.bmp\ShellNew" /f >> %neptlog% 2>&1
+Reg delete "HKCR\.bmp\ShellNew" /f >> %neptlog% 
 :: - > Remove 'rich text document' from 'new' Context Menus
-Reg delete "HKCR\.rtf\ShellNew" /f >> %neptlog% 2>&1
+Reg delete "HKCR\.rtf\ShellNew" /f >> %neptlog% 
 :: - > Remove 'send to' from Context Menus
-Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f >> %neptlog% 2>&1
-Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >> %neptlog% 2>&1
+Reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f >> %neptlog% 
+Reg delete "HKCR\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo" /f >> %neptlog% 
 :: - > Remove 'add to favorites' from Context Menus
-Reg delete "HKCR\*\shell\pintohomefile" /f >> %neptlog% 2>&1
+Reg delete "HKCR\*\shell\pintohomefile" /f >> %neptlog% 
 :: - > Remove 'rotate left' and 'rotate right' from Context Menus
-Reg delete "HKCR\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
-Reg delete "HKCR\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 2>&1
+Reg delete "HKCR\SystemFileAssociations\.avci\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.avif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.bmp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.dds\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.dib\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.gif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.heic\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.heif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.hif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.ico\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jfif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpe\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpeg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jpg\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.jxr\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.png\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.rle\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.tif\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.tiff\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.wdp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
+Reg delete "HKCR\SystemFileAssociations\.webp\ShellEx\ContextMenuHandlers\ShellImagePreview" /f >> %neptlog% 
 :: - > Remove 'Scan with Defender' from Context Menus
-Reg delete "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /va /f >> %neptlog% 2>&1
-Reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /v "InprocServer32" /f >> %neptlog% 2>&1
-Reg delete "HKCR\*\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Directory\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 2>&1
-Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /va /f >> %neptlog% 
+Reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /v "InprocServer32" /f >> %neptlog% 
+Reg delete "HKCR\*\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 
+Reg delete "HKCR\Directory\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 
+Reg delete "HKCR\Drive\shellex\ContextMenuHandlers" /v "EPP" /f >> %neptlog% 
 :: - > Remove 'print' from Context Menus
 %currentuser% Reg add "HKCR\SystemFileAssociations\image\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >> %neptlog% & for %%a in ("batfile" "cmdfile" "docxfile" "fonfile" "htmlfile" "inffile" "inifile" "JSEFile" "otffile" "pfmfile" "regfile" "rtffile" "ttcfile" "ttffile" "txtfile" "VBEFile" "VBSFile" "WSFFile") do (%currentuser% Reg add "HKCR\%%~a\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f >> %neptlog%)
 :: - > Remove 'include in library' from Context Menus
-Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >> %neptlog% 2>&1
+Reg delete "HKCR\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\Library Location" /f >> %neptlog% 
 :: - > Remove 'troubleshooting compatibility' from Context Menus
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{1d27f844-3a1f-4410-85ac-14651078412d}" /t REG_SZ /d "" /f >> %neptlog%
 Reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{1d27f844-3a1f-4410-85ac-14651078412d}" /t REG_SZ /d "" /f >> %neptlog%
@@ -1318,7 +1318,7 @@ Reg add "HKCR\regfile\Shell\RunAs" /ve /t REG_SZ /d "Merge As TrustedInstaller" 
 Reg add "HKCR\regfile\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "1" /f >> %neptlog%
 Reg add "HKCR\regfile\Shell\RunAs\Command" /ve /t REG_SZ /d "NSudo.exe -U:T -P:E Reg import "%1"" /f >> %neptlog%
 :: - > Add 'install' to .cab Context Menus
-Reg delete "HKCR\CABFolder\Shell\RunAs" /f >> %neptlog% 2>&1
+Reg delete "HKCR\CABFolder\Shell\RunAs" /f >> %neptlog% 
 Reg add "HKCR\CABFolder\Shell\RunAs" /ve /t REG_SZ /d "Install" /f >> %neptlog%
 Reg add "HKCR\CABFolder\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "" /f >> %neptlog%
 Reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /online /add-package /packagepath:\"%1\"" /f >> %neptlog%
@@ -1334,13 +1334,13 @@ Reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /onli
 Reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f >> %neptlog%
 Reg add "HKCR\Wow6432Node\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f >> %neptlog%
 :: - > Remove Duplicate Removable Drives in the File Explorer Side Panel
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >> %neptlog% 
 :: - > Disable 'Quick Access' in the File Explorer Side Panel
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f >> %neptlog%
 :: - > Disable '3D Objects' in the File Explorer Side Panel
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f >> %neptlog% 
 :: - > Hide frequently used files/folders in the 'Quick Access' File Explorer Side Panel
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowFrequent" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Hide recently used files/folders in the 'Quick Access' File Explorer Side Panel
@@ -1361,7 +1361,7 @@ Reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Disable automatic folder type discovery in File Explorer
 :: This might improve explorer performance, but will also make all folders autosort by 'details'
-%currentuser% Reg delete "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 2>&1
+%currentuser% Reg delete "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 
 %currentuser% Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f >> %neptlog%
 :: - > Show encrypted NTFS files in color in File Explorer
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowEncryptCompressedColor" /t REG_DWORD /d "1" /f >> %neptlog%
@@ -1383,7 +1383,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "H
 %currentuser% Reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f >> %neptlog%
 :: - > Hide task view button on the Taskbar
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /D "0" /f >> %neptlog%
-%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MultiTaskingView\AllUpView" /v "Enabled" /f >> %neptlog% 2>&1
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MultiTaskingView\AllUpView" /v "Enabled" /f >> %neptlog% 
 :: - > Hide search from the Taskbar
 %currentuser% Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Don't pin the store to the Taskbar
@@ -1398,14 +1398,14 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds
 :: - > Disable Start Menu Recommendations
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_AccountNotifications" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Clear Default TileGrid
-%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f >> %neptlog% 2>&1
+%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount" /v "start.tilegrid" /f >> %neptlog% 
 :: - > Disable Start Menu Pins
 :: currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "StartMenu_Start_Time" /t REG_BINARY /d "889f04f10c79da01" /f >> %neptlog%
 :: %currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >> %neptlog%
 :: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "StartMenu_Start_Time" /t REG_BINARY /d "889f04f10c79da01" /f >> %neptlog%
 :: Reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v "Start_JumpListModernTime" /t REG_BINARY /d "29210bf10c79da01" /f >> %neptlog%
 :: - > Remove Advertisements and Stubs from Start Menu
-if "%os%"=="Windows 11" (%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f) >> %neptlog% 2>&1
+if "%os%"=="Windows 11" (%currentuser% Reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start" /v "Config" /f) >> %neptlog% 
 :: -> Hide Recommended Start Menu Apps
 if "%os%"=="Windows 11" (%currentuser% Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Start" /v "ShowRecentList" /t REG_DWORD /d "0" /f) >> %neptlog%
 :: - > Hide Recently Added Apps in the Start Menu
@@ -1541,12 +1541,12 @@ Reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\Security" /v "Disabl
 %currentuser% Reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /v "BagMRU Size" /t REG_DWORD /d "1" /f >> %neptlog%
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >> %neptlog%
 %currentuser% Reg add "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog%
-%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f >> %neptlog% 2>&1
+%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f >> %neptlog% 
 
 :: Storage Sense Configuration
 :: - > Clean files once a month
@@ -1891,7 +1891,7 @@ WiFiSession
 )
 
 :: Delete Device Metadata
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f >> %neptlog% 
 
 :: Disable MSRT Telemetry
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "1" /f >> %neptlog%
@@ -2051,24 +2051,24 @@ Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "TargetRelea
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f >> %neptlog%
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f >> %neptlog%
 :: - > Prevent DevHome, Outlook and Teams from installing
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate" /f >> %neptlog% 
 %system% Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v "ConfigureChatAutoInstall" /t REG_DWORD /d "0" /f >> %neptlog%
 :: - > Prevent random apps from installing, including Widgets or advertisements
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\Settings" /v "STOREBIZCRITICALAPPS" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\State\CategoryCache" /v "48caba8a"-2e62-2097-dcd8-4255c637b32dUS /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "AccountsService" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "BackupBanner" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "DesktopSpotlight" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "IrisService" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "SystemSettingsExtensions" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WebExperienceHost" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WindowsBackup" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\LastOnlineScanTimeForAppCategory\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RequestedAppCategories\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\AppIso\FirewallRules" /v "{5D2C72C6-969D-4C1E-8484-41ED53782351}" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{26037439-AD8B-4A56-AF2E-F6CDDB59F6BE}" /f >> %neptlog% 2>&1
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{44000509-BE9E-419B-A60B-54E62CF41203}" /f >> %neptlog% 2>&1
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\Settings" /v "STOREBIZCRITICALAPPS" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\State\CategoryCache" /v "48caba8a"-2e62-2097-dcd8-4255c637b32dUS /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "AccountsService" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "BackupBanner" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "DesktopSpotlight" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "IrisService" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "SystemSettingsExtensions" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WebExperienceHost" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages\Components" /v "WindowsBackup" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\LastOnlineScanTimeForAppCategory\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >> %neptlog% 
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RequestedAppCategories\855E8A7C-ECB4-4CA3-B045-1DFA50104289" /v "EA6A8EC8-24BF-48A3-B0F0-A86A6447C0E2" /f >> %neptlog% 
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\AppIso\FirewallRules" /v "{5D2C72C6-969D-4C1E-8484-41ED53782351}" /f >> %neptlog% 
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{26037439-AD8B-4A56-AF2E-F6CDDB59F6BE}" /f >> %neptlog% 
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{44000509-BE9E-419B-A60B-54E62CF41203}" /f >> %neptlog% 
 :: - > Prevent Malicious Software Removal Tool from installing
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f >> %neptlog%
 :: - > Do not adjust default option to 'Install Updates and Shut Down' in Shut Down Windows dialog box
@@ -2154,14 +2154,14 @@ Reg add "HKLM\SOFTWARE\Microsoft\wcmsvc\wifinetworkmanager" /v "WifiSenseCredSha
 Reg add "HKLM\SOFTWARE\Microsoft\wcmsvc\wifinetworkmanager" /v "WifiSenseOpen" /t REG_DWORD /d 0 /f >> %neptlog%
 
 :: Remove FSO Overrides
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__COMPAT_LAYER" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f >> %neptlog% 2>&1
-Reg delete "HKLM\System\GameConfigStore" /f >> %neptlog% 2>&1
-Reg delete "HKU\.Default\System\GameConfigStore" /f >> %neptlog% 2>&1
-Reg delete "HKU\S-1-5-19\System\GameConfigStore" /f >> %neptlog% 2>&1
-Reg delete "HKU\S-1-5-20\System\GameConfigStore" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Classes\System\GameConfigStore" /f >> %neptlog% 2>&1
+Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__COMPAT_LAYER" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >> %neptlog%
+%currentuser% Reg delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f >> %neptlog%
+Reg delete "HKLM\System\GameConfigStore" /f >> %neptlog% 
+Reg delete "HKU\.Default\System\GameConfigStore" /f >> %neptlog% 
+Reg delete "HKU\S-1-5-19\System\GameConfigStore" /f >> %neptlog% 
+Reg delete "HKU\S-1-5-20\System\GameConfigStore" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Classes\System\GameConfigStore" /f >> %neptlog% 
 
 :: Enable FSO
 %currentuser% Reg add HKCU\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f >> %neptlog%
@@ -2251,8 +2251,8 @@ for /f "delims=" %%b in ('reg query "%%a"') do (
 %system% Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},0" /t REG_BINARY /d "4100FE6901000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >> %neptlog%
 %system% Reg add "%%b\Properties" /v "{e4870e26-3cc5-4cd2-ba46-ca0a9a70ed04},1" /t REG_BINARY /d "41008EC901000000A086010000000000" /f >> %neptlog%
 %system% Reg add "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},3" /t REG_BINARY /d "4100020001000000FEFF020080BB000000DC05000800200016002000030000000300000000001000800000AA00389B71" /f >> %neptlog%
-%system% Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >> %neptlog% 2>&1
-%system% Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >> %neptlog% 2>&1
+%system% Reg delete "%%b\Properties" /v "{624f56de-fd24-473e-814a-de40aacaed16},3" /f >> %neptlog% 
+%system% Reg delete "%%b\Properties" /v "{3d6e1656-2e50-4c4c-8d85-d0acae3c6c68},2" /f >> %neptlog% 
 )
 )
 
@@ -2394,8 +2394,8 @@ ren mobsync.exe mobsync.old >> %neptlog%
 if exist "C:\" ("%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall >> %neptlog%) else ("C:\Windows\SysWOW64\OneDriveSetup.exe" /uninstall >> %neptlog%)
 
 :: Remove OneDrive Startup Task
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >> %neptlog% 2>&1
-%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f >> %neptlog% 2>&1
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >> %neptlog% 
+%currentuser% Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f >> %neptlog% 
 
 :: Disable OneDrive Usage
 Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /t REG_DWORD /v "DisableFileSyncNGSC" /d 1 /f >> %neptlog%
