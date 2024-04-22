@@ -50,5 +50,3 @@ Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/
 Discord: nyne.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>

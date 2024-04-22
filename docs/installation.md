@@ -27,7 +27,7 @@ Home editions do not support a numerous amount of registry tweaks that are suppo
 
 ## 💽 Downloading your ISO
 
-There are a few methods of obtaining a Windows ISO. <br>
+This doc will be completed to include other methods in the future. <br>
 
 <strong><details><summary>UUP ⭐</strong></summary>
 <br>
@@ -66,8 +66,8 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> Please follow the next part of the guide to Install your ISO</li>
 <hr>
 </details>
-<br>
-<strong><details><summary>MASS</strong></summary>
+
+<!--<strong><details><summary>MASS</strong></summary>
 <br>
 <br>
 
@@ -77,12 +77,12 @@ There are a few methods of obtaining a Windows ISO. <br>
 <li> Download Windows 11 <a href="https://drive.massgrave.dev/en-us_windows_11_consumer_editions_version_23h2_updated_march_2024_x64_dvd_bcbf6ac6.iso">from here</a>
 <li> Download Windows Server 2022 (21H1) <a href="https://drive.massgrave.dev/en-us_windows_server_2022_updated_march_2024_x64_dvd_f6700d18.iso">from here</a>
 <hr>
-</details>
+</details>-->
 
 ## 👨‍💻 Installing your ISO
 
 When installing your ISO, please make sure you have at least 8gb free on your USB drive.<br>
-You can backup your files onto your USB, but please do this <b>after</b> you set up your USB.<br>
+You can backup your files onto your USB, but please do this <b>after</b> you set up your USB so your files do not get formatted.<br>
 
 <!--### Without USB Method
 
@@ -112,10 +112,18 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Please download the NeptuneOS Ventoy Configuration from this link</li>
 <li>When it has finished downloading, please drag <b>neptune</b> and <b>ventoy</b> to the root of the biggest Ventoy partition.</li>
 <li>Rename your Windows ISO to neptune.iso, and drag and drop it into the <b>neptune</b> folder on the Ventoy partition.</li>
+<li>You are now safe to place whatever backups you want onto your USB.</li>
 </details>
 
-<details><summary><strong>Rufus</strong></summary>
+### Installing Windows
 
-</details>
+<li>To access your bootable USB, please restart your PC and access your BIOS. Once you are here, disable Secure Boot. Otherwise Ventoy will be unbootable. . If you are unsure how to do this, please google your motherboard vendor for guides.</li>
+<li>After configuring the BIOS, please access the boot manager to boot off of your USB and access Ventoy.</li>
+<li>Once you are in Ventoy, please select neptune.iso and boot in normal mode.</li>
 
+## 🚀 Deploying NeptuneOS
+
+<li>After Windows has finished installing and you are prompted to create a local account, go ahead and give it whatever name and password you want.</li>
+<li>Once you hit the desktop, go to your Ventoy USB drive, and go to the 'neptune' folder. Drag and drop 'neptune-installer.cmd' to your desktop and run it.
+<li>Follow the prompts on screen, and wait for installation.
 </body>
