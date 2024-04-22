@@ -109,8 +109,8 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Extract the downloaded folder, and open <i>Ventoy2Disk.exe</i></li>
 <li>Select your USB in the dropdown, and click Install</li>
 <li>When the process is finished, find your Ventoy drive, and simply drop the ISO in the root of the folder</li>
-<li>Please download the NeptuneOS Ventoy Configuration from this link</li>
-<li>When it has finished downloading, please drag <b>neptune</b> and <b>ventoy</b> to the root of the biggest Ventoy partition.</li>
+<li>Please download the NeptuneOS Ventoy Configuration from <a href="https://github.com/NyneDZN/NeptuneOS/releases/download/0.5/NeptuneOS.Ventoy.Config.zip">this link.</a> If you already downloaded it, then keep proceeding.</li>
+<li>When it has finished downloading extract it to a folder, please drag <b>neptune</b> and <b>ventoy</b> to the root of the biggest Ventoy partition.</li>
 <li>Rename your Windows ISO to neptune.iso, and drag and drop it into the <b>neptune</b> folder on the Ventoy partition.</li>
 <li>You are now safe to place whatever backups you want onto your USB.</li>
 </details>
