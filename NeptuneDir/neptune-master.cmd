@@ -50,8 +50,9 @@ cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 %currentuser% "%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\FullScreenCMD.vbs"
 
 :: Create Log File
-echo %time% %date% Started neptune-master.cmd. >> %neptlog%
 echo This log is completely local and is not uploaded anywhere. >> %neptlog%
+echo --------------------------------------------------------- >> %neptlog%
+echo %time% %date% Started neptune-master.cmd. >> %neptlog%
 
 :: Fetch PC Type
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
@@ -3114,6 +3115,7 @@ if exist "%userprofile%\Desktop\neptune-dev.cmd" (%delF% "%userprofile%\Desktop\
 if exist "%userprofile%\Desktop\neptune-installer.cmd" (%delF% "%userprofile%\Desktop\neptune-installer.cmd")
 
 echo %time% %date% Finished neptune-master.cmd >> %neptlog%
+echo --------------------------------- >> %neptlog%
 echo !S_GRAY!We're finished, rebooting in a moment.
 timeout /t 4 /nobreak >nul
 shutdown /f /r /t 0 & del "%~f0"
@@ -3174,4 +3176,4 @@ Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul || (
 echo The specified service/driver %1 is not found. >> %neptlog%
 exit /b 1 )
 %system% Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f > nul
-echo Service/Driver %1 was configured
+echo Service/Driver %1 was configured >> %neptlog%
