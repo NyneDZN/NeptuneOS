@@ -56,7 +56,7 @@ echo %bullet% 1. Install NeptuneOS
 echo %bullet% 2. Exit
 echo]
 echo]
-echo %bullet% https://discord.gg/4YTSkcK8b8
+echo %bullet% https://discord.gg/NeptuneOS
 echo]
 echo]
 choice /c 12 /n /m "Select a choice:"
