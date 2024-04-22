@@ -34,17 +34,12 @@ call "%windir%\NeptuneDir\Scripts\settingsPages.cmd" /unhide search-permissions 
     start explorer.exe
 ) > nul 2>&1
 
-for /f "tokens=6 delims=[.] " %%a in ('ver') do (if %%a GEQ 22000 sc query wsearch | find "STOPPED" > nul && call :searchIndexBug)
 
 echo]
-echo Finished, you should be able to use Web Search and Search Highlights.
-echo Press any key to exit...
-pause > nul
-exit /b
-
-:searchIndexBug
 echo]
-echo On Windows 11, having search indexing disabled causes a graphical bug in web search.
-choice /c:yn /n /m "Would you like to enable search indexing to fix it? [Y/N] "
-if %errorlevel%==1 call "%windir%\AtlasDesktop\3. General Configuration\Search Indexing\Enable Search Indexing.cmd" /silent & set ____restart=true
-exit /b
+:: Echo to Log
+echo %date% %time% Enabled Web Search >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Web Search has been enabled.
+timeout /t 3 /nobreak >nul
+exit

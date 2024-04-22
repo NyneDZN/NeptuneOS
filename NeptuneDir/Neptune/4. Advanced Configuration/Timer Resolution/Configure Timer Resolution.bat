@@ -21,6 +21,7 @@ goto home
 :d
 powershell.exe Stop-Process -Name SetTimerResolution.exe >nul 2>&1
 Reg.exe delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "ForceResolution" /f
+echo %date% %time% Disabled Timer Resolution >> %userlog%
 timeout /t 2 /nobreak >nul 2>&1
 exit
 
@@ -28,6 +29,7 @@ exit
 powershell.exe Stop-Process -Name SetTimerResolution.exe >nul 2>&1
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ForceResolution" /t REG_SZ /d ""C:\Windows\NeptuneDir\Tools\SetTimerResolution.exe" --resolution 5000 --no-console" /f
 start "" "C:\Windows\NeptuneDir\Tools\SetTimerResolution.exe" --resolution 5000 --no-console
+echo %date% %time% Set Timer Resolution to Default >> %userlog%
 timeout /t 2 /nobreak >nul 2>&1
 exit
 
@@ -37,5 +39,6 @@ set /p value=Enter custom value (integers):
 powershell.exe Stop-Process -Name SetTimerResolution.exe >nul 2>&1
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ForceResolution" /t REG_SZ /d ""C:\Windows\NeptuneDir\Tools\SetTimerResolution.exe" --resolution %value% --no-console" /f
 start "" "C:\Windows\NeptuneDir\Tools\SetTimerResolution.exe" --resolution %value% --no-console
+echo %date% %time% Set Timer Resolution to %value% >> %userlog%
 timeout /t 2 /nobreak >nul 2>&1
 exit

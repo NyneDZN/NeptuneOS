@@ -27,5 +27,6 @@ echo !S_YELLOW!Enabling Widgets...
 
 echo]
 echo Widgets are now enabled. You might have to restart your device.
+echo %date% %time% Enabled Widgets and Installed Edge >> %userlog%
 timeout /t 3 /nobreak >nul
 exit

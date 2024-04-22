@@ -35,7 +35,9 @@ call "%windir%\NeptuneDir\Scripts\settingsPages.cmd" /hide search-permissions /s
 ) > nul 2>&1
 
 echo]
-echo Finished.
-echo Press any key to exit...
-pause > nul
-exit /b
+:: Echo to Log
+echo %date% %time% Disabled Web Search >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Web Search has been disabled.
+timeout /t 3 /nobreak >nul
+exit

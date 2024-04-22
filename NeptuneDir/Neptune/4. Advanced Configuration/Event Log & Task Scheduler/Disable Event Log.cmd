@@ -27,7 +27,14 @@ if errorlevel 2 (
 
 :DisableTaskSched
 %svcF% Eventlog 4
+:: Echo to Log
+cls
+echo %date% %time% Disabled Event Log >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Event Log has been disabled. Please restart your device.
+timeout /t 3 /nobreak >nul
 exit
+
 
 
 :Nope

@@ -164,7 +164,7 @@ Reg.exe add "HKCU\SOFTWARE\Sysinternals\Process Explorer\ProcessColumns" /v "10"
 
 
 :: Echo to Logger
-cls & echo %date% %time% Replaced Task Manager with Process Explorer. >> %neptlog%
+cls & echo %date% %time% Replaced Task Manager with Process Explorer. >> %userlog%
 :: Echo to User
 cls & echo Replaced Task Manager with Process Explorer.
 timeout /t 2 >nul

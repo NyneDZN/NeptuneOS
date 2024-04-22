@@ -1,4 +1,7 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
+
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if %errorlevel% neq 0 (
@@ -20,7 +23,10 @@ if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
 :: Enable Mitigations
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /f >nul 2>&1
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /f >nul 2>&1
-echo Enabled Mitigations, you will have to restart your PC for changes to apply.
-pause>nul
-
-
+:: Echo to Log
+cls
+echo %date% %time% Enabled Mitigations >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Mitigations have been enabled. Please restart your device.
+timeout /t 3 /nobreak >nul
+exit

@@ -15,7 +15,7 @@ fltmc >nul 2>&1 || (
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /v "Debugger" /f >nul 2>&1
 choco uninstall procexp
 :: Echo to Logger
-cls & echo %date% %time% Reverted Back to Default Task Manager. >> %neptlog%
+cls & echo %date% %time% Reverted Back to Default Task Manager. >> %userlog%
 :: Echo to User
 cls & echo !S_YELLOw!Replaced Task Manager with Process Explorer.
 timeout /t 3 >nul

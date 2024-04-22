@@ -13,7 +13,13 @@ fltmc >nul 2>&1 || (
 )
 
 
-%svcF% EventLog 4
+%svcF% EventLog 2
+:: Echo to Log
+cls
+echo %date% %time% Enabled Event Log >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Event Log has been enabled. Please restart your device.
+timeout /t 3 /nobreak >nul
 exit
 
 

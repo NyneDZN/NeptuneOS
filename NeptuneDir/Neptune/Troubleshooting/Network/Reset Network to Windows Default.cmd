@@ -23,5 +23,6 @@ echo Resetting network settings to Windows defaults...
 
 
 echo Finished, please reboot your device for changes to apply.
+echo %date% %time% Reset Network to Windows Default >> %userlog%
 timeout /t 3 /nobreak >nul
 exit

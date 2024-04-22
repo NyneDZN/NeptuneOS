@@ -13,4 +13,11 @@ fltmc >nul 2>&1 || (
 )
 
 %svcF% Schedule 2
+:: Echo to Log
+cls
+echo %date% %time% Enabled Task Scheduler >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Task Scheduler has been enabled. Please restart your device.
+timeout /t 3 /nobreak >nul
 exit
+

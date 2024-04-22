@@ -16,7 +16,7 @@ fltmc >nul 2>&1 || (
 reg add "HKLM\System\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "Start" /t REG_DWORD /d "2" /f
 sc start NVDisplay.ContainerLocalSystem
 :: Echo to Logger
-echo The NVIDIA Container Service has been enabled. >> %neptlog%
+echo The NVIDIA Container Service has been enabled. >> %userlog%
 :: Echo to User
 cls & echo !S_YELLOw!The container service has been enabled.
 timeout /t 2 >nul

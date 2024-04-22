@@ -14,4 +14,5 @@ bcdedit /deletevalue {current} safeboot
 bcdedit /deletevalue {current} safebootalternateshell
 
 echo Safe Boot disabled. Restart your device to apply changes.
+echo %date% %time% Exited Safe Boot >> %userlog%
 timeout /t 3 /nobreak >nul

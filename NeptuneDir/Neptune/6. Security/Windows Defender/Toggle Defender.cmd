@@ -17,5 +17,5 @@ fltmc > nul 2>&1 || (
 	)
 	exit /b
 )
-
+echo Opened the Toggle Defender Script >> %userlog%
 powershell -EP Bypass -NoP ^& """$env:script""" %*

@@ -13,4 +13,6 @@ fltmc >nul 2>&1 || (
 bcdedit /set {current} safeboot minimal
 
 echo Safe Boot Enabled. Restart your device to apply changes.
+echo %date% %time% Enabled Safe Boot >> %userlog%
+
 timeout /t 3 /nobreak >nul

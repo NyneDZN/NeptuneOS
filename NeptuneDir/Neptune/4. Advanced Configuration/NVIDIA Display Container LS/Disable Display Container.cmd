@@ -28,7 +28,7 @@ if errorlevel 2 (
 reg add "HKLM\System\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "Start" /t REG_DWORD /d "4" /f
 sc stop NVDisplay.ContainerLocalSystem
 :: Echo to Logger
-echo The NVIDIA Container Service has been disabled. >> %neptlog%
+echo The NVIDIA Container Service has been disabled. >> %userlog%
 :: Echo to User
 cls & echo !S_YELLOw!The container service has been disabled.
 timeout /t 2 >nul

@@ -12,5 +12,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start
 %svcF% WdiServiceHost 4
 %svcF% WdiSystemHost 4
 
-echo Disabled Troubleshooting. Restart your device to apply the changes.
-timeout /t 3 /nobreak >nul
+:: Echo to Logger
+echo Disabled Troubleshooting. >> %userlog%
+:: Echo to User
+cls & echo !S_YELLOW!Troubleshooting has been disabled. Restart your device to apply the changes.
+timeout /t 2 >nul
+exit /b

@@ -1,43 +1,48 @@
 @echo off
+setlocal EnableDelayedExpansion
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
-:: Check if script is escelated
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-if %errorlevel% neq 0 (
-    echo You are about to be prompted with the UAC. Please click yes when prompted.
-) ELSE (
-    goto admin
+:: Call Administrator
+fltmc >nul 2>&1 || (
+    echo Administrator privileges are required.
+    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
+        echo Right-click on the script and select 'Run as administrator'.
+        pause & exit 1
+    )
+    exit 0
 )
 
-:prompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\prompt.vbs"
-    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\prompt.vbs"
-    "%temp%\prompt.vbs"
-    exit /B
-
-:admin
-:: Delete prompt script
-if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
-
 :: Enabling VPN
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (IKEv2)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (IP)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (IPv6)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (L2TP)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (Network Monitor)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (PPPOE)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (PPTP)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "WAN Miniport (SSTP)" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "NDIS Virtual Network Adapter Enumerator" >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\dmv.exe /enable "Microsoft RRAS Root Enumerator" >nul 2>&1 
+%svcF% Eaphost 3
+%svcF% IKEEXT 3
+%svcF% iphlpsvc 3
+%svcF% NdisVirtualBus 3
+%svcF% RasAcd 3
+%svcF% RasAgileVpn 3
+%svcF% Rasl2tp 3
+%svcF% Rasl2tp 3
+%svcF% RasMan 2
+%svcF% RasPppoe 3
+%svcF% RasSstp 3
+%svcF% SstpSvc 3
+%svcF% WinHttpAutoProxySvc 3
 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\IKEEXT" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\WinHttpAutoProxySv" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\RasMan" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\SstpSvc" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\iphlpsvc" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\NdisVirtualBus" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\Eaphost" /v "Start" /t REG_DWORD /d "3" /f >nul 2>&1 
-%WinDir%\NeptuneDir\Tools\PowerRun.exe /SW:0 Reg.exe add "HKLM\System\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "2" /f >nul 2>&1 
-echo VPN Support enabled.
-pause>nul
+%dmv% /enable "WAN Miniport (IKEv2)"
+%dmv% /enable "WAN Miniport (IP)"
+%dmv% /enable "WAN Miniport (IPv6)"
+%dmv% /enable "WAN Miniport (L2TP)"
+%dmv% /enable "WAN Miniport (Network Monitor)"
+%dmv% /enable "WAN Miniport (PPPOE)"
+%dmv% /enable "WAN Miniport (PPTP)"
+%dmv% /enable "WAN Miniport (SSTP)"
+%dmv% /enable "NDIS Virtual Network Adapter Enumerator"
+%dmv% /enable "Microsoft RRAS Root Enumerator"
 
+call "%windir%\AtlasModules\Scripts\settingsPages.cmd" /unhide network-vpn /silent
+
+:: Echo to Log
+echo %date% %time% Enabled VPN Support >> %userlog%
+:: Echo to User
+echo !S_YELLOW!Enabled VPN Support. Restart your device to apply the changes.
+timeout /t 3 /nobreak >nul
+exit
