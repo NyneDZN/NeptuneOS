@@ -32,14 +32,7 @@ There are a few methods of obtaining a Windows ISO. <br>
 <strong><details><summary>UUP ⭐</strong></summary>
 <br>
 
-<h2> UUPDump Guide</h2>
-    <ul>
-<li> Using UUPDump, you get a up to date stock Pro ISO of whatever windows version you desire </li>
-<li> This means you will not have to update Windows upon installing. </li>
-<li> Easily supports both USB and Non-USB installation methods 
-<li> However, the ISO has to be built using their provided scripts, which takes some time depending on your systems processor. </li>
-    </ul>
-<br>
+<h2>UUPDump Guide</h2>
 <h2> Getting your ISO from UUPDump</h2>
 <li>Head over to <a href="https://uupdump.net/known.php">UUPDump</a></li>
 <li>At the top of the window, choose the latest build of your desired Windows version as shown in the screenshot. Make sure that your system and NeptuneOS support it.</li>
@@ -76,20 +69,14 @@ There are a few methods of obtaining a Windows ISO. <br>
 <br>
 <strong><details><summary>MASS</strong></summary>
 <br>
-<h2> MASS Guide</h2>
-    <ul>
-<li> Using MASS, you are downloading a full Windows ISO with every edition present</li>
-<li> You will have to update Windows upon installation
-<li> This method also requires a few extra steps to install Windows Pro edition from the ISO
-<li> The ISO is already compiled, you are only downloading it
-    </ul>
+<br>
 
+<h2>MASS Guide</h2>
 <h2>Getting your ISO from MASS</h2>
 <li> Download Windows 10 <a href="https://drive.massgrave.dev/en-us_windows_10_consumer_editions_version_22h2_updated_march_2024_x64_dvd_2ff6c8a4.iso">from here</a>
 <li> Download Windows 11 <a href="https://drive.massgrave.dev/en-us_windows_11_consumer_editions_version_23h2_updated_march_2024_x64_dvd_bcbf6ac6.iso">from here</a>
 <li> Download Windows Server 2022 (21H1) <a href="https://drive.massgrave.dev/en-us_windows_server_2022_updated_march_2024_x64_dvd_f6700d18.iso">from here</a>
 <hr>
-
 </details>
 
 ## Installing your ISO
@@ -105,7 +92,7 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Press Win+R and type <i>diskmgmt.msc</i></li>
 <li>Locate your current drive, and shrink it at least 60 GB</li>
 <li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire</li>
-<li> Assign the drive letter, and remember it</li>
+<li>Assign the drive letter, and remember it</li>
 <li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop</li>
 <li>Open the extracted folder, and open <i>Install Windows.bat</i></li>
 <li>You will be prompted to locate your ISO and open it</li>
