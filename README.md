@@ -1,19 +1,18 @@
 <!-- PROJECT LOGO -->
-<br />
+<br/>
 <div align="center">
   <a href="https://github.com/NyneDZN/NeptuneOS">
-    <img src="https://user-images.githubusercontent.com/120980797/209248113-fb446909-8aad-4c90-bedf-d4d536ef5dee.png"
-" alt="Logo" width="500" height="500">
+    <img src="https://user-images.githubusercontent.com/120980797/209248113-fb446909-8aad-4c90-bedf-d4d536ef5dee.png" alt="Logo" width="500" height="500">
   </a>
 
 <h3 align="center">NepuneOS</h3>
 
   <p align="center">
     A custom windows OS designed for productivity and gaming.
-    <br />
+    <br/>
     <a href="https://github.com/NyneDZN/NeptuneOS"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <a href="https://github.com/NyneDZN/NeptuneOS">View Demo</a>
     ·
     <a href="https://github.com/NyneDZN/NeptuneOS/issues">Report Bug</a>
@@ -51,14 +50,5 @@ Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/
 Discord: nyne.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- [Melody's Tweaks](https://sites.google.com/view/melodystweaks/basictweaks?pli=1)
-- [Optimization Guide by supermanZ (Very Outdated)](https://steamcommunity.com/sharedfiles/filedetails/?id=476760198)
-- [Atlas](https://github.com/Atlas-OS/)
-- [N1ko](https://n1kobg.blogspot.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
