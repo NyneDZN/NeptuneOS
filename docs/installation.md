@@ -115,7 +115,11 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>You are now safe to place whatever backups you want onto your USB.</li>
 </details>
 
+---
+
 ### Installing Windows
+
+---
 
 <li>To access your bootable USB, please restart your PC and access your BIOS. Once you are here, disable Secure Boot. Otherwise Ventoy will be unbootable. . If you are unsure how to do this, please google your motherboard vendor for guides.</li>
 <li>After configuring the BIOS, please access the boot manager to boot off of your USB and access Ventoy.</li>
