@@ -1,0 +1,1 @@
+powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/installer.zip', \"$env:TEMP\installer.zip\"); Expand-Archive -Path \"$env:TEMP\installer.zip\" -DestinationPath 'C:\'; Start-Process 'C:\NeptuneOS-installer\Neptune\neptune.cmd'"

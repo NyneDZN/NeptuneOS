@@ -1,0 +1,16 @@
+{
+    "theme": {
+        "file": "/ventoy/ventoy-just-black/theme.txt",
+        "file_legacy": "/ventoy/ventoy-just-black/theme_legacy.txt",
+        "gfxmode": "max"
+    },
+    "auto_install": [
+        {
+            "image": "/neptune/neptune.iso",
+            "template": [
+                "/neptune/autounattend.xml"
+            ],
+            "autosel": 1
+        }
+    ]
+}

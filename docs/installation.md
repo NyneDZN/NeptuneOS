@@ -10,7 +10,7 @@
 
 ## 🔍 Prerequisites
 
-- A USB (Optional)
+- A USB
 - A backup of your personal files on another drive
 - A general understanding of your system, and windows itself
 
@@ -79,13 +79,12 @@ There are a few methods of obtaining a Windows ISO. <br>
 <hr>
 </details>
 
-## Installing your ISO
+## 👨‍💻 Installing your ISO
 
-Just like obtaining an ISO, there are multiple ways to install one. <br>
-This section will feature a guide on how to install a Windows Pro ISO with a usb, and without a USB.<br>
-Please note that if you downloaded your ISO from MASS, you will not be able to directly install the ISO without extra steps.<br>
+When installing your ISO, please make sure you have at least 8gb free on your USB drive.<br>
+You can backup your files onto your USB, but please do this <b>after</b> you set up your USB.<br>
 
-### Without USB Method
+<!--### Without USB Method
 
 To install Windows witohut a USB, please go to <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">this repository</a> and download the ZIP.
 
@@ -99,11 +98,9 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 <li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)</li>
 <li>Reboot your PC to boot to the newly installed Windows</li>
 
-<br>
+<br>-->
 
-### With USB Method
-
-To install windows with a USB, please make sure your USB is at least 8GB.
+### Setting up your USB
 
 <details><summary><strong>Ventoy ⭐</strong></summary>
 <h2>Ventoy USB Method</h2>
@@ -111,7 +108,10 @@ To install windows with a USB, please make sure your USB is at least 8GB.
 <li>Start by <a href="https://www.ventoy.net/en/download.html">Downloading Ventoy</a></a>
 <li>Extract the downloaded folder, and open <i>Ventoy2Disk.exe</i></li>
 <li>Select your USB in the dropdown, and click Install</li>
-<li>When the process is finished, find your Ventoy drive, and simply drop the ISO in the root of the folder
+<li>When the process is finished, find your Ventoy drive, and simply drop the ISO in the root of the folder</li>
+<li>Please download the NeptuneOS Ventoy Configuration from this link</li>
+<li>When it has finished downloading, please drag <b>neptune</b> and <b>ventoy</b> to the root of the biggest Ventoy partition.</li>
+<li>Rename your Windows ISO to neptune.iso, and drag and drop it into the <b>neptune</b> folder on the Ventoy partition.</li>
 </details>
 
 <details><summary><strong>Rufus</strong></summary>
