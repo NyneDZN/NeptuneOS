@@ -1,4 +1,5 @@
 @echo off
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 set "script=%windir%\NeptuneDir\Scripts\ToggleDefender.ps1"
 if not exist "%script%" (
 	echo Script not found.
