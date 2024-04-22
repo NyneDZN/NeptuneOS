@@ -811,7 +811,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 )
 )
 )
-) >> %neptlog%
+) >nul
 
 :: Configure Drivers and Services
 :: Guide:  4 = Disabled, 3 = Manual, 2 = Automatic, 1 = System, 0 = Boot
@@ -934,7 +934,7 @@ echo "Start"=dword:0000000%%c >>%BACKUP%
 )
 )
 )
-) >> %neptlog%
+) >nul
 goto SecurityConfiguration
 
 
