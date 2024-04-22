@@ -44,7 +44,7 @@ set svc=call :setSvc
 set delf=del /f /s /q
 
 :: Fetch ANSI
-cd %WinDir%\NeptuneDir\Scripts >> %neptlog% && where ansi.cmd >> %neptlog% && call ansi.cmd >> %neptlog%
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 :: Fullsceen Script
 %currentuser% "%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\FullScreenCMD.vbs"
@@ -70,7 +70,7 @@ for /f %%a in ('PowerShell -NoP -C "(Get-PhysicalDisk -SerialNumber (Get-Disk -N
   
 :: Fetch GPU
 :: Basic one liner for now that will assume you have a RADEON GPU if NVIDIA is not found
-for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value ^| findstr /i "GeForce NVIDIA RTX GTX Radeon AMD"') do (echo %%a | findstr /i "GeForce NVIDIA RTX GTX" >> %neptlog% && set GPU=NVIDIA || set GPU=RADEON)
+for /f "tokens=2 delims==" %%a in ('wmic path Win32_VideoController get VideoProcessor /value ^| findstr /i "GeForce NVIDIA RTX GTX Radeon AMD"') do (echo %%a | findstr /i "GeForce NVIDIA RTX GTX" >nul && set GPU=NVIDIA || set GPU=RADEON)
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11
@@ -3172,7 +3172,7 @@ exit /b 1 )
 if %2 GTR 4 (
 echo Invalid configuration.
 exit /b 1 )
-Reg query "HKLM\System\CurrentControlSet\Services\%1" >> %neptlog% || (
+Reg query "HKLM\System\CurrentControlSet\Services\%1" >nul || (
 echo The specified service/driver %1 is not found. >> %neptlog%
 exit /b 1 )
 %system% Reg add "HKLM\System\CurrentControlSet\Services\%1" /v "Start" /t Reg_DWORD /d "%2" /f >> %neptlog%
