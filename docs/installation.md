@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<body>
-
 # 🚀 NeptuneOS Installation
 
-> We are not responsible for any personal files you may lose, or any hardware issues you may experience while using NeptuneOS. <br>
+> We are not responsible for any personal files you may lose, or any hardware issues you may experience while using NeptuneOS.  
 > We are fully open source, and NOT for sale.
 
-> If something has a ⭐, this means it is the recommended method.
+If something has a ⭐, this means it is the recommended method.
 
 ## 🔍 Prerequisites
 
 - A USB
 - A backup of your personal files on another drive
-- A general understanding of your system, and windows itself
+- A general understanding of your system and Windows itself
 
 ## 💻 Reinstalling Windows
 
-You must reinstall windows to install NeptuneOS. This is to prevent unforseen issues in the OS. <br>
-If you install NeptuneOS over an existing Windows install, especially one that's already optimized. You will experience issues. <br>
+You must reinstall Windows to install NeptuneOS. This is to prevent unforeseen issues in the OS.  
+If you install NeptuneOS over an existing Windows install, especially one that's already optimized, you will experience issues.  
 Your Windows ISO edition **must** be Pro or Enterprise.
 
 <details><summary>Why Pro? 💬</summary>
@@ -67,38 +64,10 @@ This doc will be completed to include other methods in the future. <br>
 <hr>
 </details>
 
-<!--<strong><details><summary>MASS</strong></summary>
-<br>
-<br>
-
-<h2>MASS Guide</h2>
-<h2>Getting your ISO from MASS</h2>
-<li> Download Windows 10 <a href="https://drive.massgrave.dev/en-us_windows_10_consumer_editions_version_22h2_updated_march_2024_x64_dvd_2ff6c8a4.iso">from here</a>
-<li> Download Windows 11 <a href="https://drive.massgrave.dev/en-us_windows_11_consumer_editions_version_23h2_updated_march_2024_x64_dvd_bcbf6ac6.iso">from here</a>
-<li> Download Windows Server 2022 (21H1) <a href="https://drive.massgrave.dev/en-us_windows_server_2022_updated_march_2024_x64_dvd_f6700d18.iso">from here</a>
-<hr>
-</details>-->
-
 ## 👨‍💻 Installing your ISO
 
 When installing your ISO, please make sure you have at least 8gb free on your USB drive.<br>
 You can backup your files onto your USB, but please do this <b>after</b> you set up your USB so your files do not get formatted.<br>
-
-<!--### Without USB Method
-
-To install Windows witohut a USB, please go to <a href="https://github.com/iidanL/InstallWindowsWithoutUSB">this repository</a> and download the ZIP.
-
-<li>Press Win+R and type <i>diskmgmt.msc</i></li>
-<li>Locate your current drive, and shrink it at least 60 GB</li>
-<li>Right click the unallocated partition, and create a new simple volume. Name it whatever you desire</li>
-<li>Assign the drive letter, and remember it</li>
-<li>Extract <i>InstallWindowsWithoutUSB-main</i> to your desktop</li>
-<li>Open the extracted folder, and open <i>Install Windows.bat</i></li>
-<li>You will be prompted to locate your ISO and open it</li>
-<li>Once the process completes, type the letter of the drive you created a partition for. (e.g. D, or F)</li>
-<li>Reboot your PC to boot to the newly installed Windows</li>
-
-<br>-->
 
 ### Setting up your USB
 
@@ -128,6 +97,6 @@ To install Windows witohut a USB, please go to <a href="https://github.com/iidan
 ## 🚀 Deploying NeptuneOS
 
 <li>After Windows has finished installing and you are prompted to create a local account, go ahead and give it whatever name and password you want.</li>
-<li>Once you hit the desktop, go to your Ventoy USB drive, and go to the 'neptune' folder. Drag and drop 'neptune-installer.cmd' to your desktop and run it.
-<li>Follow the prompts on screen, and wait for installation.
+<li>Once you hit the desktop, go to your Ventoy USB drive, and go to the 'neptune' folder. Drag and drop 'neptune-installer.cmd' to your desktop and run it.</li>
+<li>Follow the prompts on screen, and wait for installation.</li>
 </body>
