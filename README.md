@@ -25,7 +25,7 @@
 
 ## Getting Started with NeptuneOS Installation 🌊
 
-Please wait for <b>NeptuneOS 0.5</b>
+To install NeptuneOS, please follow the [Installation Guide](https://github.com/NyneDZN/NeptuneOS/blob/installer/docs/installation.md)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
