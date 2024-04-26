@@ -6,9 +6,6 @@ This documentation provides clarity on what open source repositories have been u
 
 ## AtlasOS
 
-**Main Inspiration:**
-My main inspiration for NeptuneOS began with AtlasOS. They have been a big standpoint for Neptune, and without them we wouldn't be here.
-
 **Innovative Configuration Methods:**
 The AtlasOS developers provide numerous convenient and ingenious ways to configure the operating system, such as he3als, with his online-sxs script.
 
