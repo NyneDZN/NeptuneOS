@@ -14,3 +14,7 @@ The main things we have sourced from Atlas are their .cab packages and script wr
 
 **Seamless Integration:**
 Since the Defender Removal is done through a .cab package, this allows the user to install Neptune without having to touch Defender. We also use he3als' Edge removal script. He provides a very easy way to uninstall and reinstall Edge, along with WebView2, which is widely used in Windows.
+
+## Amit
+
+**Timer Resolution:** Amit provides a application to configure the system timers resolution, which configures refresh intervals between the processor and the operating system.
