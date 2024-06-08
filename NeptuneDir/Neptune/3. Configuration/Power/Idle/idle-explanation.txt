@@ -1,1 +1,0 @@
-On Windows 8+, Task Manager reports CPU utility in % which provides misleading CPU utilization details, on the other hand, Windows 7's Task Manager and Process Explorer report time-based busy utilization. This also explains why the disable idle power setting results in 100% CPU utilization on Windows 8+

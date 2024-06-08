@@ -1,1 +1,0 @@
-PowerShell -ExecutionPolicy Unrestricted -Command Remove-WindowsFeature AzureArcSetup
