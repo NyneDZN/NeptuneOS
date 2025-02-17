@@ -2343,57 +2343,57 @@ goto DebloatWindows
 :DebloatWindows
 cls & echo !S_YELLOW!Debloating Windows... [13/18]
 :: For loop broke on Windows 11, so we're gonna remove each package 1 by 1
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bing* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bingfinance* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bingsports* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *BingWeather* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Clipchamp.Clipchamp* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *CommsPhone* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Facebook* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Getstarted* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.549981C3F5F10* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Cortana* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.GamingApp* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Messaging* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.OutlookForWindows* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Todos* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Windows.Photos* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Xbox* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.YourPhone* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Office.OneNote* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *people* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *SkypeApp* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *solit* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Sway* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Twitter* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Windows.DevHome* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsAlarms* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsCalculator* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsCamera* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsFeedbackHub* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsMaps* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsPhone* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsSoundRecorder* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsTerminal* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *zune* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Microsoft3DViewer* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *ScreenSketch* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Paint* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftCorporationII.MicrosoftFamily* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftTeams* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage" >> %neptlog%
-%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.WindowsNotepad* | Remove-AppxPackage" >> %neptlog%
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bing* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bingfinance* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *bingsports* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *BingWeather* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Clipchamp.Clipchamp* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *CommsPhone* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Facebook* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Getstarted* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.549981C3F5F10* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Cortana* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.GamingApp* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Messaging* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MicrosoftEdge.Stable* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.OutlookForWindows* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Todos* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Windows.Photos* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Xbox* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.YourPhone* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Office.OneNote* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *people* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *SkypeApp* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *solit* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Sway* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Twitter* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Windows.DevHome* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsAlarms* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsCalculator* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsCamera* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsFeedbackHub* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsMaps* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsPhone* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsSoundRecorder* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *WindowsTerminal* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *zune* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Microsoft3DViewer* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *ScreenSketch* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Paint* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftCorporationII.MicrosoftFamily* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftTeams* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage"
+%currentuser% PowerShell -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.WindowsNotepad* | Remove-AppxPackage"
 
 :: Remove Microsoft Edge Chromium
 %currentuser% Powershell -ExecutionPolicy Unrestricted "%WinDir%\NeptuneDir\Scripts\RemoveEdge.ps1" -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive >> %neptlog%
