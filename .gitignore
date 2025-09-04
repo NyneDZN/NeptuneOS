@@ -1,2 +1,48 @@
-# Idea
-.idea
+# ========================
+# Windows / PowerShell ignores
+# ========================
+
+# PowerShell generated files
+*.ps1xml
+*.psc1
+*.psd1
+*.psm1
+
+# PowerShell module auto-generated logs
+*.log
+*.tmp
+*.cache
+
+# ========================
+# Neptune Project generated files
+# ========================
+
+# System info JSON
+systeminfo.json
+
+# Troubleshooting / backup reg files
+Troubleshooting/Default Services and Drivers/*.reg
+
+# Optional: user-specific temporary folders
+*.tmp
+*.bak
+
+# ========================
+# IDE / editor files
+# ========================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Windows thumbnail cache / thumbs.db
+Thumbs.db
+Desktop.ini
+
+# ========================
+# OS specific
+# ========================
+
+# Recycle Bin / system files
+$RECYCLE.BIN/
+*.DS_Store
