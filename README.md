@@ -25,8 +25,7 @@
 
 <!-- GETTING STARTED -->
 ## Getting Started
-Fixing for <b>NepuneOS 0.5</b>
-
+WIP for <b>NepuneOS 0.6</b>
 
 <!-- COMPATIBILITY -->
 ## Windows Version Compatibility
