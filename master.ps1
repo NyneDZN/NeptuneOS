@@ -136,12 +136,53 @@ function Get-SystemInfo {
     }
 }
 
+function Invoke-TrustedInstallerScript {
+    param(
+        [Parameter(Mandatory=$true)][string]$ScriptName
+    )
+
+    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\actions\$ScriptName"
+    $powerRunExe = Join-Path $ScriptRoot "tools\PowerRun.exe"
+
+    if (-not (Test-Path $scriptPath)) {
+        Write-Log "TrustedInstaller script not found: $ScriptName" 'ERROR'
+        return
+    }
+
+    if (-not (Test-Path $powerRunExe)) {
+        Write-Log "PowerRun.exe not found at $powerRunExe. Cannot run TrustedInstaller scripts." 'ERROR'
+        return
+    }
+
+    Write-Log "Launching TrustedInstaller script: $ScriptName"
+
+    $arguments = "-exefile `"$PSHome\powershell.exe`" -args `"-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"`""
+
+    try {
+        $proc = Start-Process -FilePath $powerRunExe -ArgumentList $arguments -Wait -PassThru
+        if ($proc.ExitCode -eq 0) {
+            Write-Log "TrustedInstaller script completed successfully: $ScriptName"
+        } else {
+            Write-Log "TrustedInstaller script finished with exit code $($proc.ExitCode): $ScriptName" 'ERROR'
+        }
+    } catch {
+        Write-Log "Error launching TrustedInstaller script: $($_.Exception.Message)" 'ERROR'
+    }
+}
 
 # ========================
 # Main Mode Selection
 # ========================
 if ($DevMode) {
     Write-Log "Master script started in DEV MODE."
+    Get-SystemInfo "cpu.ps1"
+    Get-SystemInfo "gpu.ps1"
+    Get-SystemInfo "ram.ps1"
+    Get-SystemInfo "device_type.ps1"
+    Get-SystemInfo "username.ps1"
+    Get-SystemInfo "usersid.ps1"
+    Get-SystemInfo "winver.ps1"
+    Clear-Host
 
     while ($true) {
         $userInput = Read-Host "Enter command (e.g., 'action example.ps1', 'info cpu.ps1', 'exit')"
@@ -154,6 +195,8 @@ if ($DevMode) {
         switch ($Action) {
             "action" { Invoke-ActionScript $Target }
             "info"   { Get-SystemInfo $Target }
+            "ti"     { Invoke-TrustedInstallerScript $Target }
+            "clear"  { Clear-Host }
             default  { Write-Log "Unknown command: $Action" "ERROR" }
         }
     }
