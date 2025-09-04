@@ -1,0 +1,33 @@
+note for nvidia gpu users - firefox uses adaptive power managment mode by default, change it to prefer maximum performance in nvidia profile inspector
+
+about:config tweaks:
+layout.frame_rate to refresh rate
+
+full-screen-api.transition-duration.enter to 0
+
+full-screen-api.transition-duration.leave to 0
+
+full-screen-api.warning.timeout to 0
+
+ui.systemUsesDarkTheme to 1 ( create number value for win 7 & 8.1, no need for win 10 if using dark mode in windows settings )
+
+nglayout.enable_drag_images to false ( disables preview popup while rearranging tabs )
+
+browser.newtab.preload to false
+
+network.dns.disablePrefetch to true
+
+media.wmf.low-latency.enabled to true
+
+reader.parse-on-load.enabled to false ( disables reader mode )
+
+extensions.pocket.enabled to false
+
+app.normandy.enabled to false
+
+network.http.http3.enabled to true ( enables quic protocol, which uses udp instead of tcp )
+
+identity.fxaccounts.enabled to false ( disables firefox account/sync )
+
+
+recommended extensions - ublock origin, decentraleyes, privacy badger

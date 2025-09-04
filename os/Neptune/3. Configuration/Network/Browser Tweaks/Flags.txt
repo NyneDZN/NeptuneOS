@@ -1,0 +1,103 @@
+#ignore-gpu-denylist - Enabled
+
+#overlay-strategies - None
+
+#enable-webrtc-hide-local-ips-with-mdns - Enabled
+
+#smooth-scrolling - Disabled
+
+#enable-quic - Enabled
+
+#enable-javascript-harmony - Enabled
+
+#enable-experimental-webassembly-features - Enabled
+
+#enable-webassembly-threads - Enabled
+
+#enable-future-v8-vm-features - Enabled
+
+#enable-gpu-rasterization - Enabled
+
+#enable-oop-rasterization - Enabled
+
+#enable-experimental-web-platform-features - Enabled
+
+#overscroll-history-navigation - Disabled
+
+#pull-to-refresh - Disabled
+
+#enable-webgl2-compute-context - Enabled
+
+#enable-zero-copy - Enabled
+
+#enable-native-notifications - Disabled
+
+#reduced-referrer-granularity - Enabled
+
+#site-isolation-trial-opt-out - Disabled
+
+#enable-resource-loading-hints - Disabled
+
+#bypass-app-banner-engagement-checks - Enabled
+
+#media-router-cast-allow-all-ips - Disabled
+
+#cast-media-route-provider - Disabled
+
+#webxr-incubations - Disabled
+
+#webxr-runtime - No Runtime
+
+#system-keyboard-lock - Enabled
+
+#enable-force-dark - Enabled
+
+#enable-experimental-fling-animation - Disabled
+
+#enable-winrt-sensor-implementation - Disabled
+
+#enable-generic-sensor-extra-classes - Disabled
+
+#gdi-text-printing - Disabled
+
+#new-usb-backend - Enabled
+
+#enable-service-worker-on-ui - Disabled
+
+#compositor-threaded-scrollbar-scrolling - Enabled
+
+#use-angle - OpenGL
+
+#turn-off-streaming-media-caching - Disabled
+
+#enable-cooperative-scheduling - Enabled
+
+#dns-over-https - (Disabled for less latency; Enabled for privacy)
+
+#impulse-scroll-animations - Disabled
+
+#slow-dc-timer-interrupts-win - Disabled
+
+#run-video-capture-service-in-browser - Disabled
+
+
+
+
+//EDGE ONLY
+
+#edge-experimental-scrolling - Disabled
+
+#edge-experimental-tracking-prevention-features - Enabled
+
+#edge-read-aloud-pdf - Disabled
+
+#edge-log-textfield-lag - Disabled
+
+#edge-microsoft-voices - Disabled
+
+#edge-mf-dolby-vision - Disabled
+
+#edge-top-sites-from-next-url-service - Disabled
+
+
+

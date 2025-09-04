@@ -101,7 +101,7 @@ Register-EngineEvent PowerShell.OnError -Action {
 # ========================
 function Invoke-ActionScript {
     param([string]$ScriptName)
-    $scriptPath = Join-Path $ScriptRoot "actions\$ScriptName"
+    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\actions\$ScriptName"
 
     if (Test-Path $scriptPath) {
         Write-Log "Launching action script: $ScriptName"
@@ -118,7 +118,7 @@ function Invoke-ActionScript {
 
 function Get-SystemInfo {
     param([string]$InfoScript)
-    $scriptPath = Join-Path $ScriptRoot "info\$InfoScript"
+    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\info\$InfoScript"
     if (Test-Path $scriptPath) {
         Write-Log "Gathering info using: $InfoScript"
         
