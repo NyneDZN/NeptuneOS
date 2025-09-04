@@ -25,6 +25,35 @@ if (-not (Test-Path $LogFile)) {
 }
 
 # ========================
+# Terminal Banner
+# ========================
+
+function Show-Banner {
+    # Clear screen first
+    # Clear-Host
+
+    # Determine mode string
+    $mode = if ($DevMode) { 'DEV MODE' } elseif ($NeptuneInstall) { 'INSTALL MODE' } else { 'UNKNOWN' }
+
+    $bannerLines = @(
+        "========================================================",
+        "   NeptuneOS Master Script",
+        "   Mode : $mode",
+        "   Script Root: $ScriptRoot",
+        "========================================================"
+    )
+
+    foreach ($line in $bannerLines) {
+        Write-Host $line -ForegroundColor Cyan
+    }
+
+    Write-Host ""  # Blank line below banner
+}
+
+
+
+
+# ========================
 # Global System Info
 # ========================
 if (Test-Path $SystemInfoFile) {
@@ -83,9 +112,17 @@ function Write-Log {
     )
     $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
     $logEntry  = "[$timestamp] [$Level] $Message"
-    Write-Output $logEntry
+    
+    # Always print to top pane
+    Write-Host $logEntry
     Add-Content -Path $LogFile -Value $logEntry
+
+    # If ERROR, also print in error pane
+    if ($Level -eq 'ERROR') {
+    Write-ErrorPane $Message
+    }
 }
+
 
 # Capture unhandled errors
 Register-EngineEvent PowerShell.OnError -Action {
@@ -174,6 +211,7 @@ function Invoke-TrustedInstallerScript {
 # Main Mode Selection
 # ========================
 if ($DevMode) {
+    Show-Banner
     Write-Log "Master script started in DEV MODE."
     Get-SystemInfo "cpu.ps1"
     Get-SystemInfo "gpu.ps1"
@@ -183,6 +221,7 @@ if ($DevMode) {
     Get-SystemInfo "usersid.ps1"
     Get-SystemInfo "winver.ps1"
     Clear-Host
+    Show-Banner
 
     while ($true) {
         $userInput = Read-Host "Enter command (e.g., 'action example.ps1', 'info cpu.ps1', 'exit')"
