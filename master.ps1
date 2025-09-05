@@ -108,11 +108,12 @@ function Write-Log {
     Write-Host $logEntry
     Add-Content -Path $LogFile -Value $logEntry
 
-    # If ERROR, also print in error pane
+    # If ERROR, also print visibly
     if ($Level -eq 'ERROR') {
-    Write-ErrorPane $Message
+        Write-Host "ERROR: $Message" -ForegroundColor Red
     }
 }
+
 
 
 # Capture unhandled errors

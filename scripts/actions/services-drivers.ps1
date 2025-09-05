@@ -22,12 +22,13 @@ function Set-ServiceStartup {
     }
 
     try {
-        # Update the Start value
-        Set-ItemProperty -Path $regPath -Name "Start" -Value $StartType -Type DWord
+        Set-ItemProperty -Path $regPath -Name "Start" -Value $StartType -Type DWord -ErrorAction Stop
         Write-Log "Service/Driver '$ServiceName' configured to startup type $StartType"
-    } catch {
+    } 
+    catch {
         Write-Log "Failed to configure '$ServiceName': $($_.Exception.Message)" "ERROR"
     }
+
 }
 
 # ========================
