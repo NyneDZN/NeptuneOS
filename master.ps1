@@ -1,12 +1,3 @@
-<#
-.SYNOPSIS
-  Master PowerShell script for Neptune Project. Acts as terminal and logger, launches action/info scripts.
-.DESCRIPTION
-  - DevMode = opens interactive command terminal
-  - NeptuneInstall = runs install scripts automatically
-  - No params = shows popup warning
-#>
-
 param (
     [switch]$DevMode,
     [switch]$NeptuneInstall
@@ -138,7 +129,7 @@ Register-EngineEvent PowerShell.OnError -Action {
 # ========================
 function Invoke-ActionScript {
     param([string]$ScriptName)
-    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\actions\$ScriptName"
+    $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
 
     if (Test-Path $scriptPath) {
         Write-Log "Launching action script: $ScriptName"
@@ -153,9 +144,27 @@ function Invoke-ActionScript {
     }
 }
 
+function Invoke-DebugScript {
+    param([string]$debugScript)
+    $scriptPath = Join-Path $ScriptRoot "scripts\debugging\$debugScript"
+
+    if (Test-Path $scriptPath) {
+        Write-Log "Launching debug script: $debugScript"
+        try {
+            # Dot-source so script runs inside master session (keeps elevation + globals)
+            . $scriptPath | ForEach-Object { Write-Log $_ }
+        } catch {
+            Write-Log "Error while running $debugScript $_" 'ERROR'
+        }
+    } else {
+        Write-Log "Debug script not found: $debugScript" 'ERROR'
+    }
+}
+
+
 function Get-SystemInfo {
     param([string]$InfoScript)
-    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\info\$InfoScript"
+    $scriptPath = Join-Path $ScriptRoot "scripts\info\$InfoScript"
     if (Test-Path $scriptPath) {
         Write-Log "Gathering info using: $InfoScript"
         
@@ -234,6 +243,7 @@ if ($DevMode) {
         switch ($Action) {
             "action" { Invoke-ActionScript $Target }
             "info"   { Get-SystemInfo $Target }
+            "debug"  { Invoke-DebugScript $Target }
             "ti"     { Invoke-TrustedInstallerScript $Target }
             "clear"  { Clear-Host }
             default  { Write-Log "Unknown command: $Action" "ERROR" }
