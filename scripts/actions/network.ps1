@@ -1,7 +1,7 @@
 # registry.ps1 - main registry action loader
 
 # Path to registry sub-scripts folder
-$RegistryScriptsPath = Join-Path $PSScriptRoot "\scripts\actions\network"
+$RegistryScriptsPath = Join-Path $PSScriptRoot ".\scripts\actions\network"
 
 # ========================
 # Helper function
