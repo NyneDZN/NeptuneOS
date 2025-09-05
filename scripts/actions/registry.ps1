@@ -1,7 +1,7 @@
 # registry.ps1 - main registry action loader
 
 # Path to registry sub-scripts folder
-$RegistryScriptsPath = Join-Path $PSScriptRoot "registry"
+$RegistryScriptsPath = Join-Path $PSScriptRoot "\scripts\actions\registry"
 
 # ========================
 # Helper function
@@ -33,9 +33,11 @@ function Set-RegistryValue {
 # Manual execution order
 # ========================
 $RegistryScriptsOrder = @(
-    "disable_recent_docs.ps1",
-    "disable_telemetry.ps1",
-    "optimize_explorer.ps1"
+    "updates.cmd",
+    "explorer.cmd",
+    "performance.cmd",
+    "privacy.cmd",
+    "misc.bat"
     # Add more scripts here in the order you want them executed
 )
 
@@ -54,7 +56,7 @@ foreach ($scriptName in $RegistryScriptsOrder) {
 }
 
 # ========================
-# Optional: auto-load any extra scripts not in the manual list
+# Auto-load any extra scripts not in the manual list
 # ========================
 # $allScripts = Get-ChildItem -Path $RegistryScriptsPath -Filter *.ps1 | Select-Object -ExpandProperty Name
 # $extraScripts = $allScripts | Where-Object { $_ -notin $RegistryScriptsOrder }
