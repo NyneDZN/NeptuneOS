@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: Explorer Quickness
 :: - > Turn down application launch delays
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "StartupDelayInMSec" /t REG_DWORD /d "0" /f 

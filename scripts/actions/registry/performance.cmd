@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: Configuring Performance and Latency in Windows
 :: - > MMCSS
 :: - > Set system responsiveness to 10%

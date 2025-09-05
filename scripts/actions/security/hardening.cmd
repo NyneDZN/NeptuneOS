@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: Mitigations
 :: - > Spectre & Meltdown
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f 

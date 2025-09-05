@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: Configuring updates in Windows
 :: - > Defer non-critical Windows Updates
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferQualityUpdates" /t REG_DWORD /d "1" /f 

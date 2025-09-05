@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: - Configuring privacy telemetry, and tracking in Windows.
 :: Disable CEIP
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Messenger\Client" /v "CEIP" /t REG_DWORD /d "2" /f 

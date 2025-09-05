@@ -1,3 +1,5 @@
+call "%~dp0variables.cmd"
+
 :: Network Shell
 :: Reset the Network Configuration
 ipconfig /release 
