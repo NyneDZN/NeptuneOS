@@ -1,0 +1,14 @@
+set BACKUP="%WINDIR%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Neptune Default.reg"
+echo Windows Registry Editor Version 5.00 >>%BACKUP%
+
+for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
+for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
+for /l %%c in (0,1,4) do (
+if "%%b"=="0x%%c" (
+echo. >>%BACKUP%
+echo [%%~a] >>%BACKUP%
+echo "Start"=dword:0000000%%c >>%BACKUP%
+)
+)
+)
+) >nul

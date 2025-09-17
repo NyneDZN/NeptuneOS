@@ -256,7 +256,6 @@ elseif ($NeptuneInstall) {
     Write-Log "Master script started in INSTALL MODE."
 
     # Example: launch installer script
-    Invoke-ActionScript 'installer.ps1'
     Get-SystemInfo "cpu.ps1"
     Get-SystemInfo "gpu.ps1"
     Get-SystemInfo "ram.ps1"
@@ -264,8 +263,7 @@ elseif ($NeptuneInstall) {
     Get-SystemInfo "username.ps1"
     Get-SystemInfo "usersid.ps1"
     Get-SystemInfo "winver.ps1"
-    Pause -Seconds 5
-
+    Invoke-ActionScript 'installer.ps1'
     Write-Log "Master script finished (INSTALL MODE)."
 }
 else {

@@ -1,0 +1,19 @@
+setlocal enabledelayedexpansion
+
+REM Go up 2 levels from script location
+for %%I in ("%~dp0..\..") do set "rootDir=%%~fI"
+
+REM Path to prerequisites folder
+set "prereqDir=%rootDir%\prerequisites"
+
+cls & echo !S_YELLOW!Installing Visual C++... [15/18]
+start /wait "" "%prereqDir%\vcredist.exe" /ai8X239T 
+
+cls & echo !S_YELLOW!Installing DirectX... [16/18]
+start /wait "" "%prereqDir%\DirectX\DXSETUP.exe" /silent 
+
+cls & echo !S_YELLOW!Installing 7-Zip... [17/18]
+start /wait "" "%prereqDir%\7z.exe" /S  
+
+endlocal
+goto :eof

@@ -17,12 +17,16 @@ function Show-Section {
 }
 
 # Run installer prerequisites
-
+Show-Section "Installing Prerequisites"
+Invoke-ActionScript "install-prerequisites.bat"
 
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
+Invoke-ActionScript "services-drivers\backup-windows-default.cmd"
 Invoke-ActionScript "services-drivers.ps1"
 Invoke-ActionScript "services-drivers\filters.ps1"
+Invoke-ActionScript "services-drivers\audio-service-split.bat"
+Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
 
 Show-Section "Performance Tweaks"
 # Run-ActionScript "power-settings.ps1"
@@ -44,6 +48,10 @@ Invoke-ActionScript "\performance\svchost-split-threshold.cmd"
 Invoke-ActionScript "\performance\timestamp-interval.cmd"
 Invoke-ActionScript "\performance\win32-priority-seperation.cmd"
 Invoke-ActionScript "\performance\windowed-optimizations-hdr.cmd"
+
+Show-Section "Security Tweaks"
+Invoke-ActionScript "security\hardening.cmd"
+Invoke-ActionScript "security\mitigations.cmd"
 
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
