@@ -258,6 +258,15 @@ elseif ($NeptuneInstall) {
 
     # Example: launch installer script
     Invoke-ActionScript 'installer.ps1'
+    Get-SystemInfo "cpu.ps1"
+    Get-SystemInfo "gpu.ps1"
+    Get-SystemInfo "ram.ps1"
+    Get-SystemInfo "device_type.ps1"
+    Get-SystemInfo "username.ps1"
+    Get-SystemInfo "usersid.ps1"
+    Get-SystemInfo "winver.ps1"
+    Invoke-ActionScript "registry\performance\audio.cmd"
+    Pause -Seconds 10
 
     Write-Log "Master script finished (INSTALL MODE)."
 }

@@ -57,7 +57,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG
 :: Disable Shared Experiences
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableCdp" /t REG_DWORD /d "0" /f 
 
-: Disable pre-release features
+:: Disable pre-release features
 reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "EnableConfigFlighting" /t REG_DWORD /d "0" /f 
 
 :: Disable Smart App Control (Fixes slow app loading issues on W11)
