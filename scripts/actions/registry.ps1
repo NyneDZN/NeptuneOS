@@ -37,7 +37,7 @@ $RegistryScriptsOrder = @(
     "explorer.cmd",
     "performance.cmd",
     "privacy.cmd",
-    "misc.bat"
+    "misc.cmd"
     # Add more scripts here in the order you want them executed
 )
 

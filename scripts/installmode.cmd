@@ -10,7 +10,7 @@ echo Running from: %ROOT%\master.ps1
 pause
 
 :: Run the script without elevation for now
-"%ROOT%\tools\MinSudo.exe -NoL -V -S -WD=%ROOT%  powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%\master.ps1" -DevMode
+"%ROOT%\tools\MinSudo.exe -NoL -V -S -WD=%ROOT%  powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%\master.ps1" -NeptuneInstall
 
 endlocal
 pause

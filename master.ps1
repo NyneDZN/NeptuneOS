@@ -265,8 +265,7 @@ elseif ($NeptuneInstall) {
     Get-SystemInfo "username.ps1"
     Get-SystemInfo "usersid.ps1"
     Get-SystemInfo "winver.ps1"
-    Invoke-ActionScript "registry\performance\audio.cmd"
-    Pause -Seconds 10
+    Pause -Seconds 5
 
     Write-Log "Master script finished (INSTALL MODE)."
 }
