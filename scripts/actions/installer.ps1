@@ -20,6 +20,15 @@ function Show-Section {
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript "install-prerequisites.bat"
 
+# Windows Components
+Show-Section "Windows Components"
+Invoke-ActionScript "dism-capabilities.bat"
+
+# File System
+Show-Section "File System Configuration"
+Invoke-ActionScript "ntfs.ps1"
+Invoke-ActionScript "ntfs\fsutil.ps1"
+
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
 Invoke-ActionScript "services-drivers\backup-windows-default.cmd"
@@ -28,9 +37,11 @@ Invoke-ActionScript "services-drivers\filters.ps1"
 Invoke-ActionScript "services-drivers\audio-service-split.bat"
 Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
 
+# Registry Tweaks
+Show-Section "Registry Tweaks"
+
+
 Show-Section "Performance Tweaks"
-# Run-ActionScript "power-settings.ps1"
-# Run-ActionScript "scheduler.ps1"
 Invoke-ActionScript "\performance\audio.cmd"
 Invoke-ActionScript "\performance\background-apps.cmd"
 Invoke-ActionScript "\performance\disable-wbdt.cmd"
