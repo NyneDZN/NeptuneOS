@@ -83,7 +83,6 @@ function Update-SystemInfo {
     }
 
     try {
-        # ✅ Remove -Compress to get pretty, indented JSON
         $Global:SystemInfo | ConvertTo-Json -Depth 5 | Set-Content -Path $SystemInfoFile -Force
         Write-Log "System info updated: $Key"
     } catch {
