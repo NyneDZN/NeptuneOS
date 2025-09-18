@@ -20,10 +20,7 @@ if (-not (Test-Path $LogFile)) {
 # ========================
 
 function Show-Banner {
-    # Clear screen first
-    # Clear-Host
 
-    # Determine mode string
     $mode = if ($DevMode) { 'DEV MODE' } elseif ($NeptuneInstall) { 'INSTALL MODE' } else { 'UNKNOWN' }
 
     $bannerLines = @(
@@ -143,25 +140,6 @@ function Invoke-ActionScript {
         Write-Log "Action script not found: $ScriptName" 'ERROR'
     }
 }
-
-function Invoke-DebugScript {
-    param([string]$debugScript)
-    $scriptPath = Join-Path $ScriptRoot "scripts\debugging\$debugScript"
-
-    if (Test-Path $scriptPath) {
-        Write-Log "Launching debug script: $debugScript"
-        try {
-            # Dot-source so script runs inside master session (keeps elevation + globals)
-            . $scriptPath | ForEach-Object { Write-Log $_ }
-        } catch {
-            Write-Log "Error while running $debugScript $_" 'ERROR'
-        }
-    } else {
-        Write-Log "Debug script not found: $debugScript" 'ERROR'
-    }
-}
-
-
 function Get-SystemInfo {
     param([string]$InfoScript)
     $scriptPath = Join-Path $ScriptRoot "scripts\info\$InfoScript"
@@ -179,40 +157,6 @@ function Get-SystemInfo {
         }
     } else {
         Write-Log "Info script not found: $InfoScript" 'ERROR'
-    }
-}
-
-function Invoke-TrustedInstallerScript {
-    param(
-        [Parameter(Mandatory=$true)][string]$ScriptName
-    )
-
-    $scriptPath = Join-Path $ScriptRoot "scripts\powershell\actions\$ScriptName"
-    $powerRunExe = Join-Path $ScriptRoot "tools\PowerRun.exe"
-
-    if (-not (Test-Path $scriptPath)) {
-        Write-Log "TrustedInstaller script not found: $ScriptName" 'ERROR'
-        return
-    }
-
-    if (-not (Test-Path $powerRunExe)) {
-        Write-Log "PowerRun.exe not found at $powerRunExe. Cannot run TrustedInstaller scripts." 'ERROR'
-        return
-    }
-
-    Write-Log "Launching TrustedInstaller script: $ScriptName"
-
-    $arguments = "-exefile `"$PSHome\powershell.exe`" -args `"-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"`""
-
-    try {
-        $proc = Start-Process -FilePath $powerRunExe -ArgumentList $arguments -Wait -PassThru
-        if ($proc.ExitCode -eq 0) {
-            Write-Log "TrustedInstaller script completed successfully: $ScriptName"
-        } else {
-            Write-Log "TrustedInstaller script finished with exit code $($proc.ExitCode): $ScriptName" 'ERROR'
-        }
-    } catch {
-        Write-Log "Error launching TrustedInstaller script: $($_.Exception.Message)" 'ERROR'
     }
 }
 
@@ -254,8 +198,12 @@ if ($DevMode) {
 }
 elseif ($NeptuneInstall) {
     Write-Log "Master script started in INSTALL MODE."
+    # Set global root path so batch doesn't feel left out
+    $env:ROOTPATH = $PSScriptRoot
 
     # Example: launch installer script
+    # Begin ngen asap to improve powershell speeds
+    Invoke-ActionScript "ngen.ps1"
     Get-SystemInfo "cpu.ps1"
     Get-SystemInfo "gpu.ps1"
     Get-SystemInfo "ram.ps1"

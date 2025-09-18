@@ -16,6 +16,12 @@ function Show-Section {
     Write-Log "== $Title =="
 }
 
+# Initialize Neptune Environment
+New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory
+Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
+Move-Item -Path "$PSScriptRoot\os\lockscreen.png" - Destination "C:\Windows\NeptuneDir" -Force
+Move-Item -Path "$PSScriptRoot\os\user.png" - Destination "C:\Windows\NeptuneDir" -Force
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript "install-prerequisites.bat"
@@ -39,8 +45,12 @@ Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
+Invoke-ActionScript "registry\explorer.cmd"
+Invoke-ActionScript "registry\misc.cmd"
+Invoke-ActionScript "registry\privacy.cmd"
+Invoke-ActionScript "registry\updates.cmd"
 
-
+# Performance Tweaks
 Show-Section "Performance Tweaks"
 Invoke-ActionScript "\performance\audio.cmd"
 Invoke-ActionScript "\performance\background-apps.cmd"
@@ -60,10 +70,12 @@ Invoke-ActionScript "\performance\timestamp-interval.cmd"
 Invoke-ActionScript "\performance\win32-priority-seperation.cmd"
 Invoke-ActionScript "\performance\windowed-optimizations-hdr.cmd"
 
+# Security Tweaks
 Show-Section "Security Tweaks"
 Invoke-ActionScript "security\hardening.cmd"
 Invoke-ActionScript "security\mitigations.cmd"
 
+# Cleanup
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 
