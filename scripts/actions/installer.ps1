@@ -22,6 +22,9 @@ function Show-Section {
 # Move-Item -Path "$PSScriptRoot\os\lockscreen.png" - Destination "C:\Windows\NeptuneDir" -Force
 # Move-Item -Path "$PSScriptRoot\os\user.png" - Destination "C:\Windows\NeptuneDir" -Force
 
+# Make $SID visible to batch scripts
+$env:SID = $SID
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript "install-prerequisites.bat"
@@ -42,6 +45,14 @@ Invoke-ActionScript "services-drivers.ps1"
 Invoke-ActionScript "services-drivers\filters.ps1"
 Invoke-ActionScript "services-drivers\audio-service-split.bat"
 Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
+
+
+# Run all scripts normally
+Invoke-ActionScript "registry\explorer.cmd" -Args @{ SID = $SID }
+Invoke-ActionScript "registry\misc.cmd"
+Invoke-ActionScript "registry\privacy.cmd"
+Invoke-ActionScript "registry\updates.cmd"
+
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"

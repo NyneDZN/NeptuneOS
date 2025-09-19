@@ -172,16 +172,8 @@ function Update-SystemInfo {
 # Main Mode Selection
 # ========================
 if ($DevMode) {
-    Show-Banner
-    Write-Log "Master script started in DEV MODE."
-    Get-SystemInfo "cpu.ps1"
-    Get-SystemInfo "gpu.ps1"
-    Get-SystemInfo "ram.ps1"
-    Get-SystemInfo "device_type.ps1"
-    Get-SystemInfo "username.ps1"
-    Get-SystemInfo "usersid.ps1"
-    Get-SystemInfo "winver.ps1"
     Clear-Host
+    Write-Log "Master script started in DEV MODE."
     Show-Banner
 
     while ($true) {
