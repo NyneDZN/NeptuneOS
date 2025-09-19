@@ -1,4 +1,5 @@
-call "%~dp0variables.cmd"
+call "C:\neptune-installer\variables.cmd"
+pause
 
 :: Explorer Quickness
 :: - > Turn down application launch delays
