@@ -2,12 +2,6 @@
 # Windows / PowerShell ignores
 # ========================
 
-# PowerShell generated files
-*.ps1xml
-*.psc1
-*.psd1
-*.psm1
-
 # PowerShell module auto-generated logs
 *.log
 *.tmp

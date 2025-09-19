@@ -3,6 +3,14 @@ param (
     [switch]$NeptuneInstall
 )
 
+
+# ========================
+# Import Module Scripts
+# ========================
+Import-Module "$PSScriptRoot\scripts\aesthetics.psm1"
+Import-Module "$PSScriptRoot\scripts\execution-helpers.psm1"
+Import-Module "$PSScriptRoot\scripts\logs.psm1"
+
 # ========================
 # Paths & Files
 # ========================
@@ -19,24 +27,24 @@ if (-not (Test-Path $LogFile)) {
 # Terminal Banner
 # ========================
 
-function Show-Banner {
-
-    $mode = if ($DevMode) { 'DEV MODE' } elseif ($NeptuneInstall) { 'INSTALL MODE' } else { 'UNKNOWN' }
-
-    $bannerLines = @(
-        "========================================================",
-        "   NeptuneOS Master Script",
-        "   Mode : $mode",
-        "   Script Root: $ScriptRoot",
-        "========================================================"
-    )
-
-    foreach ($line in $bannerLines) {
-        Write-Host $line -ForegroundColor Cyan
-    }
-
-    Write-Host ""  # Blank line below banner
-}
+# function Show-Banner {
+# 
+#     $mode = if ($DevMode) { 'DEV MODE' } elseif ($NeptuneInstall) { 'INSTALL MODE' } else { 'UNKNOWN' }
+# 
+#     $bannerLines = @(
+#         "========================================================",
+#         "   NeptuneOS Master Script",
+#         "   Mode : $mode",
+#         "   Script Root: $ScriptRoot",
+#         "========================================================"
+#     )
+# 
+#     foreach ($line in $bannerLines) {
+#         Write-Host $line -ForegroundColor Cyan
+#     }
+# 
+#     Write-Host ""  # Blank line below banner
+# }
 
 
 
@@ -92,73 +100,73 @@ function Update-SystemInfo {
 # ========================
 # Logging
 # ========================
-function Write-Log {
-    param(
-        [string]$Message,
-        [string]$Level = 'INFO'
-    )
-    $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-    $logEntry  = "[$timestamp] [$Level] $Message"
-    
-    # Always print to top pane
-    Write-Host $logEntry
-    Add-Content -Path $LogFile -Value $logEntry
-
-    # If ERROR, also print visibly
-    if ($Level -eq 'ERROR') {
-        Write-Host "ERROR: $Message" -ForegroundColor Red
-    }
-}
-
-
-
-# Capture unhandled errors
-Register-EngineEvent PowerShell.OnError -Action {
-    param($src, $evt)
-    $err = $evt.SourceArgs[0] -as [System.Management.Automation.ErrorRecord]
-    if ($err) {
-        Write-Log "[$($err.CategoryInfo.Category)] $($err.Exception.Message)" "ERROR"
-    }
-}
+# function Write-Log {
+#     param(
+#         [string]$Message,
+#         [string]$Level = 'INFO'
+#     )
+#     $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+#     $logEntry  = "[$timestamp] [$Level] $Message"
+#     
+#     # Always print to top pane
+#     Write-Host $logEntry
+#     Add-Content -Path $LogFile -Value $logEntry
+#
+#     # If ERROR, also print visibly
+#     if ($Level -eq 'ERROR') {
+#         Write-Host "ERROR: $Message" -ForegroundColor Red
+#     }
+# }
+#
+#
+#
+# # Capture unhandled errors
+# Register-EngineEvent PowerShell.OnError -Action {
+#     param($src, $evt)
+#     $err = $evt.SourceArgs[0] -as [System.Management.Automation.ErrorRecord]
+#     if ($err) {
+#         Write-Log "[$($err.CategoryInfo.Category)] $($err.Exception.Message)" "ERROR"
+#     }
+# }
 
 # ========================
 # Script Execution Helpers
 # ========================
-function Invoke-ActionScript {
-    param([string]$ScriptName)
-    $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
-
-    if (Test-Path $scriptPath) {
-        Write-Log "Launching action script: $ScriptName"
-        try {
-            # Dot-source so script runs inside master session (keeps elevation + globals)
-            . $scriptPath | ForEach-Object { Write-Log $_ }
-        } catch {
-            Write-Log "Error while running $ScriptName $_" 'ERROR'
-        }
-    } else {
-        Write-Log "Action script not found: $ScriptName" 'ERROR'
-    }
-}
-function Get-SystemInfo {
-    param([string]$InfoScript)
-    $scriptPath = Join-Path $ScriptRoot "scripts\info\$InfoScript"
-    if (Test-Path $scriptPath) {
-        Write-Log "Gathering info using: $InfoScript"
-        
-        $info = & $scriptPath
-        
-        if ($info -is [hashtable]) {
-            foreach ($key in $info.Keys) {
-                Update-SystemInfo -Key $key -Value $info[$key]
-            }
-        } else {
-            Write-Log "Info script did not return a hashtable" "ERROR"
-        }
-    } else {
-        Write-Log "Info script not found: $InfoScript" 'ERROR'
-    }
-}
+# function Invoke-ActionScript {
+#     param([string]$ScriptName)
+#     $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
+#
+#     if (Test-Path $scriptPath) {
+#         Write-Log "Launching action script: $ScriptName"
+#         try {
+#             # Dot-source so script runs inside master session (keeps elevation + globals)
+#             . $scriptPath | ForEach-Object { Write-Log $_ }
+#         } catch {
+#             Write-Log "Error while running $ScriptName $_" 'ERROR'
+#         }
+#     } else {
+#         Write-Log "Action script not found: $ScriptName" 'ERROR'
+#     }
+# }
+# function Get-SystemInfo {
+#     param([string]$InfoScript)
+#     $scriptPath = Join-Path $ScriptRoot "scripts\info\$InfoScript"
+#     if (Test-Path $scriptPath) {
+#         Write-Log "Gathering info using: $InfoScript"
+#         
+#         $info = & $scriptPath
+#         
+#         if ($info -is [hashtable]) {
+#             foreach ($key in $info.Keys) {
+#                 Update-SystemInfo -Key $key -Value $info[$key]
+#             }
+#         } else {
+#             Write-Log "Info script did not return a hashtable" "ERROR"
+#         }
+#     } else {
+#         Write-Log "Info script not found: $InfoScript" 'ERROR'
+#     }
+# }
 
 # ========================
 # Main Mode Selection
