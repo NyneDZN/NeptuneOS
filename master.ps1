@@ -190,6 +190,11 @@ if ($DevMode) {
             "debug"  { Invoke-DebugScript $Target }
             "ti"     { Invoke-TrustedInstallerScript $Target }
             "clear"  { Clear-Host }
+            "ps"     { 
+                Write-Host "[INFO] Launching real PowerShell session..."
+                Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", "Set-Location '$ScriptRoot'" 
+            }
+            "help"   { Write-Host "Commands: action <script>, info <script>, debug <script>, ti <script>, clear, cmd, help, exit" }
             default  { Write-Log "Unknown command: $Action" "ERROR" }
         }
     }

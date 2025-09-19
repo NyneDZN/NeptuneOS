@@ -17,10 +17,10 @@ function Show-Section {
 }
 
 # Initialize Neptune Environment
-New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory
-Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
-Move-Item -Path "$PSScriptRoot\os\lockscreen.png" - Destination "C:\Windows\NeptuneDir" -Force
-Move-Item -Path "$PSScriptRoot\os\user.png" - Destination "C:\Windows\NeptuneDir" -Force
+# New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory
+# Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
+# Move-Item -Path "$PSScriptRoot\os\lockscreen.png" - Destination "C:\Windows\NeptuneDir" -Force
+# Move-Item -Path "$PSScriptRoot\os\user.png" - Destination "C:\Windows\NeptuneDir" -Force
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
