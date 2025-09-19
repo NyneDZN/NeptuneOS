@@ -1,6 +1,10 @@
-@echo off
+:: @echo off
 :: Call usersid
-call "scripts\info\usersid.cmd"
+setlocal enabledelayedexpansion
+set INITneptdir="C:\neptune-installer"
+set neptdir="C\NeptuneDir"
+
+call "%INITneptidir%\scripts\info\usersid.cmd"
 echo Echo the SID for debug purposes
 echo %SID%
 
