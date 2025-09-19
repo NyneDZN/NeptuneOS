@@ -7,9 +7,9 @@ param (
 # ========================
 # Import Module Scripts
 # ========================
-Import-Module "$PSScriptRoot\scripts\aesthetics.psm1"
-Import-Module "$PSScriptRoot\scripts\execution-helpers.psm1"
-Import-Module "$PSScriptRoot\scripts\logs.psm1"
+Import-Module "$PSScriptRoot\scripts\modules\aesthetics.psm1"
+Import-Module "$PSScriptRoot\scripts\modules\execution-helpers.psm1"
+Import-Module "$PSScriptRoot\scripts\modules\logs.psm1"
 
 # ========================
 # Paths & Files
