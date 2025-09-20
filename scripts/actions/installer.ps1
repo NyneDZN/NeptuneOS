@@ -13,8 +13,7 @@ function Show-Section {
 }
 
 # Initialize Neptune Environment
-Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR"
-Move-Item -Path ".\os\Neptune" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
@@ -29,7 +28,7 @@ Move-Item -Path "C:\neptune-installer\os\ProgramData\Microsoft\User Account Pict
 takeown /f "C:\Windows\Web" /r /d y
 icacls "C:\Windows\Web" /grant administrators:F /t
 Remove-Item -Path "C:\Windows\Web" -Recurse -Force
-Copy-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -Recurse
+Move-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png"
 
 # Run installer prerequisites
