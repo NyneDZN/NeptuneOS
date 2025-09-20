@@ -12,6 +12,10 @@ function Show-Section {
     Write-Log "== $Title =="
 }
 
+
+# Kill explorer
+Stop-Process -Name explorer.exe -Force
+
 # Initialize Neptune Environment
 Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
@@ -33,74 +37,77 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
-Invoke-ActionScript "install-prerequisites.bat"
+Invoke-ActionScript ".\install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-Invoke-ActionScript "dism-capabilities.bat"
-Invoke-ActionScript "packages.cmd"
+Invoke-ActionScript ".\dism-capabilities.bat"
+Invoke-ActionScript ".\packages.cmd"
 
 # Chocolatey
-Invoke-ActionScript "chocolatey.cmd"
+Invoke-ActionScript ".\chocolatey.cmd"
 
 # File System
 Show-Section "File System Configuration"
-Invoke-ActionScript "ntfs.ps1"
-Invoke-ActionScript "ntfs\fsutil.ps1"
+Invoke-ActionScript ".\ntfs.ps1"
+Invoke-ActionScript ".\ntfs\fsutil.ps1"
 
 # Task Scheduler
 Invoke-ActionScript "task-scheduler.ps1"
 
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
-Invoke-ActionScript "services-drivers\backup-windows-default.cmd"
-Invoke-ActionScript "services-drivers.ps1"
-Invoke-ActionScript "services-drivers\filters.ps1"
-Invoke-ActionScript "services-drivers\audio-service-split.bat"
-Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
+Invoke-ActionScript ".\services-drivers\backup-windows-default.cmd"
+Invoke-ActionScript ".\services-drivers.ps1"
+Invoke-ActionScript ".\services-drivers\filters.ps1"
+Invoke-ActionScript ".\services-drivers\audio-service-split.bat"
+Invoke-ActionScript ".\services-drivers\backup-neptune-default.cmd"
 
 # BCD
 Show-Section "Boot Configuration Data (BCD)"
-Invoke-ActionScript "bcdedit.ps1"
+Invoke-ActionScript ".\bcdedit.ps1"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
-Invoke-ActionScript "registry\explorer.cmd"
-Invoke-ActionScript "registry\misc.cmd"
-Invoke-ActionScript "registry\privacy.cmd"
-Invoke-ActionScript "registry\updates.cmd"
+Invoke-ActionScript ".\registry\explorer.cmd"
+Invoke-ActionScript ".\registry\misc.cmd"
+Invoke-ActionScript ".\registry\privacy.cmd"
+Invoke-ActionScript ".\registry\updates.cmd"
 
 # Performance Tweaks
 Show-Section "Performance Tweaks"
-Invoke-ActionScript "\performance\audio.cmd"
-Invoke-ActionScript "\performance\background-apps.cmd"
-Invoke-ActionScript "\performance\disable-wbdt.cmd"
-Invoke-ActionScript "\performance\fastboot.cmd"
-Invoke-ActionScript "\performance\fso-gamebar.cmd"
-Invoke-ActionScript "\performance\game-mode.cmd"
-Invoke-ActionScript "\performance\gpu-scheduling.cmd"
-Invoke-ActionScript "\performance\kernel.cmd"
-Invoke-ActionScript "\performance\latency-tolerance.cmd"
-Invoke-ActionScript "\performance\mmcss-configuration.cmd"
-Invoke-ActionScript "\performance\msi-mode.cmd"
-Invoke-ActionScript "\performance\power-configuration.cmd"
-Invoke-ActionScript "\performance\process-priorities.cmd"
-Invoke-ActionScript "\performance\svchost-split-threshold.cmd"
-Invoke-ActionScript "\performance\timestamp-interval.cmd"
-Invoke-ActionScript "\performance\win32-priority-seperation.cmd"
-Invoke-ActionScript "\performance\windowed-optimizations-hdr.cmd"
+Invoke-ActionScript ".\performance\audio.cmd"
+Invoke-ActionScript ".\performance\background-apps.cmd"
+Invoke-ActionScript ".\performance\disable-wbdt.cmd"
+Invoke-ActionScript ".\performance\fastboot.cmd"
+Invoke-ActionScript ".\performance\fso-gamebar.cmd"
+Invoke-ActionScript ".\performance\game-mode.cmd"
+Invoke-ActionScript ".\performance\gpu-scheduling.cmd"
+Invoke-ActionScript ".\performance\kernel.cmd"
+Invoke-ActionScript ".\performance\latency-tolerance.cmd"
+Invoke-ActionScript ".\performance\mmcss-configuration.cmd"
+Invoke-ActionScript ".\performance\msi-mode.cmd"
+Invoke-ActionScript ".\performance\power-configuration.cmd"
+Invoke-ActionScript ".\performance\process-priorities.cmd"
+Invoke-ActionScript ".\performance\svchost-split-threshold.cmd"
+Invoke-ActionScript ".\performance\timestamp-interval.cmd"
+Invoke-ActionScript ".\performance\win32-priority-seperation.cmd"
+Invoke-ActionScript ".\performance\windowed-optimizations-hdr.cmd"
 
 # Security Tweaks
 Show-Section "Security Tweaks"
-Invoke-ActionScript "security\hardening.cmd"
-Invoke-ActionScript "security\mitigations.cmd"
+Invoke-ActionScript ".\security\hardening.cmd"
+Invoke-ActionScript ".\security\mitigations.cmd"
 
 # Neptune Stuff
 Show-Section "Neptune Customizations"
-Invoke-ActionScript "lockscreen.ps1"
+Invoke-ActionScript ".\lockscreen.ps1"
 
 # Cleanup
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 
 Write-Log "Installer finished successfully."
+Write-Log "Restarting PC in 5 seconds"
+Start-Sleep -Seconds 5
+Restart-Computer -Force
