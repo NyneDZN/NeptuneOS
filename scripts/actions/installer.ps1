@@ -40,6 +40,9 @@ Show-Section "Windows Components"
 Invoke-ActionScript "dism-capabilities.bat"
 Invoke-ActionScript "packages.cmd"
 
+# Chocolatey
+Invoke-ActionScript "chocolatey.cmd"
+
 # File System
 Show-Section "File System Configuration"
 Invoke-ActionScript "ntfs.ps1"
