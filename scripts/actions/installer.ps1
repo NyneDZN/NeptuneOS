@@ -41,7 +41,8 @@ Invoke-ActionScript ".\install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-Invoke-ActionScript ".\dism-capabilities.bat"
+Invoke-ActionScript ".\components\dism-capabilities.bat"
+Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScript ".\packages.cmd"
 
 # Chocolatey
@@ -69,10 +70,16 @@ Invoke-ActionScript ".\bcdedit.ps1"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
+Invoke-ActionScript ".\registry\7-zip-entries.cmd"
 Invoke-ActionScript ".\registry\explorer.cmd"
 Invoke-ActionScript ".\registry\misc.cmd"
 Invoke-ActionScript ".\registry\privacy.cmd"
 Invoke-ActionScript ".\registry\updates.cmd"
+
+# Network Tweaks
+Invoke-ActionScript ".\network\hosts-file.cmd"
+Invoke-ActionScript ".\network\netsh.cmd"
+Invoke-ActionScript ".\network\network-registry.cmd"
 
 # Performance Tweaks
 Show-Section "Performance Tweaks"
