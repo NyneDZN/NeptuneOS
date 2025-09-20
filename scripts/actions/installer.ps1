@@ -27,11 +27,11 @@ $env:SID = $SID
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
-Invoke-ActionScript "install-prerequisites.bat"
+# Invoke-ActionScript "install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-Invoke-ActionScript "dism-capabilities.bat"
+# Invoke-ActionScript "dism-capabilities.bat"
 
 # File System
 Show-Section "File System Configuration"
