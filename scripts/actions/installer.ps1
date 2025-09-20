@@ -13,7 +13,7 @@ function Show-Section {
 }
 
 # Initialize Neptune Environment
-Move-Item -Path ".os\NeptuneDir" -Destination "$env:WINDIR"
+Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR"
 Move-Item -Path ".\os\Neptune" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force

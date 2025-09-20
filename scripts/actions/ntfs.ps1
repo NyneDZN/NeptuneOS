@@ -2,11 +2,6 @@
 # Optimize NTFS
 # -------------------------------
 
-
-# FSutil settings for NTFS optimization
-# Reference: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior
-Invoke-ActionScript ".\scripts\powershell\actions\ntfs\fsutil.ps1"
-
 # -------------------------------
 # Disable Write Cache Buffer
 # -------------------------------
