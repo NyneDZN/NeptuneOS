@@ -13,10 +13,17 @@ function Show-Section {
 }
 
 # Initialize Neptune Environment
-New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory -Force
-Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
-Move-Item -Path "$PSScriptRoot\os\lockscreen.png" -Destination "C:\Windows\NeptuneDir" -Force
-Move-Item -Path "$PSScriptRoot\os\user.png" -Destination "C:\Windows\NeptuneDir" -Force
+Move-Item -Path ".os\NeptuneDir" -Destination "$env:WINDIR"
+Move-Item -Path ".\os\Neptune" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
+
+# User icon
+Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
+Start-Process icacls -ArgumentList '"C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T' -Wait -NoNewWindow
+Remove-Item -Path "C:\ProgramData\Microsoft\User Account Pictures" -Recurse -Force
+Move-Item -Path "C:\neptune-installer\os\ProgramData\Microsoft\User Account Pictures" -Destination "C:\ProgramData\Microsoft" -Force
 
 # Set wallpaper
 takeown /f "C:\Windows\Web" /r /d y
@@ -27,11 +34,12 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
-# Invoke-ActionScript "install-prerequisites.bat"
+Invoke-ActionScript "install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-# Invoke-ActionScript "dism-capabilities.bat"
+Invoke-ActionScript "dism-capabilities.bat"
+Invoke-ActionScript "packages.cmd"
 
 # File System
 Show-Section "File System Configuration"
@@ -88,7 +96,6 @@ Invoke-ActionScript "security\mitigations.cmd"
 # Neptune Stuff
 Show-Section "Neptune Customizations"
 Invoke-ActionScript "lockscreen.ps1"
-
 
 # Cleanup
 Show-Section "Cleanup"
