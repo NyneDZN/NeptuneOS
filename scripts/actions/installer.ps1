@@ -1,9 +1,5 @@
 # Installer script for Neptune Project
 # This script will handle the installation of necessary components and configurations.
-param (
-    [switch]$Silent
-)
-
 Write-Log "Starting NeptuneOS Installer..."
 
 # Nice section header
@@ -29,9 +25,6 @@ Remove-Item -Path "C:\Windows\Web" -Recurse -Force
 Copy-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -Recurse
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png"
 
-# Make $SID visible to batch scripts
-$env:SID = $SID
-
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 # Invoke-ActionScript "install-prerequisites.bat"
@@ -45,6 +38,9 @@ Show-Section "File System Configuration"
 Invoke-ActionScript "ntfs.ps1"
 Invoke-ActionScript "ntfs\fsutil.ps1"
 
+# Task Scheduler
+Invoke-ActionScript "task-scheduler.ps1"
+
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
 Invoke-ActionScript "services-drivers\backup-windows-default.cmd"
@@ -53,13 +49,9 @@ Invoke-ActionScript "services-drivers\filters.ps1"
 Invoke-ActionScript "services-drivers\audio-service-split.bat"
 Invoke-ActionScript "services-drivers\backup-neptune-default.cmd"
 
-
-# Run all scripts normally
-Invoke-ActionScript "registry\explorer.cmd" -Args @{ SID = $SID }
-Invoke-ActionScript "registry\misc.cmd"
-Invoke-ActionScript "registry\privacy.cmd"
-Invoke-ActionScript "registry\updates.cmd"
-
+# BCD
+Show-Section "Boot Configuration Data (BCD)"
+Invoke-ActionScript "bcdedit.ps1"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
@@ -94,6 +86,7 @@ Invoke-ActionScript "security\hardening.cmd"
 Invoke-ActionScript "security\mitigations.cmd"
 
 # Neptune Stuff
+Show-Section "Neptune Customizations"
 Invoke-ActionScript "lockscreen.ps1"
 
 
