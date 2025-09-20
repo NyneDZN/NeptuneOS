@@ -1,5 +1,5 @@
 # Load RAM info
-Get-SystemInfo "info\ram.ps1"
+Get-SystemInfo "C:\neptune-installer\scripts\info\ram.ps1"
 # $TotalMemory should be set by ram.ps1 in MB or bytes; adjust logic accordingly
 
 # Convert bytes to MB if necessary

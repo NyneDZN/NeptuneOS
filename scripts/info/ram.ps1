@@ -1,9 +1,9 @@
 # ram.ps1
 $ramModules = Get-CimInstance Win32_PhysicalMemory
-$totalRAMGB = [math]::Round(($ramModules | Measure-Object Capacity -Sum).Sum / 1GB, 2)
+$TotalMemory = [math]::Round(($ramModules | Measure-Object Capacity -Sum).Sum / 1GB, 2)
 
 # Terminal output
-Write-Host "Total RAM: $totalRAMGB GB"
+Write-Host "Total RAM: $TotalMemory GB"
 Write-Host "Modules: $($ramModules.Count)"
 $ramModules | ForEach-Object {
     Write-Host "- $([math]::Round($_.Capacity / 1GB, 2)) GB, $($_.Speed) MHz, $($_.Manufacturer)"
