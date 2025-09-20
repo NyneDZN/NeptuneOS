@@ -114,7 +114,7 @@ $ServicesToConfigure = @(
     @{ Name = "MSDTC"; Start = 4 },     # Disabled
     @{ Name = "PrintNotify"; Start = 4 },     # Disabled
     @{ Name = "RasMan"; Start = 4 },     # Disabled
- #  @{ Name = "rdyboost"; Start = 4 },     # Disabled
+#  @{ Name = "rdyboost"; Start = 4 },     # Disabled
     @{ Name = "RFCOMM"; Start = 4 },     # Disabled
     @{ Name = "RmSvc"; Start = 4 },     # Disabled
     # @{ Name = "TrkWks"; Start = 4 },     # Disabled (breaks Hyper-V copy/paste)
