@@ -83,6 +83,7 @@ $ServicesToConfigure = @(
     @{ Name = "uhssvc"; Start = 4 },   # Disabled
     @{ Name = "wanarp"; Start = 4 },   # Disabled
     @{ Name = "wanarpv6"; Start = 4 },   # Disabled
+    @{ Name=  "KSecPkg"; Start = 4 },    # Disabled}
 
     # Services
     @{ Name = "Audiosrv"; Start = 2 },     # Automatic
