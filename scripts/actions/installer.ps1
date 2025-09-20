@@ -17,10 +17,17 @@ function Show-Section {
 }
 
 # Initialize Neptune Environment
-# New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory
-# Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
-# Move-Item -Path "$PSScriptRoot\os\lockscreen.png" - Destination "C:\Windows\NeptuneDir" -Force
-# Move-Item -Path "$PSScriptRoot\os\user.png" - Destination "C:\Windows\NeptuneDir" -Force
+New-Item -Path "C:\Windows\NeptuneDir" -ItemType Directory -Force
+Move-Item -Path "$PSScriptRoot\os\Neptune" -Destination "C:\Windows\NeptuneDir" -Force
+Move-Item -Path "$PSScriptRoot\os\lockscreen.png" -Destination "C:\Windows\NeptuneDir" -Force
+Move-Item -Path "$PSScriptRoot\os\user.png" -Destination "C:\Windows\NeptuneDir" -Force
+
+# Set wallpaper
+takeown /f "C:\Windows\Web" /r /d y
+icacls "C:\Windows\Web" /grant administrators:F /t
+Remove-Item -Path "C:\Windows\Web" -Recurse -Force
+Copy-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -Recurse
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png"
 
 # Make $SID visible to batch scripts
 $env:SID = $SID
@@ -85,6 +92,10 @@ Invoke-ActionScript "\performance\windowed-optimizations-hdr.cmd"
 Show-Section "Security Tweaks"
 Invoke-ActionScript "security\hardening.cmd"
 Invoke-ActionScript "security\mitigations.cmd"
+
+# Neptune Stuff
+Invoke-ActionScript "lockscreen.ps1"
+
 
 # Cleanup
 Show-Section "Cleanup"
