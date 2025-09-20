@@ -94,7 +94,7 @@ $ServicesToConfigure = @(
     @{ Name = "bthserv"; Start = 4 },     # Disabled
     @{ Name = "diagsvc"; Start = 4 },     # Disabled
     @{ Name = "DiagTrack"; Start = 4 },     # Disabled
-    @{ Name = "DispBrokerDesktopSvc"; Start = 4 },     # Automatic
+#     @{ Name = "DispBrokerDesktopSvc"; Start = 4 },     # Automatic (breaks Hyper-V display resizing)
     @{ Name = "DisplayEnhancementService"; Start = 4 },     # Disabled
     @{ Name = "DPS"; Start = 4 },     # Disabled
     @{ Name = "DusmSvc"; Start = 4 },     # Disabled
@@ -117,7 +117,7 @@ $ServicesToConfigure = @(
  #  @{ Name = "rdyboost"; Start = 4 },     # Disabled
     @{ Name = "RFCOMM"; Start = 4 },     # Disabled
     @{ Name = "RmSvc"; Start = 4 },     # Disabled
-    @{ Name = "TrkWks"; Start = 4 },     # Disabled
+    # @{ Name = "TrkWks"; Start = 4 },     # Disabled (breaks Hyper-V copy/paste)
     @{ Name = "ShellHWDetection"; Start = 4 },     # Disabled
     @{ Name = "Spooler"; Start = 4 },     # Disabled
     @{ Name = "SgrmBroker"; Start = 4 },     # Disabled
