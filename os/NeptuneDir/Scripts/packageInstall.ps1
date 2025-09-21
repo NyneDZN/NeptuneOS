@@ -104,7 +104,7 @@ $seperator
 			Write-Host "Setting error message box next boot as NoInteraction is enabled."
 			Set-Content -Path $safeModePackageList -Value $failedPackages
 
-			$failedMsgTitle = 'AtlasFailedComponentMsgBox'
+			$failedMsgTitle = 'FailedComponentMsgBox'
 			$failedMsgArgs = "/c title Finalizing Installation - Neptune & echo Do not close this window. & schtasks /delete /tn `"$failedMsgTitle`" /f > nul & " `
 				+ "PowerShell -NoP -NonI -W Hidden -EP Bypass -C `"& '$PSCommandPath' -FailMessage`""
 			$failedMsg = @{
