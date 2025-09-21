@@ -44,6 +44,7 @@ Show-Section "Windows Components"
 Invoke-ActionScript ".\components\dism-capabilities.bat"
 Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScript ".\packages.cmd"
+Invoke-ActionScript ".\CLIENTCBS.ps1"
 
 # Chocolatey
 Invoke-ActionScript ".\chocolatey.cmd"
@@ -70,7 +71,6 @@ Invoke-ActionScript ".\bcdedit.ps1"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
-Invoke-ActionScript ".\registry\7-zip-entries.cmd"
 Invoke-ActionScript ".\registry\explorer.cmd"
 Invoke-ActionScript ".\registry\misc.cmd"
 Invoke-ActionScript ".\registry\privacy.cmd"
