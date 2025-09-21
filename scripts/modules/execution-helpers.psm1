@@ -1,14 +1,19 @@
 # Execution helper functions for master.ps1
 
 function Invoke-ActionScript {
-    param([string]$ScriptName)
+    param(
+        [string]$ScriptName,
+        [Parameter(ValueFromRemainingArguments=$true)]
+        $Args
+    )
+    
     $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
 
     if (Test-Path $scriptPath) {
         Write-Log "Launching action script: $ScriptName"
         try {
-            # Dot-source so script runs inside master session (keeps elevation + globals)
-            . $scriptPath | ForEach-Object { Write-Log $_ }
+            # Dot-source with arguments
+            . $scriptPath @Args | ForEach-Object { Write-Log $_ }
         } catch {
             Write-Log "Error while running $ScriptName $_" 'ERROR'
         }
@@ -16,6 +21,7 @@ function Invoke-ActionScript {
         Write-Log "Action script not found: $ScriptName" 'ERROR'
     }
 }
+
 function Get-SystemInfo {
     param([string]$InfoScript)
 
