@@ -43,8 +43,9 @@ Invoke-ActionScript ".\install-prerequisites.bat"
 Show-Section "Windows Components"
 Invoke-ActionScript ".\components\dism-capabilities.bat"
 Invoke-ActionScript ".\components\binary-removal.cmd"
-Invoke-ActionScript ".\packages.cmd"
+# Invoke-ActionScript ".\packages.cmd"
 Invoke-ActionScript ".\packageInstall.ps1" -InstallPackages "C:\Windows\NeptuneDir\Packages\Z-Atlas-NoDefender-Package31bf3856ad364e35amd645.0.0.0.cab" -NoInteraction
+Invoke-ActionScript ".\packageInstall.ps1" -InstallPackages "C:\Windows\NeptuneDir\Packages\Z-Atlas-NoTelemetry-Package31bf3856ad364e35amd645.0.0.0.cab" -NoInteraction
 Invoke-ActionScript ".\CLIENTCBS.ps1"
 
 # Chocolatey
