@@ -21,6 +21,9 @@ Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
+Move-Item -Path ".\os\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
+Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
 
 # User icon
 Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
