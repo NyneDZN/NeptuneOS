@@ -19,10 +19,10 @@ if (!(Test-Path $packageInstall)) {
 	exit 1
 }
 
-$package = "*NoDefender*"
+$package = "C:\Windows\NeptuneDir\Packages\NoDefender.cab"
 
 try {
-	$packages = (Get-WindowsPackage -online | Where-Object { $_.PackageName -like "*NoDefender*" }).PackageName
+	$packages = (Get-WindowsPackage -online | Where-Object { $_.PackageName -like "C:\Windows\NeptuneDir\Packages\NoDefender.cab" }).PackageName
 }
 catch {
 	if (!$?) {
