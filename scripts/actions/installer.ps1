@@ -22,6 +22,11 @@ Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -For
 Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
 
+# Disable Defender
+$packageInstall = "C:\neptune-installer\scripts\packageInstall.ps1"
+$package = "C:\neptune-installer\packages\NoDefender.cab"
+$packageInstall -InstallPackages @($package)
+
 # User icon
 Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
 Start-Process icacls -ArgumentList '"C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T' -Wait -NoNewWindow

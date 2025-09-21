@@ -9,6 +9,7 @@ function Show-Banner {
         "   NeptuneOS Master Script",
         "   Mode : $mode",
         "   Script Root: $ScriptRoot",
+        "   Created by: NYN9",
         "========================================================"
     )
 

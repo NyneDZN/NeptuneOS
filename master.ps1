@@ -3,13 +3,13 @@ param (
     [switch]$NeptuneInstall
 )
 
-
 # ========================
 # Import Module Scripts
 # ========================
 Import-Module "$PSScriptRoot\scripts\modules\aesthetics.psm1"
 Import-Module "$PSScriptRoot\scripts\modules\execution-helpers.psm1"
 Import-Module "$PSScriptRoot\scripts\modules\logs.psm1"
+Import-Module "$PSSCriptRoot\scripts\modules\update-info.psm1"
 
 # ========================
 # Paths & Files
@@ -22,32 +22,6 @@ $LogFile        = Join-Path $ScriptRoot "neptune.log"
 if (-not (Test-Path $LogFile)) {
     New-Item -Path $LogFile -ItemType File -Force | Out-Null
 }
-
-# ========================
-# Terminal Banner
-# ========================
-
-# function Show-Banner {
-# 
-#     $mode = if ($DevMode) { 'DEV MODE' } elseif ($NeptuneInstall) { 'INSTALL MODE' } else { 'UNKNOWN' }
-# 
-#     $bannerLines = @(
-#         "========================================================",
-#         "   NeptuneOS Master Script",
-#         "   Mode : $mode",
-#         "   Script Root: $ScriptRoot",
-#         "========================================================"
-#     )
-# 
-#     foreach ($line in $bannerLines) {
-#         Write-Host $line -ForegroundColor Cyan
-#     }
-# 
-#     Write-Host ""  # Blank line below banner
-# }
-
-
-
 
 # ========================
 # Global System Info
@@ -64,109 +38,6 @@ if (Test-Path $SystemInfoFile) {
     $Global:SystemInfo = @{}
     $Global:SystemInfo | ConvertTo-Json -Depth 5 | Set-Content $SystemInfoFile -Force
 }
-
-function Update-SystemInfo {
-    param (
-        [string]$Key,
-        [object]$Value
-    )
-
-    if (-not $Global:SystemInfo -or -not ($Global:SystemInfo -is [hashtable])) {
-        $Global:SystemInfo = @{ }
-    }
-
-    if ($Value -is [hashtable]) {
-        if ($Global:SystemInfo.ContainsKey($Key) -and ($Global:SystemInfo[$Key] -is [hashtable])) {
-            foreach ($k in $Value.Keys) {
-                $Global:SystemInfo[$Key][$k] = $Value[$k]
-            }
-        } else {
-            $Global:SystemInfo[$Key] = $Value
-        }
-    } else {
-        $Global:SystemInfo[$Key] = $Value
-    }
-
-    try {
-        $Global:SystemInfo | ConvertTo-Json -Depth 5 | Set-Content -Path $SystemInfoFile -Force
-        Write-Log "System info updated: $Key"
-    } catch {
-        Write-Log "Failed to update system info: $($_.Exception.Message)" "ERROR"
-    }
-}
-
-
-
-# ========================
-# Logging
-# ========================
-# function Write-Log {
-#     param(
-#         [string]$Message,
-#         [string]$Level = 'INFO'
-#     )
-#     $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-#     $logEntry  = "[$timestamp] [$Level] $Message"
-#     
-#     # Always print to top pane
-#     Write-Host $logEntry
-#     Add-Content -Path $LogFile -Value $logEntry
-#
-#     # If ERROR, also print visibly
-#     if ($Level -eq 'ERROR') {
-#         Write-Host "ERROR: $Message" -ForegroundColor Red
-#     }
-# }
-#
-#
-#
-# # Capture unhandled errors
-# Register-EngineEvent PowerShell.OnError -Action {
-#     param($src, $evt)
-#     $err = $evt.SourceArgs[0] -as [System.Management.Automation.ErrorRecord]
-#     if ($err) {
-#         Write-Log "[$($err.CategoryInfo.Category)] $($err.Exception.Message)" "ERROR"
-#     }
-# }
-
-# ========================
-# Script Execution Helpers
-# ========================
-# function Invoke-ActionScript {
-#     param([string]$ScriptName)
-#     $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
-#
-#     if (Test-Path $scriptPath) {
-#         Write-Log "Launching action script: $ScriptName"
-#         try {
-#             # Dot-source so script runs inside master session (keeps elevation + globals)
-#             . $scriptPath | ForEach-Object { Write-Log $_ }
-#         } catch {
-#             Write-Log "Error while running $ScriptName $_" 'ERROR'
-#         }
-#     } else {
-#         Write-Log "Action script not found: $ScriptName" 'ERROR'
-#     }
-# }
-# function Get-SystemInfo {
-#     param([string]$InfoScript)
-#     $scriptPath = Join-Path $ScriptRoot "scripts\info\$InfoScript"
-#     if (Test-Path $scriptPath) {
-#         Write-Log "Gathering info using: $InfoScript"
-#         
-#         $info = & $scriptPath
-#         
-#         if ($info -is [hashtable]) {
-#             foreach ($key in $info.Keys) {
-#                 Update-SystemInfo -Key $key -Value $info[$key]
-#             }
-#         } else {
-#             Write-Log "Info script did not return a hashtable" "ERROR"
-#         }
-#     } else {
-#         Write-Log "Info script not found: $InfoScript" 'ERROR'
-#     }
-# }
 
 # ========================
 # Main Mode Selection
