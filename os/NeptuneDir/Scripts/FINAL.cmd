@@ -1,4 +1,4 @@
-@echo off & kil explorer.exe
+@echo off & kill explorer.exe
 setlocal EnableDelayedExpansion
 title NeptuneOS Finalization
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
@@ -9,12 +9,11 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 
-del /s /f /q C:\Windows\Temp\*.* >nul 2>&1
-del /s /f /q %USERPROFILE%\appdata\local\temp\*.* >nul 2>&1
-cd %systemroot% & del *.log /s /f /q /a >nul 2>&1
-cd %homepath% & del *.log /s /f /q /a >nul 2>&1
+:: Cleanup script
+powershell.exe -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts\cleanup.ps1"
+
 :: Debloat UWP apps during finalization
-call "C:\Windows\NeptuneDir\Scripts\debloat.cmd"
+:: call "C:\Windows\NeptuneDir\Scripts\debloat.cmd"
 cls & echo !S_YELLOW!Finished.
 echo !S_YELLOW!Enjoy NeptuneOS.
 timeout /t 3 /nobreak >nul

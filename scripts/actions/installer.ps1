@@ -25,6 +25,9 @@ Move-Item -Path ".\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
 
+# Clear restore points
+vssadmin delete shadows /all /quiet
+
 # User icon
 Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
 Start-Process icacls -ArgumentList '"C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T' -Wait -NoNewWindow
@@ -119,13 +122,15 @@ Invoke-ActionScript ".\lockscreen.ps1"
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 # Move log and systeminfo and run cleanup
-Move-Item -Path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path "C:\neptune-installer\scripts\actions\cleanup.ps1" -Destination "$env:WINDIR\NeptuneDir\Scripts" -Force
-powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Finalization" -PropertyType String -Value "$env:WinDir\NeptuneDir\Scripts\FINAL.cmd" -Force
+
+# powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
 
 
 Write-Log "Installer finished successfully."
 Write-Log "Restarting PC in 5 seconds"
+Move-Item -Path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
 Start-Sleep -Seconds 5
 Restart-Computer -Force

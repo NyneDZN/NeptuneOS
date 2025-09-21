@@ -30,5 +30,5 @@ if ($sysTemp) {
 Remove-Item -Path "C:\neptune-installer" -Force
 
 # Clear restore points
-vssadmin delete shadows /all /quiet
+# vssadmin delete shadows /all /quiet
 
