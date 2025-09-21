@@ -26,6 +26,9 @@ if ($sysTemp) {
 	Write-Error "System temp folder not found!"
 }
 
+# Delete installer files
+Remove-Item -Path "C:\neptune-installer" -Force
+
 # Clear restore points
 vssadmin delete shadows /all /quiet
 

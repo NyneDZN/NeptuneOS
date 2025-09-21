@@ -118,6 +118,12 @@ Invoke-ActionScript ".\lockscreen.ps1"
 # Cleanup
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
+# Move log and systeminfo and run cleanup
+Move-Item -path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -path "C:\neptune-installer\scripts\cleanup.ps1" -Destination "$env:WINDIR\NeptuneDir\Scripts" -Force
+powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts.ps1"
+
 
 Write-Log "Installer finished successfully."
 Write-Log "Restarting PC in 5 seconds"
