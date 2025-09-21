@@ -21,7 +21,7 @@ Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\user.png" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
-Move-Item -Path ".\os\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path ".\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
 
@@ -119,10 +119,10 @@ Invoke-ActionScript ".\lockscreen.ps1"
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 # Move log and systeminfo and run cleanup
-Move-Item -path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
-Move-Item -path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
-Move-Item -path "C:\neptune-installer\scripts\cleanup.ps1" -Destination "$env:WINDIR\NeptuneDir\Scripts" -Force
-powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts.ps1"
+Move-Item -Path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
+Move-Item -Path "C:\neptune-installer\scripts\actions\cleanup.ps1" -Destination "$env:WINDIR\NeptuneDir\Scripts" -Force
+powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
 
 
 Write-Log "Installer finished successfully."
