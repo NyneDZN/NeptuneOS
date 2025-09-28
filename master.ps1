@@ -6,10 +6,10 @@ param (
 # ========================
 # Import Module Scripts
 # ========================
-Import-Module "$PSScriptRoot\scripts\modules\aesthetics.psm1"
-Import-Module "$PSScriptRoot\scripts\modules\execution-helpers.psm1"
-Import-Module "$PSScriptRoot\scripts\modules\logs.psm1"
-Import-Module "$PSSCriptRoot\scripts\modules\update-info.psm1"
+Import-Module "$PSScriptRoot\modules\aesthetics.psm1"
+Import-Module "$PSScriptRoot\modules\execution-helpers.psm1"
+Import-Module "$PSScriptRoot\modules\logs.psm1"
+Import-Module "$PSScriptRoot\modules\update-info.psm1"
 
 # ========================
 # Paths & Files
@@ -58,14 +58,8 @@ if ($DevMode) {
         switch ($Action) {
             "action" { Invoke-ActionScript $Target }
             "info"   { Get-SystemInfo $Target }
-            "debug"  { Invoke-DebugScript $Target }
-            "ti"     { Invoke-TrustedInstallerScript $Target }
             "clear"  { Clear-Host }
-            "ps"     { 
-                Write-Host "[INFO] Launching real PowerShell session..."
-                Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", "Set-Location '$ScriptRoot'" 
-            }
-            "help"   { Write-Host "Commands: action <script>, info <script>, debug <script>, ti <script>, clear, cmd, help, exit" }
+            "help"   { Write-Host "Commands: action <script>, info <script>,clear, cmd, help, exit" }
             default  { Write-Log "Unknown command: $Action" "ERROR" }
         }
     }
@@ -74,12 +68,11 @@ if ($DevMode) {
 }
 elseif ($NeptuneInstall) {
     Write-Log "Master script started in INSTALL MODE."
-    # Set global root path so batch doesn't feel left out
-    $env:ROOTPATH = $PSScriptRoot
-
     # Example: launch installer script
     # Begin ngen asap to improve powershell speeds
     Invoke-ActionScript "ngen.ps1"
+
+    # Gather system info
     Get-SystemInfo "cpu.ps1"
     Get-SystemInfo "gpu.ps1"
     Get-SystemInfo "ram.ps1"
@@ -87,6 +80,12 @@ elseif ($NeptuneInstall) {
     Get-SystemInfo "username.ps1"
     Get-SystemInfo "usersid.ps1"
     Get-SystemInfo "winver.ps1"
+
+    # Parse json into variables
+    $jsonText = Get-Content -Path "C:\neptune-installer\systeminfo.json" -Raw
+    $data = $jsonText | ConvertFrom-Json
+
+    # Begin actual installation
     Invoke-ActionScript 'installer.ps1'
     Write-Log "Master script finished (INSTALL MODE)."
 }
