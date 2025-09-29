@@ -1,4 +1,4 @@
-call "C:\neptune-installer\variables.cmd"
+call "C:\neptune-installer\modules\variables.cmd"
 
 :: - Configuring privacy telemetry, and tracking in Windows.
 :: Disable CEIP

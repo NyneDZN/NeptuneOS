@@ -1,3 +1,5 @@
+call "%~dp0\modules\variables.cmd"
+
 :: Disable Bandwith Preservation
 reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "TimerResolution" /t Reg_DWORD /d "1" /f 
 reg add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /t Reg_DWORD /d "00000000" /f 

@@ -1,3 +1,5 @@
+call "%~dp0\modules\variables.cmd"
+
 :: Rename SmartScreen
 taskkill /f /im smartscreen.exe
 cd %WinDir%\System32 

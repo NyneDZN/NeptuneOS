@@ -1,4 +1,4 @@
-call "%~dp0variables.cmd"
+call "%~dp0\modules\variables.cmd"
 
 :: Network Shell
 :: Reset the Network Configuration

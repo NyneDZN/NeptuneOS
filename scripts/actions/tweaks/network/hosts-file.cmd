@@ -1,3 +1,5 @@
+call "%~dp0\modules\variables.cmd"
+
 :: Disable Telemetry IP's
 cd %SystemRoot%\System32\drivers\etc
 if not exist hosts.bak ren hosts hosts.bak 

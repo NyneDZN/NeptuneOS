@@ -1,4 +1,4 @@
-call "C:\neptune-installer\variables.cmd"
+call "C:\neptune-installer\modules\variables.cmd"
 
 :: Configuring Misc Registry
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t Reg_DWORD /d "1" /f 

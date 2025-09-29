@@ -1,4 +1,4 @@
-call "C:\neptune-installer\variables.cmd"
+call "C:\neptune-installer\modules\variables.cmd"
 
 :: Disable Background Apps
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f 

@@ -1,3 +1,5 @@
+call "%~dp0\modules\variables.cmd"
+
 :: Features and Components
 :: Enable DirectPlay
 dism /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart 
