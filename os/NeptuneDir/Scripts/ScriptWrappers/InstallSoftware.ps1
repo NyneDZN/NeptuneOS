@@ -69,6 +69,17 @@ $Label.Size = New-Object System.Drawing.Size(255, 15)
 $Label.Text = "Download and install software using WinGet:"
 $Form.Controls.Add($Label)
 
+# Add disclaimer at the bottom
+$Disclaimer = New-Object System.Windows.Forms.Label
+$Disclaimer.Text = "Forked from and created by the AtlasOS team. Small modifications made by NYN9.
+Note: Some applications may require you to update directly from the application, such as discord."
+#$Disclaimer.AutoSize = $true
+$Disclaimer.Size = New-Object System.Drawing.Size(500, 25)
+$Disclaimer.Location = New-Object System.Drawing.Point(11, 650)
+$Disclaimer.ForeColor = [System.Drawing.Color]::White
+$Form.Controls.Add($Disclaimer)
+
+
 
 # https://winstall.app/apps/eloston.ungoogled-chromium
 init_item "Ungoogled Chromium" "eloston.ungoogled-chromium"
@@ -91,17 +102,14 @@ init_item "LibreWolf" "LibreWolf.LibreWolf"
 # https://winstall.app/apps/TorProject.TorBrowser
 init_item "Tor Browser" "TorProject.TorBrowser"
 
+# https://winstall.app/apps/Alex313031.Thorium.AVX2
+init_item "Thorium Browser (AVX2)" "Alex313031.Thorium.AVX2"
+
 # https://winstall.app/apps/Discord.Discord
 init_item "Discord" "Discord.Discord"
 
-# https://winstall.app/apps/Discord.Discord.Canary
-init_item "Discord Canary" "Discord.Discord.Canary"
-
 # https://winstall.app/apps/Valve.Steam
 init_item "Steam" "Valve.Steam"
-
-# https://winstall.app/apps/Playnite.Playnite
-init_item "Playnite" "Playnite.Playnite"
 
 # https://winstall.app/apps/HeroicGamesLauncher.HeroicGamesLauncher
 init_item "Heroic" "HeroicGamesLauncher.HeroicGamesLauncher"
@@ -114,6 +122,9 @@ init_item "Mozilla Thunderbird" "Mozilla.Thunderbird"
 
 # https://winstall.app/apps/PeterPawlowski.foobar2000
 init_item "foobar2000" "PeterPawlowski.foobar2000"
+
+# https://winstall.app/apps/mpv.net
+init_item "MPV Player" "mpv.net"
 
 # https://winstall.app/apps/IrfanSkiljan.IrfanView
 init_item "IrfanView" "IrfanSkiljan.IrfanView"
@@ -172,9 +183,6 @@ init_item "Lightshot" "Skillbrains.Lightshot"
 # https://winstall.app/apps/ShareX.ShareX
 init_item "ShareX" "ShareX.ShareX"
 
-# https://www.microsoft.com/store/productId/9MZ95KL8MR0L?ocid=pdpshare
-init_item "Snipping Tool" "9MZ95KL8MR0L"
-
 # https://winstall.app/apps/valinet.ExplorerPatcher
 init_item "ExplorerPatcher" "valinet.ExplorerPatcher"
 
@@ -182,7 +190,7 @@ init_item "ExplorerPatcher" "valinet.ExplorerPatcher"
 init_item "Powershell 7" "Microsoft.PowerShell"
 
 #https://winstall.app/apps/MartiCliment.UniGetUI
-init_item "UniGetUI" "MartiCliment.UniGetUI"
+init_item "UniGetUI (WinGetUI)" "MartiCliment.UniGetUI"
 
 if ([System.Environment]::OSVersion.Version.Build -ge 22000) {
     # https://winget.run/pkg/StartIsBack/StartAllBack
@@ -208,6 +216,7 @@ if ($global:column -ne 0) {
 }
 
 $Form.height = $global:lastPos + 80
+
 
 # Dark Mode/Light Mode Toggle
 $ToggleBtn = New-Object System.Windows.Forms.Button
@@ -260,11 +269,27 @@ check_system_theme
 
 $Form.Controls.Add($ToggleBtn)
 
-# Install Button
-$lastPosWidth = $form.Width - 80 - 31
-$InstallButton = new-object System.Windows.Forms.Button
-$InstallButton.Location = new-object System.Drawing.Size($lastPosWidth, $global:lastPos)
-$InstallButton.Size = new-object System.Drawing.Size(80, 23)
+# Add Update button
+$UpdateButton = New-Object System.Windows.Forms.Button
+$UpdateButton.Location = New-Object System.Drawing.Size(400, 20)
+$UpdateButton.Size = New-Object System.Drawing.Size(80, 23)
+$UpdateButton.Text = "Update"
+$UpdateButton.Add_Click({
+    $checkedBoxes = $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] -and $_.Checked }
+    if ($checkedBoxes.Count -eq 0) {
+        Read-MessageBox -Title "No package selected" -Body 'Please select at least one software package to update' -Icon Information -Buttons Ok | Out-Null
+    }
+    else {
+        $global:update = $true
+        $Form.Close()
+    }
+})
+$Form.Controls.Add($UpdateButton)
+
+# Add Install button
+$InstallButton = New-Object System.Windows.Forms.Button
+$InstallButton.Location = New-Object System.Drawing.Size(300, 20)
+$InstallButton.Size = New-Object System.Drawing.Size(80, 23)
 $InstallButton.Text = "Install"
 $InstallButton.Add_Click({
     $checkedBoxes = $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] -and $_.Checked }
@@ -278,30 +303,66 @@ $InstallButton.Add_Click({
 })
 $Form.Controls.Add($InstallButton)
 
-# Activate the form
+# Activate the form once
 $Form.Add_Shown({ $Form.Activate() })
 [void] $Form.ShowDialog()
 
-if ($global:install) {
-    $installPackages = [System.Collections.ArrayList]::new()
-    $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] } | ForEach-Object {
-        if ($_.Checked) {
-            [void]$installPackages.Add($_.Name)
+# Reset some global flags
+$global:update = $false
+$global:install = $false
+
+# Loop to keep the GUI open
+do {
+    # Reset flags each loop
+    $global:update = $false
+    $global:install = $false
+
+    # Show the form
+    [void] $Form.ShowDialog()
+
+    # Handle updates
+    if ($global:update) {
+        $updatePackages = [System.Collections.ArrayList]::new()
+        $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] -and $_.Checked } | ForEach-Object {
+            [void]$updatePackages.Add($_.Name)
+        }
+
+        if ($updatePackages.Count -ne 0) {
+            Write-Host "Updating: " -ForegroundColor Yellow
+            foreach ($a in $updatePackages) {
+                Write-Host "- " -NoNewline -ForegroundColor Blue
+                Write-Host "$a"
+            }
+            Start-Sleep 1
+            foreach ($package in $updatePackages) {
+                & winget upgrade -e --id $package --accept-package-agreements --accept-source-agreements --disable-interactivity -h
+            }
+            Read-MessageBox -Title "Update complete" -Body 'Selected packages have been updated' -Icon Information -Buttons Ok | Out-Null
         }
     }
 
-    if ($installPackages.count -ne 0) {
-        Write-Host "Installing: " -ForegroundColor Yellow
-        foreach ($a in $installPackages) {
-            Write-Host "- " -NoNewline -ForegroundColor Blue
-            Write-Host "$a"
+    # Handle installs
+    if ($global:install) {
+        $installPackages = [System.Collections.ArrayList]::new()
+        $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] -and $_.Checked } | ForEach-Object {
+            [void]$installPackages.Add($_.Name)
         }
-        Write-Host ""
-        Start-Sleep 1
-        foreach ($package in $installPackages) {
-            & winget install -e --id $package --accept-package-agreements --accept-source-agreements --disable-interactivity --force -h
+
+        if ($installPackages.Count -ne 0) {
+            Write-Host "Installing: " -ForegroundColor Yellow
+            foreach ($a in $installPackages) {
+                Write-Host "- " -NoNewline -ForegroundColor Blue
+                Write-Host "$a"
+            }
+            Start-Sleep 1
+            foreach ($package in $installPackages) {
+                & winget install -e --id $package --accept-package-agreements --accept-source-agreements --disable-interactivity --force -h
+            }
+            Read-MessageBox -Title "Install complete" -Body 'Selected packages have been installed' -Icon Information -Buttons Ok | Out-Null
         }
-        Write-Host ""
-        pause
     }
-}
+
+    # Reset all checkboxes for next round
+    foreach ($cb in $Form.Controls | Where-Object { $_ -is [System.Windows.Forms.Checkbox] }) { $cb.Checked = $false }
+
+} while ($true)

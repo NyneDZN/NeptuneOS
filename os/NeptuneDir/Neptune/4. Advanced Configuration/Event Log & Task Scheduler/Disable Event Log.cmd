@@ -14,7 +14,7 @@ fltmc >nul 2>&1 || (
 
 echo !S_YELLOW!Disclaimer:
 echo]
-echo !S_RED!Disabling Task Scheduler will break CapFrameX, UWP searching, and a few other things.
+echo !S_RED!Disabling Task Scheduler will break CapFrameX, UWP searching, and a few other things. This is not recommended for most people.
 choice /C YN /M "Are you sure you want to continue?"
 if errorlevel 2 (
     goto Nope

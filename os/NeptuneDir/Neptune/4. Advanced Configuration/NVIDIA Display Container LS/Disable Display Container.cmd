@@ -16,6 +16,8 @@ fltmc >nul 2>&1 || (
 
 echo !S_RED!WARNING:
 echo !S_YELLOW!Disabling the NVIDIA Display Container LS service will stop the NVIDIA Control Panel from working.
+echo !S_YELLOW!This is fine to disable unless you use NVIDA overlay or any NVIDIA app features.
+echo !S_YELLOW!You can still configure the control panel via NvProfileInspector.
 echo]
 choice /C YN /M "Are you sure you want to continue?"
 if errorlevel 2 (

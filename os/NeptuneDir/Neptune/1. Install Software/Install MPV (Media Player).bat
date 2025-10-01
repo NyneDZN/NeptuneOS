@@ -1,18 +1,31 @@
 @echo off
-cd %WINDIR%\NeptuneDir\Tools
-curl -o mpv.7z -L https://cfhcable.dl.sourceforge.net/project/mpv-player-windows/64bit-v3/mpv-x86_64-v3-20240317-git-3afcaeb.7z
-7za x mpv.7z
-del mpv.7z
-mkdir MPV2
-move "doc" "MPV2"
-move "installer" "MPV2"
-move "mpv" "MPV2"
-move "d3dcompiler_43.dll" "MPV2"
-move "mpv.com" "MPV2"
-move "mpv.exe" "MPV2"
-move "updater.bat" MPV2
-move "MPV2" "C:\Program Files (x86)" & cd "C:\Program Files (x86)"
-rename "MPV2" "MPV"
-call "C:\Program Files (x86)\MPV\installer\mpv-install.bat"
+setlocal EnableDelayedExpansion
+:: Check if script is escelated
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+if %errorlevel% neq 0 (
+    echo You are about to be prompted with the UAC. Please click yes when prompted.
+) ELSE (
+    goto admin
+)
 
-pause>nul
+:prompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\prompt.vbs"
+    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\prompt.vbs"
+    "%temp%\prompt.vbs"
+    exit /B
+
+:admin
+:: Delete prompt script
+if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+echo !S_YELLOW!Installing MPV Media Player
+timeout /t 2 >nul
+choco install mpvio -y --ignore-checksums
+
+
+:: Echo to Logger
+echo Installed MPV Media Player through Chocolatey. >> %neptlog%
+:: Echo to User
+cls & echo !S_YELLOW!Installed Google Chrome.
+timeout /2 >nul
+exit
