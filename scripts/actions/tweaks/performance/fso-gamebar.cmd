@@ -29,7 +29,7 @@ reg delete "HKU\S-1-5-20\System\GameConfigStore" /f
 %currentuser% reg delete "HKU\%SID%\Software\Classes\System\GameConfigStore" /f  
 
 :: Enable FSO
-%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
-%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f 
-%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f 
-%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f 
+reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
+reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f 
+reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f 
+reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f 
