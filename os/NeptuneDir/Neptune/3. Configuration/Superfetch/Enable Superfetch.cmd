@@ -17,14 +17,14 @@ fltmc > nul 2>&1 || (
 setlocal EnableDelayedExpansion
 
 :: Add lower filters for rdyboost driver
-set "key=HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}"
-for /f "skip=1 tokens=3*" %%a in ('reg query "!key!" /v "LowerFilters"') do (set val=%%a)
-
-echo "!val!" > nul | findstr /c:"rdyboost"
-if !errorlevel! NEQ 0 (
-	set "val=!val!\0rdyboost"
-	reg add "!key!" /v "LowerFilters" /t REG_MULTI_SZ /d "!val!" /f
-)
+:: set "key=HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}"
+:: for /f "skip=1 tokens=3*" %%a in ('reg query "!key!" /v "LowerFilters"') do (set val=%%a)
+:: 
+:: echo "!val!" > nul | findstr /c:"rdyboost"
+:: if !errorlevel! NEQ 0 (
+:: 	set "val=!val!\0rdyboost"
+:: 	reg add "!key!" /v "LowerFilters" /t REG_MULTI_SZ /d "!val!" /f
+:: )
 
 :: Enable ReadyBoost
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\rdyboost" /v "Start" /t REG_DWORD /d "0" /f > nul
