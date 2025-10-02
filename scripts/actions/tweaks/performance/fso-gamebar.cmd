@@ -20,16 +20,16 @@ reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\All
 
 :: Remove FSO Overrides
 reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__COMPAT_LAYER" /f  
-%currentuser% reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f 
-%currentuser% reg delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f 
+reg delete "HKU\%SID\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f 
+reg delete "HKU\%SID%\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f 
 reg delete "HKLM\System\GameConfigStore" /f  
 reg delete "HKU\.Default\System\GameConfigStore" /f  
 reg delete "HKU\S-1-5-19\System\GameConfigStore" /f  
 reg delete "HKU\S-1-5-20\System\GameConfigStore" /f  
-%currentuser% reg delete "HKCU\Software\Classes\System\GameConfigStore" /f  
+%currentuser% reg delete "HKU\%SID%\Software\Classes\System\GameConfigStore" /f  
 
 :: Enable FSO
-%currentuser% reg add HKCU\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
-%currentuser% reg add HKCU\System\GameConfigStore /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f 
-%currentuser% reg add HKCU\System\GameConfigStore /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f 
-%currentuser% reg add HKCU\System\GameConfigStore /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f 
+%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f 
+%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f 
+%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f 
+%currentuser% reg add HKU\%SID%\System\GameConfigStore /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f 

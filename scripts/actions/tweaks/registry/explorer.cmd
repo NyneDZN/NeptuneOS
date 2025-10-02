@@ -495,8 +495,8 @@ reg add "HKU\%SID%\Software\Microsoft\Internet Explorer\LowRegistry\Audio\Policy
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Multimedia\Audio\DeviceCpl" /v "ShowDisconnectedDevices" /t REG_DWORD /d "0" /f 
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Multimedia\Audio\DeviceCpl" /v "ShowHiddenDevices" /t REG_DWORD /d "0" /f 
 :: - > Set audio scheme to none
-PowerShell -ExecutionPolicy Unrestricted -Command  "New-ItemProperty -Path 'HKCU:\AppEvents\Schemes' -Name '(Default)' -Value '.None' -Force | Out-Null" 
-PowerShell -ExecutionPolicy Unrestricted -Command  "Get-ChildItem -Path 'HKCU:\AppEvents\Schemes\Apps' | Get-ChildItem | Get-ChildItem | Where-Object {$_.PSChildName -eq '.Current'} | Set-ItemProperty -Name '(Default)' -Value ''" 
+PowerShell -ExecutionPolicy Unrestricted -Command  "New-ItemProperty -Path 'HKU:%SID%\AppEvents\Schemes' -Name '(Default)' -Value '.None' -Force | Out-Null" 
+PowerShell -ExecutionPolicy Unrestricted -Command  "Get-ChildItem -Path 'HKU:%SID%\AppEvents\Schemes\Apps' | Get-ChildItem | Get-ChildItem | Where-Object {$_.PSChildName -eq '.Current'} | Set-ItemProperty -Name '(Default)' -Value ''" 
 :: - > Don't reduce sounds while in a call
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f 
 
