@@ -63,11 +63,11 @@ $ServicesToConfigure = @(
     @{ Name = "mrxsmb"; Start = 4 },   # Disabled
     @{ Name = "mrxsmb20"; Start = 4 },   # Disabled
     @{ Name = "MsLldp"; Start = 4 },   # Disabled
-    @{ Name = "NdisCap"; Start = 4 },   # Disabled
-    @{ Name = "NdisTapi"; Start = 4 },   # Disabled
-    @{ Name = "NdisWan"; Start = 4 },   # Disabled
-    @{ Name = "ndiswanlegacy"; Start = 4 },   # Disabled
-    @{ Name = "Ndu"; Start = 4 },   # Disabled
+    #@{ Name = "NdisCap"; Start = 4 },   # Disabled
+    #@{ Name = "NdisTapi"; Start = 4 },   # Disabled
+    #@{ Name = "NdisWan"; Start = 4 },   # Disabled
+    #@{ Name = "ndiswanlegacy"; Start = 4 },   # Disabled
+    #@{ Name = "Ndu"; Start = 4 },   # Disabled (breaks Task manager network stats)
     @{ Name = "NetBIOS"; Start = 4 },   # Disabled
     @{ Name = "NetBT"; Start = 4 },   # Disabled
     @{ Name = "PptpMiniport"; Start = 4 },   # Disabled
@@ -127,7 +127,7 @@ $ServicesToConfigure = @(
     @{ Name = "WarpJITSvc"; Start = 4 },     # Disabled
     @{ Name = "WdiServiceHost"; Start = 4 },     # Disabled
     @{ Name = "webthreatdefusersvc"; Start = 4 },     # Disabled
-    @{ Name = "WinHttpAutoProxySvc"; Start = 4 },     # Disabled
+    # @{ Name = "WinHttpAutoProxySvc"; Start = 4 },     # Disabled (breaks Wi-Fi)
     @{ Name = "WPDBusEnum"; Start = 4 },     # Disabled
     @{ Name = "webthreatdefsvc"; Start = 4 },     # Disabled
     @{ Name = "WerSvc"; Start = 4 },     # Disabled
