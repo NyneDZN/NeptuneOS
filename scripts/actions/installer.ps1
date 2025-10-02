@@ -3,7 +3,7 @@
 Write-Log "Starting NeptuneOS Installer..."
 
 # Kill explorer
-Stop-Process -Name explorer.exe -Force
+taskkill /f /im explorer.exe
 
 # Initialize Neptune Environment
 Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
