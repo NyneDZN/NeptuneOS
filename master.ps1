@@ -81,8 +81,8 @@ elseif ($NeptuneInstall) {
     Get-SystemInfo "winver.ps1"
 
     # Parse json into variables
-    $jsonText = Get-Content -Path "C:\neptune-installer\systeminfo.json" -Raw
-    $data = $jsonText | ConvertFrom-Json
+    #$jsonText = Get-Content -Path "C:\neptune-installer\systeminfo.json" -Raw
+    #$data = $jsonText | ConvertFrom-Json
 
     # Begin actual installation
     Invoke-ActionScript 'installer.ps1'
