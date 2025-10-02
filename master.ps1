@@ -78,7 +78,6 @@ elseif ($NeptuneInstall) {
     Get-SystemInfo "ram.ps1"
     Get-SystemInfo "device_type.ps1"
     Get-SystemInfo "username.ps1"
-    Get-SystemInfo "usersid.ps1"
     Get-SystemInfo "winver.ps1"
 
     # Parse json into variables
