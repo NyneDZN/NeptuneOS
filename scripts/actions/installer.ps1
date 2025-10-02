@@ -58,9 +58,10 @@ Invoke-ActionScript ".\tweaks\DEVMGMT.CMD"
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-windows-default.cmd"
-Invoke-ActionScript ".\tweaks\services-drivers.ps1"
 Invoke-ActionScript ".\tweaks\services-drivers\audio-service-split.bat"
-Invoke-ActionScript ".\tweaks\services-drivers\RDYBOOST.cmd"
+#Invoke-ActionScript ".\tweaks\services-drivers\RDYBOOST.cmd"
+Invoke-ActionScript ".\tweaks\services-drivers\filters.ps1"
+Invoke-ActionScript ".\tweaks\services-drivers.ps1"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-neptune-default.cmd"
 
 # BCD
