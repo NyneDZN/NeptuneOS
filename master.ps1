@@ -86,7 +86,6 @@ elseif ($NeptuneInstall) {
 
     # Begin actual installation
     Invoke-ActionScript 'installer.ps1'
-    Write-Log "Master script finished (INSTALL MODE)."
 }
 else {
     # Show popup error if no parameters
