@@ -135,6 +135,7 @@ $ServicesToConfigure = @(
     @{ Name = "WSearch"; Start = 4 },     # Disabled
     @{ Name = "WpnService"; Start = 4 },     # Disabled
     @{ Name = "WpnUserService"; Start = 4 }    # Disabled
+    @{ Name = "PcaSvc"; Start = 4 }    # Disabled
 )
 
 foreach ($svcItem in $ServicesToConfigure) {
