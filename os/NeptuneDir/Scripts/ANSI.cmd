@@ -1,19 +1,25 @@
 :: To call this script:
-:: cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+:: setlocal EnableDelayedExpansion && cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 @echo off
 setlocal EnableDelayedExpansion
 cd /d "%~dp0"
+
+:: ANSI escape codes
 for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
 set "right=%ESC%[<x>C"
 set "bullet= %ESC%[34m-%ESC%[0m"
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
-set neptlog=%WinDir%\NeptuneDir\neptune.f
+
+:: Neptune variables
 set userlog=%WinDir%\NeptuneDir\user.txt
+set neptlog=%WinDir%\NeptuneDir\neptune.log
+set neptdir=%WinDir%\NeptuneDir
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svcF=call C:\Windows\NeptuneDir\Scripts\setSvc.cmd
 set delf=del /f /s /q
-set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
+set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Bypass -Command"
+
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11

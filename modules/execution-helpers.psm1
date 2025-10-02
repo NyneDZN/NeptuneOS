@@ -32,12 +32,10 @@ function Invoke-ActionScriptAsSystem {
         $Args
     )
 
-    # Resolve ScriptRoot (use existing $ScriptRoot if present, otherwise default to $PSScriptRoot)
     if (-not $ScriptRoot) { $ScriptRoot = $PSScriptRoot }
 
     $scriptPath = Join-Path $ScriptRoot "scripts\actions\$ScriptName"
 
-    # NSudo location you specified
     $nsudoPath = Join-Path $env:WinDir "NeptuneDir\Tools\NSudoLG.exe"
 
     if (-not (Test-Path $scriptPath)) {
@@ -92,16 +90,10 @@ function Invoke-ActionScriptAsSystem {
             '-Command',
             $psCommand
         )
-
-        # Start NSudo (which will start a child PowerShell). Wait for it to exit.
         $proc = Start-Process -FilePath $nsudoPath -ArgumentList $nsudoArgs -Wait -PassThru
-
-        # Optionally check exit code from NSudo process
         if ($proc.ExitCode -ne 0) {
             Write-Log "NSudo process exited with code $($proc.ExitCode)." 'WARN'
         }
-
-        # If output file exists, stream it into Write-Log, then remove it
         if (Test-Path $tempOut) {
             Get-Content $tempOut -ErrorAction SilentlyContinue | ForEach-Object { Write-Log $_ }
             Remove-Item $tempOut -ErrorAction SilentlyContinue

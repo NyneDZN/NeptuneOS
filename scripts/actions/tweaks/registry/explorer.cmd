@@ -311,6 +311,8 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificat
 :: - > Disable notifications
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f 
 reg add "HKU\%SID%\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /t REG_DWORD /d "1" /f 
+:: - > Disable notification bell
+reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowNotificationIcon" /t REG_DWORD /d "0" /f
 :: ^ - > Lock Screen Notifications
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f 
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f 

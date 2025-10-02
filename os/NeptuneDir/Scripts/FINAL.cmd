@@ -1,5 +1,6 @@
 @echo off
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion && cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+
 taskkill /f /im explorer.exe >nul
 title NeptuneOS Finalization
 mode 60,30
