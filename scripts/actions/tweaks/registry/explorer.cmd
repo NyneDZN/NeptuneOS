@@ -211,9 +211,12 @@ reg add "HKCR\CABFolder\Shell\RunAs\Command" /ve /t REG_SZ /d "cmd /k DISM /onli
 :: attrib +h "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\SendTo\Mail Recipient.MAPIMail" 
 :: attrib +h "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\SendTo\Documents.mydocs" 
 
+:: - > Disable security icon in tray
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
+
 :: File Explorer Configuration
 :: - > Disable 'Network Navigation' in the File Explorer Side Panel
-reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f 
+reg add "HKU\%SID%\Software\Classes\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f
 :: - > Disable OneDrive in the File Explorer Side Panel
 reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f 
 reg add "HKCR\Wow6432Node\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /d "0" /t REG_DWORD /f 
