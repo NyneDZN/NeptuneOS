@@ -105,6 +105,7 @@ Invoke-ActionScript ".\tweaks\performance\svchost-split-threshold.cmd"
 Invoke-ActionScript ".\tweaks\performance\timestamp-interval.cmd"
 Invoke-ActionScript ".\tweaks\performance\win32-priority-seperation.cmd"
 Invoke-ActionScript ".\tweaks\performance\windowed-optimizations-hdr.cmd"
+Invoke-ActionScript ".\tweaks\performance\timer-resolution.cmd"
 
 # Security Tweaks
 Show-Section "Security Tweaks"
