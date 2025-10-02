@@ -18,6 +18,9 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudF
 :: Cleanup script
 powershell -NoProfile -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts\postClean.ps1"
 
+:: Remove rounded corners by default
+"%WinDir%\NeptuneDir%\Tools\rounded_corners.exe"
+
 cls & echo !S_YELLOW!Finished.
 echo !S_YELLOW!Enjoy NeptuneOS.
 timeout /t 3 /nobreak >nul
