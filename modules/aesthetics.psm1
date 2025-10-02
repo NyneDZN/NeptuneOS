@@ -19,3 +19,12 @@ function Show-Banner {
 
     Write-Host ""  # Blank line below banner
 }
+
+function Show-Section {
+    param([string]$Title)
+    Write-Host ""
+    Write-Host ("=" * 50) -ForegroundColor Cyan
+    Write-Host ">>> $Title" -ForegroundColor Yellow
+    Write-Host ("=" * 50) -ForegroundColor Cyan
+    Write-Log "== $Title =="
+}

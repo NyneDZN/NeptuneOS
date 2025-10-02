@@ -1,6 +1,7 @@
 :: To call this script:
 :: cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 @echo off
+setlocal EnableDelayedExpansion
 cd /d "%~dp0"
 for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
 set "right=%ESC%[<x>C"
@@ -12,6 +13,7 @@ set userlog=%WinDir%\NeptuneDir\user.txt
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svcF=call C:\Windows\NeptuneDir\Scripts\setSvc.cmd
 set delf=del /f /s /q
+set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
 
 :: Configure variables for determining winver
 :: - %os% - Windows 10 or 11

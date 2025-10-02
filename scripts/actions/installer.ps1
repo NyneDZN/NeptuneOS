@@ -2,17 +2,6 @@
 # This script will handle the installation of necessary components and configurations.
 Write-Log "Starting NeptuneOS Installer..."
 
-# Nice section header
-function Show-Section {
-    param([string]$Title)
-    Write-Host ""
-    Write-Host ("=" * 50) -ForegroundColor Cyan
-    Write-Host ">>> $Title" -ForegroundColor Yellow
-    Write-Host ("=" * 50) -ForegroundColor Cyan
-    Write-Log "== $Title =="
-}
-
-
 # Kill explorer
 Stop-Process -Name explorer.exe -Force
 
@@ -24,9 +13,6 @@ Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Deskto
 Move-Item -Path ".\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
-
-# Clear restore points
-vssadmin delete shadows /all /quiet
 
 # User icon
 Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
@@ -41,21 +27,22 @@ Remove-Item -Path "C:\Windows\Web" -Recurse -Force
 Move-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png"
 
+# Set lockscreen
+Invoke-ActionScript ".\tweaks\lockscreen.ps1"
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
-Invoke-ActionScript ".\install-prerequisites.bat"
+Invoke-ActionScript ".\components\install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-Invoke-ActionScript ".\tweaks\components\dism-capabilities.bat"
+Invoke-ActionScript ".\tweaks\components\dism-capabilities.cmd"
 Invoke-ActionScript ".\tweaks\components\binary-removal.cmd"
-Invoke-ActionScript ".\tweaks\packages.cmd"
-Invoke-ActionScript ".\packageInstall.ps1" -InstallPackages "C:\Windows\NeptuneDir\Packages\Z-Atlas-NoDefender-Package31bf3856ad364e35amd645.0.0.0.cab" -NoInteraction
-Invoke-ActionScript ".\packageInstall.ps1" -InstallPackages "C:\Windows\NeptuneDir\Packages\Z-Atlas-NoTelemetry-Package31bf3856ad364e35amd645.0.0.0.cab" -NoInteraction
+Invoke-ActionScript ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 
 # Chocolatey
-Invoke-ActionScript ".\chocolatey.cmd"
+Invoke-ActionScript ".\tweaks\chocolatey.cmd"
 
 # File System
 Show-Section "File System Configuration"
@@ -117,16 +104,11 @@ Show-Section "Security Tweaks"
 Invoke-ActionScript ".\tweaks\security\hardening.cmd"
 Invoke-ActionScript ".\tweaks\security\mitigations.cmd"
 
-# Neptune Stuff
-Show-Section "Neptune Customizations"
-Invoke-ActionScript ".\lockscreen.ps1"
-
 # Cleanup
 Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 # Move log and systeminfo and run cleanup
 Move-Item -Path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
-Move-Item -Path "C:\neptune-installer\scripts\actions\cleanup.ps1" -Destination "$env:WINDIR\NeptuneDir\Scripts" -Force
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Finalization" -PropertyType String -Value "$env:WinDir\NeptuneDir\Scripts\FINAL.cmd" -Force
 
 # powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
