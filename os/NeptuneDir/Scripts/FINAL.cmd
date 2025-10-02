@@ -1,5 +1,6 @@
 @echo off
-setlocal EnableDelayedExpansion && cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion 
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 
 taskkill /f /im explorer.exe >nul
 title NeptuneOS Finalization
@@ -10,8 +11,12 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "leg
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 
+:: Disable 'Show files from Office.com' in File Explorer
+:: Unsure as to why this doesn't work in the registry tweaks script
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f >nul
+
 :: Cleanup script
-%PowerShell% "%WinDir%\NeptuneDir\Scripts\postClean.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts\postClean.ps1"
 
 cls & echo !S_YELLOW!Finished.
 echo !S_YELLOW!Enjoy NeptuneOS.

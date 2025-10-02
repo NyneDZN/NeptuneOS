@@ -241,8 +241,8 @@ reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" 
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SharingWizardOn" /t REG_DWORD /d "0" /f 
 :: - > Disable Sync Provider Notifications
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "0" /f 
-:: - > Disable 'Show files from Office.com'
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f 
+:: - > Disable 'Show files from Office.com' (doesn't seem to disable, also exists in FINAL.cmd)
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f
 :: - > Disable automatic folder type discovery in File Explorer
 :: This might improve explorer performance, but will also make all folders autosort by 'details'
 reg delete "HKU\%SID%\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f  
