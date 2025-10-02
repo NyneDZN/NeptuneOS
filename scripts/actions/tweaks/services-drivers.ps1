@@ -132,7 +132,9 @@ $ServicesToConfigure = @(
     @{ Name = "WPDBusEnum"; Start = 4 },     # Disabled
     @{ Name = "webthreatdefsvc"; Start = 4 },     # Disabled
     @{ Name = "WerSvc"; Start = 4 },     # Disabled
-    @{ Name = "WSearch"; Start = 4 }     # Disabled
+    @{ Name = "WSearch"; Start = 4 },     # Disabled
+    @{ Name = "WpnService"; Start = 4 },     # Disabled
+    @{ Name = "WpnUserService"; Start = 4 }    # Disabled
 )
 
 foreach ($svcItem in $ServicesToConfigure) {
