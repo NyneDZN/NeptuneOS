@@ -101,7 +101,7 @@ $ServicesToConfigure = @(
     @{ Name = "DusmSvc"; Start = 4 },     # Disabled
     @{ Name = "edgeupdate"; Start = 4 },     # Disabled
     @{ Name = "edgeupdatem"; Start = 4 },     # Disabled
-    @{ Name = "FontCache"; Start = 4 },     # Disabled
+    # @{ Name = "FontCache"; Start = 4 },     # Disabled (ruins performance in text heavy applications, like photoshop)
     @{ Name = "FontCache3.0.0.0"; Start = 4 },     # Disabled
     @{ Name = "HvHost"; Start = 4 },     # Disabled
     @{ Name = "IKEEXT"; Start = 4 },     # Disabled
