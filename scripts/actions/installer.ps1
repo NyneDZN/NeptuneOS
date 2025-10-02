@@ -38,7 +38,7 @@ Invoke-ActionScript ".\components\install-prerequisites.bat"
 Show-Section "Windows Components"
 Invoke-ActionScript ".\tweaks\components\dism-capabilities.cmd"
 Invoke-ActionScript ".\tweaks\components\binary-removal.cmd"
-Invoke-ActionScript ".\PACKAGES.PS1"
+Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 
 # Chocolatey
@@ -46,7 +46,7 @@ Invoke-ActionScript ".\tweaks\chocolatey.cmd"
 
 # File System
 Show-Section "File System Configuration"
-Invoke-ActionScript ".\tweaks\ntfs.ps1"
+Invoke-ActionScriptAsSystem ".\tweaks\ntfs.ps1"
 Invoke-ActionScript ".\tweaks\ntfs\fsutil.ps1"
 
 # Task Scheduler
