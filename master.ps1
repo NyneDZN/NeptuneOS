@@ -70,7 +70,7 @@ elseif ($NeptuneInstall) {
     Write-Log "Master script started in INSTALL MODE."
     # Example: launch installer script
     # Begin ngen asap to improve powershell speeds
-    Invoke-ActionScript "ngen.ps1"
+    #Invoke-ActionScript "ngen.ps1"
 
     # Gather system info
     Get-SystemInfo "cpu.ps1"

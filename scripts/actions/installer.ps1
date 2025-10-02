@@ -5,6 +5,12 @@ Write-Log "Starting NeptuneOS Installer..."
 # Kill explorer
 taskkill /f /im explorer.exe
 
+# NGEN
+Invoke-ActionScript "ngen.ps1"
+
+# Clear event logs
+Invoke-ActionScript ".\tweaks\EVENTLOGS.bat"
+
 # Initialize Neptune Environment
 Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
 Move-Item -Path ".\os\lockscreen.png" -Destination "$env:WINDIR\NeptuneDir" -Force
