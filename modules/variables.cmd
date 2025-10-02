@@ -3,6 +3,7 @@ set INITneptdir="C:\neptune-installer"
 set neptdir="C:\Windows\NeptuneDir"
 set currentuser=C:\neptune-installer\tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide -Wait
 set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
+set "prereqDir=C:\neptune-installer\prerequisites"
 
 :: Winver Variables
 for /f "tokens=6 delims=[.] " %%a in ('ver') do (set "win_version=%%a")

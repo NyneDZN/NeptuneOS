@@ -1,10 +1,4 @@
-setlocal enabledelayedexpansion
-
-REM Go up 2 levels from script location
-for %%I in ("%~dp0..\..") do set "rootDir=%%~fI"
-
-REM Path to prerequisites folder
-set "prereqDir=%rootDir%\prerequisites"
+call "C:\neptune-installer\modules\variables.cmd"
 
 cls & echo !S_YELLOW!Installing Visual C++... [15/18]
 start /wait "" "%prereqDir%\vcredist.exe" /ai8X239T 

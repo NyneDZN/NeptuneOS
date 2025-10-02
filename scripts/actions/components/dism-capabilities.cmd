@@ -1,4 +1,4 @@
-call "%~dp0\modules\variables.cmd"
+call "C:\neptune-installer\modules\variables.cmd"
 
 :: Features and Components
 :: Enable DirectPlay
