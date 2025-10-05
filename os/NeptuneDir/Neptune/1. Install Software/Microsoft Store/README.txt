@@ -1,1 +1,0 @@
-After installing the store, please run through and update all apps so microsoft store is up to date.
