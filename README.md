@@ -73,7 +73,7 @@ NeptuneOS is a project aimed to optimize performance in Windows for gaming and w
 
 <!-- GETTING STARTED -->
 ## Getting Started & Installation
-You can view installation instructions in our [Discord Server](discord.gg\Ekj32cWeqB)
+You can view installation instructions in our [Discord Server](https://discord.com/invite/Ekj32cWeqB)
 
 
 #
@@ -98,9 +98,8 @@ Contributions are what make the open source community such an amazing place to l
 <!-- CONTACT -->
 ## Contact
 
-[Twitter](https://twitter.com/nyn9pm)
-[Discord Server](https://discord.com/invite/Ekj32cWeqB)
-Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
+* [Twitter](https://twitter.com/nyn9pm)
+* [Discord Server](https://discord.com/invite/Ekj32cWeqB)
 
 
 
