@@ -18,8 +18,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![Static Badge](https://img.shields.io/badge/NeptuneOS-blue?style=for-the-badge&logo=windows)
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -101,7 +99,7 @@ Contributions are what make the open source community such an amazing place to l
 ## Contact
 
 [Twitter](https://twitter.com/nyn9pm)
-[Discord Server](discord.gg\Ekj32cWeqB)
+[Discord Server](https://discord.com/invite/Ekj32cWeqB)
 Project Link: [https://github.com/NyneDZN/NeptuneOS](https://github.com/NyneDZN/NeptuneOS)
 
 
