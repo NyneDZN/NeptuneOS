@@ -18,24 +18,32 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+![Static Badge](https://img.shields.io/badge/NeptuneOS-blue?style=for-the-badge&logo=windows)
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![project_license][license-shield]][license-url]
+#
+
+<p align="center">
+  <b>🚧 README.md Status 🚧</b><br><br>
+  🟩🟩🟩🟨⬜⬜⬜⬜ <b>45% Complete</b><br>
+  <i>Work in progress — updates coming soon!</i>
+</p>
+
+#
 
 
-
-<b><i>This page is still being updated in preperation for Neptune V1.0</b></i>
 
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/NyneDZN/NeptuneOS">
-    <img src="https://user-images.githubusercontent.com/120980797/209248113-fb446909-8aad-4c90-bedf-d4d536ef5dee.png" alt="Logo" width="500" height="500">
-  </a>
 
-<h3 align="center">NeptuneOS</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/NeptuneOS-blue?style=for-the-badge&logo=windows" width="200">
+  <br>
+</p>
 
   <p align="center">
     A windows optimization project dedicated to performance and productivity.
@@ -47,8 +55,12 @@
     <a href="https://github.com/NyneDZN/NeptuneOS/issues/new">Report Bug</a>
     &middot;
     <a href="https://github.com/NyneDZN/NeptuneOS/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    
   </p>
 </div>
+
+#
+
 
 
 
@@ -58,7 +70,7 @@
 NeptuneOS is a project aimed to optimize performance in Windows for gaming and workloads while maintaining compatibility and security. NeptuneOS is entirely open source and uses code from other open source repositories, listed at the bottom of this page.
 
 
-
+#
 
 
 <!-- GETTING STARTED -->
@@ -66,7 +78,7 @@ NeptuneOS is a project aimed to optimize performance in Windows for gaming and w
 You can view installation instructions in our [Discord Server](discord.gg\Ekj32cWeqB)
 
 
-
+#
 
 
 <!-- CONTRIBUTING -->
