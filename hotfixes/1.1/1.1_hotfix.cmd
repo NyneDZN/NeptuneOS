@@ -49,6 +49,15 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 :: Enable display enhancement service to fix NVIDIA app error
 %svcF% DisplayEnhancementService 2
 
+:: Enable Programmable interrupt controller
+%devman% /enable "Programmable interrupt controller"
+
+:: Enable system timer
+%devman% /enable "System timer"
+
+:: Enable CMOS / RTC
+%devman% /enable "System CMOS/real time clock"
+
 :: Update Neptune Default Services.reg
 powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\1.1_hotfix_shell.ps1"
 

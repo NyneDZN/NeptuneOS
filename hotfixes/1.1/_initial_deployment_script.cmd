@@ -1,10 +1,18 @@
-:: =====================================================
-::      This just contains the script snippets for the batch 
-::      file everyone was sent to apply the hotfix
-:: =====================================================
-
 :: ==========================================================
+::
+::      This just contains the script snippets for the batch 
+::      file that was sent to testers / early accesss 
+::      members to apply the hotfix and initiate the updater 
+::      enviornment when neptune was still in beta phase 
+::      and the ISO was not public. This was not present
+::      in the V1.0 ISO and was a late addition hence the mess. 
+::                          
+::                            - NYN9
+::                            
+:: ==========================================================
+::
 ::           NeptuneOS V1.1 Hotfix - Release Notes
+::
 :: ==========================================================
 ::  Fixes Included:
 ::    • NVIDIA app error on launch
