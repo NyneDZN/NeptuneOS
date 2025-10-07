@@ -19,7 +19,8 @@ $lines = Get-Content $regFile
 # --- Target services ---
 $services = @(
     "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnService",
-    "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnUserService"
+    "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnUserService",
+    "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService"
 )
 
 # --- Track which service section we are in ---

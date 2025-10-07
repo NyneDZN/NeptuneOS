@@ -13,7 +13,7 @@
 
 :: Init enviornment
 setlocal EnableDelayedExpansion
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+call "%WinDir%\NeptuneDir\Updates\updater_variables.cmd"
 
 :: Fullscreen script
 "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs"
@@ -42,7 +42,15 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 ::                  Begin Hotfixes
 :: ----------------------------------------------------------
 
-:: Begin actual hotfix process
+:: Enable notification services to fix calendar and explorer crashes
 %svcF% WpnService 2
 %svcF% WpnUserService 2
+
+:: Enable display enhancement service to fix NVIDIA app error
 %svcF% DisplayEnhancementService 2
+
+:: Update Neptune Default Services.reg
+powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\1.1_hotfix_shell.ps1"
+
+:: Update Neptune desktop folder
+call "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\move_to_directories.cmd"
