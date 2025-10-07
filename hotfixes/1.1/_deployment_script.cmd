@@ -1,0 +1,44 @@
+:: =====================================================
+::      This just contains the script snippets for the batch 
+::      file everyone was sent to apply the hotfix
+:: =====================================================
+
+:: ==========================================================
+::           NeptuneOS V1.1 Hotfix - Release Notes
+:: ==========================================================
+::  Fixes Included:
+::    • NVIDIA app error on launch
+::    • Clicking on time/date won't open calendar
+::    • Random explorer.exe crashes
+::    • Neptune Desktop folder enhancements
+:: ==========================================================
+
+@echo off
+title NeptuneOS v1.1 Hotfix
+
+:: Call Administrator
+fltmc >nul 2>&1 || (
+    echo Administrator privileges are required.
+    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
+        echo Right-click on the script and select 'Run as administrator'.
+        pause & exit 1
+    )
+    exit 0
+)
+
+:: Download the updater
+curl -L -o %temp%\updater.zip https://github.com/NyneDZN/NeptuneOS/archive/refs/heads/updater.zip
+
+:: Create updates directory
+mkdir "%WinDir%\NeptuneDir\Updates"
+
+:: Extract the updater
+"%WinDir%\NeptuneDir\Tools\7za.exe" x "%TEMP%\updater.zip" -o"%temp%\update_files" -y
+
+:: Move the updater files to the updates directory
+move "%temp%\update_files\NeptuneOS-updater\hotfixes" "%WinDir%\NeptuneDir\Updates"
+move "%temp%\update_files\NeptuneOS-updater\updater.ps1" "%WinDir%\NeptuneDir\Updates"
+move "%temp%\update_files\NeptuneOS-updater\updater_variables.cmd" "%WinDir%\NeptuneDir\Updates"
+
+:: Execute the hotfix script
+powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\updater.ps1" -hotfix "1.1"
