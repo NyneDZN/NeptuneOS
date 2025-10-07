@@ -28,6 +28,7 @@ Troubleshooting/Default Services and Drivers/*.reg
 # VS Code
 .vscode/
 *.code-workspace
+.github
 
 # Windows thumbnail cache / thumbs.db
 Thumbs.db
