@@ -50,13 +50,16 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 %svcF% DisplayEnhancementService 2
 
 :: Enable Programmable interrupt controller
-%devman% /enable "Programmable interrupt controller"
+%DevMan% /enable "Programmable interrupt controller"
 
 :: Enable system timer
-%devman% /enable "System timer"
+%DevMan% /enable "System timer"
 
 :: Enable CMOS / RTC
-%devman% /enable "System CMOS/real time clock"
+%DevMan% /enable "System CMOS/real time clock"
+
+:: Remove Open-Shell configuration scripts, these will be kept in the future once Windows 10 is re-supported
+del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
 
 :: Update Neptune Default Services.reg
 powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\1.1_hotfix_shell.ps1"
