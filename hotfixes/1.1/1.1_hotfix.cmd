@@ -5,11 +5,24 @@
 ::    • NVIDIA app error on launch
 ::    • Clicking on time/date won't open calendar
 ::    • Random explorer.exe crashes
+::    • Disable Mouse Throttling
+::    • Disable USB Sleep States
+::    • Network Improvements
 ::    • Neptune Desktop folder enhancements
 :: ==========================================================
 
 
 @echo off
+
+:: Call Administrator
+fltmc >nul 2>&1 || (
+    echo Administrator privileges are required.
+    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
+        echo Right-click on the script and select 'Run as administrator'.
+        pause & exit 1
+    )
+    exit 0
+)
 
 :: Init enviornment
 setlocal EnableDelayedExpansion
@@ -26,6 +39,9 @@ echo !S_WHITE!This hotfix addresses the following issues:!S_WHITE!
 echo  !S_RED!•!S_RED! !S_GREEN!NVIDIA app error on launch!S_GREEN!
 echo  !S_RED!•!S_RED! !S_GREEN!Clicking on time/date won't open calendar!S_GREEN
 echo  !S_RED!•!S_RED! !S_GREEN!Random explorer.exe crashes!S_GREEN!
+echo  !S_RED!•!S_RED! !S_GREEN!Disable Mouse Throttling!S_GREEN!
+echo  !S_RED!•!S_RED! !S_GREEN!Disable USB Sleep States!S_GREEN!
+echo  !S_RED!•!S_RED! !S_GREEN!Network Improvements!S_GREEN!
 echo.
 echo !S_WHITE!This hotfix also adds these improvements:!S_WHITE!
 echo  !S_RED!•!S_RED! !S_GREEN!Neptune Desktop folder enhancements!S_GREEN!
@@ -58,11 +74,14 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 :: Enable CMOS / RTC
 %DevMan% /enable "System CMOS/real time clock"
 
-:: Remove Open-Shell configuration scripts, these will be kept in the future once Windows 10 is re-supported
-del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
+:: Disbale Host Controller Sleep State 0 in USB Flags
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t REG_DWORD /d "1" /f
 
-:: Update Neptune Default Services.reg
-powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\1.1_hotfix_shell.ps1"
+:: Disable Mouse Throttle
+reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0" /f
 
+
+
+:: ---------------------------------------------------------------------------
 :: Update Neptune desktop folder
 call "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\move_to_directories.cmd"
