@@ -18,4 +18,5 @@ powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1
 
 
 :: Move Updated QoS DSCP script to Network Configuration
-move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network"
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network"
+del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q
