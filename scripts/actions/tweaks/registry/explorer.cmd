@@ -17,11 +17,11 @@ reg add "HKU\%SID%\Control Panel\Desktop" /v "HungAppTimeout" /t REG_SZ /d "1000
 
 :: Explorer Colors
 :: - > Set windows color scheme to 'storm gray'
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentColorMenu" /t REG_DWORD /d "4290756543" /f 
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /t REG_DWORD /d "4289901234" /f 
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentPalette" /t REG_BINARY /d "9b9a9900848381006d6b6a004c4a4800363533002625240019191900107c1000" /f 
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationColor" /t REG_DWORD /d "3293334088" /f 
-reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationAfterglow" /t REG_DWORD /d "3293334088" /f 
+reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentColorMenu" /t REG_DWORD /d "4283520086" /f 
+reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /t REG_DWORD /d "4284046430" /f 
+reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v AccentPalette /t REG_BINARY /d "77,74,70,ff,6c,6a,67,ff,65,63,60,ff,5e,5c,59,ff,56,54,51,ff,4f,4d,4a,ff,44,43,41,ff,88,17,98,00" /f
+reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationColor" /t REG_DWORD /d "3294518361" /f 
+reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationAfterglow" /t REG_DWORD /d "3294518361" /f 
 :: - > Set operating system color scheme to 'dark'
 reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f 
 reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f 
