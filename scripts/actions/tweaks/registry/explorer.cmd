@@ -435,6 +435,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v
 reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\Security" /v "DisableSecuritySettingsCheck" /t REG_DWORD /d "1" /f 
 
 :: Disable ShellBags
+:: This doesn't actually disable them, just removes existing ones. They get rebuilt overtime as you open applications.
 reg add "HKU\%SID%\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /v "BagMRU Size" /t REG_DWORD /d "1" /f 
 reg add "HKU\%SID%\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /v "BagMRU Size" /t REG_DWORD /d "1" /f 
 reg add "HKU\%SID%\Software\Microsoft\Windows\Shell\BagMRU" /f 
