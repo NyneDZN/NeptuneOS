@@ -20,7 +20,8 @@ FSUTIL behavior set bugcheckoncorrupt 0
 :: https://ttcshelbyville.wordpress.com/2018/12/02/should-you-disable-8dot3-for-performance-and-security
 FSUTIL behavior set disable8dot3 1 
 :: Disable NTFS File Compression
-FSUTIL behavior set disablecompression 1 
+:: Causes DISM errors but also adds slight overhead when files are compressing in the background, user can re-enable if needed
+FSUTIL behavior set disablecompression 1
 :: Disable NTFS File Encryption
 :: Commented out because this disables XBOX downloads
 :: FSUTIL behavior set disableencryption 1 
