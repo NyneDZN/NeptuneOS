@@ -27,6 +27,7 @@ fltmc >nul 2>&1 || (
 :: Init enviornment
 setlocal EnableDelayedExpansion
 call "%WinDir%\NeptuneDir\Updates\updater_variables.cmd"
+call "%WinDir%\NeptuneDir\Scripts\ANSI.cmd"
 
 :: Fullscreen script
 "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs"
