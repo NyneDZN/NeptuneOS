@@ -99,11 +99,11 @@ bcdedit /deletevalue useplatformtick >nul
 
 :: Setting BBR2 for TCP Congestion Provider
 echo !S_WHITE!Setting BBR2 for TCP Congestion Provider!S_WHITE!
-netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2 
-netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2 
-netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2 
-netsh int tcp set supplemental Template=DatacenterCustom CongestionProvider=bbr2 
-netsh int tcp set supplemental Template=InternetCustom CongestionProvider=bbr
+netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2 >nul 
+netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2 >nul 
+netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2 >nul 
+netsh int tcp set supplemental Template=DatacenterCustom CongestionProvider=bbr2 >nul 
+netsh int tcp set supplemental Template=InternetCustom CongestionProvider=bbr >nul
 
 
 :: TImeout to let user see what was done
