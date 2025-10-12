@@ -13,7 +13,9 @@
 
 
 @echo off
-cls
+
+:: Fix ANSI
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\neptune_folder\ANSI.cmd" "%WinDir%\NeptuneDir\Scripts" >nul 2>&1
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
