@@ -9,8 +9,7 @@ move "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\NVIDIA Display Conta
 :: Remove Open-Shell configuration scripts, these will be kept in the future once Windows 10 is re-supported
 del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
 
-:: Update Neptune Default Services.reg
-powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\1.1_hotfix_shell.ps1"
+
 
 :: ----------------------------------
 ::          New additions

@@ -12,7 +12,8 @@
 :: ==========================================================
 
 
-@echo off & cls
+@echo off
+cls
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
@@ -27,11 +28,11 @@ fltmc >nul 2>&1 || (
 :: Init enviornment
 setlocal EnableDelayedExpansion
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
-call "%WinDir%\NeptuneDir\Updates\updater_variables.cmd"
-call "%WinDir%\NeptuneDir\Scripts\ANSI.cmd"
+call "%WinDir%\NeptuneDir\Updates\updater_variables.cmd" >nul
+call "%WinDir%\NeptuneDir\Scripts\ANSI.cmd" >nul
 
 :: Fullscreen script
-"%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs"
+"%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" >nul
 
 
 :: Echo to user
@@ -53,7 +54,7 @@ echo Press any key to continue updating.
 pause>nul
 
 :: Init neptune reg for future hotfixes
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v HotfixVersion /t REG_SZ /d "1.1" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v HotfixVersion /t REG_SZ /d "1.1" /f 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "1.0" /f
 
 :: ----------------------------------------------------------
@@ -87,8 +88,5 @@ reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d
 :: ---------------------------------------------------------------------------
 :: Update Neptune desktop folder
 call "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\move_to_directories.cmd"
-
-:: Fix default services reg
-powershell -file "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\hotfix_reg_1.1.ps1
 
 pause>nul
