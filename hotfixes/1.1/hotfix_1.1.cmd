@@ -153,7 +153,7 @@ copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\N
 
 :: Move updated Neptune Default Services.reg to Scripts folder
 del "%WinDir%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Neptune Default.reg" /f /q >nul 2>&1
-move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Neptune Default.reg" "%WinDir%\NeptuneDir\Scripts\Neptune Default.reg" >nul
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Neptune Default.reg" "%WinDir%\NeptuneDir\Scripts" >nul
 
 
 
