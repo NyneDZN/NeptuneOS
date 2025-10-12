@@ -12,7 +12,7 @@
 :: ==========================================================
 
 
-@echo off
+@echo off & cls
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
