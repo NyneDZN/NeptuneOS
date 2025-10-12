@@ -42,7 +42,7 @@ echo !S_RED!It's recommended to save and close any programs before proceeding.!S
 echo !S_RED!The script will pause for 10 seconds to prevent you from accidentally continuing while you close your applications.!S_RED!
 timeout /t 10 /nobreak>nul
 echo.
-echo !S_WHITE!!Press any key to continue the script once you're ready.!S_WHITE!
+echo !S_WHITE!Press any key to continue the script once you're ready.!S_WHITE!
 pause>nul
 
 

@@ -48,9 +48,9 @@ echo.
 echo !S_WHITE!This hotfix also adds these improvements:!S_WHITE!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!Neptune Desktop folder enhancements!S_GREEN!
 echo.
-timeout /t 5 /nobreak>nul
 echo Press any key to continue updating.
 pause>nul
+cls
 
 :: Init neptune reg for future hotfixes
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v HotfixVersion /t REG_SZ /d "1.1" /f 
@@ -58,8 +58,6 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 
 :: ----------------------------------------------------------
 ::                  Begin Hotfixes
-cls
-::
 :: ----------------------------------------------------------
 
 :: Enable notification services to fix calendar and explorer crashes
@@ -90,6 +88,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t
 :: Disable Mouse Throttle
 echo !S_WHITE!Enable mouse throttling for non-foreground apps!S_WHITE!
 reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0x14" /f >nul
+timeout /t 3 /nobreak>nul
 
 
 
