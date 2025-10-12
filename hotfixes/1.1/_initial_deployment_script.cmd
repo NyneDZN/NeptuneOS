@@ -24,7 +24,7 @@
 @echo off
 title NeptuneOS v1.1 Hotfix
 setlocal EnableDelayedExpansion
-call "C:\Windows\NeptuneDir\Scripts\ANSI.cmd"
+set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
@@ -67,6 +67,6 @@ move "%temp%\update_files\NeptuneOS-updater\updater.ps1" "%WinDir%\NeptuneDir\Up
 move "%temp%\update_files\NeptuneOS-updater\updater_variables.cmd" "%WinDir%\NeptuneDir\Updates" >nul
 
 :: Execute the hotfix script
-echo !S_WHITE!Running hotfix master script!S_WHITE!
-timeout /t 1 /nobreak>nul
+cls & echo !S_WHITE!Running hotfix master script!S_WHITE!
+timeout /t 3 /nobreak>nul
 powershell -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Updates\updater.ps1" -hotfix "1.1"
