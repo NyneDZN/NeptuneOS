@@ -131,7 +131,8 @@ del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Poli
 copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
 timeout /t 3 /nobreak>nul
 cls & echo !S_GREEN!Hotfix v1.1 complete. Restarting in 10 seconds!S_GREEN!
-echo !S_GREEN!Enjoy!S_GREEN! - !S_RED!NYN9!S_RED!
+echo !S_GREEN!Enjoy!S_GREEN! 
+echo !S_WHITE!,!S_WHITE! !S_RED!NYN9!S_RED!
 timeout /t /5 /nobreak>nul
 shutdown /f /r /t 5 /c "Restarting for NeptuneOS v1.1."
 

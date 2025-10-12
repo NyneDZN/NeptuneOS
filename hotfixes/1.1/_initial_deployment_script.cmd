@@ -24,7 +24,7 @@
 @echo off
 title NeptuneOS v1.1 Hotfix
 setlocal EnableDelayedExpansion
-set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
+
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
@@ -36,14 +36,22 @@ fltmc >nul 2>&1 || (
     exit 0
 )
 
+:: ANSI escape codes
+for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
+set "right=%ESC%[<x>C"
+set "bullet= %ESC%[34m-%ESC%[0m"
+set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
+set "%CMDLINE:,=" & set "%"
+
 :: Echo to user
-echo !S_RED!Hello!S_RED!!S_WHITE!,!S_WHITE! !S_GREEN!%USERNAME%!S_GREEN!
+cls & echo !S_RED!Hello!S_RED!!S_WHITE!,!S_WHITE! !S_GREEN!%USERNAME%!S_GREEN!
 echo !S_RED!This is the NeptuneOS v1.1 Hotfix installer!S_RED!
 echo.
-echo !S_YELLOW!Please read:!S_YELLOW!
-echo !S_RED!This script will automatically restart your PC when finished.!S_RED!
-echo !S_RED!It's recommended to save and close any programs before proceeding.!S_RED!
-echo !S_RED!The script will pause for 10 seconds to prevent you from accidentally continuing while you close your applications.!S_RED!
+echo !S_WHITE!•!S_WHITE! !S_YELLOW!Please read:!S_YELLOW!
+echo.
+echo !S_WHITE!•!S_WHITE! !S_RED!This script will automatically restart your PC when finished.!S_RED!
+echo !S_WHITE!•!S_WHITE! !S_RED!It's recommended to save and close any programs before proceeding.!S_RED!
+echo !S_WHITE!•!S_WHITE! !S_RED!The script will pause for 10 seconds to prevent you from accidentally continuing while you close your applications.!S_RED!
 timeout /t 10 /nobreak>nul
 echo.
 echo !S_WHITE!Press any key to continue the script once you're ready.!S_WHITE!
