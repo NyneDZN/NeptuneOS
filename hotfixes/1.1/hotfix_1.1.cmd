@@ -31,7 +31,7 @@ call "%WinDir%\NeptuneDir\Updates\updater_variables.cmd"
 call "%WinDir%\NeptuneDir\Scripts\ANSI.cmd"
 
 :: Fullscreen script
-"%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs"
+"%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs"
 
 
 :: Echo to user
