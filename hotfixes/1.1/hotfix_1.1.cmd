@@ -36,18 +36,18 @@ call "%WinDir%\NeptuneDir\Scripts\ANSI.cmd" >nul
 
 
 :: Echo to user
-echo !S_GREEN!NeptuneOS V1.1!S_GREEN! !S_RED!Hotfix!S_RED!
+echo !S_GREEN!NeptuneOS V1.1!S_GREEN! !S_WHITE!Hotfix!S_WHITE!
 echo.
 echo !S_WHITE!This hotfix addresses the following issues:!S_WHITE!
-echo  !S_RED!•!S_RED! !S_GREEN!NVIDIA app error on launch!S_GREEN!
-echo  !S_RED!•!S_RED! !S_GREEN!Clicking on time/date won't open calendar!S_GREEN
-echo  !S_RED!•!S_RED! !S_GREEN!Random explorer.exe crashes!S_GREEN!
-echo  !S_RED!•!S_RED! !S_GREEN!Disable Mouse Throttling!S_GREEN!
-echo  !S_RED!•!S_RED! !S_GREEN!Disable USB Sleep States!S_GREEN!
-echo  !S_RED!•!S_RED! !S_GREEN!Network Improvements!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!NVIDIA app error on launch!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Clicking on time/date won't open calendar!S_GREEN
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Random explorer.exe crashes!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Disable Mouse Throttling!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Disable USB Sleep States!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Network Improvements!S_GREEN!
 echo.
 echo !S_WHITE!This hotfix also adds these improvements:!S_WHITE!
-echo  !S_RED!•!S_RED! !S_GREEN!Neptune Desktop folder enhancements!S_GREEN!
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Neptune Desktop folder enhancements!S_GREEN!
 echo.
 timeout /t 5 /nobreak>nul
 echo Press any key to continue updating.
@@ -62,31 +62,69 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 :: ----------------------------------------------------------
 
 :: Enable notification services to fix calendar and explorer crashes
+echo !S_WHITE!Enabling notification services!S_WHITE!
 %svcF% WpnService 2
 %svcF% WpnUserService 2
 
 :: Enable display enhancement service to fix NVIDIA app error
+echo !S_WHITE!Enabling display enhancement service for NVIDIA app!S_WHITE!
 %svcF% DisplayEnhancementService 2
 
 :: Enable Programmable interrupt controller
+echo !S_WHITE!Enabling Programmable interrupt controller!S_WHITE!
 %DevMan% /enable "Programmable interrupt controller"
 
 :: Enable system timer
+echo !S_WHITE!Enabling System timer!S_WHITE!
 %DevMan% /enable "System timer"
 
 :: Enable CMOS / RTC
+echo !S_WHITE!Enabling CMOS / RTC!S_WHITE!
 %DevMan% /enable "System CMOS/real time clock"
 
 :: Disbale Host Controller Sleep State 0 in USB Flags
+echo !S_WHITE!Disabling USB HCS0 in USB Flags!S_WHITE!
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t REG_DWORD /d "1" /f
 
 :: Disable Mouse Throttle
-reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0" /f
+echo !S_WHITE!Enable mouse throttling for non-foreground apps!S_WHITE!
+reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0x14" /f
 
 
 
-:: ---------------------------------------------------------------------------
-:: Update Neptune desktop folder
-call "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\move_to_directories.cmd"
+::         Update Neptune desktop folder
+:: ===================================================
+::
+:: New Features:
+:: • Removed deprecated open-shell scripts
+:: • Added new QoS Script in Network Configuration
+:: • Moved NVIDIA Display Container LS to proper location
+:: • Updated Neptune Default Services.reg
+:: • Added FullscreenCMD.vbs to Scripts folder
+::
+:: ===================================================
+:: hi there, i'm aware this entire project is a mess.
+:: ---------------------------------
+::       Tweaking existing files
+:: ---------------------------------
+
+
+:: Move NVIDIA Display Container LS folder from "Advanced Configuration" to "Driver Maintenance"
+move "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\NVIDIA Display Container LS" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\GPU\NVIDIA\Configuration"
+
+:: Remove Open-Shell configuration scripts, these will be kept in the future once Windows 10 is re-supported
+del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
+
+
+
+:: ----------------------------------
+::          New additions
+:: ----------------------------------
+
+
+:: Move Updated QoS DSCP script to Network Configuration
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration"
+del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q
+copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" 
 
 pause>nul

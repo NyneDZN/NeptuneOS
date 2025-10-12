@@ -42,6 +42,7 @@ echo !S_RED!The script will pause for 10 seconds to prevent you from accidentall
 timeout /t 10 /nobreak>nul
 echo.
 echo !S_WHITE!!Press any key to continue the script once you're ready.!S_WHITE!
+pause>nul
 
 
 :: Download the updater
