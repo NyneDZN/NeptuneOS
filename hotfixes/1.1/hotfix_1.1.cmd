@@ -39,7 +39,7 @@ echo !S_GREEN!NeptuneOS V1.1!S_GREEN! !S_WHITE!Hotfix!S_WHITE!
 echo.
 echo !S_WHITE!This hotfix addresses the following issues:!S_WHITE!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!NVIDIA app error on launch!S_GREEN!
-echo  !S_WHITE!•!S_WHITE! !S_GREEN!Clicking on time/date won't open calendar!S_GREEN
+echo  !S_WHITE!•!S_WHITE! !S_GREEN!Clicking on time/date won't open calendar!S_GREEN!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!Random explorer.exe crashes!S_GREEN!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!Disable Mouse Throttling!S_GREEN!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!Disable USB Sleep States!S_GREEN!
