@@ -37,7 +37,11 @@ fltmc >nul 2>&1 || (
 )
 
 :: Echo to user
-echo !S_RED!This script will require you to restart your computer!S_RED!
+echo !S_RED!Hello!S_RED!!S_WHITE!,!S_WHITE! !S_GREEN!%USERNAME%!S_GREEN!
+echo !S_RED!This is the NeptuneOS v1.1 Hotfix installer!S_RED!
+echo.
+echo !S_YELLOW!Please read:!S_YELLOW!
+echo !S_RED!This script will automatically restart your PC when finished.!S_RED!
 echo !S_RED!It's recommended to save and close any programs before proceeding.!S_RED!
 echo !S_RED!The script will pause for 10 seconds to prevent you from accidentally continuing while you close your applications.!S_RED!
 timeout /t 10 /nobreak>nul

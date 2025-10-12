@@ -15,7 +15,7 @@
 @echo off
 
 :: Fix ANSI
-del "%WinDir%\NeptuneDir\Scripts\ANSI.cmd" /f /q
+del "%WinDir%\NeptuneDir\Scripts\ANSI.cmd" /f /q >nul 2>&1
 move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\neptune_folder\ANSI.cmd" "%WinDir%\NeptuneDir\Scripts" >nul 2>&1
 
 :: Call Administrator
@@ -38,7 +38,7 @@ call "C:\Windows\NeptuneDir\Updates\updater_variables.cmd"
 
 
 :: Echo to user
-echo !S_GREEN!NeptuneOS V1.1!S_GREEN! !S_WHITE!Hotfix!S_WHITE!
+cls & echo !S_GREEN!NeptuneOS V1.1!S_GREEN! !S_WHITE!Hotfix!S_WHITE!
 echo.
 echo !S_WHITE!This hotfix addresses the following issues:!S_WHITE!
 echo  !S_WHITE!•!S_WHITE! !S_GREEN!NVIDIA app error on launch!S_GREEN!
@@ -56,8 +56,8 @@ pause>nul
 cls
 
 :: Init neptune reg for future hotfixes
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v HotfixVersion /t REG_SZ /d "1.1" /f 
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "1.0" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v HotfixVersion /t REG_SZ /d "1.1" /f >nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "1.0" /f >nul
 
 :: ----------------------------------------------------------
 ::                  Begin Hotfixes
@@ -126,7 +126,13 @@ del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q >nul
 
 
 :: Move Updated QoS DSCP script to Network Configuration
-move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration" >nul
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration" >nul
 del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q >nul
 copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
+timeout /t 3 /nobreak>nul
+cls & echo !S_GREEN!Hotfix v1.1 complete. Restarting in 10 seconds!S_GREEN!
+echo !S_GREEN!Enjoy!S_GREEN! - !S_RED!NYN9!S_RED!
+timeout /t /5 /nobreak>nul
+shutdown /f /r /t 5 /c "Restarting for NeptuneOS v1.1."
+
 
