@@ -23,7 +23,8 @@
 
 @echo off
 title NeptuneOS v1.1 Hotfix
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+setlocal EnableDelayedExpansion
+cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
