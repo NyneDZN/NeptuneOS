@@ -91,7 +91,14 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t
 :: Disable Mouse Throttle
 echo !S_WHITE!Enable mouse throttling for non-foreground apps!S_WHITE!
 reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0x14" /f >nul
-timeout /t 3 /nobreak>nul
+
+:: Disable platform tick
+echo !S_WHITE!Disabling platform tick!S_WHITE!
+bcdedit /deletevalue useplatformtick >nul
+
+
+:: TImeout to let user see what was done
+timeout /t 5 /nobreak>nul
 
 
 
@@ -129,6 +136,13 @@ del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q >nul
 move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration" >nul
 del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q >nul
 copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
+
+:: Move updated Neptune Default Services.reg to Scripts folder
+del "%WinDir%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Neptune Default.reg" /f /q >nul 2>&1
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Neptune Default.reg" "%WinDir%\NeptuneDir\Scripts\Neptune Default.reg" >nul
+
+
+
 timeout /t 3 /nobreak>nul
 cls & echo !S_GREEN!Hotfix v1.1 complete. Restarting in 10 seconds!S_GREEN!
 echo !S_GREEN!Enjoy!S_GREEN! 
