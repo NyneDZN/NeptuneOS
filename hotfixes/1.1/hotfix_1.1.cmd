@@ -59,6 +59,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\NeptuneOS" /v NeptuneVersion /t REG_SZ /d "
 
 :: ----------------------------------------------------------
 ::                  Begin Hotfixes
+cls
+::
 :: ----------------------------------------------------------
 
 :: Enable notification services to fix calendar and explorer crashes
@@ -84,11 +86,11 @@ echo !S_WHITE!Enabling CMOS / RTC!S_WHITE!
 
 :: Disbale Host Controller Sleep State 0 in USB Flags
 echo !S_WHITE!Disabling USB HCS0 in USB Flags!S_WHITE!
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\usbflags" /v "DisableHCS0Idle" /t REG_DWORD /d "1" /f >nul
 
 :: Disable Mouse Throttle
 echo !S_WHITE!Enable mouse throttling for non-foreground apps!S_WHITE!
-reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0x14" /f
+reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d "0x14" /f >nul
 
 
 
@@ -110,10 +112,10 @@ reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d
 
 
 :: Move NVIDIA Display Container LS folder from "Advanced Configuration" to "Driver Maintenance"
-move "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\NVIDIA Display Container LS" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\GPU\NVIDIA\Configuration"
+move "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\NVIDIA Display Container LS" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\GPU\NVIDIA\Configuration" >nul
 
 :: Remove Open-Shell configuration scripts, these will be kept in the future once Windows 10 is re-supported
-del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
+del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q >nul
 
 
 
@@ -123,8 +125,8 @@ del "%WinDir%\NeptuneDir\Neptune\3. Configuration\Start Menu" /s /q
 
 
 :: Move Updated QoS DSCP script to Network Configuration
-move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration"
-del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q
-copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" 
+move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir\Neptune\2. Driver Maintenance\Network\Network Configuration" >nul
+del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q >nul
+copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
 
 pause>nul
