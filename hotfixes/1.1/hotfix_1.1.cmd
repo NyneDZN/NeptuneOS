@@ -85,3 +85,8 @@ reg add "HKCU\Control Panel\Mouse" /v "RawMouseThrottleDuration" /t REG_DWORD /d
 :: ---------------------------------------------------------------------------
 :: Update Neptune desktop folder
 call "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\move_to_directories.cmd"
+
+:: Fix default services reg
+powershell -file "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\hotfix_reg_1.1.ps1
+
+pause>nul
