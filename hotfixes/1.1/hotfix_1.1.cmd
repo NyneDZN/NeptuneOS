@@ -129,4 +129,3 @@ move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\Set QoS.cmd" "%WinDir%\NeptuneDir
 del "%WinDir%\NeptuneDir\Neptune\4. Advanced Configuration\Add Game to DSCP Policy.cmd" /s /q >nul
 copy /y "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\FullscreenCMD.vbs" "%WinDir%\NeptuneDir\Scripts\FullscreenCMD.vbs" >nul
 
-pause>nul
