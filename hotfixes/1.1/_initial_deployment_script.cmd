@@ -43,6 +43,10 @@ set "bullet= %ESC%[34m-%ESC%[0m"
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
 set "%CMDLINE:,=" & set "%"
 
+:: Change code page for bullet points
+chcp 65001>nul
+
+
 :: Echo to user
 cls & echo !S_RED!Hello!S_RED!!S_WHITE!,!S_WHITE! !S_GREEN!%USERNAME%!S_GREEN!
 echo !S_RED!This is the NeptuneOS v1.1 Hotfix installer!S_RED!
@@ -57,6 +61,8 @@ echo.
 echo !S_WHITE!Press any key to continue the script once you're ready.!S_WHITE!
 pause>nul
 
+:: Change code page back before doing things
+chcp 437>nul
 
 :: Download the updater
 cls & echo !S_WHITE!Downloading hotfix!S_WHITE!
