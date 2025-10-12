@@ -15,6 +15,7 @@
 @echo off
 
 :: Fix ANSI
+del "%WinDir%\NeptuneDir\Scripts\ANSI.cmd" /f /q
 move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\neptune_folder\ANSI.cmd" "%WinDir%\NeptuneDir\Scripts" >nul 2>&1
 
 :: Call Administrator
