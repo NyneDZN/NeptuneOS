@@ -144,7 +144,7 @@ move "%WinDir%\NeptuneDir\Updates\hotfixes\1.1\additions\desktop_folder\Neptune 
 
 
 timeout /t 3 /nobreak>nul
-cls & echo !S_GREEN!Hotfix v1.1 complete. Restarting in 10 seconds!S_GREEN!
+cls & echo !S_GREEN!Hotfix v1.1 complete. Restarting in a few seconds!S_GREEN!
 echo !S_GREEN!Enjoy!S_GREEN! 
 echo !S_WHITE!,!S_WHITE! !S_RED!NYN9!S_RED!
 timeout /t 5 /nobreak>nul
