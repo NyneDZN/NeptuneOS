@@ -1,4 +1,4 @@
-# Cleanup Script for NeptuneOS
+# Cleanup Script for NeptuneOS, parts forked from AtlasOS
 
 # Remove startup notices
 if((Test-Path -LiteralPath "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System") -ne $true) {  New-Item "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -force -ea SilentlyContinue };
