@@ -5,6 +5,9 @@ Write-Log "Starting NeptuneOS Installer..."
 # Kill explorer
 taskkill /f /im explorer.exe
 
+# Clear terminal
+Clear-Host
+
 # NGEN
 Invoke-ActionScript "ngen.ps1"
 
