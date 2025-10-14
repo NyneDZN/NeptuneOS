@@ -96,7 +96,7 @@ $ServicesToConfigure = @(
     @{ Name = "diagsvc"; Start = 4 },     # Disabled
     @{ Name = "DiagTrack"; Start = 4 },     # Disabled
 #     @{ Name = "DispBrokerDesktopSvc"; Start = 4 },     # Automatic (breaks Hyper-V display resizing)
-    @{ Name = "DisplayEnhancementService"; Start = 4 },     # Disabled
+    # @{ Name = "DisplayEnhancementService"; Start = 4 },     # Disabled (breaks NVIDIA app)
     @{ Name = "DPS"; Start = 4 },     # Disabled
     @{ Name = "DusmSvc"; Start = 4 },     # Disabled
     @{ Name = "edgeupdate"; Start = 4 },     # Disabled
@@ -133,8 +133,8 @@ $ServicesToConfigure = @(
     @{ Name = "webthreatdefsvc"; Start = 4 },     # Disabled
     @{ Name = "WerSvc"; Start = 4 },     # Disabled
     @{ Name = "WSearch"; Start = 4 },     # Disabled
-    @{ Name = "WpnService"; Start = 4 },     # Disabled
-    @{ Name = "WpnUserService"; Start = 4 }    # Disabled
+    # @{ Name = "WpnService"; Start = 4 },     # Disabled (re-enabled because it breaks calendar)
+    # @{ Name = "WpnUserService"; Start = 4 }    # Disabled (re-enabled because it breaks calendar)
     @{ Name = "PcaSvc"; Start = 4 }    # Disabled
 )
 
