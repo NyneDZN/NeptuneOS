@@ -1,5 +1,8 @@
 @echo off
 
+:: Give other startup scripts time to work
+timeout /t 5 /nobreak >nul
+
 :: Variables
 set neptver=1.1
 
@@ -12,6 +15,6 @@ echo Deployment will begin in a moment.
 timeout /t 3 /nobreak>nul
 
 :: Launch script
-powershell -ExecutionPolicy Bypass -File "%WinDir%\deploy_neptune.ps1"
+powershell -ExecutionPolicy Bypass -File "%WinDir%\Setup\deploy_neptune.ps1"
 
 
