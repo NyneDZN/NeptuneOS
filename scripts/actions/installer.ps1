@@ -45,7 +45,7 @@ Invoke-ActionScript ".\components\install-prerequisites.bat"
 
 # Windows Components
 Show-Section "Windows Components"
-Invoke-ActionScript ".\components\dism-capabilities.cmd"
+# Invoke-ActionScript ".\components\dism-capabilities.cmd" (commented out for now as they are disabled already)
 Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
