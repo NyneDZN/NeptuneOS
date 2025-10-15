@@ -1,1 +1,0 @@
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "obs64" /t REG_SZ /d "cmd.exe /c start \"\" /d \"%programfiles%\obs-studio\bin\64bit\" obs64.exe --disable-shutdown-check --startreplaybuffer --disable-missing-files-check --minimize-to-tray" /f

