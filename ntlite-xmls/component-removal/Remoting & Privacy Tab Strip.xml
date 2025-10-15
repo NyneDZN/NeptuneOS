@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Preset isAutoSaved="false" xmlns="urn:schemas-nliteos-com:pn.v1">
+	<Date>10/14/2025 12:42:51</Date>
+	<AppInfo>
+		<Version>2025.10.10631</Version>
+		<Licensed>Yes</Licensed>
+		<Protections>No</Protections>
+		<Host>Windows 11 IoTEnterpriseS 25H2 x64 - 10.0.26200.6588 (en-US)</Host>
+	</AppInfo>
+	<ImageInfo>
+		<Version mode="offline">Windows 11 Professional 24H2 x64 - 10.0.26100.6588 (en-US)</Version>
+		<GUID>{89CDA66C-17C7-42AC-93E1-3B2B4FEBEB2B}</GUID>
+	</ImageInfo>
+	<RemoveComponents AppRemovalMode="Custom">
+		<c>appid 'Application Identity Service'</c>
+		<c>asimov 'Telemetry Client'</c>
+		<c>assignedaccess 'Assigned Access'</c>
+		<c>branchcacheclient 'BranchCache Client'</c>
+		<c>ceip 'CEIP (SQM)'</c>
+		<c>deviceexperience 'Device Experience'</c>
+		<c>devicesync 'Microsoft Sync Framework'</c>
+		<c>deviceupdatecenter 'Device Update Center'</c>
+		<c>driver_kdnic.inf</c>
+		<c>driver_kdnic_legacy.inf</c>
+		<c>driver_rdpbus.inf</c>
+		<c>driver_termbus.inf</c>
+		<c>driver_termkbd.inf</c>
+		<c>driver_termmou.inf</c>
+		<c>driver_ts_generic.inf</c>
+		<c>driver_tsgenericusbdriver.inf</c>
+		<c>driver_tsprint.inf</c>
+		<c>driver_tsusbhubfilter.inf</c>
+		<c>enterpriseclientsync 'Work Folders Client'</c>
+		<c>errorreporting 'Windows Error Reporting'</c>
+		<c>fciclient 'File Server Resource Manager'</c>
+		<c>iis 'Internet Information Server (IIS)'</c>
+		<c>insiderhub 'Windows Insider Program'</c>
+		<c>kerneldebug 'Kernel Debugging'</c>
+		<c>lcu 'Cumulative Update cache (LCU)'</c>
+		<c>microsoft.windows.assignedaccesslockapp 'Assigned Access Lock app'</c>
+		<c>msmq 'Microsoft Message Queue (MSMQ)'</c>
+		<c>multipointconnector 'MultiPoint Connector'</c>
+		<c>naturalauthentication 'Natural Authentication'</c>
+		<c>onedrive</c>
+		<c>rdpserver 'Remote Desktop Server'</c>
+		<c>rdpserverlic 'Remote Desktop Licensing'</c>
+		<c>remoteassistance 'Remote Assistance'</c>
+		<c>remotefx</c>
+		<c>remoteportredirector 'Remote Desktop Services Port Redirector'</c>
+		<c>remoteregistry 'Remote Registry'</c>
+		<c>rightsmanagement 'Rights Management support'</c>
+		<c>sharedpc 'Shared PC mode'</c>
+		<c>sihclient 'Server-Initiated Healing Client'</c>
+		<c>sleepstudy 'Sleep Study'</c>
+		<c>snmp 'Simple Network Management Protocol (SNMP)'</c>
+		<c>troubleshootingsvc 'Recommended Troubleshooting service'</c>
+		<c>wifinetworkmanager 'Wi-Fi Network Manager (Wi-Fi Sense)'</c>
+	</RemoveComponents>
+	<Compatibility>
+		<ComponentFeatures>
+			<Feature enabled="no">Battle.net</Feature>
+			<Feature enabled="no">USBCamera</Feature>
+			<Feature enabled="no">Discord</Feature>
+			<Feature enabled="no">EAC</Feature>
+			<Feature enabled="no">FileSharing</Feature>
+			<Feature enabled="no">OfficeSupport</Feature>
+			<Feature enabled="no">AppxSupport</Feature>
+			<Feature enabled="no">Netflix</Feature>
+			<Feature enabled="no">NightLight</Feature>
+			<Feature enabled="no">NvidiaSetup</Feature>
+			<Feature enabled="no">OOBE</Feature>
+			<Feature enabled="no">Printing</Feature>
+			<Feature enabled="no">Recommended-All</Feature>
+			<Feature enabled="no">Scanning</Feature>
+			<Feature enabled="no">ServicingStack</Feature>
+			<Feature enabled="no">ShellSearchSupport</Feature>
+			<Feature enabled="no">Spotify</Feature>
+			<Feature enabled="no">SFC</Feature>
+			<Feature enabled="no">DefaultFonts</Feature>
+			<Feature enabled="no">TeamViewer</Feature>
+			<Feature enabled="no">USB</Feature>
+			<Feature enabled="no">VideoPlayback</Feature>
+			<Feature enabled="no">VisualStudio</Feature>
+			<Feature enabled="no">Activation</Feature>
+			<Feature enabled="no">WinSetup</Feature>
+			<Feature enabled="no">WindowsStore</Feature>
+			<Feature enabled="no">WindowsUpdate</Feature>
+			<Feature enabled="no">WLAN</Feature>
+		</ComponentFeatures>
+		<MachineDrivers>
+			<Machine enabled="no">HostMachine</Machine>
+		</MachineDrivers>
+	</Compatibility>
+	<Features>
+		<Feature name="Windows.Kernel.LA57~~~~0.0.1.0">false</Feature>
+		<Feature name="Windows.DirectoryServices.ADAM.Client.Content~~~~">false</Feature>
+		<Feature name="DirectPlay">true</Feature>
+		<Feature name="OneCoreUAP.OneSync~~~~0.0.1.0">false</Feature>
+		<Feature name="Microsoft.Wallpapers.Extended~~~~0.0.1.0">false</Feature>
+		<Feature name="Hello.Face.20134~~~~0.0.1.0">false</Feature>
+		<Feature name="Browser.InternetExplorer~~~~0.0.11.0">false</Feature>
+		<Feature name="Printing-Foundation-InternetPrinting-Client">false</Feature>
+		<Feature name="LegacyComponents">true</Feature>
+		<Feature name="MathRecognizer~~~~0.0.1.0">false</Feature>
+		<Feature name="MediaPlayback">false</Feature>
+		<Feature name="Edge.Webview2.Platform~~~~">false</Feature>
+		<Feature name="Printing-PrintToPDFServices-Features">false</Feature>
+		<Feature name="OpenSSH.Client~~~~0.0.1.0">false</Feature>
+		<Feature name="Printing-Foundation-Features">false</Feature>
+		<Feature name="Print.Management.Console~~~~0.0.1.0">false</Feature>
+		<Feature name="Microsoft-RemoteDesktopConnection">false</Feature>
+		<Feature name="MSRDC-Infrastructure">false</Feature>
+		<Feature name="SmbDirect">false</Feature>
+		<Feature name="App.StepsRecorder~~~~0.0.1.0">false</Feature>
+		<Feature name="WCF-TCP-PortSharing45">false</Feature>
+		<Feature name="Windows.TFTP.Client~~~~">false</Feature>
+		<Feature name="WCF-Services45">false</Feature>
+		<Feature name="Media.WindowsMediaPlayer~~~~0.0.12.0">false</Feature>
+		<Feature name="WindowsMediaPlayer">false</Feature>
+		<Feature name="SearchEngine-Client-Package">false</Feature>
+		<Feature name="Windows.WinOcr~~~~">false</Feature>
+		<Feature name="WorkFolders-Client">false</Feature>
+		<Feature name="Windows.WorkFolders.Client~~~~">false</Feature>
+	</Features>
+	<Packages>
+		<Options>
+			<CleanHotfixedLeftovers>3</CleanHotfixedLeftovers>
+		</Options>
+	</Packages>
+	<Tweaks></Tweaks>
+	<ApplyOptions>
+		<ImageTasks>
+			<Task>imageSaveRebuild</Task>
+			<Task>imageFormatWim</Task>
+		</ImageTasks>
+	</ApplyOptions>
+</Preset>
