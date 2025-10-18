@@ -47,7 +47,7 @@ $svc = { param($name,$type) Set-ServiceStartup -ServiceName $name -StartType $ty
 # Ordered list approach (run multiple services/drivers automatically)
 $ServicesToConfigure = @(
     # Drivers
-    @{ Name = "3ware"; Start = 4 },   # Disabled
+    #@{ Name = "3ware"; Start = 4 },   # Disabled (not existing in v1.1)
     @{ Name = "ADP80XX"; Start = 4 }, # Disabled
     @{ Name = "AmdK8"; Start = 4 },   # Disabled
     @{ Name = "Beep"; Start = 4 },    # Disabled
@@ -56,10 +56,10 @@ $ServicesToConfigure = @(
     @{ Name = "BthEnum"; Start = 4 },   # Disabled
     @{ Name = "BthHFEnum"; Start = 4 },   # Disabled
     @{ Name = "bthleenum"; Start = 4 },   # Disabled
-    @{ Name = "BTHMODEM"; Start = 4 },   # Disabled
+    #@{ Name = "BTHMODEM"; Start = 4 },   # Disabled (not existing in v1.1)
     @{ Name = "cdrom"; Start = 4 },   # Disabled
-    @{ Name = "flpydisk"; Start = 4 },   # Disabled
-    @{ Name = "GpuEnergyDrv"; Start = 4 },   # Disabled
+    #@{ Name = "flpydisk"; Start = 4 },   # Disabled (not existing in v1.1)
+    # @{ Name = "GpuEnergyDrv"; Start = 4 },   # Disabled (not existing in v1.1)
     @{ Name = "mrxsmb"; Start = 4 },   # Disabled
     @{ Name = "mrxsmb20"; Start = 4 },   # Disabled
     @{ Name = "MsLldp"; Start = 4 },   # Disabled
@@ -79,12 +79,12 @@ $ServicesToConfigure = @(
     @{ Name = "srv2"; Start = 4 },   # Disabled
     @{ Name = "srvnet"; Start = 4 },   # Disabled
     @{ Name = "tcpipReg"; Start = 4 },   # Disabled
-    @{ Name = "Telemetry"; Start = 4 },   # Disabled
+    #@{ Name = "Telemetry"; Start = 4 },   # Disabled (not existing in v1.1)
     @{ Name = "uhssvc"; Start = 4 },   # Disabled
     @{ Name = "wanarp"; Start = 4 },   # Disabled
     @{ Name = "wanarpv6"; Start = 4 },   # Disabled
     @{ Name=  "KSecPkg"; Start = 4 },    # Disabled}
-    @{ Name = "rdyboost"; Start = 4 },   # Disabled
+    #@{ Name = "rdyboost"; Start = 4 },   # Disabled (not existing in v1.1)
 
     # Services
     @{ Name = "Audiosrv"; Start = 2 },     # Automatic
@@ -99,10 +99,10 @@ $ServicesToConfigure = @(
     # @{ Name = "DisplayEnhancementService"; Start = 4 },     # Disabled (breaks NVIDIA app)
     @{ Name = "DPS"; Start = 4 },     # Disabled
     @{ Name = "DusmSvc"; Start = 4 },     # Disabled
-    @{ Name = "edgeupdate"; Start = 4 },     # Disabled
-    @{ Name = "edgeupdatem"; Start = 4 },     # Disabled
-    # @{ Name = "FontCache"; Start = 4 },     # Disabled (ruins performance in text heavy applications, like photoshop)
-    @{ Name = "FontCache3.0.0.0"; Start = 4 },     # Disabled
+    #@{ Name = "edgeupdate"; Start = 4 },     # Disabled (not existing in v1.1)
+    #@{ Name = "edgeupdatem"; Start = 4 },     # Disabled (not existing in v1.1)
+    #@{ Name = "FontCache"; Start = 4 },     # Disabled (ruins performance in text heavy applications, like photoshop)
+    #@{ Name = "FontCache3.0.0.0"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "HvHost"; Start = 4 },     # Disabled
     @{ Name = "IKEEXT"; Start = 4 },     # Disabled
     @{ Name = "iphlpsvc"; Start = 4 },     # Disabled
@@ -111,27 +111,27 @@ $ServicesToConfigure = @(
     @{ Name = "LanmanWorkstation"; Start = 4 },     # Disabled
     @{ Name = "lmhosts"; Start = 4 },     # Disabled
     @{ Name = "microsoft_bluetooth_avrcptransport"; Start = 4 },     # Disabled
-    @{ Name = "MapsBroker"; Start = 4 },     # Disabled
+    #@{ Name = "MapsBroker"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "MSDTC"; Start = 4 },     # Disabled
-    @{ Name = "PrintNotify"; Start = 4 },     # Disabled
+    #@{ Name = "PrintNotify"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "RasMan"; Start = 4 },     # Disabled
 #  @{ Name = "rdyboost"; Start = 4 },     # Disabled
     @{ Name = "RFCOMM"; Start = 4 },     # Disabled
     @{ Name = "RmSvc"; Start = 4 },     # Disabled
     # @{ Name = "TrkWks"; Start = 4 },     # Disabled (breaks Hyper-V copy/paste)
     @{ Name = "ShellHWDetection"; Start = 4 },     # Disabled
-    @{ Name = "Spooler"; Start = 4 },     # Disabled
-    @{ Name = "SgrmBroker"; Start = 4 },     # Disabled
+    #@{ Name = "Spooler"; Start = 4 },     # Disabled (not existing in v1.1)
+    #@{ Name = "SgrmBroker"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "SysMain"; Start = 4 },     # Disabled
     @{ Name = "W32Time"; Start = 4 },     # Disabled
     @{ Name = "WaaSMedicSvc"; Start = 4 },     # Disabled
-    @{ Name = "WarpJITSvc"; Start = 4 },     # Disabled
+    #@{ Name = "WarpJITSvc"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "WdiServiceHost"; Start = 4 },     # Disabled
     @{ Name = "webthreatdefusersvc"; Start = 4 },     # Disabled
     # @{ Name = "WinHttpAutoProxySvc"; Start = 4 },     # Disabled (breaks Wi-Fi)
     @{ Name = "WPDBusEnum"; Start = 4 },     # Disabled
     @{ Name = "webthreatdefsvc"; Start = 4 },     # Disabled
-    @{ Name = "WerSvc"; Start = 4 },     # Disabled
+    #@{ Name = "WerSvc"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "WSearch"; Start = 4 },     # Disabled
     # @{ Name = "WpnService"; Start = 4 },     # Disabled (re-enabled because it breaks calendar)
     # @{ Name = "WpnUserService"; Start = 4 }    # Disabled (re-enabled because it breaks calendar)
