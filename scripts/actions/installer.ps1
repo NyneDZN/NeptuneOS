@@ -23,12 +23,6 @@ Move-Item -Path ".\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
 
-# User icon
-Start-Process takeown -ArgumentList '/f "C:\ProgramData\Microsoft\User Account Pictures" /r' -Wait -NoNewWindow
-Start-Process icacls -ArgumentList '"C:\ProgramData\Microsoft\User Account Pictures" /grant administrators:F /T' -Wait -NoNewWindow
-Remove-Item -Path "C:\ProgramData\Microsoft\User Account Pictures" -Recurse -Force
-Move-Item -Path "C:\neptune-installer\os\ProgramData\Microsoft\User Account Pictures" -Destination "C:\ProgramData\Microsoft" -Force
-
 # Set wallpaper
 takeown /f "C:\Windows\Web" /r /d y
 icacls "C:\Windows\Web" /grant administrators:F /t
@@ -37,7 +31,7 @@ Move-Item -Path "C:\neptune-installer\os\Web" -Destination "C:\Windows\Web" -For
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C:\Windows\Web\Wallpaper\Windows\NeptuneOS.png"
 
 # Set lockscreen
-Invoke-ActionScript ".\tweaks\lockscreen.ps1"
+Invoke-ActionScript ".\tweaks\LOCKSCREEN.ps1"
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
@@ -51,7 +45,7 @@ Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 
 # Chocolatey
-Invoke-ActionScript ".\tweaks\chocolatey.cmd"
+Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
 
 # File System
 Show-Section "File System Configuration"
@@ -59,7 +53,7 @@ Invoke-ActionScript ".\tweaks\ntfs\NTFS.CMD"
 Invoke-ActionScript ".\tweaks\ntfs\fsutil.ps1"
 
 # Task Scheduler
-Invoke-ActionScript ".\tweaks\task-scheduler.ps1"
+Invoke-ActionScript ".\tweaks\TASKS.ps1"
 
 # Device Manager
 Invoke-ActionScript ".\tweaks\DEVMGMT.CMD"
@@ -69,12 +63,12 @@ Show-Section "Services and Drivers"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-windows-default.cmd"
 Invoke-ActionScript ".\tweaks\services-drivers\audio-service-split.bat"
 Invoke-ActionScript ".\tweaks\services-drivers\filters.ps1"
-Invoke-ActionScript ".\tweaks\services-drivers.ps1"
+Invoke-ActionScript ".\tweaks\SERVICES-DRIVERS.ps1"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-neptune-default.cmd"
 
 # BCD
 Show-Section "Boot Configuration Data (BCD)"
-Invoke-ActionScript ".\tweaks\bcdedit.ps1"
+Invoke-ActionScript ".\tweaks\BCD.ps1"
 
 # Registry Tweaks
 Show-Section "Registry Tweaks"
