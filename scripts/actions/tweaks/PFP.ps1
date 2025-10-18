@@ -1,5 +1,11 @@
+# Forked from AtlasOS Repository
+# https://github.com/Atlas-OS
+# Small modifications made by NYNE for NeptuneOS such as:
+# Adjusting file paths
+
+
 Add-Type -AssemblyName System.Drawing
-$img = [System.Drawing.Image]::FromFile((Get-Item '.\user.png'))
+$img = [System.Drawing.Image]::FromFile((Get-Item 'C:\Windows\NeptuneDir\user.png'))
 
 $resolutions = @{
     "user.png" = 448
