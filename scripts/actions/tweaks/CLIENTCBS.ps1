@@ -1,3 +1,8 @@
+# Forked from AtlasOS Repository
+# https://github.com/Atlas-OS
+# Small modifications made by NYNE for NeptuneOS such as:
+# Adjusting file paths and removing ARM variables as Neptune won't work on ARM devices
+
 # --------------------------------------------------------------
 # Remove ads from the 'Accounts' page in Immersive Control Panel
 # --------------------------------------------------------------
@@ -8,13 +13,8 @@
 
 # Variables
 $windir = [Environment]::GetFolderPath('Windows')
+$neptinstall = "C:\neptune-installer"
 $settingsExtensions = (Get-ChildItem "$windir\SystemApps" -Recurse).FullName | Where-Object { $_ -like '*wsxpacks\Account\SettingsExtensions.json*' }
-$arm = ((Get-CimInstance -Class Win32_ComputerSystem).SystemType -match 'ARM64') -or ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64')
-if ($settingsExtensions.Count -eq 0) {
-    Write-Output "Settings extensions ($settingsExtensions) not found."
-    Write-Output "User is likely on Windows 10, nothing to do. Exiting..."
-    exit
-}
 
 # Finds velocity IDs listed in 'Accounts' wsxpack
 function Find-VelocityID($Node) {
@@ -54,31 +54,26 @@ if ($ids.Count -le 0) {
 
 # Extract ViVeTool https://github.com/thebookisclosed/ViVe
 # Not done in PowerShell as it's too complicated, it's just easiest to use the actual tool
-#$viveZip = Get-ChildItem "ViVeTool-*.zip" -Name
-#if ($arm) {
-#    $viveZip = $viveZip | Where-Object { $_ -match '-ARM64CLR' }
-#} else {
-#    $viveZip = $viveZip | Where-Object { $_ -notmatch '-ARM64CLR' }
-#}
-#
+$viveZip = Get-ChildItem "$neptinstall\tools\ViVeTool-*.zip" -Name
+
 # Extract & setup ViVeTool
-#if ($viveZip) {
-#    $viveFolder = Join-Path -Path (Get-Location) -ChildPath "vivetool"
-#    if (!(Test-Path -Path $viveFolder)) {
-#        New-Item -ItemType Directory -Path $viveFolder | Out-Null
-#    }
-#    Expand-Archive -Path $viveZip -DestinationPath $viveFolder -Force
-#} else {
-#    throw "ViVeTool not found!"
-#}
-#$env:PATH += ";$viveFolder"
-#if (!(Get-Command 'vivetool' -EA 0)) {
-#    throw "ViVeTool EXE not found in ZIP!"
-#}
+if ($viveZip) {
+    $viveFolder = Join-Path -Path (Get-Location) -ChildPath "vivetool"
+    if (!(Test-Path -Path $viveFolder)) {
+        New-Item -ItemType Directory -Path $viveFolder | Out-Null
+    }
+    Expand-Archive -Path $viveZip -DestinationPath $viveFolder -Force
+} else {
+    throw "ViVeTool not found!"
+}
+$env:PATH += ";$viveFolder"
+if (!(Get-Command 'vivetool' -EA 0)) {
+    throw "ViVeTool EXE not found in ZIP!"
+}
 
 # Disable feature IDs
 # Applies next reboot
 foreach ($id in $($ids | Sort-Object -Unique)) {
     Write-Output "Disabling feature ID $id..."
-    C:\neptune-installer\tools\ViveTool\ViVeTool.exe /disable /id:$id | Out-Null
+    ViVeTool.exe /disable /id:$id | Out-Null
 }
