@@ -1,8 +1,6 @@
 :: To call this script:
 :: setlocal EnableDelayedExpansion && cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
 @echo off
-setlocal EnableDelayedExpansion
-cd /d "%~dp0"
 
 :: ANSI escape codes
 for /f %%a in ('forfiles /m "%~nx0" /c "cmd /c echo 0x1B"') do set "ESC=%%a"
@@ -12,7 +10,6 @@ set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_M
 set "%CMDLINE:,=" & set "%"
 
 :: Neptune variables
-set userlog=%WinDir%\NeptuneDir\user.txt
 set neptlog=%WinDir%\NeptuneDir\neptune.log
 set neptdir=%WinDir%\NeptuneDir
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
