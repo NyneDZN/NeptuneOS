@@ -13,7 +13,6 @@
 
 # Variables
 $windir = [Environment]::GetFolderPath('Windows')
-$neptinstall = "C:\neptune-installer"
 $settingsExtensions = (Get-ChildItem "$windir\SystemApps" -Recurse).FullName | Where-Object { $_ -like '*wsxpacks\Account\SettingsExtensions.json*' }
 
 # Finds velocity IDs listed in 'Accounts' wsxpack
