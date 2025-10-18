@@ -33,6 +33,9 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "Wallpaper" -Value "C
 # Set lockscreen
 Invoke-ActionScript ".\tweaks\LOCKSCREEN.ps1"
 
+# Set user icon
+Invoke-ActionScript ".\tweaks\PFP.ps1"
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript ".\components\install-prerequisites.bat"

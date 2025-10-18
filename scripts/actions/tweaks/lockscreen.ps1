@@ -1,4 +1,5 @@
 # Credit: https://superuser.com/a/1343640
+
 $imagePath = "C:\Windows\NeptuneDir\lockscreen.png"
 
 if (!(Test-Path $imagePath)) {
