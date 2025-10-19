@@ -130,7 +130,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EnergyEstimationEnable
 
 :: - > Disable Connected Standby
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "CsEnabled" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f 
+:: reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled" /t REG_DWORD /d "0" /f 
 
 :: Disable power throttling
 :: https://blogs.windows.com/windows-insider/2017/04/18/introducing-power-throttling
