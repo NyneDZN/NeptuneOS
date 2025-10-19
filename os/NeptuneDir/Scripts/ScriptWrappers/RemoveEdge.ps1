@@ -97,7 +97,7 @@ function Write-Status {
 }
 
 function InternetCheck {
-	if ($(Test-Connection "microsoft.com" -Count 1 -EA 0; $?) -eq $false) {
+	if ($(Test-Connection "www.microsoft.com" -Count 1 -EA 0; $?) -eq $false) {
 		Write-Status "Failed to ping Microsoft! You must have an internet connection to reinstall Edge and its components." -Level Critical -Exit -ExitCode 404
 	}
 }
