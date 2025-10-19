@@ -53,7 +53,7 @@ if ($ids.Count -le 0) {
 
 # Extract ViVeTool https://github.com/thebookisclosed/ViVe
 # Not done in PowerShell as it's too complicated, it's just easiest to use the actual tool
-$viveZip = Get-ChildItem "$windir\NeptuneDir\tools\ViVeTool-*.zip" -Name
+$viveZip = Get-ChildItem "$windir\NeptuneDir\tools\ViVeTool-v0.3.4-IntelAmd.zip"
 
 # Extract & setup ViVeTool
 if ($viveZip) {
