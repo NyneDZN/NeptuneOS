@@ -1,5 +1,6 @@
 :: To call this script:
-:: setlocal EnableDelayedExpansion && cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+:: setlocal EnableDelayedExpansion & cd "%WinDir%\NeptuneDir\Scripts" >nul && if exist ansi.cmd call ansi.cmd >nul
+
 @echo off
 
 :: ANSI escape codes
@@ -15,7 +16,7 @@ set neptdir=%WinDir%\NeptuneDir
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svcF=call C:\Windows\NeptuneDir\Scripts\setSvc.cmd
 set delf=del /f /s /q
-set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Bypass -Command"
+set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
 
 
 :: Configure variables for determining winver
@@ -26,3 +27,6 @@ for /f "tokens=6 delims=[.] " %%a in ('ver') do (set "win_version=%%a")
 if %win_version% lss 22000 (set os=Windows 10) else (set os=Windows 11)
 for /f "tokens=3" %%a in ('Reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do (set releaseid=%%a)
 for /f "tokens=4-7 delims=[.] " %%a in ('ver') do (set "build=%%a.%%b.%%c.%%d")
+
+:: SID 
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "(Get-CimInstance Win32_UserAccount | Where-Object { $_.Name -eq $env:USERNAME -and $_.LocalAccount }) | Select-Object -ExpandProperty SID"`) do set "SID=%%A"
