@@ -80,7 +80,7 @@ $ServicesToConfigure = @(
     @{ Name = "srvnet"; Start = 4 },   # Disabled
     @{ Name = "tcpipReg"; Start = 4 },   # Disabled
     #@{ Name = "Telemetry"; Start = 4 },   # Disabled (not existing in v1.1)
-    @{ Name = "uhssvc"; Start = 4 },   # Disabled
+    #@{ Name = "uhssvc"; Start = 4 },   # Disabled (not existing in v1.1)
     @{ Name = "wanarp"; Start = 4 },   # Disabled
     @{ Name = "wanarpv6"; Start = 4 },   # Disabled
     @{ Name=  "KSecPkg"; Start = 4 },    # Disabled}
