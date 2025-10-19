@@ -12,7 +12,7 @@ Clear-Host
 Invoke-ActionScript "ngen.ps1"
 
 # Clear event logs
-Invoke-ActionScript ".\tweaks\EVENTLOGS.cmd"
+# Invoke-ActionScript ".\tweaks\EVENTLOGS.cmd"
 
 # Initialize Neptune Environment
 Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
