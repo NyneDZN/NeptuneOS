@@ -109,6 +109,7 @@ Invoke-ActionScript ".\tweaks\performance\timer-resolution.cmd"
 Show-Section "Security Tweaks"
 Invoke-ActionScript ".\tweaks\security\hardening.cmd"
 Invoke-ActionScript ".\tweaks\security\mitigations.cmd"
+Invoke-ActionScript ".\tweaks\DEFENDPOLICY.cmd"
 
 # Cleanup
 Show-Section "Cleanup"
