@@ -23,7 +23,16 @@ fltmc >nul 2>&1 || (
 %svcF% bthserv 4
 %svcF% BluetoothUserService 4
 %svcF% BthAvctpSvc 4
+%svcF% BthPan 4
+%svcF% BTHPORT 4
+%svcF% BTHUSB 4
+
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t Reg_SZ /d "Deny" /f >nul
+
+%DevMan% /disable "Generic Bluetooth Adapter"
+%DevMan% /disable "Bluetooth Device (RFCOMM Protocol TDI)"
+%DevMan% /disable "Microsoft Bluetooth Enumerator"
+%DevMan% /disable "Microsoft Bluetooth LE Enumerator"
 
 :: Echo to Log
 echo %date% %time% Disabled Bluetooth >> %userlog%

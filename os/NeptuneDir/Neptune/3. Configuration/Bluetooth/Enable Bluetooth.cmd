@@ -23,7 +23,15 @@ fltmc >nul 2>&1 || (
 %svcF% bthserv 3
 %svcF% BluetoothUserService 3
 %svcF% BthAvctpSvc 3
+%svcF% BthPan 3
+%svcF% BTHPORT 3
+%svcF% BTHUSB 3
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t Reg_SZ /d "Allow" /f >nul
+
+%DevMan% /enable "Generic Bluetooth Adapter"
+%DevMan% /enable "Bluetooth Device (RFCOMM Protocol TDI)"
+%DevMan% /enable "Microsoft Bluetooth Enumerator"
+%DevMan% /enable "Microsoft Bluetooth LE Enumerator"
 
 :: Echo to Log
 echo %date% %time% Enabled Bluetooth >> %userlog%
