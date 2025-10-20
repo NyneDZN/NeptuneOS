@@ -1,4 +1,6 @@
 @echo off
+setlocal EnableDelayedExpansion & cd "%WinDir%\NeptuneDir\Scripts" >nul && if exist ansi.cmd call ansi.cmd >nul
+
 for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
 	for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Enum\%%i" /v "Driver"') do (
 		for /f %%i in ('echo %%a ^| findstr "{"') do (
@@ -6,4 +8,7 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
                    )
                 )
              )        
-pause
+
+
+cls & echo !S_GREEN!P-State disabled!S_GREEN!
+timeout /t 2 /nobreak>nul
