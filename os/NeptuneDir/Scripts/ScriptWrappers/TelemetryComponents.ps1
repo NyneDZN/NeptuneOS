@@ -18,7 +18,7 @@ function Restart {
 	}
 }
 
-$packageInstall = "$windir\AtlasModules\Scripts\packageInstall.ps1"
+$packageInstall = "$windir\NeptuneDir\Scripts\packageInstall.ps1"
 if (!(Test-Path $packageInstall)) {
     Write-Host "Missing package install script, can't continue."
     Read-Pause
@@ -51,11 +51,7 @@ function Menu {
 
 	Write-BulletPoint @"
 Removing the package restores the telemetry components, which can aid in troubleshooting. If
-   resolving the issue involves removing the package, please report this as an issue to Atlas.`n
-"@
-	Write-BulletPoint @"
-Atlas retains policies that should disable telemetry even after the package removal. These policies
-   do not work on Windows Home edition.
+   resolving the issue involves removing the package, please report this as an issue to the discord.`n
 "@
 
 	Write-BulletPoint @"
