@@ -1,6 +1,6 @@
 @echo off
 cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
-setlocal EnableDelayedExpansion
+
 :: Call Administrator
 fltmc >nul 2>&1 || (
     echo Administrator privileges are required.
