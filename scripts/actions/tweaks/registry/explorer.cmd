@@ -336,15 +336,6 @@ reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" 
 :: Fix Default Account Icon
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDefaultTile" /t REG_DWORD /d "1" /f
 
-:: Enable the legacy photo viewer from windows 7 era
-for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~a" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-)
-for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-reg add "HKU\%SID%\SOFTWARE\Classes\.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-)
-
-
 :: - >  Hide unneeded control panel applets
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "RestrictCpl" /t REG_DWORD /d "1" /f
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /f

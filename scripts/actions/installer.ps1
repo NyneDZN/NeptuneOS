@@ -46,6 +46,7 @@ Show-Section "Windows Components"
 Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
+Invoke-ActionScript ".\components\deprovisioned-apps.cmd"
 
 # Chocolatey
 Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
@@ -79,6 +80,7 @@ Invoke-ActionScript ".\tweaks\registry\explorer.cmd"
 Invoke-ActionScript ".\tweaks\registry\misc.cmd"
 Invoke-ActionScript ".\tweaks\registry\privacy.cmd"
 Invoke-ActionScript ".\tweaks\registry\updates.cmd"
+Invoke-ActionScript ".\tweaks\registry\photo-viewer.cmd"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
@@ -109,6 +111,10 @@ Invoke-ActionScript ".\tweaks\performance\timer-resolution.cmd"
 Show-Section "Security Tweaks"
 Invoke-ActionScript ".\tweaks\security\hardening.cmd"
 Invoke-ActionScript ".\tweaks\security\mitigations.cmd"
+
+# Misc
+Show-Section "Misc Configuration"
+Invoke-ActionScript ".\tweaks\etc\msi-installer-safe-mode.cmd"
 
 # Cleanup
 Show-Section "Cleanup"
