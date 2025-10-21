@@ -18,10 +18,10 @@ if not "%~1"=="/silent" call "%windir%\NeptuneDir\Scripts\serviceWarning.cmd" %*
 :: Unpin 'Network' from Explorer sidebar
 reg import "%windir%\NeptuneDir\Neptune\3. Configuration\File Sharing\Network Navigation Pane\Disable Network Navigation Pane (default).reg" > nul
 
-call setSvc.cmd fdPHost 4
-call setSvc.cmd FDResPub 4
-call setSvc.cmd lmhosts 4
-call setSvc.cmd SSDPSRV 4
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" fdPHost 4
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" FDResPub 4
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" lmhosts 4
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" SSDPSRV 4
 if "%~1"=="/silent" exit /b
 
 echo Finished, please reboot your device for changes to apply.
