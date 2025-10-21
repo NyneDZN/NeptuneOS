@@ -32,81 +32,81 @@ if (!(powercfg /l | Select-String "GUID: 11111111-1111-1111-1111-111111111111" -
 }
 powercfg /setactive 11111111-1111-1111-1111-111111111111
 powercfg /changename 11111111-1111-1111-1111-111111111111 "NeptuneOS Powerplan 4.0." "A powerplan created to achieve low latency and high 0.01% lows." 
-:: -  Hard Disk & NVMe Settings
-:: Turn off hard disk after 0 seconds
+# -  Hard Disk & NVMe Settings
+# Turn off hard disk after 0 seconds
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0 
-:: Turn off secondary NVMe idle timeout
+# Turn off secondary NVMe idle timeout
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 0012ee47-9041-4b5d-9b77-535fba8b1442 d3d55efd-c1ff-424e-9dc3-441be7833010 0 
-:: Turn off primary NVMe idle timeout
+# Turn off primary NVMe idle timeout
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 0012ee47-9041-4b5d-9b77-535fba8b1442 d639518a-e56d-4345-8af2-b9f32fb26109 0 
-:: Turn off NVMe noppme
+# Turn off NVMe noppme
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 0012ee47-9041-4b5d-9b77-535fba8b1442 fc7372b6-ab2d-43ee-8797-15e9841f2cca 0 
 
-:: -  USB and Sleep Settings
-:: Disable hub selective suspend timeout
+# -  USB and Sleep Settings
+# Disable hub selective suspend timeout
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 2a737441-1930-4402-8d77-b2bebba308a3 0853a681-27c8-4100-a2fd-82013e970683 0 
-:: Disable USB selective suspend setting
+# Disable USB selective suspend setting
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 
-:: Set USB 3 link power management to maximum performance
+# Set USB 3 link power management to maximum performance
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 2a737441-1930-4402-8d77-b2bebba308a3 d4e98f31-5ffe-4ce1-be31-1b38b384c009 0 
-:: Disable deep sleep
+# Disable deep sleep
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 2e601130-5351-4d9d-8e04-252966bad054 d502f7ee-1dc7-4efd-a55d-f04b6f5c0545 0 
-:: Disable away mode policy
+# Disable away mode policy
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 
 powercfg /setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 25dfa149-5dd1-4736-b5ab-e8a37b5b8187 0 
-:: Disable idle states
+# Disable idle states
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 
 powercfg /setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 abfc2519-3608-4c2a-94ea-171b0ed546ab 0 
-:: Disable hybrid sleep
+# Disable hybrid sleep
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 
 powercfg /setdcvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e 0 
-:: Turn off system unattended sleep timeout
+# Turn off system unattended sleep timeout
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 0 
-:: Disable allow wake timers
+# Disable allow wake timers
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0 
 
-:: -  Display and Battery Settings
-:: Turn off display after 0 seconds
+# -  Display and Battery Settings
+# Turn off display after 0 seconds
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 7516b95f-f776-4464-8c53-06167f40cc99 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e 0 
-:: Disable critical battery notification
+# Disable critical battery notification
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f 5dbb7c9f-38e9-40d2-9749-4f8a0e9f640f 0 
-:: Disable critical battery action
+# Disable critical battery action
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f 637ea02f-bbcb-4015-8e2c-a1c7b9c0b546 0 
-:: Set low battery level to 0
+# Set low battery level to 0
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f 8183ba9a-e910-48da-8769-14ae6dc1170a 0 
-:: Set critical battery level to 0
+# Set critical battery level to 0
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f 9a66d8d7-4ff7-4ef9-b5a2-5a326ca2a469 0 
-:: Disable low battery notification
+# Disable low battery notification
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f bcded951-187b-4d05-bccc-f7e51960c258 0 
-:: Set reserve battery level to 0
+# Set reserve battery level to 0
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 e73a048d-bf27-4f12-9731-8b2076e8891f f3c5027d-cd16-4930-aa6b-90db844a8f00 0 
 
-:: - Processor and Performance Settings
-:: Set processor states
+# - Processor and Performance Settings
+# Set processor states
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PROCTHROTTLEMIN 100 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PROCTHROTTLEMAX 100 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 06cadf0e-64ed-448a-8927-ce7bf90eb35d 1 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 12a0ab44-fe28-4fa9-b3bd-4b64f44960a6 1 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 7b224883-b3cc-4d79-819f-8374152cbe7c 100 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor 4b92d758-5a24-4851-a470-815d78aee119 100 
-:: Enable Turbo Boost
+# Enable Turbo Boost
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTMODE 2 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor PERFBOOSTPOL 100 
-:: Prefer Performant Processors
+# Prefer Performant Processors
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SHORTSCHEDPOLICY 2 
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 sub_processor SCHEDPOLICY 2 
-:: Processor performance time check interval - 200 miliseconds
+# Processor performance time check interval - 200 miliseconds
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 200 
-:: Allow Throttle States to Off
+# Allow Throttle States to Off
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 54533251-82be-4824-96c1-47b60b740d00 3b04d4fd-1cc7-4f23-ab1c-d1337819c4bb 0 
 
-:: - Miscellaneous
-:: Set slideshow to paused
+# - Miscellaneous
+# Set slideshow to paused
 powercfg /setacvalueindex 11111111-1111-1111-1111-111111111111 0d7dbae2-4294-402a-ba8e-26777e8488cd 309dce9b-bef4-4119-9921-a851fb12f0f4 1 
-:: Disable hibernation
+# Disable hibernation
 powercfg /h off 
 
-:: Set NeptuneOS Scheme as Current
+# Set NeptuneOS Scheme as Current
 powercfg /setactive scheme_current 
 
 Write-Host "Disabling power-saving ACPI devices..." -ForegroundColor Yellow
