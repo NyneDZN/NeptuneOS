@@ -81,6 +81,7 @@ Invoke-ActionScript ".\tweaks\registry\misc.cmd"
 Invoke-ActionScript ".\tweaks\registry\privacy.cmd"
 Invoke-ActionScript ".\tweaks\registry\updates.cmd"
 Invoke-ActionScript ".\tweaks\registry\photo-viewer.cmd"
+Invoke-ActionScript ".\tweaks\registry\taskbar.cmd"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
