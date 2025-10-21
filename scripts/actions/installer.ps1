@@ -88,7 +88,8 @@ Invoke-ActionScript ".\tweaks\registry\taskbar.cmd"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
-Invoke-ActionScript ".\tweaks\network\netsh.cmd"
+#Invoke-ActionScript ".\tweaks\network\netsh.cmd"
+Invoke-ActionScript ".\tweaks\network\network.cmd"
 Invoke-ActionScript ".\tweaks\network\network-registry.cmd"
 
 # Performance Tweaks
