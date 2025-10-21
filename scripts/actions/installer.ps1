@@ -36,6 +36,9 @@ Invoke-ActionScript ".\tweaks\LOCKSCREEN.ps1"
 # Set user icon
 Invoke-ActionScript ".\tweaks\PFP.ps1"
 
+# Set NeptuneOS themes
+Invoke-ActionScript ".\tweaks\THEMES.cmd"
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript ".\components\install-prerequisites.bat"
