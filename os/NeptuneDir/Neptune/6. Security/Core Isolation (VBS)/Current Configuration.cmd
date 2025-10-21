@@ -1,7 +1,7 @@
 @echo off
 echo This script is forked from the AtlasOS repository.
 timeout /t 2 /nobreak >nul
-set "script=%windir%\NeptuneDir\Scripts\ConfigVBS.ps1"
+set "script=%windir%\NeptuneDir\Scripts\ScriptWrappers\ConfigVBS.ps1"
 if not exist "%script%" (
 	echo Script not found.
 	echo "%script%"
