@@ -18,12 +18,12 @@ if not "%~1"=="/silent" call "%windir%\NeptuneDir\Scripts\serviceWarning.cmd" %*
 :: Enable Lanman Workstation (SMB) as a dependency
 call "%windir%\NeptuneDir\Neptune\4. Advanced Configuration\Services\Lanman Workstation (SMB)\Enable Lanman Workstation (default).cmd" /silent
 :: Enable EventLog as a dependency
-call setSvc.cmd eventlog 2
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" eventlog 2
 
-call setSvc.cmd fdPHost 3
-call setSvc.cmd FDResPub 3
-call setSvc.cmd lmhosts 3
-call setSvc.cmd netman 3
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" fdPHost 3
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" FDResPub 3
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" lmhosts 3
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" netman 3
 for /f "tokens=6 delims=[.] " %%a in ('ver') do (
     if %%a LSS 22000 (call setSvc.cmd NlaSvc 2) else (call setSvc.cmd NlaSvc 3)
 )

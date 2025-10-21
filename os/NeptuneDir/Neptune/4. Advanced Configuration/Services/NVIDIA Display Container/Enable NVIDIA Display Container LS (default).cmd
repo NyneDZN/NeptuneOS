@@ -26,7 +26,7 @@ reg query "HKLM\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem
     exit /b
 )
 
-call setSvc.cmd NVDisplay.ContainerLocalSystem 2
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" NVDisplay.ContainerLocalSystem 2
 sc start NVDisplay.ContainerLocalSystem > nul 2>&1
 
 if "%~1"=="/silent" exit /b
