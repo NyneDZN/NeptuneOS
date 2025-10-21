@@ -34,7 +34,7 @@ echo See 'Must Read First' for more info.
 echo]
 pause
 
-call setSvc.cmd NVDisplay.ContainerLocalSystem 4
+call "%windir%\NeptuneDir\Scripts\setSvc.cmd" NVDisplay.ContainerLocalSystem 4
 sc stop NVDisplay.ContainerLocalSystem > nul 2>&1
 if "%~1"=="/silent" exit /b
 
