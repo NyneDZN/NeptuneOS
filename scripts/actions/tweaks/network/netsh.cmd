@@ -2,16 +2,16 @@ call "%~dp0\modules\variables.cmd"
 
 :: Network Shell
 :: Reset the Network Configuration
-ipconfig /release 
-ipconfig /renew 
-ipconfig /flushdns 
-netsh int ip reset 
-netsh int ipv4 reset 
-netsh int ipv6 reset 
-netsh int tcp reset 
-netsh winsock reset 
+:: ipconfig /release 
+:: ipconfig /renew 
+:: ipconfig /flushdns 
+:: netsh int ip reset 
+:: netsh int ipv4 reset 
+:: netsh int ipv6 reset 
+:: netsh int tcp reset 
+:: netsh winsock reset 
 netsh advfirewall reset 
-netsh branchcache reset 
+:: netsh branchcache reset 
 netsh http flush logbuffer 
 :: - > Disable IPV6
 :: IPV6 is disabled through regedit, so I'm commenting this out so it doesn't cause unforseen issues.
