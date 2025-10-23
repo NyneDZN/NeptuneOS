@@ -14,9 +14,6 @@
 # System info JSON
 systeminfo.json
 
-# Troubleshooting / backup reg files
-Troubleshooting/Default Services and Drivers/*.reg
-
 # Optional: user-specific temporary folders
 *.tmp
 *.bak
