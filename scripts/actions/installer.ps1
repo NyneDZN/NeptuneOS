@@ -125,7 +125,7 @@ Show-Section "Cleanup"
 # Run-ActionScript "remove-bloat.ps1"
 # Move log and systeminfo and run cleanup
 Move-Item -Path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Finalization" -PropertyType String -Value "$env:WinDir\NeptuneDir\Scripts\FINAL.cmd" -Force
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Finalization" -PropertyType String -Value "$env:WinDir\NeptuneDir\Scripts\FINALIZE.cmd" -Force
 
 # powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
 
