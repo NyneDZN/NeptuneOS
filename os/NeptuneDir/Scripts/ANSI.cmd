@@ -11,12 +11,15 @@ set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_M
 set "%CMDLINE:,=" & set "%"
 
 :: Neptune variables
+set INITneptdir="C:\neptune-installer"
+set "prereqDir=C:\neptune-installer\prerequisites"
 set neptlog=%WinDir%\NeptuneDir\neptune.log
 set neptdir=%WinDir%\NeptuneDir
 set DevMan="%WinDir%\NeptuneDir\Tools\dmv.exe"
 set svcF=call C:\Windows\NeptuneDir\Scripts\setSvc.cmd
 set delf=del /f /s /q
 set "PowerShell=%WinDir%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProf -NonI -NoL -EP Bypass -C"
+set currentuser=C:\neptune-installer\tools\NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide -Wait
 
 
 :: Configure variables for determining winver
