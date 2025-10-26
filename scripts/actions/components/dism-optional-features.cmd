@@ -57,7 +57,7 @@ dism /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart
 :: Disable WCF Services
 dism /Online /Disable-Feature /FeatureName:"WCF-Services45" /NoRestart 
 :: Disable Remote Desktop Connection
-:: dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /NoRestart 
+dism /Online /Disable-Feature /FeatureName:"Microsoft-RemoteDesktopConnection" /NoRestart 
 
 
 :: Capabilities

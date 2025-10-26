@@ -1,17 +1,5 @@
 :: Configuring the NTFS file system in Windows
 
-:: Adjust MFT (master file table) and paged pool memory cache levels according to ram size
-:: if !TOTAL_MEMORY! LSS 8000000 (
-:: FSUTIL behavior set memoryusage 1 
-:: FSUTIL behavior set mftzone 1 
-:: ) else if !TOTAL_MEMORY! LSS 16000000 (
-:: FSUTIL behavior set memoryusage 1 
-:: FSUTIL behavior set mftzone 2 
-:: ) else (
-:: FSUTIL behavior set memoryusage 2 
-:: FSUTIL behavior set mftzone 2 
-:: )
-
 :: Disallows characters from the extended character set to be used in 8.3 character-length short file names
 FSUTIL behavior set allowextchar 0 
 :: Disallow generation of a bug check
