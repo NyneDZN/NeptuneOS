@@ -41,7 +41,7 @@ Invoke-ActionScript ".\tweaks\THEMES.cmd"
 
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
-Invoke-ActionScript ".\components\install-prerequisites.bat"
+Invoke-ActionScript ".\components\install-prerequisites.cmd"
 
 # Windows Components
 Show-Section "Windows Components"
@@ -68,10 +68,11 @@ Invoke-ActionScript ".\tweaks\DEVMGMT.CMD"
 # Services and Drivers configuration
 Show-Section "Services and Drivers"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-windows-default.cmd"
-Invoke-ActionScript ".\tweaks\services-drivers\audio-service-split.bat"
+Invoke-ActionScript ".\tweaks\services-drivers\audio-service-split.cmd"
 Invoke-ActionScript ".\tweaks\services-drivers\filters.ps1"
 Invoke-ActionScript ".\tweaks\SERVICES-DRIVERS.ps1"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-neptune-default.cmd"
+Invoke-ActionScript ".\tweaks\services-drivers\SVCSPLIT.ps1"
 
 # BCD
 Show-Section "Boot Configuration Data (BCD)"
