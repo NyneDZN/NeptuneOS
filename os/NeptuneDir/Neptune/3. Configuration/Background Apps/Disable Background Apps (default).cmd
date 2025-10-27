@@ -1,4 +1,6 @@
 @echo off
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
+
 set "___args="%~f0" %*"
 fltmc > nul 2>&1 || (
     echo Administrator privileges are required.
@@ -15,7 +17,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAp
 if "%~1"=="/silent" exit /b
 
 echo.
-echo Background Apps have been disabled.
-echo Press any key to exit...
+echo %S_GREEN%Background Apps have been disabled.%S_GREEN%
+echo %S_WHITE%Press any key to exit...%S_WHITE%
 pause > nul
 exit /b
