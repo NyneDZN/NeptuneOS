@@ -1,6 +1,5 @@
 @echo off
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
-setlocal EnableDelayedExpansion
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
 :: Check if script is escelated
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"

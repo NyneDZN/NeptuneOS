@@ -1,6 +1,5 @@
 @echo off
-setlocal EnableDelayedExpansion
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
 :: Call Administrator
 fltmc >nul 2>&1 || (

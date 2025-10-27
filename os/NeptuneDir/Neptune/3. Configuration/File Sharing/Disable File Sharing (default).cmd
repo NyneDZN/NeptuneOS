@@ -1,4 +1,6 @@
 @echo off
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
+
 set "script=%windir%\NeptuneDir\Scripts\ScriptWrappers\DisableFileSharing.ps1"
 
 if not exist "%script%" (

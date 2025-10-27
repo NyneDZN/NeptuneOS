@@ -1,4 +1,5 @@
 @echo off
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
 set "___args="%~f0" %*"
 fltmc > nul 2>&1 || (

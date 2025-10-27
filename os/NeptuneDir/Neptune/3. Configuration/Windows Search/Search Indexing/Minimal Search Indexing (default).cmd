@@ -1,5 +1,6 @@
 @echo off
-setlocal EnableDelayedExpansion
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
+
 set indexConfPath="%windir%\NeptuneDir\Scripts\indexConf.cmd"
 if not exist %indexConfPath% (
 	echo The 'indexConf.cmd' script wasn't found in AtlasModules.
