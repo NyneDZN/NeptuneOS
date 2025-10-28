@@ -5,7 +5,7 @@
 
 
 Add-Type -AssemblyName System.Drawing
-$img = [System.Drawing.Image]::FromFile((Get-Item 'C:\Windows\NeptuneDir\user.png'))
+$img = [System.Drawing.Image]::FromFile((Get-Item 'C:\Windows\NeptuneDir\Images\user.png'))
 
 $resolutions = @{
     "user.png" = 448

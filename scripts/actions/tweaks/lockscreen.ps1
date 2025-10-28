@@ -1,6 +1,6 @@
 # Credit: https://superuser.com/a/1343640
 
-$imagePath = "C:\Windows\NeptuneDir\lockscreen.png"
+$imagePath = "C:\Windows\NeptuneDir\Images\lockscreen.png"
 
 if (!(Test-Path $imagePath)) {
     throw "Lockscreen not found."
