@@ -504,7 +504,6 @@ PowerShell -ExecutionPolicy Unrestricted -Command  "Get-ChildItem -Path 'HKU:%SI
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f
 
 :: Configure Windows 11 File Explorer
-if "%os%"=="Windows 11" (
 :: - > Restore default context menu
 reg add "HKU\%SID%\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /ve /t REG_SZ /d "" /f
 reg add "HKU\%SID%\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /t REG_SZ /d "" /f
@@ -524,7 +523,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "S
 reg add "HKU\%SID%\SOFTWARE\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 :: - > Show more pins in start menu
 reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_Layout" /t REG_DWORD /d "1" /f
-)
+
 
 :: Configuring ease of access settings in Windows
 :: Disable Sticky keys, Mouse Keys, Toggle Keys, and other Keyboard Features
