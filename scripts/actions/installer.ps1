@@ -52,6 +52,7 @@ Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 Invoke-ActionScript ".\components\deprovisioned-apps.cmd"
+Invoke-ActionScript ".\tweaks\SFCDEPLOY.cmd"
 
 # Chocolatey
 Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
