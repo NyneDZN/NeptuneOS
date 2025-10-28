@@ -1,0 +1,134 @@
+Settings:
+    Privacy and security
+        Send a "Do Not Track" request - ON
+        Preload pages for faster browsing and searching - OFF (privacy concerns)
+
+    Search engine
+        Manage search engines and site search 
+            Remove bing, yahoo
+    
+    Languages
+        Spell check - OFF (privacy concerns)
+
+    System
+        Continue running backgroud apps - OFF
+        Use hardware acceleration when available - OFF (if you play games with browser on)
+
+Extensions (https://chrome.google.com/webstore/category/extensions):
+    uBlock Origin - block ads
+        Block CSP Reports - ON
+        Disable tooltips - ON
+        Disable cosmetic filtering - ON
+        AdGuard Base, AdGuard Mobile Ads - ON
+        AdGuard URL Tracking Protection, Block Outsider Intrusion into LAN - ON
+        Phishing URL Blocklist, PUP Domains Blocklist - ON
+        Dan Pollock's hosts file - ON
+        Block Twitch ads - https://github.com/pixeltris/TwitchAdSolutions
+    DuckDuckGo Privacy Essentials - replaces Google search engine | more privacy, can be way harder to find information
+    Privacy Badger - block trackers
+    WebRTC Leak Prevent - prevent WebRTC leaks (set it to Disable non-proxied UDP)
+    
+
+chrome://flags
+    Parallel downloading - ON (download files faster)
+    Auto Dark Mode for Web Contents - ON (personal preference, forces dark Mode)
+    GPU rasterization - ON (use GPU for faster rasterization, if you play games with browser turned off)
+    Enable Reader Mode - OFF (useless feature most of the time)
+    Tab Hover Card Images - OFF (content display of an opened tab when hovering over)
+    WinRT Geolocation Implementation - OFF (privacy concerns)
+    WebRTC remote-bound event logging - OFF (uploads event logs to Crash)
+    Verbose logging in Native Client - OFF (debugging purposes only)
+    Show Autofill predictions - OFF (privacy concerns)
+    Smooth Scrolling - OFF (not needed, more animation)
+    In-Product Help Demo Mode - OFF
+    Record web app debug info - OFF
+
+Registry (https://admx.help/?Category=Chrome):
+    
+
+Websites:
+    https://unshorten.me/ - unshorten URLs
+
+
+Extra Flags:
+#ignore-gpu-denylist - Enabled
+
+#overlay-strategies - None
+
+#enable-webrtc-hide-local-ips-with-mdns - Enabled
+
+#smooth-scrolling - Disabled
+
+#enable-quic - Enabled
+
+#enable-javascript-harmony - Enabled
+
+#enable-experimental-webassembly-features - Enabled
+
+#enable-webassembly-threads - Enabled
+
+#enable-future-v8-vm-features - Enabled
+
+#enable-gpu-rasterization - Enabled
+
+#enable-oop-rasterization - Enabled
+
+#enable-experimental-web-platform-features - Enabled
+
+#overscroll-history-navigation - Disabled
+
+#pull-to-refresh - Disabled
+
+#enable-webgl2-compute-context - Enabled
+
+#enable-zero-copy - Enabled
+
+#enable-native-notifications - Disabled
+
+#reduced-referrer-granularity - Enabled
+
+#site-isolation-trial-opt-out - Disabled
+
+#enable-resource-loading-hints - Disabled
+
+#bypass-app-banner-engagement-checks - Enabled
+
+#media-router-cast-allow-all-ips - Disabled
+
+#cast-media-route-provider - Disabled
+
+#webxr-incubations - Disabled
+
+#webxr-runtime - No Runtime
+
+#system-keyboard-lock - Enabled
+
+#enable-force-dark - Enabled
+
+#enable-experimental-fling-animation - Disabled
+
+#enable-winrt-sensor-implementation - Disabled
+
+#enable-generic-sensor-extra-classes - Disabled
+
+#gdi-text-printing - Disabled
+
+#new-usb-backend - Enabled
+
+#enable-service-worker-on-ui - Disabled
+
+#compositor-threaded-scrollbar-scrolling - Enabled
+
+#use-angle - OpenGL
+
+#turn-off-streaming-media-caching - Disabled
+
+#enable-cooperative-scheduling - Enabled
+
+#dns-over-https - (Disabled for less latency; Enabled for privacy)
+
+#impulse-scroll-animations - Disabled
+
+#slow-dc-timer-interrupts-win - Disabled
+
+#run-video-capture-service-in-browser - Disabled
