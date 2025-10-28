@@ -54,8 +54,9 @@ Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 Invoke-ActionScript ".\components\deprovisioned-apps.cmd"
 Invoke-ActionScript ".\tweaks\SFCDEPLOY.cmd"
 
-# ExplorerPatcher
+# ExplorerPatcher \ OpenShell
 # Invoke-ActionScript ".\tweaks\OLDUI.cmd"
+Invoke-ActionScript ".\tweaks\OPENSHELL.cmd"
 
 # Chocolatey
 Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
