@@ -37,6 +37,10 @@ Invoke-ActionScript ".\tweaks\PFP.ps1"
 # Set NeptuneOS themes
 Invoke-ActionScript ".\tweaks\THEMES.cmd"
 
+# Initialize nepthost.exe
+Invoke-ActionScript ".\tweaks\NEPTHOST.cmd"
+Invoke-ActionScript ".\tweaks\FIREWALL.cmd"
+
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript ".\components\install-prerequisites.cmd"
