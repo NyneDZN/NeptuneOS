@@ -133,6 +133,7 @@ $ServicesToConfigure = @(
     @{ Name = "webthreatdefsvc"; Start = 4 },     # Disabled
     #@{ Name = "WerSvc"; Start = 4 },     # Disabled (not existing in v1.1)
     @{ Name = "WSearch"; Start = 4 },     # Disabled
+    @{ Name = "whesvc"; Start = 4 },     # Disabled
     # @{ Name = "WpnService"; Start = 4 },     # Disabled (re-enabled because it breaks calendar)
     # @{ Name = "WpnUserService"; Start = 4 }    # Disabled (re-enabled because it breaks calendar)
     @{ Name = "PcaSvc"; Start = 4 }    # Disabled
