@@ -2,7 +2,7 @@
 call "C:\neptune-installer\modules\variables.cmd"
 
 
-start "C:\neptune-installer\prerequisites\ep-setup.exe"
+"C:\neptune-installer\prerequisites\ep-setup.exe"
 
 reg add "HKU\%SID%\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}" /f
 reg add "HKU\%SID%\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}\InprocServer32" /t REG_SZ /d "" /f
@@ -26,5 +26,3 @@ reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "DoNotRedirectProgramsAndFeature
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "HideIconAndTitleInExplorer" /t REG_DWORD /D 3 /f
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "IMEStyle" /t REG_DWORD /D 4 /f
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "MicaEffectOnTitlebar" /t REG_DWORD /D 1 /f
-
-taskkill /f /im "explorer.exe"
