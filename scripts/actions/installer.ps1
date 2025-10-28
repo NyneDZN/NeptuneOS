@@ -55,7 +55,7 @@ Invoke-ActionScript ".\components\deprovisioned-apps.cmd"
 Invoke-ActionScript ".\tweaks\SFCDEPLOY.cmd"
 
 # ExplorerPatcher
-Invoke-ActionScript ".\tweaks\OLDUI.cmd"
+# Invoke-ActionScript ".\tweaks\OLDUI.cmd"
 
 # Chocolatey
 Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
