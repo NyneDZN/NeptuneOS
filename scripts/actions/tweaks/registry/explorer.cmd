@@ -192,15 +192,15 @@ Reg add "HKCR\.ps1" /ve /t REG_SZ /d "ps1legacy" /f& Reg add "HKCR\.ps1\ShellNew
 reg add "HKLM\SOFTWARE\Classes\.reg\ShellNew" /v "NullFile" /t REG_SZ /d "" /f
 reg add "HKLM\SOFTWARE\Classes\.reg\ShellNew" /v "ItemName" /t REG_EXPAND_SZ /d "@C:\Windows\regedit.exe,-309" /f
 :: - > Add 'take ownership' to Context Menus
-reg add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f
-reg add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
-reg add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" && icacls \"%%1\" /grant administrators:F" /f
-reg add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" && icacls \"%%1\" /grant administrators:F" /f
-reg add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f
-reg add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
-reg add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
-reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
-reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "MultipleInvokePromptMinimum" /t REG_DWORD /d "200" /f
+:: reg add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f
+:: reg add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
+:: reg add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" && icacls \"%%1\" /grant administrators:F" /f
+:: reg add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" && icacls \"%%1\" /grant administrators:F" /f
+:: reg add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f
+:: reg add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
+:: reg add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
+:: reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f\"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
+:: reg add "HKU\%SID%\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "MultipleInvokePromptMinimum" /t REG_DWORD /d "200" /f
 :: - > Add "merge as trusted installer" to .reg Context Menus
 reg add "HKCR\regfile\Shell\RunAs" /ve /t REG_SZ /d "Merge As TrustedInstaller" /f
 reg add "HKCR\regfile\Shell\RunAs" /v "HasLUAShield" /t REG_SZ /d "1" /f
