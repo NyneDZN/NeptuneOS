@@ -1,4 +1,6 @@
 @echo off
+call "C:\neptune-installer\modules\variables.cmd"
+
 
 start "C:\neptune-installer\prerequisites\ep-setup.exe"
 
@@ -24,3 +26,5 @@ reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "DoNotRedirectProgramsAndFeature
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "HideIconAndTitleInExplorer" /t REG_DWORD /D 3 /f
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "IMEStyle" /t REG_DWORD /D 4 /f
 reg add "HKU\%SID%\SOFTWARE\ExplorerPatcher" /v "MicaEffectOnTitlebar" /t REG_DWORD /D 1 /f
+
+taskkill /f /im "explorer.exe"
