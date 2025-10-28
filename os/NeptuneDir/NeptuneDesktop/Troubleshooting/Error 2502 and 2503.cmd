@@ -11,7 +11,7 @@ fltmc >nul 2>&1 || (
 
 title "Fix error 2502 and 2503"
 echo This should fix error 2502 and 2503 when installing applications.
-pause>nul
+pause
 cls
 for /f "tokens=*" %%a in ('whoami') do (set user=%%a) || echo Failed to set variable for user account!
 icacls "C:\Windows\Temp" /grant:r %user%:(OI)(CI)F /grant:r Administrators:(OI)(CI)F /T /Q || echo Failed to set permissions!
