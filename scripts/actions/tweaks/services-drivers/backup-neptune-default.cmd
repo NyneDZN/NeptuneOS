@@ -1,4 +1,4 @@
-set BACKUP="%WINDIR%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Neptune Default.reg"
+set BACKUP="%WINDIR%\NeptuneDir\NeptuneDesktop\Troubleshooting\Default Services and Drivers\Neptune Default.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (

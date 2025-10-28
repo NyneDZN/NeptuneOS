@@ -1,5 +1,5 @@
 :: Backing up default Windows services and drivers
-set BACKUP="%WINDIR%\NeptuneDir\Neptune\Troubleshooting\Default Services and Drivers\Windows Default.reg"
+set BACKUP="%WINDIR%\NeptuneDir\NeptuneDesktop\Troubleshooting\Default Services and Drivers\Windows Default.reg"
 echo Windows Registry Editor Version 5.00 >>%BACKUP%
 for /f "delims=" %%a in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Services"') do (
 for /f "tokens=3" %%b in ('Reg query "%%~a" /v "Start" 2^>nul') do (
