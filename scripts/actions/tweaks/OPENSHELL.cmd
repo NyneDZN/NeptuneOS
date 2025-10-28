@@ -1,3 +1,4 @@
+call "C:\neptune-installer\modules\variables.cmd"
 
 :: Install Open-Shell
 "C:\neptune-installer\prerequisites\openshell.exe" /qn ADDLOCAL=StartMenu
