@@ -1,3 +1,6 @@
+:: Created by UnlovedCookie
+:: Slight adjustments made by NYN9 for NeptuneOS
+
 :: Release 2.0
 :: https://discord.gg/dptDHp9p9k
 :: https://tinyurl.com/NetworkDocu
@@ -6,6 +9,7 @@
 cd %temp%
 set Pwsh=^>nul powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command
 setlocal EnableDelayedExpansion
+
 
 rem Run as Trusted Installer via MinSudo
 dism>nul || (where MinSudo >nul 2>&1 || (
@@ -462,9 +466,6 @@ Reg add "%%g" /v "ValidateRssV2" /t REG_SZ /d "1" /f
 ) >nul
 echo Enable RSS
 
-rem Restart Explorer
-rem taskkill /f /im explorer.exe >nul && start explorer.exe
-
 rem Flush DNS Cache
 ipconfig /flushdns >nul
 echo Flush DNS Cache
@@ -483,9 +484,8 @@ certutil -URLcache * delete >nul
 echo Wipe The Windows CryptNet SSL Certificate Cache
 
 rem Restart Network Adapter
-choice /c yn /m "Operations complete, would you like to restart your network adapter?"
-if %errorlevel% equ 1 %Pwsh% Restart-NetAdapter *
-pause & exit
+rem %Pwsh% Restart-NetAdapter *
+exit
 
 :NICSetting
 for /f "tokens=3*" %%a in ('Reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\NetworkCards" /k /v /f "Description" /s /e ^| findstr /ri "REG_SZ"') do ^
