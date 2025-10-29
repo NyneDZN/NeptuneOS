@@ -24,7 +24,6 @@ systeminfo.json
 
 \.vscode/
 \.idea/
-\templates/
 *.code-workspace
 .github
 
