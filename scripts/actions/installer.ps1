@@ -47,7 +47,7 @@ Invoke-ActionScript ".\components\install-prerequisites.cmd"
 
 # Windows Components
 Show-Section "Windows Components"
-# Invoke-ActionScript ".\components\dism-capabilities.cmd" (commented out for now as they are disabled already)
+# Invoke-ActionScript ".\components\dism-optional-features.cmd"
 Invoke-ActionScript ".\components\binary-removal.cmd"
 Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
@@ -96,8 +96,7 @@ Invoke-ActionScript ".\tweaks\registry\taskbar.cmd"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
-Invoke-ActionScript ".\tweaks\network\netsh.cmd"
-Invoke-ActionScript ".\tweaks\network\network-registry.cmd"
+Invoke-ActionScript ".\tweaks\network\network"
 
 # Performance Tweaks
 Show-Section "Performance Tweaks"
@@ -130,16 +129,12 @@ Invoke-ActionScript ".\tweaks\etc\msi-installer-safe-mode.cmd"
 
 # Cleanup
 Show-Section "Cleanup"
-# Run-ActionScript "remove-bloat.ps1"
 # Move log and systeminfo and run cleanup
 Move-Item -Path "C:\neptune-installer\systeminfo.json" -Destination "$env:WINDIR\NeptuneDir" -Force
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Finalization" -PropertyType String -Value "$env:WinDir\NeptuneDir\Scripts\FINALIZE.cmd" -Force
+Move-Item -Path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir\Logs" -Force
 
-# powershell.exe -ExecutionPolicy Bypass -File "$env:WINDIR\NeptuneDir\Scripts\cleanup.ps1"
-
-
+# Finish
 Write-Log "Installer finished successfully."
-Write-Log "Restarting PC in 5 seconds"
-Move-Item -Path "C:\neptune-installer\neptune.log" -Destination "$env:WINDIR\NeptuneDir" -Force
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 1
 Restart-Computer -Force
