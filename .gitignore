@@ -22,11 +22,11 @@ systeminfo.json
 # IDE / editor files
 # ========================
 
-# VS Code
-.vscode/
+\.vscode/
+\.idea/
+\templates/
 *.code-workspace
 .github
-\templates
 
 # Windows thumbnail cache / thumbs.db
 Thumbs.db
