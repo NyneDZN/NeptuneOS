@@ -37,4 +37,9 @@ To verify the legitamacy of the executables provided in NeptuneOS, we verify the
 - Source: https://www.majorgeeks.com/files/details/nsudo.html
 - `The x64 NSudoLG.exe executable was extracted and verified`
 
+## ExplorerBlurMica
+- SHA256: (`ExplorerBlurMica.dll`): `F0FB61E3ABD19EEE67BA486045DA823A62F6B7E99FF4C51375BC280246FA49A5`
+- Source: https://github.com/Maplespe/ExplorerBlurMica
+- `The x64 ExplorerBlurMica.dll file was extracted and verified.`
+
 # This list will continue
