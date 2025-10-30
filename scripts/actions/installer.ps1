@@ -96,7 +96,7 @@ Invoke-ActionScript ".\tweaks\registry\taskbar.cmd"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
-Invoke-ActionScript ".\tweaks\network\network"
+Invoke-ActionScript ".\tweaks\network\network.cmd"
 
 # Performance Tweaks
 Show-Section "Performance Tweaks"
