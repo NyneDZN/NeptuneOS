@@ -12,15 +12,15 @@ setlocal EnableDelayedExpansion
 
 
 rem Run as Trusted Installer via MinSudo
-dism>nul || (where MinSudo >nul 2>&1 || (
-curl -L "https://github.com/M2Team/NanaRun/releases/download/1.0.92.0/NanaRun_1.0_Preview3_1.0.92.0.zip" -o "NanaRun.zip" -s || ^
-echo Failed to download MinSudo, run this script as an administrator. && pause && exit
-%Pwsh% "Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('NanaRun.zip', '.\NanaRun');"
-move /y .\NanaRun\x64\MinSudo.exe MinSudo.exe >nul
-del /f NanaRun.zip
-rmdir /s /q NanaRun
-) & MinSudo -NoL -TI -P "%~f0" && exit)
-cls
+rem dism>nul || (where MinSudo >nul 2>&1 || (
+rem curl -L "https://github.com/M2Team/NanaRun/releases/download/1.0.92.0/NanaRun_1.0_Preview3_1.0.92.0.zip" -o "NanaRun.zip" -s || ^
+rem echo Failed to download MinSudo, run this script as an administrator. && pause && exit
+rem %Pwsh% "Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('NanaRun.zip', '.\NanaRun');"
+rem move /y .\NanaRun\x64\MinSudo.exe MinSudo.exe >nul
+rem del /f NanaRun.zip
+rem rmdir /s /q NanaRun
+rem ) & MinSudo -NoL -TI -P "%~f0" && exit)
+rem cls
 
 rem Reset TCP/IP Stack
 netsh interface tcp reset >nul
@@ -216,10 +216,10 @@ rem Disable Network Power Savings
 echo Disable Network Power Savings
 
 rem Disable Delivery Optimization (peer-to-peer functionality)
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f >nul
-sc config DoSvc start=disabled >nul
-sc stop "DoSvc" >nul
-echo Disable Delivery Optimization
+rem  add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f >nul
+rem sc config DoSvc start=disabled >nul
+rem sc stop "DoSvc" >nul
+rem echo Disable Delivery Optimization
 
 rem Disable Network Throttling
 Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched /v NonBestEffortLimit /t REG_DWORD /d 0 /f >nul
@@ -409,20 +409,20 @@ Reg add "%%g" /v "*PriorityVLANTag" /t REG_SZ /d "1" /f
 echo Disable Network Adapter Power Saving
 
 rem Configure Network Adapter Device Parameters
-for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| find "PCI\VEN_"') do (
+rem for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| find "PCI\VEN_"') do (
 
 rem Set Network Adapter Interrupt Priority to Undefined
-Reg delete "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>&1
-echo Set Network Adapter Interrupt Priority to Undefined
+rem Reg delete "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>&1
+rem echo Set Network Adapter Interrupt Priority to Undefined
 
 rem Set Network Adapter Policy to IrqPolicySpreadMessagesAcrossAllProcessors
-Reg add "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePolicy" /t REG_DWORD /d "5" /f >nul
-echo Set Network Adapter Policy to IrqPolicySpreadMessagesAcrossAllProcessors
+rem Reg add "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePolicy" /t REG_DWORD /d "5" /f >nul
+rem echo Set Network Adapter Policy to IrqPolicySpreadMessagesAcrossAllProcessors
 
 rem Enable Network Adapter MSI Mode
-Reg add "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f >nul
-echo Enable Network Adapter MSI Mode
-)
+rem Reg add "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f >nul
+rem echo Enable Network Adapter MSI Mode
+rem )
 
 rem Optimize RSS
 %Pwsh% Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled

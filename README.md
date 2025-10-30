@@ -1,5 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a id="readme-top"></a>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -8,9 +10,8 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
+
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
@@ -18,12 +19,14 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![project_license][license-shield]][license-url]
-#
+
+# 
 
 <p align="center">
   <b>🚧 README.md Status 🚧</b><br><br>
@@ -31,55 +34,38 @@
   <i>Work in progress — updates coming soon!</i>
 </p>
 
-#
-
-
+# 
 
 <!-- PROJECT LOGO -->
-
 
 <p align="center">
   <img src="https://img.shields.io/badge/NeptuneOS-blue?style=for-the-badge&logo=windows" width="200">
   <br>
 </p>
 
-  <p align="center">
-    A windows optimization project dedicated to performance and productivity.
-    <br />
-    <a href="https://github.com/NyneDZN/NeptuneOS/wiki"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    &middot;
-    <a href="https://github.com/NyneDZN/NeptuneOS/issues/new">Report Bug</a>
-    &middot;
-    <a href="https://github.com/NyneDZN/NeptuneOS/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
-    
-  </p>
+
 </div>
 
-#
-
-
-
+# 
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 NeptuneOS is a project aimed to optimize performance in Windows for gaming and workloads while maintaining compatibility and security. NeptuneOS is entirely open source and uses code from other open source repositories, listed at the bottom of this page.
 
-
-#
-
+# 
 
 <!-- GETTING STARTED -->
+
 ## Getting Started & Installation
+
 You can view installation instructions in our [Discord Server](https://discord.com/invite/Ekj32cWeqB)
 
-
-#
-
+# 
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -92,19 +78,17 @@ Contributions are what make the open source community such an amazing place to l
   <img src="https://contrib.rocks/image?repo=NyneDZN/NeptuneOS" alt="contrib.rocks image" />
 </a>
 
-
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 * [Twitter](https://twitter.com/nyn9pm)
 * [Discord Server](https://discord.com/invite/Ekj32cWeqB)
 
-
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Forked From
+
 <b> NeptuneOS contains code from these repositories. All credit for the code that was forked goes entirely to them.</b>
 
 * [AtlasOS Team](https://github.com/Atlas-OS/)
@@ -115,16 +99,16 @@ Contributions are what make the open source community such an amazing place to l
 
 <b>This list may extend in the future. If your code has been used and you have not been credit, don't be afraid to either message me, or make a pull request to insert yourself.</b>
 
-
 ## Contributors
+
 * [Yoshii64](https://github.com/Yoshii64)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
+
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/NyneDZN/NeptuneOS.svg?style=for-the-badge
 [contributors-url]: https://github.com/NyneDZN/NeptuneOS/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/NyneDZN/NeptuneOS.svg?style=for-the-badge
@@ -139,6 +123,7 @@ Contributions are what make the open source community such an amazing place to l
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
+
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
@@ -154,4 +139,4 @@ Contributions are what make the open source community such an amazing place to l
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com
