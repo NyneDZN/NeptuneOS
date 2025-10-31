@@ -144,7 +144,7 @@ bcdedit /set nx on
 
 :: Disable TSX 
 :: Enabling this could result in improved performance under certain workloads
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f 
+:: reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f
 
 :: Disable Fault Tolerant Heap
 reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f 
