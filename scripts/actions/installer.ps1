@@ -35,7 +35,7 @@ Invoke-ActionScript ".\tweaks\LOCKSCREEN.ps1"
 Invoke-ActionScript ".\tweaks\PFP.ps1"
 
 # Set NeptuneOS themes
-Invoke-ActionScript ".\tweaks\THEMES.cmd"
+# Invoke-ActionScript ".\tweaks\THEMES.cmd"
 
 # Initialize nepthost.exe
 Invoke-ActionScript ".\tweaks\NEPTHOST.cmd"
