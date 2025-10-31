@@ -1,5 +1,8 @@
 @echo off
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+title Windows Default Network
+
+:: Init
+call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
 :: Call Administrator
 fltmc >nul 2>&1 || (
@@ -22,7 +25,6 @@ echo Resetting network settings to Windows defaults...
 ) > nul
 
 
-echo Finished, please reboot your device for changes to apply.
-echo %date% %time% Reset Network to Windows Default >> %userlog%
-timeout /t 3 /nobreak >nul
-exit
+echo %S_GREEN%Finished, please reboot your device for changes to apply.%S_GREEN%
+echo]
+pause
