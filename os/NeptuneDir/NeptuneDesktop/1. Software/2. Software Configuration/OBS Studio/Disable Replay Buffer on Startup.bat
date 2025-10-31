@@ -17,8 +17,8 @@ fltmc > nul 2>&1 || (
 )
 
 :: (Configuration snippet here)
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" 
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" 
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
 
 :: Exit script if called with /silent argument
 if "%~1"=="/silent" exit /b
