@@ -93,6 +93,7 @@ Invoke-ActionScript ".\tweaks\registry\privacy.cmd"
 Invoke-ActionScript ".\tweaks\registry\updates.cmd"
 Invoke-ActionScript ".\tweaks\registry\photo-viewer.cmd"
 Invoke-ActionScript ".\tweaks\registry\taskbar.cmd"
+Invoke-ActionScript ".tweaks\registry\color.ps1"
 
 # Network Tweaks
 Invoke-ActionScript ".\tweaks\network\hosts-file.cmd"
