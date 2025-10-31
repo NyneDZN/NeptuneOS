@@ -1,21 +1,28 @@
 @echo off
+title Configuration
+
+:: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
-:: Call Administrator
-fltmc >nul 2>&1 || (
+:: Run as administrator
+set "___args="%~f0" %*"
+fltmc > nul 2>&1 || (
     echo Administrator privileges are required.
-    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
-        echo Right-click on the script and select 'Run as administrator'.
-        pause & exit 1
+    powershell -c "Start-Process -Verb RunAs -FilePath 'cmd' -ArgumentList """/c $env:___args"""" 2> nul || (
+        echo You must run this script as admin.
+        if "%*"=="" pause
+        exit /b 1
     )
-    exit 0
+    exit /b
 )
+
+:: Disable service
 %svcF% hidserv 4
 
-
-:: Echo to Log
-echo %date% %time% Disabled Keyboard Media Input >> %userlog%
-:: Echo to User
-echo !S_YELLOW!Disabled Keyboard Media Input. Restart your device to apply the changes.
-timeout /t 3 /nobreak >nul
-exit
+:: Echo back to user
+echo]
+echo %S_GREEN%Disabled Keyboard Media Controls%S_GREEN%
+echo]
+echo %S_WHITE%Press any key to exit...%S_WHITE%
+pause > nul
+exit /b
