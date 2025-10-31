@@ -334,9 +334,9 @@ reg add "HKU\%SID%\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnO
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f) 
 
 :: Fix Default Account Icon
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDefaultTile" /t REG_DWORD /d "1" /f
+:: reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "UseDefaultTile" /t REG_DWORD /d "1" /f
 
-:: - >  Hide unneeded control panel applets
+:: - >  Hide unneeded control panel applets and only show needed ones
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "RestrictCpl" /t REG_DWORD /d "1" /f
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /f
 reg add "HKU\%SID%\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\RestrictCpl" /v "1" /t REG_SZ /d "Windows Tools" /f
