@@ -1,31 +1,32 @@
 @echo off
+title Configuration
+
+:: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
-:: Check if script is escelated
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
-if %errorlevel% neq 0 (
-    echo You are about to be prompted with the UAC. Please click yes when prompted.
-) ELSE (
-    goto admin
+:: Run as administrator
+set "___args="%~f0" %*"
+fltmc > nul 2>&1 || (
+    echo Administrator privileges are required.
+    powershell -c "Start-Process -Verb RunAs -FilePath 'cmd' -ArgumentList """/c $env:___args"""" 2> nul || (
+        echo You must run this script as admin.
+        if "%*"=="" pause
+        exit /b 1
+    )
+    exit /b
 )
 
-:prompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\prompt.vbs"
-    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\prompt.vbs"
-    "%temp%\prompt.vbs"
-    exit /B
-
-:admin
-:: Delete prompt script
-if exist "%temp%\prompt.vbs" ( del "%temp%\prompt.vbs" )
-
-:: Enabling Wi-Fi
+:: Enable wifi services
 %svcF% WlanSvc 3
 %svcF% vwififlt 1
 
-:: Echo to Log
-echo %date% %time% Enabled Wi-Fi >> %userlog%
-:: Echo to User
-echo !S_YELLOW!Wi-Fi has been Enabled. Please restart your device.
-timeout /t 3 /nobreak >nul
-exit
+:: Exit script if called with /silent argument
+if "%~1"=="/silent" exit /b
+
+:: Echo back to user
+echo]
+echo %S_GREEN%Enabled Wi-Fi%S_GREEN%
+echo]
+echo %S_WHITE%Press any key to exit...%S_WHITE%
+pause > nul
+exit /b
