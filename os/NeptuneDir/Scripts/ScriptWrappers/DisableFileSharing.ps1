@@ -4,7 +4,7 @@ param (
     [switch]$Silent
 )
 
-$fileSharingConfigPath = "$([Environment]::GetFolderPath('Windows'))\NeptuneDir\Neptune\3. Configuration\File Sharing"
+$fileSharingConfigPath = "$([Environment]::GetFolderPath('Windows'))\NeptuneDir\NeptuneDesktop\3. Configuration\File Sharing"
 
 # Disable network items
 Disable-NetAdapterBinding -Name "*" -ComponentID ms_msclient, ms_server, ms_lltdio, ms_rspndr | Out-Null

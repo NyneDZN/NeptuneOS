@@ -1,6 +1,6 @@
 #Requires -RunAsAdministrator
 
-$networkDiscoveryConfigPath = "$([Environment]::GetFolderPath('Windows'))\NeptuneDir\Neptune\4. Advanced Configuration\Services\Network Discovery"
+$networkDiscoveryConfigPath = "$([Environment]::GetFolderPath('Windows'))\NeptuneDir\NeptuneDesktop\4. Advanced Configuration\Services\Network Discovery"
 
 # Enable network items
 Enable-NetAdapterBinding -Name "*" -ComponentID ms_msclient, ms_server, ms_lltdio, ms_rspndr | Out-Null
