@@ -11,6 +11,9 @@ Clear-Host
 # NGEN to speed-up powershell
 Invoke-ActionScript "ngen.ps1"
 
+# Chocolatey
+Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
+
 # Clear event logs
 # Invoke-ActionScript ".\tweaks\EVENTLOGS.cmd"
 
@@ -45,6 +48,8 @@ Invoke-ActionScript ".\tweaks\FIREWALL.cmd"
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript ".\components\install-prerequisites.cmd"
 Invoke-ActionScript ".\components\7z.cmd"
+Invoke-ActionScript ".\components\open-shell.cmd"
+#Invoke-ActionScript ".\tweaks\explorer-patcher.cmd"
 
 # Windows Components
 Show-Section "Windows Components"
@@ -54,13 +59,6 @@ Invoke-ActionScriptAsSystem ".\PACKAGES.PS1"
 Invoke-ActionScript ".\tweaks\CLIENTCBS.ps1"
 Invoke-ActionScript ".\components\deprovisioned-apps.cmd"
 Invoke-ActionScript ".\tweaks\SFCDEPLOY.cmd"
-
-# ExplorerPatcher \ OpenShell
-#Invoke-ActionScript ".\tweaks\OLDUI.cmd"
-Invoke-ActionScript ".\tweaks\OPENSHELL.cmd"
-
-# Chocolatey
-Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
 
 # File System
 Show-Section "File System Configuration"
