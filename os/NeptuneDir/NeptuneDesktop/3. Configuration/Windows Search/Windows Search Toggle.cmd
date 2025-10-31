@@ -26,14 +26,12 @@ takeown /f "SearchHost.exe"
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F
 ren SearchHost.exe SearchHost.old
 start explorer.exe
-echo %date% %time% Disabled Windows Search >> %userlog%
 cls
 pause
 exit
 
 :enable
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "1" /f
-sc start wsearch
 taskkill /f /im explorer.exe
 taskkill /f /im searchapp.exe
 taskkill /f /im SearchHost.exe
@@ -46,7 +44,6 @@ takeown /f "SearchHost.old"
 icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.old" /grant Administrators:F
 ren SearchHost.old SearchHost.exe
 start explorer.exe
-echo %date% %time% Enabled Windows Search >> %userlog%
 cls
 pause
 exit
