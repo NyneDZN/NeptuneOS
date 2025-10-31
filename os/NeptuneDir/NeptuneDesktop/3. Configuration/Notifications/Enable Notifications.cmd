@@ -1,5 +1,5 @@
 @echo off
-title Configuration
+title Notifications
 
 :: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
