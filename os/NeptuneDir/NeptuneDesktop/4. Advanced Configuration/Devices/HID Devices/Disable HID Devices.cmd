@@ -31,7 +31,7 @@ pause
 
 :: Echo back to user
 echo]
-echo %S_GREEN%DisableD HID Devices%S_GREEN%
+echo %S_GREEN%Disabled HID Devices%S_GREEN%
 echo]
 echo %S_WHITE%Press any key to exit...%S_WHITE%
 pause > nul

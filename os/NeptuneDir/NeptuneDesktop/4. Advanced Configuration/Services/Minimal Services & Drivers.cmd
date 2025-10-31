@@ -1,3 +1,4 @@
+@echo off
 echo]
-echo coming soon
+echo placeholder file, will be complete in future updates.
 pause
