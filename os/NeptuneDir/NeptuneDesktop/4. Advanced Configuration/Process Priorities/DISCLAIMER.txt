@@ -1,0 +1,13 @@
+HIGH PRIORITY DISCLAIMER:
+
+Depending on your hardware, higher process priority can squeeze out extra performance in games, but other times it can cause issues.
+
+Before testing these, I recommend trying high priority through task manager / process lasso.
+
+=========================================================================
+
+LOWER PRIORITY DISCLAIMER:
+
+Setting processes to lower priority doesn't do much, but can help.
+
+Most background processes for applications such as game launchers are already set to "Below Normal" by default.
