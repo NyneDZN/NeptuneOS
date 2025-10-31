@@ -19,7 +19,7 @@ Invoke-ActionScript ".\tweaks\CHOCOLATEY.cmd"
 
 # Initialize Neptune Environment
 Move-Item -Path ".\os\NeptuneDir" -Destination "$env:WINDIR" -Force
-Move-Item -Path ".\os\Desktop\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
+Move-Item -Path ".\os\Neptune.lnk" -Destination "$env:USERPROFILE\Desktop" -Force
 Move-Item -Path ".\tools" -Destination "$env:WINDIR\NeptuneDir" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\regjump.exe" -Destination "$env:WINDIR" -Force
 Move-Item -path "$env:WINDIR\NeptuneDir\Tools\serviwin.exe" -Destination "$env:WINDIR" -Force
