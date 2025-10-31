@@ -1,17 +1,22 @@
 @echo off
+title Configuration
+
+:: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
-:: Call Administrator
-fltmc >nul 2>&1 || (
+:: Run as administrator
+set "___args="%~f0" %*"
+fltmc > nul 2>&1 || (
     echo Administrator privileges are required.
-    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
-        echo Right-click on the script and select 'Run as administrator'.
-        pause & exit 1
+    powershell -c "Start-Process -Verb RunAs -FilePath 'cmd' -ArgumentList """/c $env:___args"""" 2> nul || (
+        echo You must run this script as admin.
+        if "%*"=="" pause
+        exit /b 1
     )
-    exit 0
+    exit /b
 )
 
-:: Enabling VPN
+:: Enabling vpn services/drivers
 %svcF% Eaphost 3
 %svcF% IKEEXT 3
 %svcF% iphlpsvc 3
@@ -26,6 +31,7 @@ fltmc >nul 2>&1 || (
 %svcF% SstpSvc 3
 %svcF% WinHttpAutoProxySvc 3
 
+:: Enabling vpn devices
 %dmv% /enable "WAN Miniport (IKEv2)"
 %dmv% /enable "WAN Miniport (IP)"
 %dmv% /enable "WAN Miniport (IPv6)"
@@ -37,11 +43,16 @@ fltmc >nul 2>&1 || (
 %dmv% /enable "NDIS Virtual Network Adapter Enumerator"
 %dmv% /enable "Microsoft RRAS Root Enumerator"
 
-call "%windir%\AtlasModules\Scripts\settingsPages.cmd" /unhide network-vpn /silent
+:: Unhide page
+call "%windir%\NeptuneDir\Scripts\settingsPages.cmd" /unhide network-vpn /silent
 
-:: Echo to Log
-echo %date% %time% Enabled VPN Support >> %userlog%
-:: Echo to User
-echo !S_YELLOW!Enabled VPN Support. Restart your device to apply the changes.
-timeout /t 3 /nobreak >nul
-exit
+:: Exit script if called with /silent argument
+if "%~1"=="/silent" exit /b
+
+:: Echo back to user
+echo]
+echo %S_GREEN%Enabled Wi-Fi%S_GREEN%
+echo]
+echo %S_WHITE%Press any key to exit...%S_WHITE%
+pause > nul
+exit /b

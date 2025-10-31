@@ -1,17 +1,22 @@
 @echo off
+title Disable VPN
+
+:: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
-:: Call Administrator
-fltmc >nul 2>&1 || (
+:: Run as administrator
+set "___args="%~f0" %*"
+fltmc > nul 2>&1 || (
     echo Administrator privileges are required.
-    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
-        echo Right-click on the script and select 'Run as administrator'.
-        pause & exit 1
+    powershell -c "Start-Process -Verb RunAs -FilePath 'cmd' -ArgumentList """/c $env:___args"""" 2> nul || (
+        echo You must run this script as admin.
+        if "%*"=="" pause
+        exit /b 1
     )
-    exit 0
+    exit /b
 )
 
-:: Disabling VPN
+:: Disable vpn devices
 %dmv% /disable "WAN Miniport (IKEv2)"
 %dmv% /disable "WAN Miniport (IP)"
 %dmv% /disable "WAN Miniport (IPv6)"
@@ -23,19 +28,25 @@ fltmc >nul 2>&1 || (
 %dmv% /disable "NDIS Virtual Network Adapter Enumerator"
 %dmv% /disable "Microsoft RRAS Root Enumerator"
 
-%svcF% IKEEXT 4 
-%svcF% WinHttpAutoProxySv 4 
-%svcF% RasMan 4 
-%svcF% SstpSvc 4 
-%svcF% iphlpsvc 4 
-%svcF% NdisVirtualBus 4 
-%svcF% Eaphost 4 
+:: Disable vpn services/drivers
+%svcF% IKEEXT 4
+%svcF% WinHttpAutoProxySv 4
+%svcF% RasMan 4
+%svcF% SstpSvc 4
+%svcF% iphlpsvc 4
+%svcF% NdisVirtualBus 4
+%svcF% Eaphost 4
 
+:: Hide settings page
 call "%windir%\NeptuneDir\Scripts\settingsPages.cmd" /hide network-vpn /silent
 
-:: Echo to Log
-echo %date% %time% Disabled VPN Support >> %userlog%
-:: Echo to User
-echo !S_YELLOW!Disabled VPN Support. Restart your device to apply the changes.
-timeout /t 3 /nobreak >nul
-exit
+:: Exit script if called with /silent argument
+if "%~1"=="/silent" exit /b
+
+:: Echo back to user
+echo]
+echo %S_GREEN%Disabled VPN Support%S_GREEN%
+echo]
+echo %S_WHITE%Press any key to exit...%S_WHITE%
+pause > nul
+exit /b
