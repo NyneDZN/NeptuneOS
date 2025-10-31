@@ -1,13 +1,22 @@
-@echo off
-setlocal EnableDelayedExpansion 
-cd %WinDir%\NeptuneDir\Scripts >nul && where ansi.cmd >nul && call ansi.cmd >nul
+:: We reboot once more because certain components like winget aren't initialized until a second reboot. Unknown as to why.
+:: Will fix this in the future to make installs quicker.
 
-taskkill /f /im explorer.exe >nul
+@echo off
 title NeptuneOS Finalization
-mode 60,30
-echo !S_YELLOW!Doing some cleanup before final use, this won't take long.
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "" /f >nul
-Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "" /f >nul
+call %WinDir%\NeptuneDir\Scripts\envINIT.cmd
+
+:: Kill Explorer
+taskkill /f /im explorer.exe >nul
+
+:: Fullsceen Script
+"%WinDir%\System32\cscript.exe" //nologo "%WinDir%\NeptuneDir\Scripts\VBS\FullScreenCMD.vbs"
+
+echo %S_YELLOW%Completing a few more tasks, then 1 last reboot.
+timeout /t 2 /nobreak >nul
+
+:: Removing startup texts & resetting RunOnce
+:: Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticecaption" /t REG_SZ /d "" /f >nul
+:: Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "legalnoticetext" /t REG_SZ /d "" /f >nul
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 
@@ -16,7 +25,7 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f >nul
 
 :: Cleanup start menu
-del /s /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Character Map.lnk"
+:: del /s /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Character Map.lnk"
 del /s /f /q "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility"
 
 :: Cleanup script
@@ -25,8 +34,5 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts
 :: Remove rounded corners by default
 "%WinDir%\NeptuneDir%\Tools\rounded_corners.exe"
 
-cls & echo !S_YELLOW!Finished.
-echo !S_YELLOW!Enjoy NeptuneOS.
-timeout /t 3 /nobreak >nul
-start explorer.exe
+shutdown /f /r /t 5 /c "Last reboot for NeptuneOS"
 del "%~f0"
