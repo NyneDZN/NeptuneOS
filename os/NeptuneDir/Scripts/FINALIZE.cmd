@@ -25,8 +25,8 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f >nul
 
 :: Cleanup start menu
-:: del /s /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Character Map.lnk"
-del /s /f /q "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility"
+:: del /s /f /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Character Map.lnk" >nul
+del /s /f /q "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility" >nul
 
 :: Cleanup script
 powershell -NoProfile -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts\postClean.ps1"
@@ -34,5 +34,5 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "%WinDir%\NeptuneDir\Scripts
 :: Remove rounded corners by default
 "%WinDir%\NeptuneDir%\Tools\rounded_corners.exe"
 
-shutdown /f /r /t 5 /c "Last reboot for NeptuneOS"
+shutdown /f /r /t 2 /c "Last reboot for NeptuneOS"
 del "%~f0"
