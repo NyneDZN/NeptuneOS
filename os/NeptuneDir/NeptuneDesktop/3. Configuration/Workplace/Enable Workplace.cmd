@@ -12,7 +12,7 @@ fltmc > nul 2>&1 || (
     exit /b
 )
 
-if not "%~1"=="/silent" call "%windir%\AtlasModules\Scripts\serviceWarning.cmd" %*
+if not "%~1"=="/silent" call "%windir%\NeptuneDir\Scripts\serviceWarning.cmd" %*
 
 call "%windir%\NeptuneDir\Scripts\settingsPages.cmd" /unhide workplace /silent
 
