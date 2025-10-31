@@ -62,7 +62,7 @@ Invoke-ActionScript ".\tweaks\SFCDEPLOY.cmd"
 
 # File System
 Show-Section "File System Configuration"
-Invoke-ActionScript ".\tweaks\ntfs\NTFS.CMD"
+Invoke-ActionScript ".\tweaks\ntfs\NTFS.cmd"
 Invoke-ActionScript ".\tweaks\ntfs\fsutil.ps1"
 
 # Task Scheduler
@@ -76,7 +76,7 @@ Show-Section "Services and Drivers"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-windows-default.cmd"
 Invoke-ActionScript ".\tweaks\services-drivers\audio-service-split.cmd"
 Invoke-ActionScript ".\tweaks\services-drivers\filters.ps1"
-Invoke-ActionScript ".\tweaks\SERVICES-DRIVERS.ps1"
+Invoke-ActionScriptAsSystem ".\tweaks\SERVICES-DRIVERS.ps1"
 Invoke-ActionScript ".\tweaks\services-drivers\backup-neptune-default.cmd"
 Invoke-ActionScript ".\tweaks\services-drivers\SVCSPLIT.ps1"
 
