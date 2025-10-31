@@ -1,17 +1,29 @@
 @echo off
+title Hyper-V
+
+:: Init
 call "%WinDir%\NeptuneDir\Scripts\envINIT.cmd"
 
-:: Call Administrator
-fltmc >nul 2>&1 || (
+:: Run as administrator
+set "___args="%~f0" %*"
+fltmc > nul 2>&1 || (
     echo Administrator privileges are required.
-    PowerShell -NoProfile Start -Verb RunAs '%0' 2> nul || (
-        echo Right-click on the script and select 'Run as administrator'.
-        pause & exit 1
+    powershell -c "Start-Process -Verb RunAs -FilePath 'cmd' -ArgumentList """/c $env:___args"""" 2> nul || (
+        echo You must run this script as admin.
+        if "%*"=="" pause
+        exit /b 1
     )
-    exit 0
+    exit /b
 )
 
-echo !S_YELLOW!Enabling Hyper-V
+:: DISM
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart
+:: Disable Hyper-V Managenagement Tool
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
+:: Disable Hyper-V Module for Windows PowerShell
+dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart
+
 :: Hyper-V Services/Drivers
 %svcF% bttflt 0
 %svcF% gcs 3
@@ -26,23 +38,21 @@ echo !S_YELLOW!Enabling Hyper-V
 %svcF% storflt 0
 %svcF% vhdparser 3
 %svcF% Vid 1
-%svcF% vmbus 0 
+%svcF% vmbus 0
 %svcF% vmbusr 3
-%svcF% vmcompute 3 
+%svcF% vmcompute 3
 %svcF% vmgid 3
-%svcF% vmicguestinterface 3 
+%svcF% vmicguestinterface 3
 %svcF% vmicheartbeat 3
-%svcF% vmickvpexchange 3 
-%svcF% vmicrdv 3 
-%svcF% vmicshutdown 4 
-%svcF% vmictimesync 3 
-%svcF% vmicvmsession 3 
-%svcF% vmicvss 3 
+%svcF% vmickvpexchange 3
+%svcF% vmicrdv 3
+%svcF% vmicshutdown 4
+%svcF% vmictimesync 3
+%svcF% vmicvmsession 3
+%svcF% vmicvss 3
 %svcF% vpci 1
 %svcF% rdpbus 3
 %svcF% NdisVirtualBus 3
-
-
 
 :: Hyper-V Devices
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hyper-V NT Kernel Integration VSP"
@@ -54,41 +64,13 @@ C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Microsoft Hypervisor Service"
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "NDIS Virtual Network Adapter Enumerator"
 C:\Windows\NeptuneDir\Tools\dmv.exe /enable "Remote Desktop Device Redirector Bus"
 
-:: DISM
-dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
-dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart 
-:: Disable Hyper-V Managenagement Tool
-dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
-:: Disable Hyper-V Module for Windows PowerShell
-dism /Online /Enable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart
-
 :: BCD
-bcdedit /set loadoptions DISABLE-LSA-ISO,DISABLE-VBS > nul
-bcdedit /deletevalue loadoptions > nul
-bcdedit /set vsmlaunchtype Auto > nul
 bcdedit /set hypervisorlaunchtype auto > nul
-bcdedit /deletevalue vm > nul
 
-:: REGEDIT
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "RequirePlatformSecurityFeatures" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HypervisorEnforcedCodeIntegrity" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "LsaCfgFlags" /f
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "ConfigureSystemGuardLaunch" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequireMicrosoftSignedBootChain" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "Locked" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Locked" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "WasEnabledBy" /t REG_DWORD /d "1" /f
-
-
-
-:: Echo to Log
-echo %date% %time% Enabled Hyper-V >> %userlog%
-:: Echo to User
-echo !S_YELLOW!Enabled Hyper-V. Restart your device to apply the changes.
-timeout /t 3 /nobreak >nul
-exit
+:: Echo back to user
+echo]
+echo %S_GREEN%Enabled Hyper-V%S_GREEN%
+echo]
+echo %S_WHITE%Press any key to exit...%S_WHITE%
+pause > nul
+exit /b
