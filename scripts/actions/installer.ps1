@@ -1,4 +1,4 @@
-# Installer script for Neptune Project
+# Installer script for NeptuneOS
 # This script will handle the installation of necessary components and configurations.
 Write-Log "Starting NeptuneOS Installer..."
 
@@ -8,7 +8,7 @@ taskkill /f /im explorer.exe
 # Clear terminal
 Clear-Host
 
-# NGEN
+# NGEN to speed-up powershell
 Invoke-ActionScript "ngen.ps1"
 
 # Clear event logs
@@ -44,6 +44,7 @@ Invoke-ActionScript ".\tweaks\FIREWALL.cmd"
 # Run installer prerequisites
 Show-Section "Installing Prerequisites"
 Invoke-ActionScript ".\components\install-prerequisites.cmd"
+Invoke-ActionScript ".\components\7z.cmd"
 
 # Windows Components
 Show-Section "Windows Components"
