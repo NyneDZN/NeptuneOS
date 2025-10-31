@@ -1,7 +1,6 @@
 @echo off
 
 title Asking for administrator access
-mode CON COLS=37 LINES=3
 color F0
 echo :::::::::::::::::::::::::::::::::::::
 echo :: Requesting administrator access ::
@@ -26,9 +25,7 @@ start explorer.exe
 echo .
 echo title Success
 echo Changes applied successfully
-echo You can now close this window, it will close automatically in 5 seconds
-timeout /t 5 >nul
-exit /b 0
+pause
 
 :isAdmin
 fsutil dirty query %systemdrive% >nul
