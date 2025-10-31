@@ -12,7 +12,7 @@ fltmc > nul 2>&1 || (
 	exit /b
 )
 
-echo Before running this, please see the Atlas documentation, linked in the folder.
+echo Note that this will increase performance across applications but *may* result in higher temperatures.
 pause
 echo]
 
