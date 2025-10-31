@@ -17,7 +17,7 @@ fltmc > nul 2>&1 || (
 )
 
 :: Warning
-echo %S_YELLOW%This will break things such as Razer Synapse, Brightness & Media Control, and other special keyboard functionality.
+echo %S_YELLOW%This will break things such as Razer Synapse, Brightness and Media Control, and other special keyboard functionality.
 echo]
 echo %S_YELLOW%Close this script if you don't want to continue, otherwise press any key to Disable HID devices.
 echo]
