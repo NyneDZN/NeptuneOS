@@ -14,6 +14,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start
 %svcF% WdiSystemHost 3
 
 :: Echo to User
-cls & echo !S_YELLOW!Troubleshooting has been enabled. Restart your device to apply the changes.
+cls & echo %S_YELLOW%Troubleshooting has been enabled. Restart your device to apply the changes.
 timeout /t 2 >nul
 exit /b
